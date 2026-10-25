@@ -1,46 +1,46 @@
-2810 companies with figures, 188 without usable figures
-with ticker: 945, with sector: 1751
-with F-score: 1865, F-score 8-9: 99, with dividend cover: 914
-by country: GB 559, SE 329, FR 237, DE 195, IT 166, NO 154, PL 141, FI 131, DK 122, ES 121, NL 112, GR 105, BE 84, AT 54, CH 52, LU 37, PT 28, IE 27, MT 27, IS 24, HU 20, LT 20, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
+2813 companies with figures, 186 without usable figures
+with ticker: 963, with sector: 1766
+with F-score: 1867, F-score 8-9: 100, with dividend cover: 943
+by country: GB 559, SE 329, FR 237, DE 195, IT 167, NO 154, PL 141, FI 131, DK 122, ES 121, NL 113, GR 105, BE 84, AT 54, CH 53, LU 37, PT 28, IE 27, MT 27, IS 24, HU 20, LT 20, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
+Volkswagen                         DE VOW3     Consumer Discretionary 2025-12-31 rev€=321913.0 ebitda=25836.0 fcf=-290.0 roe=3.5 F=None None
 Shell PLC                          GB SHEL     Energy                 2025-12-31 rev€=238440.1 ebitda=None fcf=21948.0 roe=10.2 F=5 1111001-0
 Glencore PLC                       GB GLEN     Materials              2025-12-31 rev€=221151.6 ebitda=None fcf=-290.0 roe=0.9 F=6 1111101-0
 TotalEnergies SE                   FR TTE      Energy                 2025-12-31 rev€=179751.6 ebitda=None fcf=10390.0 roe=11.4 F=4 1101001-0
 BP P.L.C.                          GB BP       Energy                 2025-12-31 rev€=172026.3 ebitda=30464.0 fcf=11272.0 roe=0.1 F=6 1101011-1
 Stellantis N.V.                    NL STLAM    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
+BMW                                DE BMW      Consumer Discretionary 2025-12-31 rev€=133453.0 ebitda=16651.0 fcf=-2735.0 roe=7.6 F=None None
+Mercedes-Benz Group                DE MBG      Consumer Discretionary 2025-12-31 rev€=132214.0 ebitda=11778.0 fcf=12524.0 roe=5.5 F=None None
+Deutsche Telekom                   DE DTE      Communication          2025-12-31 rev€=121816.0 ebitda=47389.0 fcf=28313.0 roe=15.5 F=None None
+Allianz                            DE ALV      Financials             2025-12-31 rev€=113174.0 ebitda=None fcf=None roe=16.9 F=None None
+Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=97415.2 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
 Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=95114.8 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
 Ahold                              NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
 AXA                                FR CS       Financials             2025-12-31 rev€=91139.0 ebitda=None fcf=None roe=20.8 F=None None
 Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=88037.5 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
 LVMH                               FR MC       Consumer Discretionary 2024-12-31 rev€=84683.0 ebitda=None fcf=None roe=18.6 F=5 110101100
 Carrefour Group                    FR CA       Consumer Staples       2025-12-31 rev€=84025.0 ebitda=None fcf=None roe=2.9 F=6 110110101
+DHL Group                          DE DHL      Industrials            2025-12-31 rev€=83433.0 ebitda=10139.0 fcf=6324.0 roe=15.8 F=None None
 ENI S.P.A.                         IT ENI      Energy                 2025-12-31 rev€=82151.0 ebitda=12359.0 fcf=4101.0 roe=5.4 F=5 11110-1-0
+Siemens                            DE SIE      Industrials            2025-09-30 rev€=78914.0 ebitda=12299.0 fcf=10812.0 roe=15.5 F=None None
+E.ON                               DE EOAN     Utilities              2025-12-31 rev€=78704.0 ebitda=None fcf=-937.0 roe=9.0 F=None None
 Vinci                              FR DG       Industrials            2025-12-31 rev€=75372.0 ebitda=13570.0 fcf=None roe=15.9 F=5 1101--1-1
 Enel                               IT ENEL     Utilities              2024-12-31 rev€=73914.0 ebitda=22743.0 fcf=3057.0 roe=20.8 F=5 11110-1-0
 Airbus SE                          NL AIR      Industrials            2025-12-31 rev€=73420.0 ebitda=None fcf=None roe=20.0 F=None None
 Engie                              FR ENGI     Utilities              2025-12-31 rev€=71944.0 ebitda=13683.0 fcf=-8743.0 roe=11.6 F=4 1010001-1
+Roche                              CH ROG      Healthcare             2025-12-31 rev€=68663.7 ebitda=24344.0 fcf=15104.0 roe=38.1 F=None None
+Accenture                          IE ACN      Technology             2026-08-31 rev€=66276.2 ebitda=13419.0 fcf=11620.25 roe=26.5 F=None None
+Zurich Insurance                   CH ZURN     Financials             2025-12-31 rev€=65293.5 ebitda=None fcf=None roe=23.8 F=None None
+Munich Re                          DE MUV2     Financials             2025-12-31 rev€=62313.0 ebitda=None fcf=None roe=18.4 F=None None
+BASF                               DE BAS      Materials              2025-12-31 rev€=59657.0 ebitda=6053.0 fcf=1343.0 roe=4.9 F=None None
 Renault                            FR RNO      Consumer Discretionary 2025-12-31 rev€=57922.0 ebitda=-3628.0 fcf=-705.0 roe=-52.6 F=4 0101-01-1
 Bouygues                           FR EN       Industrials            2024-12-31 rev€=56752.0 ebitda=4640.0 fcf=2664.0 roe=8.3 F=5 11011-1-0
 ArcelorMittal                      LU MT       Materials              2024-12-31 rev€=55785.8 ebitda=5942.0 fcf=447.0 roe=2.7 F=6 111100110
 Repsol SA                          ES REP      Energy                 2025-12-31 rev€=54421.0 ebitda=5148.0 fcf=1619.0 roe=6.9 F=7 1111-11-1
+Chubb                              CH CB       Financials             2025-12-31 rev€=53269.9 ebitda=None fcf=None roe=14.0 F=None None
 Anheuser-Busch InBev               BE ABI      Consumer Staples       2025-12-31 rev€=52997.4 ebitda=21057.0 fcf=11227.0 roe=7.8 F=8 111111110
 Astrazeneca PLC                    GB AZN      Healthcare             2025-12-31 rev€=52478.3 ebitda=19476.0 fcf=8670.0 roe=21.0 F=8 111111110
 Rio Tinto plc                      GB RIO      Materials              2025-12-31 rev€=51494.7 ebitda=21513.0 fcf=4497.0 roe=16.0 F=4 11010-1-0
+Novartis                           CH NOVN     Healthcare             2025-12-31 rev€=50633.4 ebitda=23749.0 fcf=17596.0 roe=30.3 F=None None
 Unilever PLC                       GB ULVR     Consumer Staples       2025-12-31 rev€=50503.0 ebitda=10390.0 fcf=6759.0 roe=61.0 F=6 1110-11-1
-Grupo ACS                          ES -        Industrials            2025-12-31 rev€=49847.7 ebitda=None fcf=2303.0 roe=19.7 F=6 1111001-1
-Maersk                             DK MAERSK A Industrials            2025-12-31 rev€=48233.7 ebitda=10171.0 fcf=4962.0 roe=4.9 F=None None
-AB Volvo                           SE -        Industrials            2024-12-31 rev€=47328.7 ebitda=None fcf=None roe=26.0 F=5 1100-1110
-Saint-Gobain                       FR SGO      Materials              2025-12-31 rev€=46483.0 ebitda=None fcf=3464.0 roe=11.7 F=7 1111101-1
-Veolia Environnement               FR VIE      Utilities              2024-12-31 rev€=44692.0 ebitda=None fcf=None roe=8.5 F=5 1111-01-0
-Iberdrola SA                       ES IBE      Utilities              2025-12-31 rev€=44076.0 ebitda=15558.0 fcf=3317.0 roe=12.6 F=8 1111-1111
-L'Oréal                            FR OR       Consumer Staples       2025-12-31 rev€=44052.0 ebitda=None fcf=None roe=17.5 F=6 110101110
-Sanofi                             FR SAN      Healthcare             2025-12-31 rev€=43626.0 ebitda=8120.0 fcf=7212.0 roe=10.9 F=7 111100111
-Novo Nordisk A/S                   DK NOVO     Healthcare             2025-12-31 rev€=41347.5 ebitda=149640.0 fcf=28989.0 roe=52.8 F=5 110101100
-Compass Group                      GB CPG      Consumer Discretionary 2025-09-30 rev€=41159.7 ebitda=None fcf=2474.0 roe=24.4 F=5 1111001-0
-Vodafone Group Public Limited Comp GB VOD      Communication          2026-03-31 rev€=40461.0 ebitda=None fcf=6973.0 roe=-0.8 F=6 01111-101
-Orange                             FR ORA      Communication          2024-12-31 rev€=40260.0 ebitda=None fcf=None roe=7.4 F=7 1111011-1
-J Sainsbury                        GB SBRY     Consumer Staples       2026-02-28 rev€=40186.1 ebitda=1096.0 fcf=931.0 roe=6.4 F=6 111100101
-Schneider Electric                 FR SU       Industrials            2025-12-31 rev€=40152.0 ebitda=None fcf=4588.0 roe=17.2 F=6 111100101
-Inditex                            ES ITX      Consumer Discretionary 2026-01-31 rev€=39864.0 ebitda=11267.0 fcf=6520.0 roe=30.5 F=8 111110111
-GSK PLC                            GB GSK      Healthcare             2025-12-31 rev€=39015.6 ebitda=None fcf=4756.0 roe=34.9 F=9 111111111
