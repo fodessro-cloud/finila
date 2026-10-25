@@ -169,8 +169,8 @@ ESMA FULINS_E_20261024_02of02.zip: 0 new issuers
 FCA FULINS_E_20261024_01of01.zip: 2151 new issuers
 18568 issuers with listed shares
 4000 issuers with a report for 2024 or later (15 pages)
-38 reports to read, 3962 cached
-read 38 reports this run
+35 reports to read, 3965 cached
+read 35 reports this run
 4905 listed companies with an LEI on Wikidata
 18568 issuers with listed shares (FIRDS); 2299 of them file reports here
 shares in issue for 212 companies (data/shares.json)
@@ -220,7 +220,7 @@ Novo Nordisk A/S                   DK NOVO     Healthcare             2025-12-31
 Compass Group                      GB CPG      Consumer Discretionary 2025-09-30 rev€=41159.7 ebitda=None fcf=2474.0 roe=24.4 F=5 1111001-0
 Vodafone Group Public Limited Comp GB VOD      Communication          2026-03-31 rev€=40461.0 ebitda=None fcf=6973.0 roe=-0.8 F=6 01111-101
 Orange                             FR ORA      Communication          2024-12-31 rev€=40260.0 ebitda=None fcf=None roe=7.4 F=7 1111011-1
-Sainsbury's                        GB SBRY     Consumer Staples       2026-02-28 rev€=40186.1 ebitda=1096.0 fcf=931.0 roe=6.4 F=6 111100101
+J Sainsbury                        GB SBRY     Consumer Staples       2026-02-28 rev€=40186.1 ebitda=1096.0 fcf=931.0 roe=6.4 F=6 111100101
 Schneider Electric                 FR SU       Industrials            2025-12-31 rev€=40152.0 ebitda=None fcf=4588.0 roe=17.2 F=6 111100101
 Inditex                            ES ITX      Consumer Discretionary 2026-01-31 rev€=39864.0 ebitda=11267.0 fcf=6520.0 roe=30.5 F=8 111110111
 GSK PLC                            GB GSK      Healthcare             2025-12-31 rev€=39015.6 ebitda=None fcf=4756.0 roe=34.9 F=9 111111111
