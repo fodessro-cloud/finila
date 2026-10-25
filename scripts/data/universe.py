@@ -334,6 +334,8 @@ def shares_from_report(rows):
             continue
         eps, ni, tagged = r.get("eps"), r.get("netIncome"), r.get("sharesTagged")
         implied = ni / eps if eps and ni and eps * ni > 0 else None
+        if implied and abs(eps) < 0.05 and abs(eps * 100 - round(eps * 100)) < 1e-9:
+            implied = None   # EPS rounded to whole cents (TIM 0.01): profit / EPS can be off by half
         shares = tagged if tagged and (implied is None or 0.5 < tagged / implied < 2) else implied
         price = (prices.get(r.get("isin") or "") or [None])[0]
         if shares and price and (r.get("revenueEur") or 0) > 50 and not 0.01 <= price * shares / r["revenueEur"] <= 100:

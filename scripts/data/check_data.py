@@ -71,9 +71,7 @@ def companies_with_values():
             r.update({f"p_{k}": v for k, v in zip(pf, pr)})
         fx = (r["revenueEur"] / r["revenue"] if is_num(r.get("revenueEur")) and is_num(r.get("revenue")) and r["revenue"]
               else 1 if r.get("currency") == "EUR" else None)
-        shares = (r["shares"] if is_num(r.get("shares")) else
-                  r["netIncome"] / r["eps"] if is_num(r.get("eps")) and is_num(r.get("netIncome")) and r["eps"] * r["netIncome"] > 0 and fx
-                  else None)
+        shares = r["shares"] if is_num(r.get("shares")) and r["shares"] > 0 else None   # as the pages: universe.py fills it
         r["fx"], r["sharesUsed"] = fx, shares
         r["mcap"] = r["p_price"] * shares if is_num(r.get("p_price")) and shares else None   # EUR millions
         r["pe"] = r["p_price"] / (r["eps"] * fx) if fx and is_num(r.get("eps")) and r["eps"] > 0 and is_num(r.get("p_price")) else None
