@@ -2397,6 +2397,62 @@
    "source": "https://stockanalysis.com/quote/wse/BNP/financials/balance-sheet/",
    "name": "BNP Paribas Bank Polska",
    "ticker": "BNP"
+  },
+  "NL0009805522": {
+   "shares": 255160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/nbis/financials/balance-sheet/",
+   "name": "Nebius Group",
+   "ticker": "NBIS"
+  },
+  "GB00BRXH2664": {
+   "shares": 505010000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/au/financials/balance-sheet/",
+   "name": "AngloGold Ashanti",
+   "ticker": "AU"
+  },
+  "IE00BFRT3W74": {
+   "shares": 86070000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/alle/financials/balance-sheet/",
+   "name": "Allegion",
+   "ticker": "ALLE"
+  },
+  "FR0014004L86": {
+   "shares": 77540000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/AM/financials/balance-sheet/",
+   "name": "Dassault Aviation",
+   "ticker": "AM"
+  },
+  "FR0004125920": {
+   "shares": 204750000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/AMUN/financials/balance-sheet/",
+   "name": "Amundi",
+   "ticker": "AMUN"
+  },
+  "IT0005211237": {
+   "shares": 1016000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IG/financials/balance-sheet/",
+   "name": "Italgas",
+   "ticker": "IG"
+  },
+  "IT0005218380": {
+   "shares": 1503000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BAMI/financials/balance-sheet/",
+   "name": "Banco BPM",
+   "ticker": "BAMI"
+  },
+  "IT0001031084": {
+   "shares": 113910000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BGN/financials/balance-sheet/",
+   "name": "Banca Generali",
+   "ticker": "BGN"
   }
  }
 }
