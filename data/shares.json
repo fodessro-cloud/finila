@@ -2285,6 +2285,118 @@
    "shares": 88990000,
    "asOf": "2026-10-25",
    "source": "https://www.comdirect.de/inf/aktien/IT0005527616"
+  },
+  "PLTLKPL00017": {
+   "shares": 1312360000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/OPL/financials/balance-sheet/",
+   "name": "Orange Polska",
+   "ticker": "OPL"
+  },
+  "PLTAURN00011": {
+   "shares": 1753000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/TPE/financials/balance-sheet/",
+   "name": "Tauron Polska Energia",
+   "ticker": "TPE"
+  },
+  "PLSOFTB00016": {
+   "shares": 80510000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ACP/financials/balance-sheet/",
+   "name": "Asseco Poland",
+   "ticker": "ACP"
+  },
+  "PLKRK0000010": {
+   "shares": 19490000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/KRU/financials/balance-sheet/",
+   "name": "KRUK",
+   "ticker": "KRU"
+  },
+  "PLKETY000011": {
+   "shares": 9840000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/KTY/financials/balance-sheet/",
+   "name": "Grupa Kęty",
+   "ticker": "KTY"
+  },
+  "PLJSW0000015": {
+   "shares": 117410000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/JSW/financials/balance-sheet/",
+   "name": "JSW",
+   "ticker": "JSW"
+  },
+  "PLGPW0000017": {
+   "shares": 41970000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/GPW/financials/balance-sheet/",
+   "name": "GPW Warsaw Stock Exchange",
+   "ticker": "GPW"
+  },
+  "PLEURCH00011": {
+   "shares": 139160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/EUR/financials/balance-sheet/",
+   "name": "Eurocash",
+   "ticker": "EUR"
+  },
+  "PLENEA000013": {
+   "shares": 529730000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ENA/financials/balance-sheet/",
+   "name": "Enea",
+   "ticker": "ENA"
+  },
+  "PLCFRPT00013": {
+   "shares": 550700000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CPS/financials/balance-sheet/",
+   "name": "Cyfrowy Polsat",
+   "ticker": "CPS"
+  },
+  "PLCCC0000016": {
+   "shares": 83580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CCC/financials/balance-sheet/",
+   "name": "Modivo",
+   "ticker": "MDV"
+  },
+  "PLBZ00000044": {
+   "shares": 102190000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SPL/financials/balance-sheet/",
+   "name": "Erste Bank Polska",
+   "ticker": "EBP"
+  },
+  "PLBSK0000017": {
+   "shares": 130100000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ING/financials/balance-sheet/",
+   "name": "ING Bank Śląski",
+   "ticker": "ING"
+  },
+  "PLBIG0000016": {
+   "shares": 1213000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/MIL/financials/balance-sheet/",
+   "name": "Bank Millennium",
+   "ticker": "MIL"
+  },
+  "PLBH00000012": {
+   "shares": 130390000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BHW/financials/balance-sheet/",
+   "name": "Bank Handlowy",
+   "ticker": "BHW"
+  },
+  "PLBGZ0000010": {
+   "shares": 148600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BNP/financials/balance-sheet/",
+   "name": "BNP Paribas Bank Polska",
+   "ticker": "BNP"
   }
  }
 }
