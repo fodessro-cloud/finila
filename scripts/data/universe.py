@@ -323,7 +323,7 @@ def add_shares(rows, listed):
 def add_financials(rows, rates):
     """Annual figures for big companies with no report on filings.xbrl.org (SAP, Roche, Nestlé ...),
     copied by hand from their annual accounts into data/financials.json (millions, report currency).
-    A report read here always wins; the same ratios as fundamentals.metrics() are derived."""
+    A report wins unless it is older or lacks revenue and EPS; the same ratios as fundamentals.metrics() are derived."""
     path = ROOT / "data/financials.json"
     if not path.exists():
         return 0
@@ -332,7 +332,13 @@ def add_financials(rows, rates):
     n = 0
     for r in rows:
         k = known.get(r.get("isin") or "")
-        if not k or r.get("revenue") is not None or r.get("netIncome") is not None:
+        if not k:
+            continue
+        # a report wins when it is as new and has revenue and EPS; banks' reports often lack both
+        # (Generali, DNB, CaixaBank), so they had no market value
+        if (r.get("revenue") is not None or r.get("netIncome") is not None) and (
+                (r.get("revenue") is not None and r.get("eps") is not None)
+                or (r.get("periodEnd") or "") > k["periodEnd"]):
             continue
         rev, op, net, da = k.get("revenue"), k.get("operatingProfit"), k.get("netIncome"), k.get("da")
         fin = bool(k.get("financial"))
