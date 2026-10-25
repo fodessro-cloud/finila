@@ -2453,6 +2453,132 @@
    "source": "https://stockanalysis.com/quote/bit/BGN/financials/balance-sheet/",
    "name": "Banca Generali",
    "ticker": "BGN"
+  },
+  "IE00BGH1M568": {
+   "shares": 137600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/prgo/financials/balance-sheet/",
+   "name": "Perrigo",
+   "ticker": "PRGO"
+  },
+  "LU0569974404": {
+   "shares": 73100000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ams/APAM/financials/balance-sheet/",
+   "name": "Aperam",
+   "ticker": "APAM"
+  },
+  "FR0013467479": {
+   "shares": 135420000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/cstm/financials/balance-sheet/",
+   "name": "Constellium",
+   "ticker": "CSTM"
+  },
+  "FR0000124570": {
+   "shares": 142890000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/OPM/financials/balance-sheet/",
+   "name": "OPmobility",
+   "ticker": "OPM"
+  },
+  "FR0000031577": {
+   "shares": 8380000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/VIRP/financials/balance-sheet/",
+   "name": "Virbac",
+   "ticker": "VIRP"
+  },
+  "FR0005691656": {
+   "shares": 19290000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/TRI/financials/balance-sheet/",
+   "name": "Trigano",
+   "ticker": "TRI"
+  },
+  "GB0002869419": {
+   "shares": 195960000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/lon/BYG/financials/balance-sheet/",
+   "name": "Big Yellow Group",
+   "ticker": "BYG"
+  },
+  "BE0003878957": {
+   "shares": 30350000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ebr/VGP/financials/balance-sheet/",
+   "name": "VGP",
+   "ticker": "VGP"
+  },
+  "AT0000A3EPA4": {
+   "shares": 98850000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/swx/AMS/financials/balance-sheet/",
+   "name": "ams-OSRAM",
+   "ticker": "AMS"
+  },
+  "IS0000000040": {
+   "shares": 427770000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/EMBLA/financials/balance-sheet/",
+   "name": "Embla Medical",
+   "ticker": "EMBLA"
+  },
+  "NO0010209331": {
+   "shares": 82430000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/PROT/financials/balance-sheet/",
+   "name": "Protector Forsikring",
+   "ticker": "PROT"
+  },
+  "DK0060854669": {
+   "shares": 24340000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/RILBA/financials/balance-sheet/",
+   "name": "Ringkjøbing Landbobank",
+   "ticker": "RILBA"
+  },
+  "CZ0009000121": {
+   "shares": 21290000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/pra/KOFOL/financials/balance-sheet/",
+   "name": "Kofola ČeskoSlovensko",
+   "ticker": "KOFOL"
+  },
+  "CZ0009008942": {
+   "shares": 56460000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/pra/CZG/financials/balance-sheet/",
+   "name": "Colt CZ Group",
+   "ticker": "CZG"
+  },
+  "CH0334081137": {
+   "shares": 95890000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/crsp/financials/balance-sheet/",
+   "name": "CRISPR Therapeutics",
+   "ticker": "CRSP"
+  },
+  "IE0003LFZ4U7": {
+   "shares": 95900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/dole/financials/balance-sheet/",
+   "name": "Dole",
+   "ticker": "DOLE"
+  },
+  "IE00BKYC3F77": {
+   "shares": 24350000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/cmpr/financials/balance-sheet/",
+   "name": "Cimpress",
+   "ticker": "CMPR"
+  },
+  "ES0105884011": {
+   "shares": 167960000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bme/CIRSA/financials/balance-sheet/",
+   "name": "Cirsa Enterprises",
+   "ticker": "CIRSA"
   }
  }
 }
