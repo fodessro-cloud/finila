@@ -3251,6 +3251,48 @@
    "source": "https://stockanalysis.com/quote/bit/IEG/statistics/",
    "name": "Italian Exhibition Group",
    "ticker": "IEG"
+  },
+  "NO0003033102": {
+   "shares": 933200000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/KOA/statistics/",
+   "name": "Kongsberg Automotive",
+   "ticker": "KOA"
+  },
+  "GRS144003001": {
+   "shares": 243160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ath/ATTICA/statistics/",
+   "name": "Attica Holdings",
+   "ticker": "ATTICA"
+  },
+  "GRS543003008": {
+   "shares": 70030000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ath/QLCO/statistics/",
+   "name": "Qualco Group",
+   "ticker": "QLCO"
+  },
+  "SE0017083272": {
+   "shares": 90480000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/NIVI.B/statistics/",
+   "name": "Nivika Fastigheter",
+   "ticker": "NIVI-B"
+  },
+  "GRS222213001": {
+   "shares": 27730000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ath/EKTER/statistics/",
+   "name": "Ekter",
+   "ticker": "EKTER"
+  },
+  "DK0010258995": {
+   "shares": 117780000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/AGAT/statistics/",
+   "name": "Agat Ejendomme",
+   "ticker": "AGAT"
   }
  }
 }
