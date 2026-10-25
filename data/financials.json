@@ -6623,6 +6623,90 @@
    "netIncomePrev": -36.76,
    "eps": -0.67,
    "source": "https://stockanalysis.com/stocks/clls/financials/"
+  },
+  "HU0000167788": {
+   "name": "4iG",
+   "currency": "HUF",
+   "periodEnd": "2025-12-31",
+   "revenue": 745297.0,
+   "revenuePrev": 687176.0,
+   "operatingProfit": 66596.0,
+   "netIncome": -5344.0,
+   "netIncomePrev": -45836.0,
+   "eps": -18.44,
+   "source": "https://stockanalysis.com/quote/bud/4IG/financials/"
+  },
+  "CZ1008000310": {
+   "name": "Doosan Škoda Power",
+   "currency": "CZK",
+   "periodEnd": "2025-12-31",
+   "revenue": 5616.0,
+   "revenuePrev": 5898.0,
+   "operatingProfit": 693.23,
+   "netIncome": 521.43,
+   "netIncomePrev": 659.82,
+   "eps": 16.47,
+   "source": "https://stockanalysis.com/quote/pra/DSPW/financials/"
+  },
+  "NO0010895782": {
+   "name": "Xplora Technologies",
+   "currency": "NOK",
+   "periodEnd": "2025-12-31",
+   "revenue": 1918.0,
+   "revenuePrev": 797.15,
+   "operatingProfit": 176.94,
+   "netIncome": -32.27,
+   "netIncomePrev": 8.4,
+   "eps": -0.72,
+   "source": "https://stockanalysis.com/quote/osl/XPLRA/financials/"
+  },
+  "NO0013696799": {
+   "name": "Havila Kystruten",
+   "currency": "NOK",
+   "periodEnd": "2025-12-31",
+   "revenue": 1775.0,
+   "revenuePrev": 1529.0,
+   "operatingProfit": 530.58,
+   "netIncome": -1071.0,
+   "netIncomePrev": -787.93,
+   "eps": -62.58,
+   "source": "https://stockanalysis.com/quote/osl/HKY/financials/"
+  },
+  "NO0010762792": {
+   "name": "Instabank",
+   "currency": "NOK",
+   "periodEnd": "2025-12-31",
+   "revenue": 413.35,
+   "revenuePrev": 334.87,
+   "netIncome": 122.79,
+   "netIncomePrev": 98.12,
+   "eps": 0.29,
+   "financial": true,
+   "source": "https://stockanalysis.com/quote/osl/INSTA/financials/"
+  },
+  "DK0010230630": {
+   "name": "GrønlandsBANKEN",
+   "currency": "DKK",
+   "periodEnd": "2025-12-31",
+   "revenue": 438.67,
+   "revenuePrev": 485.33,
+   "netIncome": 180.85,
+   "netIncomePrev": 209.01,
+   "eps": 100.5,
+   "financial": true,
+   "source": "https://stockanalysis.com/quote/cph/GRLA/financials/"
+  },
+  "LU2405144788": {
+   "name": "Codere Online",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 210.41,
+   "revenuePrev": 200.7,
+   "operatingProfit": 5.74,
+   "netIncome": 1.29,
+   "netIncomePrev": 3.91,
+   "eps": 0.0284,
+   "source": "https://stockanalysis.com/stocks/cdro/financials/"
   }
  }
 }

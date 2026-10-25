@@ -3048,6 +3048,48 @@
    "source": "https://stockanalysis.com/stocks/clls/financials/balance-sheet/",
    "name": "Cellectis",
    "ticker": "ALCLS"
+  },
+  "HU0000167788": {
+   "shares": 289800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bud/4IG/financials/balance-sheet/",
+   "name": "4iG",
+   "ticker": "4IG"
+  },
+  "CZ1008000310": {
+   "shares": 31660000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/pra/DSPW/financials/balance-sheet/",
+   "name": "Doosan Škoda Power",
+   "ticker": "DSPW"
+  },
+  "NO0010895782": {
+   "shares": 44820000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/XPLRA/financials/balance-sheet/",
+   "name": "Xplora Technologies",
+   "ticker": "XPLRA"
+  },
+  "NO0013696799": {
+   "shares": 17110000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/HKY/financials/balance-sheet/",
+   "name": "Havila Kystruten",
+   "ticker": "HKY"
+  },
+  "DK0010230630": {
+   "shares": 1800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/GRLA/financials/balance-sheet/",
+   "name": "GrønlandsBANKEN",
+   "ticker": "GRLA"
+  },
+  "LU2405144788": {
+   "shares": 45400000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/cdro/financials/balance-sheet/",
+   "name": "Codere Online",
+   "ticker": "CDRO"
   }
  }
 }
