@@ -2978,6 +2978,76 @@
    "source": "https://stockanalysis.com/quote/wse/PXM/financials/balance-sheet/",
    "name": "Polimex Mostostal",
    "ticker": "PXM"
+  },
+  "ROTSELACNOR9": {
+   "shares": 73300000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bvb/TEL/financials/balance-sheet/",
+   "name": "Transelectrica",
+   "ticker": "TEL"
+  },
+  "NL0015073TS8": {
+   "shares": 1000000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ams/CSG/financials/balance-sheet/",
+   "name": "CSG",
+   "ticker": "CSG"
+  },
+  "GB00BN0VZ646": {
+   "shares": 90500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ams/FERGR/financials/balance-sheet/",
+   "name": "Ferrari Group",
+   "ticker": "FERGR"
+  },
+  "GB00BVG7F061": {
+   "shares": 198600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/brsl/financials/balance-sheet/",
+   "name": "Brightstar Lottery",
+   "ticker": "BRSL"
+  },
+  "SE0010442418": {
+   "shares": 107600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/BAHN.B/financials/balance-sheet/",
+   "name": "Bahnhof",
+   "ticker": "BAHN-B"
+  },
+  "FR0000075442": {
+   "shares": 6170000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/ALLDL/financials/balance-sheet/",
+   "name": "Groupe LDLC",
+   "ticker": "ALLDL"
+  },
+  "FR0012819381": {
+   "shares": 18500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/ALGIL/financials/balance-sheet/",
+   "name": "Groupe Guillin",
+   "ticker": "ALGIL"
+  },
+  "IT0003173629": {
+   "shares": 79500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BST/financials/balance-sheet/",
+   "name": "Banca Sistema",
+   "ticker": "BST"
+  },
+  "IT0004240443": {
+   "shares": 48000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/PQ/financials/balance-sheet/",
+   "name": "Piquadro",
+   "ticker": "PQ"
+  },
+  "FR0010425595": {
+   "shares": 100900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/clls/financials/balance-sheet/",
+   "name": "Cellectis",
+   "ticker": "ALCLS"
   }
  }
 }

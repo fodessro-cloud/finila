@@ -6504,6 +6504,125 @@
    "netIncomePrev": -348.58,
    "eps": 0.54,
    "source": "https://stockanalysis.com/quote/wse/PXM/financials/"
+  },
+  "ROTSELACNOR9": {
+   "name": "Transelectrica",
+   "currency": "RON",
+   "periodEnd": "2025-12-31",
+   "revenue": 5615.0,
+   "revenuePrev": 7802.0,
+   "netIncome": 440.16,
+   "netIncomePrev": 556.97,
+   "eps": 6.0,
+   "source": "https://stockanalysis.com/quote/bvb/TEL/financials/"
+  },
+  "NL0015073TS8": {
+   "name": "CSG",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 6741.0,
+   "revenuePrev": 3925.0,
+   "operatingProfit": 1606.0,
+   "netIncome": 694.06,
+   "netIncomePrev": 526.07,
+   "eps": 0.694,
+   "source": "https://stockanalysis.com/quote/ams/CSG/financials/"
+  },
+  "GB00BN0VZ646": {
+   "name": "Ferrari Group",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 359.37,
+   "revenuePrev": 348.76,
+   "operatingProfit": 54.91,
+   "netIncome": 50.68,
+   "netIncomePrev": 55.46,
+   "eps": 0.56,
+   "source": "https://stockanalysis.com/quote/ams/FERGR/financials/"
+  },
+  "GB00BVG7F061": {
+   "name": "Brightstar Lottery",
+   "currency": "USD",
+   "periodEnd": "2025-12-31",
+   "revenue": 2511.0,
+   "revenuePrev": 2512.0,
+   "operatingProfit": 661.0,
+   "netIncome": 147.0,
+   "netIncomePrev": 348.0,
+   "eps": 0.74,
+   "source": "https://stockanalysis.com/stocks/brsl/financials/"
+  },
+  "SE0010442418": {
+   "name": "Bahnhof",
+   "currency": "SEK",
+   "periodEnd": "2025-12-31",
+   "revenue": 2214.0,
+   "revenuePrev": 2018.0,
+   "operatingProfit": 243.45,
+   "netIncome": 183.07,
+   "netIncomePrev": 220.23,
+   "eps": 1.7,
+   "source": "https://stockanalysis.com/quote/sto/BAHN.B/financials/"
+  },
+  "FR0000075442": {
+   "name": "Groupe LDLC",
+   "currency": "EUR",
+   "periodEnd": "2026-03-31",
+   "revenue": 554.05,
+   "revenuePrev": 534.46,
+   "operatingProfit": 15.55,
+   "netIncome": 10.18,
+   "netIncomePrev": -10.89,
+   "eps": 1.65,
+   "source": "https://stockanalysis.com/quote/epa/ALLDL/financials/"
+  },
+  "FR0012819381": {
+   "name": "Groupe Guillin",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 885.96,
+   "revenuePrev": 870.74,
+   "operatingProfit": 67.33,
+   "netIncome": 48.29,
+   "netIncomePrev": 59.74,
+   "eps": 2.61,
+   "source": "https://stockanalysis.com/quote/epa/ALGIL/financials/"
+  },
+  "IT0003173629": {
+   "name": "Banca Sistema",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 160.73,
+   "revenuePrev": 120.09,
+   "netIncome": 29.04,
+   "netIncomePrev": 25.2,
+   "eps": 0.36,
+   "financial": true,
+   "source": "https://stockanalysis.com/quote/bit/BST/financials/"
+  },
+  "IT0004240443": {
+   "name": "Piquadro",
+   "currency": "EUR",
+   "periodEnd": "2026-03-31",
+   "revenue": 184.12,
+   "revenuePrev": 186.74,
+   "operatingProfit": 13.24,
+   "netIncome": 12.88,
+   "netIncomePrev": 11.58,
+   "eps": 0.27,
+   "source": "https://stockanalysis.com/quote/bit/PQ/financials/"
+  },
+  "FR0010425595": {
+   "name": "Cellectis",
+   "currency": "USD",
+   "periodEnd": "2025-12-31",
+   "revenue": 79.59,
+   "revenuePrev": 49.22,
+   "operatingProfit": -33.08,
+   "netIncome": -67.59,
+   "netIncomePrev": -36.76,
+   "eps": -0.67,
+   "source": "https://stockanalysis.com/stocks/clls/financials/"
   }
  }
 }
