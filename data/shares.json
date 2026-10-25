@@ -2873,6 +2873,111 @@
    "source": "https://stockanalysis.com/quote/wse/ZAP/financials/balance-sheet/",
    "name": "Grupa Azoty Puławy",
    "ticker": "ZAP"
+  },
+  "PLZEPAK00012": {
+   "shares": 50820000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ZEP/financials/balance-sheet/",
+   "name": "ZE PAK",
+   "ticker": "ZEP"
+  },
+  "PLMCIMG00012": {
+   "shares": 52300000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/MCI/financials/balance-sheet/",
+   "name": "MCI Capital",
+   "ticker": "MCI"
+  },
+  "PLWAWEL00013": {
+   "shares": 1292000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/WWL/financials/balance-sheet/",
+   "name": "Wawel",
+   "ticker": "WWL"
+  },
+  "PLVSTLA00011": {
+   "shares": 234600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/VRG/financials/balance-sheet/",
+   "name": "VRG",
+   "ticker": "VRG"
+  },
+  "PLSTLSK00016": {
+   "shares": 26880000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SNK/financials/balance-sheet/",
+   "name": "Sanok Rubber Company",
+   "ticker": "SNK"
+  },
+  "PLOPNPL00013": {
+   "shares": 11230000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/OPN/financials/balance-sheet/",
+   "name": "Oponeo.pl",
+   "ticker": "OPN"
+  },
+  "PLDEBCA00016": {
+   "shares": 13800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/DBC/financials/balance-sheet/",
+   "name": "Dębica",
+   "ticker": "DBC"
+  },
+  "PLLUBAW00013": {
+   "shares": 150000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/LBW/financials/balance-sheet/",
+   "name": "Lubawa",
+   "ticker": "LBW"
+  },
+  "PLVIGOS00015": {
+   "shares": 874900,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/VGO/financials/balance-sheet/",
+   "name": "VIGO Photonics",
+   "ticker": "VGO"
+  },
+  "PLTSQGM00016": {
+   "shares": 6478000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/TEN/financials/balance-sheet/",
+   "name": "Ten Square Games",
+   "ticker": "TEN"
+  },
+  "PLBLOBR00014": {
+   "shares": 19290000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BLO/financials/balance-sheet/",
+   "name": "Bloober Team",
+   "ticker": "BLO"
+  },
+  "PLCTINT00018": {
+   "shares": 182900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CIG/financials/balance-sheet/",
+   "name": "CI Games",
+   "ticker": "CIG"
+  },
+  "PLBOS0000019": {
+   "shares": 92930000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BOS/financials/balance-sheet/",
+   "name": "Bank Ochrony Środowiska",
+   "ticker": "BOS"
+  },
+  "PLKGNRC00015": {
+   "shares": 14900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/KGN/financials/balance-sheet/",
+   "name": "Kogeneracja",
+   "ticker": "KGN"
+  },
+  "PLMSTSD00019": {
+   "shares": 248700000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/PXM/financials/balance-sheet/",
+   "name": "Polimex Mostostal",
+   "ticker": "PXM"
   }
  }
 }
