@@ -199,7 +199,9 @@ function openCompany(lei) {
       </div>
       ${scoresHTML(c)}
       ${fin}
-      <div class="modal-report-src">Source: the company’s ESEF annual report via filings.xbrl.org${c.source ? ` · <a href="${esc(c.source)}" target="_blank" rel="noopener">view report</a>` : ''}. Figures are read automatically and can contain errors; check the report before relying on them.</div>
+      <div class="modal-report-src">${c.origin === 'hand'
+        ? `Source: the company’s published annual accounts, entered by FINILA (no ESEF report on filings.xbrl.org)${c.source ? ` · <a href="${esc(c.source)}" target="_blank" rel="noopener">view figures</a>` : ''}. Check the annual report before relying on them.`
+        : `Source: the company’s ESEF annual report via filings.xbrl.org${c.source ? ` · <a href="${esc(c.source)}" target="_blank" rel="noopener">view report</a>` : ''}. Figures are read automatically and can contain errors; check the report before relying on them.`}</div>
     </div>`}`;
   document.getElementById('stock-modal').style.display = 'flex';
 }

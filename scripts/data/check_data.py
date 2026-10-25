@@ -137,6 +137,11 @@ def check_shares_file():
     old = [k for k, r in s.items() if age(r["asOf"]) > 200]
     if old:
         warn(f"{len(old)} share counts in data/shares.json are older than 200 days: time for the quarterly refresh.")
+    fin = json.loads((ROOT / "data/financials.json").read_text())["rows"] if (ROOT / "data/financials.json").exists() else {}
+    old = [r["name"] for r in fin.values() if age(r["periodEnd"]) > 480]
+    if old:
+        warn(f"{len(old)} hand-entered annual figures in data/financials.json are for a year that ended over 16 months ago "
+             f"({', '.join(old[:5])}): enter the new annual report.")
 
 
 def check_history():

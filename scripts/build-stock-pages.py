@@ -306,7 +306,7 @@ def events_html(c):
     ev = sorted(c.get('events', []), key=lambda e: e[0], reverse=True)[:12]
     nice = lambda d: date.fromisoformat(d).strftime('%-d %b %Y') if re.fullmatch(r'\d{4}-\d\d-\d\d', d or '') else d
     items = ''.join(f'<li><time datetime="{esc(d)}">{esc(nice(d))}</time><span>{text}</span><a href="{link}">Details</a></li>' for d, text, link in ev)
-    if c.get('source') and c.get('origin') not in ('listing', 'wikidata'):
+    if c.get('source') and c.get('origin') not in ('listing', 'wikidata', 'hand'):
         items += (f'<li><time>FY {esc((c.get("periodEnd") or "")[:4])}</time><span>Annual report for the year ending {esc(c["periodEnd"])}</span>'
                   f'<a href="{esc(c["source"])}" target="_blank" rel="noopener">Read</a></li>')
     if not items:
@@ -325,7 +325,11 @@ def page(c, peers, updated):
     # Listed issuers without any usable report: name, ISIN, ticker and sector only.
     listed_only = c.get('origin') == 'listing'
     link = f' · <a href="{esc(c["source"])}" target="_blank" rel="noopener">{"view on Wikidata" if wd else "view report"}</a>' if c.get('source') else ''
+    hand = c.get('origin') == 'hand'
+    if hand:
+        link = f' · <a href="{esc(c["source"])}" target="_blank" rel="noopener">view figures</a>' if c.get('source') else ''
     src = (f'Source: headline figures from Wikidata (CC0), the company has no ESEF report on filings.xbrl.org yet{link}' if wd
+           else f'Source: the company’s published annual accounts, entered by FINILA (no ESEF report on filings.xbrl.org){link}' if hand
            else f'Source: the company’s ESEF annual report via filings.xbrl.org{link}')
     fy = (c.get('periodEnd') or '')[:4]
     url = f'{SITE}/stock/{c["slug"]}'

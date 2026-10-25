@@ -320,6 +320,47 @@ def add_shares(rows, listed):
     return sum(1 for r in rows if r.get("shares"))
 
 
+def add_financials(rows, rates):
+    """Annual figures for big companies with no report on filings.xbrl.org (SAP, Roche, Nestlé ...),
+    copied by hand from their annual accounts into data/financials.json (millions, report currency).
+    A report read here always wins; the same ratios as fundamentals.metrics() are derived."""
+    path = ROOT / "data/financials.json"
+    if not path.exists():
+        return 0
+    known = json.loads(path.read_text())["rows"]
+    pct = lambda a, b: None if a is None or not b else round(a / b * 100, 1)
+    n = 0
+    for r in rows:
+        k = known.get(r.get("isin") or "")
+        if not k or r.get("revenue") is not None or r.get("netIncome") is not None:
+            continue
+        rev, op, net, da = k.get("revenue"), k.get("operatingProfit"), k.get("netIncome"), k.get("da")
+        fin = bool(k.get("financial"))
+        ebitda = op + da if op is not None and da is not None and not fin else None
+        capex = None if fin else k.get("capex")
+        fcf = k["operatingCashFlow"] - capex if k.get("operatingCashFlow") is not None and capex is not None else None
+        net_debt = k["debt"] - k["cash"] if not fin and k.get("debt") is not None and k.get("cash") is not None else None
+        div = k.get("dividendsPaid")
+        rate = rates.get(k["currency"])
+        r.update({
+            "currency": k["currency"], "periodEnd": k["periodEnd"], "source": k["source"], "financial": fin,
+            "revenue": rev, "revenueEur": round(rev / rate, 1) if rev is not None and rate else None,
+            "ebitda": ebitda, "operatingProfit": op, "netIncome": net, "operatingCashFlow": k.get("operatingCashFlow"),
+            "capex": capex, "fcf": fcf, "dividendsPaid": div, "equity": k.get("equity"), "assets": k.get("assets"),
+            "cash": k.get("cash"), "debt": k.get("debt"), "netDebt": net_debt, "eps": k.get("eps"),
+            "roe": pct(net, k.get("equity")), "ebitdaMargin": pct(ebitda, rev), "operatingMargin": pct(op, rev),
+            "netMargin": pct(net, rev), "fcfMargin": pct(fcf, rev),
+            "netDebtToEbitda": round(net_debt / ebitda, 2) if net_debt is not None and ebitda and ebitda > 0 else None,
+            "revenueGrowth": pct(rev - k["revenuePrev"], k["revenuePrev"]) if rev is not None and k.get("revenuePrev") else None,
+            "netIncomeGrowth": pct(net - k["netIncomePrev"], abs(k["netIncomePrev"])) if net is not None and k.get("netIncomePrev") else None,
+            "payoutFcf": pct(div, fcf) if div and fcf and fcf > 0 else None,
+            "payoutNet": pct(div, net) if div and net and net > 0 else None,
+            "origin": "hand",
+        })
+        n += 1
+    return n
+
+
 def shares_from_report(rows):
     """Everyone without a hand-checked count gets the one in the annual report, so loss-makers and
     companies with no revenue line in another currency still get a market value: the tagged count,
@@ -506,6 +547,7 @@ def main():
                      "exchange": exchange, "sector": sector_of(w.get("industries", [])),
                      "industry": ", ".join(sorted(w.get("industries", [])))[:60] or None, "origin": "listing"})
     log(f"shares in issue for {add_shares(rows, listed)} companies (data/shares.json)")
+    log(f"annual figures by hand for {add_financials(rows, fx)} companies (data/financials.json)")
     missing = [r for r in rows if not r["sector"]]
     extra = wikidata_extra({r["isin"] for r in missing if r["isin"]}, {r["lei"] for r in missing})
     via = {"wikidata": 0, "bank": 0, "name": 0}
