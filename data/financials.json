@@ -1824,6 +1824,26 @@
    "equity": 3364.0,
    "assets": 10118.0,
    "source": "https://stockanalysis.com/stocks/fti/financials/"
+  },
+  "BE0974268972": {
+   "name": "bpost",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 4468.0,
+   "revenuePrev": 4329.0,
+   "operatingProfit": 79.1,
+   "netIncome": -40.3,
+   "netIncomePrev": -205.1,
+   "eps": -0.2,
+   "da": 458.4,
+   "operatingCashFlow": 428.9,
+   "capex": 125.0,
+   "dividendsPaid": 0.0,
+   "cash": 1256.0,
+   "debt": 3029.0,
+   "equity": 707.8,
+   "assets": 5487.0,
+   "source": "https://stockanalysis.com/quote/ebr/BPOST/financials/"
   }
  }
 }
