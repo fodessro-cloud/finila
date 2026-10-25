@@ -2110,6 +2110,181 @@
    "name": "Telecom Italia",
    "ticker": "TIT",
    "sector": "Communication"
+  },
+  "JE00B4T3BW64": {
+   "shares": 11720000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/JE00B4T3BW64"
+  },
+  "GB00BMBVGQ36": {
+   "shares": 1500000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB00BMBVGQ36"
+  },
+  "SE0000667925": {
+   "shares": 3930000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/SE0000667925"
+  },
+  "ES0132105018": {
+   "shares": 249160000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ES0132105018"
+  },
+  "JE00BN574F90": {
+   "shares": 103530000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/JE00BN574F90"
+  },
+  "GB0001859296": {
+   "shares": 317360000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB0001859296"
+  },
+  "ES0121975009": {
+   "shares": 34280000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ES0121975009"
+  },
+  "IT0001347308": {
+   "shares": 160850000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0001347308"
+  },
+  "ES0142090317": {
+   "shares": 1380000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ES0142090317"
+  },
+  "NL0009739416": {
+   "shares": 516580000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/NL0009739416"
+  },
+  "FR0000036675": {
+   "shares": 11250000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0000036675"
+  },
+  "GB0005576813": {
+   "shares": 539540000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB0005576813"
+  },
+  "AT0000644505": {
+   "shares": 73370000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/AT0000644505"
+  },
+  "AT0000758305": {
+   "shares": 37590000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/AT0000758305"
+  },
+  "SE0000872095": {
+   "shares": 357640000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/SE0000872095"
+  },
+  "IT0005541336": {
+   "shares": 231720000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0005541336"
+  },
+  "GB00BMTV7393": {
+   "shares": 1640000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB00BMTV7393"
+  },
+  "DK0010234467": {
+   "shares": 53840000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/DK0010234467"
+  },
+  "IT0001206769": {
+   "shares": 90700000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0001206769"
+  },
+  "IT0005187460": {
+   "shares": 261980000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0005187460"
+  },
+  "ES0180918015": {
+   "shares": 65030000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ES0180918015"
+  },
+  "DK0010255975": {
+   "shares": 7790000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/DK0010255975"
+  },
+  "GB0005630420": {
+   "shares": 77690000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB0005630420"
+  },
+  "CH0496451508": {
+   "shares": 214780000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CH0496451508"
+  },
+  "IT0005090300": {
+   "shares": 902490000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0005090300"
+  },
+  "AT0000837307": {
+   "shares": 42340000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/AT0000837307"
+  },
+  "GB0003718474": {
+   "shares": 33050000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB0003718474"
+  },
+  "DK0060615755": {
+   "shares": 62380000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/DK0060615755"
+  },
+  "IT0005482333": {
+   "shares": 640320000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0005482333"
+  },
+  "ES0165386014": {
+   "shares": 131650000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ES0165386014"
+  },
+  "SE0016797732": {
+   "shares": 1560000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/SE0016797732"
+  },
+  "IT0004552359": {
+   "shares": 267120000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0004552359"
+  },
+  "FR0014005HJ9": {
+   "shares": 153460000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0014005HJ9"
+  },
+  "FR0000127771": {
+   "shares": 978450000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0000127771"
+  },
+  "IT0005527616": {
+   "shares": 88990000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0005527616"
   }
  }
 }
