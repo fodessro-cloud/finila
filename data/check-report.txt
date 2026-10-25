@@ -1,6 +1,8 @@
-FINILA data check 2026-10-24 12:13 UTC (live site)
-0 errors, 54 warnings
+FINILA data check 2026-10-25 12:45 UTC (live site)
+2 errors, 54 warnings
 
+ERROR   Two companies share ISIN GRS432003028: Ακtor Ανώνυμη Εταιρεία Συμμετοχών, Τεχνικών ΚΑΙ Ενεργειακών Έργων, Ιντρακομ Ανωνυμη Εταιρια Συμμετοχων.
+ERROR   Two companies share ISIN GRS331043000: Alpha Real Estate Services AE, Alpha Υπηρεσιων ΚΑΙ Συμμετοχων Ανωνυμη Εταιρεια.
 WARNING Volvo Cars (SE0021628898): price moved -25.2% on 2026-10-23 (check it is real news, not a data error).
 WARNING Prosus N.V. (NL0013654783): newest annual report ends 2024-03-31, older than two years.
 WARNING Embracer Group (SE0023615885): newest annual report ends 2024-03-31, older than two years.
@@ -55,5 +57,5 @@ WARNING DOF Group ASA (NO0012851874): €3B company has no sector, falls into 'O
 WARNING 15 share counts in data/shares.json are older than 200 days: time for the quarterly refresh.
 WARNING 3 daily closes jump more than 2x (share split or wrong line); first: DE000A1YC996 2026-10-16 0.02 -> 2026-10-19 0.001; GB00BQVVS097 2026-10-19 0.0005 -> 2026-10-20 0.0045; GB00BQVVS097 2026-10-22 0.0045 -> 2026-10-23 0.0005.
 WARNING js/housing-levels.json: sources that failed last run (old values kept): FI.
-NOTE    2793 companies, 2195 with a price, 1719 with a market value; newest price 2026-10-23.
-NOTE    Priced but no market value (no report figures, no shares count): PL 84, GB 78, SE 65, FR 27, NO 26, IT 25, DK 14, IE 11, BE 9, NL 8, CH 7, CZ 7.
+NOTE    2810 companies, 2208 with a price, 1728 with a market value; newest price 2026-10-23.
+NOTE    Priced but no market value (no report figures, no shares count): PL 84, GB 79, SE 65, FR 27, NO 26, IT 25, DK 14, IE 12, BE 9, CH 8, NL 8, CZ 7.
