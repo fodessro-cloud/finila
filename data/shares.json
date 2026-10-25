@@ -3097,6 +3097,160 @@
    "source": "https://stockanalysis.com/quote/lon/NICL/financials/balance-sheet/",
    "name": "Nichols",
    "ticker": "NICL"
+  },
+  "GB00BP6S8Z30": {
+   "shares": 975250000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/lon/ONT/statistics/",
+   "name": "Oxford Nanopore Technologies",
+   "ticker": "ONT"
+  },
+  "SE0016787071": {
+   "shares": 311240000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/TRUE.B/statistics/",
+   "name": "Truecaller",
+   "ticker": "TRUE-B"
+  },
+  "SE0009143662": {
+   "shares": 79410000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/VOLO/statistics/",
+   "name": "Volati",
+   "ticker": "VOLO"
+  },
+  "IT0005221517": {
+   "shares": 28890000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/GPI/statistics/",
+   "name": "GPI",
+   "ticker": "GPI"
+  },
+  "IT0005345233": {
+   "shares": 88330000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/GHC/statistics/",
+   "name": "Garofalo Health Care",
+   "ticker": "GHC"
+  },
+  "IT0005075764": {
+   "shares": 9240000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IWB/statistics/",
+   "name": "Italian Wine Brands",
+   "ticker": "IWB"
+  },
+  "LU1250154413": {
+   "shares": 151630000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/etr/ADJ/statistics/",
+   "name": "ADLER Group",
+   "ticker": "ADJ"
+  },
+  "ES0112458312": {
+   "shares": 24390000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bme/AZK/statistics/",
+   "name": "Azkoyen",
+   "ticker": "AZK"
+  },
+  "NO0010612450": {
+   "shares": 93690000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/SBO/statistics/",
+   "name": "Selvaag Bolig",
+   "ticker": "SBO"
+  },
+  "IT0005274094": {
+   "shares": 9580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/PHN/statistics/",
+   "name": "Pharmanutra",
+   "ticker": "PHN"
+  },
+  "FI4000490875": {
+   "shares": 60470000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/hel/HEALTH/statistics/",
+   "name": "Nightingale Health",
+   "ticker": "HEALTH"
+  },
+  "AT0000815402": {
+   "shares": 7350000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/vie/UBS/statistics/",
+   "name": "UBM Development",
+   "ticker": "UBS"
+  },
+  "NO0012916131": {
+   "shares": 34870000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/TECH/statistics/",
+   "name": "Techstep",
+   "ticker": "TECH"
+  },
+  "IT0005709909": {
+   "shares": 65580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/TFIN/statistics/",
+   "name": "Trevi Finanziaria Industriale",
+   "ticker": "TFIN"
+  },
+  "IT0005543480": {
+   "shares": 26410000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/DEX/statistics/",
+   "name": "Dexelance",
+   "ticker": "DEX"
+  },
+  "IT0004585243": {
+   "shares": 601750000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/TES/statistics/",
+   "name": "Tesmec",
+   "ticker": "TES"
+  },
+  "IT0005438046": {
+   "shares": 132500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IOT/statistics/",
+   "name": "Seco",
+   "ticker": "IOT"
+  },
+  "IT0003895668": {
+   "shares": 59490000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/ETH/statistics/",
+   "name": "Eurotech",
+   "ticker": "ETH"
+  },
+  "IT0005573065": {
+   "shares": 30120000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/UD/statistics/",
+   "name": "Unidata",
+   "ticker": "UD"
+  },
+  "IT0005472730": {
+   "shares": 18240000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/AGP/statistics/",
+   "name": "Altea Green Power",
+   "ticker": "AGP"
+  },
+  "IT0001447785": {
+   "shares": 83780000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/MTV/statistics/",
+   "name": "Mondo TV",
+   "ticker": "MTV"
+  },
+  "IT0003411417": {
+   "shares": 30550000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IEG/statistics/",
+   "name": "Italian Exhibition Group",
+   "ticker": "IEG"
   }
  }
 }
