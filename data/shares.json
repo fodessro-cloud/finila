@@ -2691,6 +2691,188 @@
    "source": "https://stockanalysis.com/quote/vie/OBS/financials/balance-sheet/",
    "name": "Oberbank",
    "ticker": "OBS"
+  },
+  "PLALIOR00045": {
+   "shares": 130550000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ALR/financials/balance-sheet/",
+   "name": "Alior Bank",
+   "ticker": "ALR"
+  },
+  "PLWRTPL00027": {
+   "shares": 29670000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/WPL/financials/balance-sheet/",
+   "name": "Wirtualna Polska",
+   "ticker": "WPL"
+  },
+  "PLPKPCR00011": {
+   "shares": 44790000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/PKP/financials/balance-sheet/",
+   "name": "PKP Cargo",
+   "ticker": "PKP"
+  },
+  "PLZATRM00012": {
+   "shares": 99195000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ATT/financials/balance-sheet/",
+   "name": "Grupa Azoty",
+   "ticker": "ATT"
+  },
+  "PLDMDVL00012": {
+   "shares": 25800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/DOM/financials/balance-sheet/",
+   "name": "Dom Development",
+   "ticker": "DOM"
+  },
+  "PLTRFRM00018": {
+   "shares": 4569000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/NEU/financials/balance-sheet/",
+   "name": "Neuca",
+   "ticker": "NEU"
+  },
+  "PLLVTSF00010": {
+   "shares": 25740000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/TXT/financials/balance-sheet/",
+   "name": "Text",
+   "ticker": "TXT"
+  },
+  "PL11BTS00015": {
+   "shares": 2418000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/11B/financials/balance-sheet/",
+   "name": "11 bit studios",
+   "ticker": "11B"
+  },
+  "PLLCCRP00017": {
+   "shares": 461970000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/DVL/financials/balance-sheet/",
+   "name": "Develia",
+   "ticker": "DVL"
+  },
+  "PLATAL000046": {
+   "shares": 43280000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/1AT/financials/balance-sheet/",
+   "name": "Atal",
+   "ticker": "1AT"
+  },
+  "PLGTC0000037": {
+   "shares": 574250000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/GTC/financials/balance-sheet/",
+   "name": "Globe Trade Centre",
+   "ticker": "GTC"
+  },
+  "PLRNBWT00031": {
+   "shares": 14550000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/RBW/financials/balance-sheet/",
+   "name": "Rainbow Tours",
+   "ticker": "RBW"
+  },
+  "PLECHPS00019": {
+   "shares": 412690000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ECH/financials/balance-sheet/",
+   "name": "Echo Investment",
+   "ticker": "ECH"
+  },
+  "PLBRSZW00011": {
+   "shares": 196800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BRS/financials/balance-sheet/",
+   "name": "Boryszew",
+   "ticker": "BRS"
+  },
+  "PLNEWAG00012": {
+   "shares": 45000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/NWG/financials/balance-sheet/",
+   "name": "Newag",
+   "ticker": "NWG"
+  },
+  "PLAPATR00018": {
+   "shares": 29080000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/APT/financials/balance-sheet/",
+   "name": "Apator",
+   "ticker": "APT"
+  },
+  "PLCMPLD00016": {
+   "shares": 22720000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SGN/financials/balance-sheet/",
+   "name": "Sygnity",
+   "ticker": "SGN"
+  },
+  "PLMNNCP00011": {
+   "shares": 50990000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/MNC/financials/balance-sheet/",
+   "name": "Mennica Polska",
+   "ticker": "MNC"
+  },
+  "PLARHCM00016": {
+   "shares": 58600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ARH/financials/balance-sheet/",
+   "name": "Archicom",
+   "ticker": "ARH"
+  },
+  "PLAMICA00010": {
+   "shares": 7676000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/AMC/financials/balance-sheet/",
+   "name": "Amica",
+   "ticker": "AMC"
+  },
+  "PLAGORA00067": {
+   "shares": 46530000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/AGO/financials/balance-sheet/",
+   "name": "Agora",
+   "ticker": "AGO"
+  },
+  "PLAB00000019": {
+   "shares": 15790000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ABE/financials/balance-sheet/",
+   "name": "AB",
+   "ticker": "ABE"
+  },
+  "PLR220000018": {
+   "shares": 14450000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CBF/financials/balance-sheet/",
+   "name": "cyber_Folks",
+   "ticker": "CBF"
+  },
+  "PLBIOTN00029": {
+   "shares": 85870000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BIO/financials/balance-sheet/",
+   "name": "Bioton",
+   "ticker": "BIO"
+  },
+  "PLSELNA00010": {
+   "shares": 21630000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SEL/financials/balance-sheet/",
+   "name": "Selena FM",
+   "ticker": "SEL"
+  },
+  "PLZAPUL00057": {
+   "shares": 19115000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ZAP/financials/balance-sheet/",
+   "name": "Grupa Azoty Puławy",
+   "ticker": "ZAP"
   }
  }
 }
