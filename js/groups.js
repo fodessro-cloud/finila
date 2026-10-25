@@ -34,13 +34,13 @@ function buildCompanies(cos, prices) {
     if (!q || !isNum(q[iPrice])) return c;
     c.price = q[iPrice]; c.change = q[iChange];
     const fx = isNum(c.revenueEur) && isNum(c.revenue) && c.revenue ? c.revenueEur / c.revenue : c.currency === 'EUR' ? 1 : null;
-    const shares = isNum(c.shares) ? c.shares : isNum(c.eps) && isNum(c.netIncome) && c.eps * c.netIncome > 0 && fx ? c.netIncome / c.eps : null;
+    const shares = isNum(c.shares) && c.shares > 0 ? c.shares : null;   // from data/shares.json or the annual report (universe.py)
     if (!shares) return c;
     const mcap = c.price * shares, pe = fx && c.eps > 0 ? c.price / (c.eps * fx) : null;
     const ps = isNum(c.revenueEur) && c.revenueEur > 0 ? mcap / c.revenueEur : null;
-    if ((pe !== null && (pe < 1 || pe > 150)) || (ps !== null && (ps < 0.02 || ps > 60))) return c;
+    if (ps !== null ? ps < 0.02 || ps > 60 : pe !== null && (pe < 1 || pe > 150)) return c;
     c.mcap = mcap;
-    c.pe = pe;
+    c.pe = pe !== null && pe >= 1 && pe <= 1000 ? pe : null;
     c.dividendsEur = fx && c.dividendsPaid > 0 ? c.dividendsPaid * fx : fx ? 0 : null;
     return c;
   });

@@ -42,6 +42,7 @@ CONCEPTS = {
     "cur_assets": ["CurrentAssets"],
     "cur_liab":  ["CurrentLiabilities"],
     "shares":    ["WeightedAverageShares", "AdjustedWeightedAverageShares"],   # rarely tagged; else profit / EPS
+    "shares_out": ["NumberOfSharesOutstanding", "NumberOfSharesIssued", "NumberOfSharesIssuedAndFullyPaid"],
     # Used when no combined D&A line is tagged.
     "dep_ppe":   ["DepreciationPropertyPlantAndEquipment", "AdjustmentsForDepreciationPropertyPlantAndEquipment"],
     "dep_rou":   ["DepreciationRightofuseAssets"],
@@ -73,7 +74,7 @@ def extension_key(name):
 FINANCIAL_MARKERS = {"InterestRevenueCalculatedUsingEffectiveInterestMethod", "RevenueFromInterest",
                      "InsuranceRevenue", "LoansAndAdvancesToCustomers", "DepositsFromCustomers",
                      "InsuranceContractsIssuedThatAreLiabilities"}
-INSTANT = {"equity", "assets", "cash", "debt_nc", "debt_c", "debt", "cur_assets", "cur_liab"}
+INSTANT = {"equity", "assets", "cash", "debt_nc", "debt_c", "debt", "cur_assets", "cur_liab", "shares_out"}
 
 
 def get(url, as_json=True):
@@ -159,7 +160,7 @@ def extract(xjson, period_end):
     if financial and "cur_assets" not in cur:
         cur["financial"] = True
     prev = {k: v[1] for (k, w), v in found.items() if w == "prev"}
-    units = {v[2] for (k, w), v in found.items() if k not in ("eps", "shares")}
+    units = {v[2] for (k, w), v in found.items() if k not in ("eps", "shares", "shares_out")}
     currency = next((u.split(":")[1] for u in units if u.startswith("iso4217:")), None)
     return cur, prev, currency, end - timedelta(days=1), seen
 
@@ -218,6 +219,8 @@ def metrics(cur, prev):
         "dividendsPaid": m(abs(cur["dividends"])) if "dividends" in cur else None,
         "equity": m(cur.get("equity")), "assets": m(cur.get("assets")), "cash": m(cur.get("cash")),
         "debt": m(debt), "netDebt": m(net_debt), "eps": cur.get("eps"),
+        # The share count where the report tags one (weighted average, else shares in issue at the year end).
+        "sharesTagged": round((cur.get("shares") or cur.get("shares_out")) / 1e6, 6) if (cur.get("shares") or cur.get("shares_out") or 0) > 0 else None,
         "roe": pct(net, cur.get("equity")),
         "ebitdaMargin": pct(ebitda, rev), "operatingMargin": pct(op, rev), "netMargin": pct(net, rev),
         "fcfMargin": pct(fcf, rev),

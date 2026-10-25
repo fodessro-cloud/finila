@@ -105,20 +105,20 @@ def companies():
         if not q:
             continue
         c.update(price=q[pi['price']], change=q[pi['change']], priceVenue=q[pi['venue']], priceDate=q[pi['date']])
-        # Same estimate as js/companies.js: shares in issue where known, else net income / EPS,
-        # skipped when the units look mismatched.
+        # Same estimate as js/companies.js: shares in issue from data/shares.json or the annual
+        # report (universe.py), skipped when price-to-sales (else P/E) says the units are mismatched.
         rev, rev_eur, eps, ni = c.get('revenue'), c.get('revenueEur'), c.get('eps'), c.get('netIncome')
         fx = rev_eur / rev if is_num(rev_eur) and is_num(rev) and rev else 1 if c.get('currency') == 'EUR' else None
-        shares = c['shares'] if is_num(c.get('shares')) else ni / eps if fx and is_num(eps) and is_num(ni) and eps * ni > 0 else None
+        shares = c['shares'] if is_num(c.get('shares')) and c['shares'] > 0 else None
         if not shares:
             continue
         mcap = c['price'] * shares
         pe = c['price'] / (eps * fx) if fx and is_num(eps) and eps > 0 else None
         ps = mcap / rev_eur if is_num(rev_eur) and rev_eur > 0 else None
-        if (pe is not None and not 1 <= pe <= 150) or (ps is not None and not 0.02 <= ps <= 60):
+        if (not 0.02 <= ps <= 60) if ps is not None else (pe is not None and not 1 <= pe <= 150):
             continue
         c['mcap'] = mcap
-        if pe is not None:
+        if pe is not None and 1 <= pe <= 1000:
             c['pe'] = pe
         if fx and is_num(c.get('dividendsPaid')) and c['dividendsPaid'] > 0:
             y = c['dividendsPaid'] * fx / mcap * 100
@@ -306,7 +306,7 @@ def events_html(c):
     ev = sorted(c.get('events', []), key=lambda e: e[0], reverse=True)[:12]
     nice = lambda d: date.fromisoformat(d).strftime('%-d %b %Y') if re.fullmatch(r'\d{4}-\d\d-\d\d', d or '') else d
     items = ''.join(f'<li><time datetime="{esc(d)}">{esc(nice(d))}</time><span>{text}</span><a href="{link}">Details</a></li>' for d, text, link in ev)
-    if c.get('source') and c.get('origin') not in ('listing', 'wikidata'):
+    if c.get('source') and c.get('origin') not in ('listing', 'wikidata', 'hand'):
         items += (f'<li><time>FY {esc((c.get("periodEnd") or "")[:4])}</time><span>Annual report for the year ending {esc(c["periodEnd"])}</span>'
                   f'<a href="{esc(c["source"])}" target="_blank" rel="noopener">Read</a></li>')
     if not items:
@@ -325,7 +325,11 @@ def page(c, peers, updated):
     # Listed issuers without any usable report: name, ISIN, ticker and sector only.
     listed_only = c.get('origin') == 'listing'
     link = f' · <a href="{esc(c["source"])}" target="_blank" rel="noopener">{"view on Wikidata" if wd else "view report"}</a>' if c.get('source') else ''
+    hand = c.get('origin') == 'hand'
+    if hand:
+        link = f' · <a href="{esc(c["source"])}" target="_blank" rel="noopener">view figures</a>' if c.get('source') else ''
     src = (f'Source: headline figures from Wikidata (CC0), the company has no ESEF report on filings.xbrl.org yet{link}' if wd
+           else f'Source: the company’s published annual accounts, entered by FINILA (no ESEF report on filings.xbrl.org){link}' if hand
            else f'Source: the company’s ESEF annual report via filings.xbrl.org{link}')
     fy = (c.get('periodEnd') or '')[:4]
     url = f'{SITE}/stock/{c["slug"]}'

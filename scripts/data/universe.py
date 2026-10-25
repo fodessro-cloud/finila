@@ -19,7 +19,7 @@ import urllib.request
 
 MIN_PERIOD = "2024-01-01"
 CACHE = ROOT / "data/cache/universe.json"
-CACHE_VERSION = 3          # bump when metrics() changes, so every report is read again
+CACHE_VERSION = 4          # bump when metrics() changes, so every report is read again
 RETRY_EMPTY = 2            # bump when read_report() changes, so companies without figures are read again
 WIKIDATA_CACHE = ROOT / "data/cache/wikidata.json"
 # Shares with a European ISIN only: drops e.g. Toyota or Royal Bank of Canada, which file in London too.
@@ -320,7 +320,73 @@ def add_shares(rows, listed):
     return sum(1 for r in rows if r.get("shares"))
 
 
-def fix_eps_scale(rows):
+def add_financials(rows, rates):
+    """Annual figures for big companies with no report on filings.xbrl.org (SAP, Roche, Nestlé ...),
+    copied by hand from their annual accounts into data/financials.json (millions, report currency).
+    A report read here always wins; the same ratios as fundamentals.metrics() are derived."""
+    path = ROOT / "data/financials.json"
+    if not path.exists():
+        return 0
+    known = json.loads(path.read_text())["rows"]
+    pct = lambda a, b: None if a is None or not b else round(a / b * 100, 1)
+    n = 0
+    for r in rows:
+        k = known.get(r.get("isin") or "")
+        if not k or r.get("revenue") is not None or r.get("netIncome") is not None:
+            continue
+        rev, op, net, da = k.get("revenue"), k.get("operatingProfit"), k.get("netIncome"), k.get("da")
+        fin = bool(k.get("financial"))
+        ebitda = op + da if op is not None and da is not None and not fin else None
+        capex = None if fin else k.get("capex")
+        fcf = k["operatingCashFlow"] - capex if k.get("operatingCashFlow") is not None and capex is not None else None
+        net_debt = k["debt"] - k["cash"] if not fin and k.get("debt") is not None and k.get("cash") is not None else None
+        div = k.get("dividendsPaid")
+        rate = rates.get(k["currency"])
+        r.update({
+            "currency": k["currency"], "periodEnd": k["periodEnd"], "source": k["source"], "financial": fin,
+            "revenue": rev, "revenueEur": round(rev / rate, 1) if rev is not None and rate else None,
+            "ebitda": ebitda, "operatingProfit": op, "netIncome": net, "operatingCashFlow": k.get("operatingCashFlow"),
+            "capex": capex, "fcf": fcf, "dividendsPaid": div, "equity": k.get("equity"), "assets": k.get("assets"),
+            "cash": k.get("cash"), "debt": k.get("debt"), "netDebt": net_debt, "eps": k.get("eps"),
+            "roe": pct(net, k.get("equity")), "ebitdaMargin": pct(ebitda, rev), "operatingMargin": pct(op, rev),
+            "netMargin": pct(net, rev), "fcfMargin": pct(fcf, rev),
+            "netDebtToEbitda": round(net_debt / ebitda, 2) if net_debt is not None and ebitda and ebitda > 0 else None,
+            "revenueGrowth": pct(rev - k["revenuePrev"], k["revenuePrev"]) if rev is not None and k.get("revenuePrev") else None,
+            "netIncomeGrowth": pct(net - k["netIncomePrev"], abs(k["netIncomePrev"])) if net is not None and k.get("netIncomePrev") else None,
+            "payoutFcf": pct(div, fcf) if div and fcf and fcf > 0 else None,
+            "payoutNet": pct(div, net) if div and net and net > 0 else None,
+            "origin": "hand",
+        })
+        n += 1
+    return n
+
+
+def shares_from_report(rows):
+    """Everyone without a hand-checked count gets the one in the annual report, so loss-makers and
+    companies with no revenue line in another currency still get a market value: the tagged count,
+    else profit / EPS (after fix_eps_scale). A tagged count far from profit / EPS is a unit slip and
+    the division wins; a count that puts price-to-sales out of reach is left out. Shares are in
+    millions, like the report figures."""
+    path = ROOT / "js/company-prices.json"
+    prices = json.loads(path.read_text())["rows"] if path.exists() else {}
+    n = 0
+    for r in rows:
+        if r.get("shares"):
+            continue
+        eps, ni, tagged = r.get("eps"), r.get("netIncome"), r.get("sharesTagged")
+        implied = ni / eps if eps and ni and eps * ni > 0 else None
+        if implied and abs(eps) < 0.05 and abs(eps * 100 - round(eps * 100)) < 1e-9:
+            implied = None   # EPS rounded to whole cents (TIM 0.01): profit / EPS can be off by half
+        shares = tagged if tagged and (implied is None or 0.5 < tagged / implied < 2) else implied
+        price = (prices.get(r.get("isin") or "") or [None])[0]
+        if shares and price and (r.get("revenueEur") or 0) > 50 and not 0.01 <= price * shares / r["revenueEur"] <= 100:
+            continue
+        if shares:
+            r["shares"], n = round(shares, 6), n + 1
+    return n
+
+
+def fix_eps_scale(rows, rates=None):
     """Some filers tag earnings per share in cents or thousands (3i in pence, Logista 2,130 instead of
     2.13), which turns market value and P/E into nonsense. Against today's price, an EPS that gives an
     impossible P/E and price-to-sales is moved by powers of ten to the believable value nearest a
@@ -335,7 +401,8 @@ def fix_eps_scale(rows):
         eps, ni = r.get("eps"), r.get("netIncome")
         if not price or not eps or not ni or eps * ni <= 0:
             continue
-        fx = r["revenueEur"] / r["revenue"] if r.get("revenueEur") and r.get("revenue") else 1 if r.get("currency") == "EUR" else None
+        fx = r["revenueEur"] / r["revenue"] if r.get("revenueEur") and r.get("revenue") else 1 if r.get("currency") == "EUR" \
+            else 1 / rates[r["currency"]] if rates and rates.get(r.get("currency") or "") else None
         if not fx:
             continue
         rev = r["revenueEur"] if (r.get("revenueEur") or 0) > 50 else None
@@ -372,6 +439,23 @@ def fix_eps_scale(rows):
             r["eps"] = None
             dropped += 1
     return fixed, dropped
+
+
+def one_company_per_isin(rows):
+    """Two issuers must never share a share ISIN (FIRDS sometimes files a subsidiary's share under its
+    parent too). The one with the larger revenue keeps it; the other loses the ISIN, so no price and
+    no market value is attached to the wrong company. Returns how many lost it."""
+    owner, lost = {}, 0
+    for r in sorted(rows, key=lambda r: -(r.get("revenueEur") or 0)):
+        if not r.get("isin"):
+            continue
+        if r["isin"] in owner:
+            log(f"  ISIN {r['isin']} already belongs to {owner[r['isin']]}, dropped from {r['name']}")
+            r["isin"], r["mic"] = None, None
+            lost += 1
+        else:
+            owner[r["isin"]] = r["name"]
+    return lost
 
 
 def apply_fixes(rows):
@@ -463,6 +547,7 @@ def main():
                      "exchange": exchange, "sector": sector_of(w.get("industries", [])),
                      "industry": ", ".join(sorted(w.get("industries", [])))[:60] or None, "origin": "listing"})
     log(f"shares in issue for {add_shares(rows, listed)} companies (data/shares.json)")
+    log(f"annual figures by hand for {add_financials(rows, fx)} companies (data/financials.json)")
     missing = [r for r in rows if not r["sector"]]
     extra = wikidata_extra({r["isin"] for r in missing if r["isin"]}, {r["lei"] for r in missing})
     via = {"wikidata": 0, "bank": 0, "name": 0}
@@ -478,8 +563,10 @@ def main():
             r["sector"] = sector_by_name(r["name"])
             via["name"] += 1
     log(f"sector found for {sum(via.values())} of {len(missing)} without a Wikidata industry: {via}")
-    log("earnings per share moved by powers of ten for %d companies, dropped for %d (checked against the price)" % fix_eps_scale(rows))
+    log("earnings per share moved by powers of ten for %d companies, dropped for %d (checked against the price)" % fix_eps_scale(rows, fx))
+    log(f"shares in issue from the annual report for {shares_from_report(rows)} more companies")
     rows, fixed = apply_fixes(rows)
+    log(f"shared ISINs taken from {one_company_per_isin(rows)} companies (kept by the larger one)")
     log(f"hand-checked fixes for {fixed} companies (data/fixes.json)")
     rows.sort(key=lambda r: -(r.get("revenueEur") or 0))
     out = {"updated": date.today().isoformat(), "fields": FIELDS,
