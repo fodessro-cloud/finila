@@ -164,23 +164,24 @@ OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.
 PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
 
 49 companies with real fundamentals
-  ! ESMA file list: HTTP Error 502: Bad Gateway
-FCA FULINS_E_20261024_01of01.zip: 17903 new issuers
-17903 issuers with listed shares
+ESMA FULINS_E_20261024_01of02.zip: 16417 new issuers
+ESMA FULINS_E_20261024_02of02.zip: 0 new issuers
+FCA FULINS_E_20261024_01of01.zip: 2151 new issuers
+18568 issuers with listed shares
 4000 issuers with a report for 2024 or later (15 pages)
-35 reports to read, 3965 cached
-read 35 reports this run
-4904 listed companies with an LEI on Wikidata
-17903 issuers with listed shares (FIRDS); 2283 of them file reports here
-shares in issue for 211 companies (data/shares.json)
-Wikidata by ISIN/LEI: labels for 1727 of 3782 keys
-sector found for 759 of 1891 without a Wikidata industry: {'wikidata': 349, 'bank': 64, 'name': 346}
+38 reports to read, 3962 cached
+read 38 reports this run
+4905 listed companies with an LEI on Wikidata
+18568 issuers with listed shares (FIRDS); 2299 of them file reports here
+shares in issue for 212 companies (data/shares.json)
+Wikidata by ISIN/LEI: labels for 1734 of 3807 keys
+sector found for 764 of 1905 without a Wikidata industry: {'wikidata': 349, 'bank': 67, 'name': 348}
 earnings per share moved by powers of ten for 37 companies, dropped for 9 (checked against the price)
 hand-checked fixes for 142 companies (data/fixes.json)
-2793 companies with figures, 191 without usable figures
-with ticker: 944, with sector: 1743
-with F-score: 1854, F-score 8-9: 98, with dividend cover: 908
-by country: GB 558, SE 326, FR 235, DE 194, IT 166, NO 153, PL 141, FI 130, DK 122, ES 121, NL 111, GR 102, BE 84, AT 54, CH 51, LU 37, PT 28, MT 27, IE 26, IS 24, HU 19, LT 19, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
+2810 companies with figures, 188 without usable figures
+with ticker: 945, with sector: 1751
+with F-score: 1865, F-score 8-9: 99, with dividend cover: 914
+by country: GB 559, SE 329, FR 237, DE 195, IT 166, NO 154, PL 141, FI 131, DK 122, ES 121, NL 112, GR 105, BE 84, AT 54, CH 52, LU 37, PT 28, IE 27, MT 27, IS 24, HU 20, LT 20, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
 Shell PLC                          GB SHEL     Energy                 2025-12-31 rev€=238440.1 ebitda=None fcf=21948.0 roe=10.2 F=5 1111001-0

@@ -1,7 +1,7 @@
-2793 companies with figures, 191 without usable figures
-with ticker: 944, with sector: 1743
-with F-score: 1854, F-score 8-9: 98, with dividend cover: 908
-by country: GB 558, SE 326, FR 235, DE 194, IT 166, NO 153, PL 141, FI 130, DK 122, ES 121, NL 111, GR 102, BE 84, AT 54, CH 51, LU 37, PT 28, MT 27, IE 26, IS 24, HU 19, LT 19, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
+2810 companies with figures, 188 without usable figures
+with ticker: 945, with sector: 1751
+with F-score: 1865, F-score 8-9: 99, with dividend cover: 914
+by country: GB 559, SE 329, FR 237, DE 195, IT 166, NO 154, PL 141, FI 131, DK 122, ES 121, NL 112, GR 105, BE 84, AT 54, CH 52, LU 37, PT 28, IE 27, MT 27, IS 24, HU 20, LT 20, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
 Shell PLC                          GB SHEL     Energy                 2025-12-31 rev€=238440.1 ebitda=None fcf=21948.0 roe=10.2 F=5 1111001-0
