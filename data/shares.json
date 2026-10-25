@@ -2579,6 +2579,118 @@
    "source": "https://stockanalysis.com/quote/bme/CIRSA/financials/balance-sheet/",
    "name": "Cirsa Enterprises",
    "ticker": "CIRSA"
+  },
+  "SE0009778848": {
+   "shares": 150980000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/MCOV.B/financials/balance-sheet/",
+   "name": "Medicover",
+   "ticker": "MCOV-B"
+  },
+  "SE0017769995": {
+   "shares": 101160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/BIOG.B/financials/balance-sheet/",
+   "name": "BioGaia",
+   "ticker": "BIOG-B"
+  },
+  "SE0006220018": {
+   "shares": 57970000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/INWI/financials/balance-sheet/",
+   "name": "Inwido",
+   "ticker": "INWI"
+  },
+  "SE0007439443": {
+   "shares": 77670000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/STORY.B/financials/balance-sheet/",
+   "name": "Storytel",
+   "ticker": "STORY-B"
+  },
+  "SE0008294953": {
+   "shares": 105620000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/PDX/financials/balance-sheet/",
+   "name": "Paradox Interactive",
+   "ticker": "PDX"
+  },
+  "SE0004840718": {
+   "shares": 31500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/XVIVO/financials/balance-sheet/",
+   "name": "Xvivo Perfusion",
+   "ticker": "XVIVO"
+  },
+  "SE0023615638": {
+   "shares": 236720000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/ASMDEE.B/financials/balance-sheet/",
+   "name": "Asmodee Group",
+   "ticker": "ASMDEE-B"
+  },
+  "IT0003097257": {
+   "shares": 26580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BSS/financials/balance-sheet/",
+   "name": "Biesse",
+   "ticker": "BSS"
+  },
+  "FR0000120107": {
+   "shares": 12910000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/SAVE/financials/balance-sheet/",
+   "name": "Savencia",
+   "ticker": "SAVE"
+  },
+  "FR0000039091": {
+   "shares": 2187000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/RBT/financials/balance-sheet/",
+   "name": "Robertet",
+   "ticker": "RBT"
+  },
+  "FR0000121691": {
+   "shares": 77450000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/NRG/financials/balance-sheet/",
+   "name": "NRJ Group",
+   "ticker": "NRG"
+  },
+  "FR0000052680": {
+   "shares": 62640000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/SBT/financials/balance-sheet/",
+   "name": "Oeneo",
+   "ticker": "SBT"
+  },
+  "CH0012268360": {
+   "shares": 55800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/swx/KUD/financials/balance-sheet/",
+   "name": "Kudelski",
+   "ticker": "KUD"
+  },
+  "BE0003867844": {
+   "shares": 76940000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ebr/KBCA/financials/balance-sheet/",
+   "name": "KBC Ancora",
+   "ticker": "KBCA"
+  },
+  "BE0003770840": {
+   "shares": 10100000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ebr/NEXTA/financials/balance-sheet/",
+   "name": "Nextensa",
+   "ticker": "NEXTA"
+  },
+  "AT0000625108": {
+   "shares": 70530000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/vie/OBS/financials/balance-sheet/",
+   "name": "Oberbank",
+   "ticker": "OBS"
   }
  }
 }
