@@ -3090,6 +3090,13 @@
    "source": "https://stockanalysis.com/stocks/cdro/financials/balance-sheet/",
    "name": "Codere Online",
    "ticker": "CDRO"
+  },
+  "GB0006389398": {
+   "shares": 36600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/lon/NICL/financials/balance-sheet/",
+   "name": "Nichols",
+   "ticker": "NICL"
   }
  }
 }

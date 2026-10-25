@@ -6707,6 +6707,45 @@
    "netIncomePrev": 3.91,
    "eps": 0.0284,
    "source": "https://stockanalysis.com/stocks/cdro/financials/"
+  },
+  "DE0005313506": {
+   "name": "Energiekontor",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 167.94,
+   "revenuePrev": 126.46,
+   "netIncome": 40.96,
+   "netIncomePrev": 22.56,
+   "eps": 2.92,
+   "cash": 194.62,
+   "debt": 707.35,
+   "equity": 224.74,
+   "assets": 1078.0,
+   "source": "https://stockanalysis.com/quote/etr/EKT/financials/"
+  },
+  "DE0007568578": {
+   "name": "SFC Energy",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 143.27,
+   "revenuePrev": 144.68,
+   "operatingProfit": 12.3,
+   "netIncome": -0.61,
+   "netIncomePrev": 8.8,
+   "eps": -0.035,
+   "source": "https://stockanalysis.com/quote/etr/F3C/financials/"
+  },
+  "GB0006389398": {
+   "name": "Nichols",
+   "currency": "GBP",
+   "periodEnd": "2025-12-31",
+   "revenue": 175.05,
+   "revenuePrev": 172.81,
+   "operatingProfit": 31.91,
+   "netIncome": 21.44,
+   "netIncomePrev": 17.84,
+   "eps": 0.58,
+   "source": "https://stockanalysis.com/quote/lon/NICL/financials/"
   }
  }
 }
