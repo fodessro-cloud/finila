@@ -1718,6 +1718,390 @@
    "name": "bpost",
    "ticker": "BPOST",
    "sector": "Industrials"
+  },
+  "FR0000121485": {
+   "shares": 122620000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0000121485",
+   "name": "Kering",
+   "ticker": "KER",
+   "sector": "Consumer Discretionary"
+  },
+  "IT0000072618": {
+   "shares": 17300000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0000072618",
+   "name": "Intesa Sanpaolo",
+   "ticker": "ISP",
+   "sector": "Financials"
+  },
+  "FR0000130403": {
+   "shares": 180510000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0000130403",
+   "name": "Christian Dior",
+   "ticker": "CDI",
+   "sector": "Consumer Discretionary"
+  },
+  "IE0001827041": {
+   "shares": 665280000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE0001827041",
+   "name": "CRH",
+   "ticker": "CRG",
+   "sector": "Materials"
+  },
+  "IE00BYTBXV33": {
+   "shares": 1040000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE00BYTBXV33",
+   "name": "Ryanair",
+   "ticker": "RYA",
+   "sector": "Industrials"
+  },
+  "IE00B4BNMY34": {
+   "shares": 611940000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE00B4BNMY34",
+   "name": "Accenture",
+   "ticker": "ACN",
+   "sector": "Technology"
+  },
+  "IE000S9YS762": {
+   "shares": 460980000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE000S9YS762",
+   "name": "Linde",
+   "ticker": "LIN",
+   "sector": "Materials"
+  },
+  "IE00B8KQN827": {
+   "shares": 388400000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE00B8KQN827",
+   "name": "Eaton",
+   "ticker": "ETN",
+   "sector": "Industrials"
+  },
+  "IE00BLP1HW54": {
+   "shares": 212120000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE00BLP1HW54",
+   "name": "Aon",
+   "ticker": "AON",
+   "sector": "Financials"
+  },
+  "CH0044328745": {
+   "shares": 385800000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CH0044328745",
+   "name": "Chubb",
+   "ticker": "CB",
+   "sector": "Financials"
+  },
+  "IE00BWT6H894": {
+   "shares": 173540000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IE00BWT6H894",
+   "name": "Flutter Entertainment",
+   "ticker": "FLTR",
+   "sector": "Consumer Discretionary"
+  },
+  "CH0114405324": {
+   "shares": 192850000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CH0114405324",
+   "name": "Garmin",
+   "ticker": "GRMN",
+   "sector": "Technology"
+  },
+  "NL0009538784": {
+   "shares": 252160000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/NL0009538784",
+   "name": "NXP Semiconductors",
+   "ticker": "NXPI",
+   "sector": "Technology"
+  },
+  "LU1778762911": {
+   "shares": 205880000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/LU1778762911",
+   "name": "Spotify",
+   "ticker": "SPOT",
+   "sector": "Communication"
+  },
+  "NL0009434992": {
+   "shares": 323040000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/NL0009434992",
+   "name": "LyondellBasell",
+   "ticker": "LYB",
+   "sector": "Materials"
+  },
+  "NL0010545661": {
+   "shares": 1240000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/NL0010545661",
+   "name": "CNH Industrial",
+   "ticker": "CNH",
+   "sector": "Industrials"
+  },
+  "NL0000687663": {
+   "shares": 154430000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/NL0000687663",
+   "name": "AerCap",
+   "ticker": "AER",
+   "sector": "Industrials"
+  },
+  "PLKGHM000017": {
+   "shares": 200000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLKGHM000017",
+   "name": "KGHM",
+   "ticker": "KGH",
+   "sector": "Materials"
+  },
+  "PLPKO0000016": {
+   "shares": 1250000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLPKO0000016",
+   "name": "PKO Bank Polski",
+   "ticker": "PKO",
+   "sector": "Financials"
+  },
+  "PLPZU0000011": {
+   "shares": 863350000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLPZU0000011",
+   "name": "PZU",
+   "ticker": "PZU",
+   "sector": "Financials"
+  },
+  "PLPEKAO00016": {
+   "shares": 262470000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLPEKAO00016",
+   "name": "Bank Pekao",
+   "ticker": "PEO",
+   "sector": "Financials"
+  },
+  "PLPKN0000018": {
+   "shares": 1160000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLPKN0000018",
+   "name": "Orlen",
+   "ticker": "PKN",
+   "sector": "Energy"
+  },
+  "PLLPP0000011": {
+   "shares": 1860000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLLPP0000011",
+   "name": "LPP",
+   "ticker": "LPP",
+   "sector": "Consumer Discretionary"
+  },
+  "PLOPTTC00011": {
+   "shares": 99820000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLOPTTC00011",
+   "name": "CD Projekt",
+   "ticker": "CDR",
+   "sector": "Communication"
+  },
+  "PLDINPL00011": {
+   "shares": 980400000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLDINPL00011",
+   "name": "Dino Polska",
+   "ticker": "DNP",
+   "sector": "Consumer Staples"
+  },
+  "HU0000061726": {
+   "shares": 269130000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/HU0000061726",
+   "name": "OTP Bank",
+   "ticker": "OTP",
+   "sector": "Financials"
+  },
+  "CZ0005112300": {
+   "shares": 536810000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CZ0005112300",
+   "name": "ČEZ",
+   "ticker": "CEZ",
+   "sector": "Utilities"
+  },
+  "SE0000108227": {
+   "shares": 426430000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/SE0000108227",
+   "name": "SKF",
+   "ticker": "SKF B",
+   "sector": "Industrials"
+  },
+  "DK0060636678": {
+   "shares": 590930000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/DK0060636678",
+   "name": "Tryg",
+   "ticker": "TRYG",
+   "sector": "Financials"
+  },
+  "SE0016589188": {
+   "shares": 787710000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/SE0016589188",
+   "name": "Electrolux",
+   "ticker": "ELUX B",
+   "sector": "Consumer Discretionary"
+  },
+  "BE0974264930": {
+   "shares": 209230000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/BE0974264930",
+   "name": "Ageas",
+   "ticker": "AGS",
+   "sector": "Financials"
+  },
+  "FR0010451203": {
+   "shares": 311390000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0010451203",
+   "name": "Rexel",
+   "ticker": "RXL",
+   "sector": "Industrials"
+  },
+  "FR0000121147": {
+   "shares": 195880000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0000121147",
+   "name": "Forvia",
+   "ticker": "FRVIA",
+   "sector": "Consumer Discretionary"
+  },
+  "FR0000077919": {
+   "shares": 214130000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/FR0000077919",
+   "name": "JCDecaux",
+   "ticker": "DEC",
+   "sector": "Communication"
+  },
+  "IT0003874101": {
+   "shares": 2560000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0003874101",
+   "name": "Prada",
+   "ticker": "1913",
+   "sector": "Consumer Discretionary"
+  },
+  "IT0001233417": {
+   "shares": 3130000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/IT0001233417",
+   "name": "A2A",
+   "ticker": "A2A",
+   "sector": "Utilities"
+  },
+  "ROTLVAACNOR1": {
+   "shares": 1250000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ROTLVAACNOR1",
+   "name": "Banca Transilvania",
+   "ticker": "TLV",
+   "sector": "Financials"
+  },
+  "ROSNPPACNOR9": {
+   "shares": 62310000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/ROSNPPACNOR9",
+   "name": "OMV Petrom",
+   "ticker": "SNP",
+   "sector": "Energy"
+  },
+  "BE0003764785": {
+   "shares": 32660000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/BE0003764785",
+   "name": "Ackermans & van Haaren",
+   "ticker": "ACKB",
+   "sector": "Financials"
+  },
+  "GB0022569080": {
+   "shares": 107570000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB0022569080",
+   "name": "Amdocs",
+   "ticker": "DOX",
+   "sector": "Technology"
+  },
+  "GB00BDSFG982": {
+   "shares": 392160000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB00BDSFG982",
+   "name": "TechnipFMC",
+   "ticker": "FTI",
+   "sector": "Energy"
+  },
+  "GB00BVMN1558": {
+   "shares": 1040000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/GB00BVMN1558",
+   "name": "Verisure",
+   "ticker": "VSURE",
+   "sector": "Industrials"
+  },
+  "PLBRE0000012": {
+   "shares": 42550000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLBRE0000012",
+   "name": "mBank",
+   "ticker": "MBK",
+   "sector": "Financials"
+  },
+  "PLPGER000010": {
+   "shares": 2240000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/PLPGER000010",
+   "name": "PGE",
+   "ticker": "PGE",
+   "sector": "Utilities"
+  },
+  "CZ0008019106": {
+   "shares": 188860000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CZ0008019106",
+   "name": "Komerční banka",
+   "ticker": "KOMB",
+   "sector": "Financials"
+  },
+  "CZ0008040318": {
+   "shares": 511000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CZ0008040318",
+   "name": "Moneta Money Bank",
+   "ticker": "MONET",
+   "sector": "Financials"
+  },
+  "CH1134540470": {
+   "shares": 296870000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CH1134540470",
+   "name": "On Holding",
+   "ticker": "ONON",
+   "sector": "Consumer Discretionary"
+  },
+  "CH0048265513": {
+   "shares": 1120000000,
+   "asOf": "2026-10-25",
+   "source": "https://www.comdirect.de/inf/aktien/CH0048265513",
+   "name": "Transocean",
+   "ticker": "RIG",
+   "sector": "Energy"
   }
  }
 }
