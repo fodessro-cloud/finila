@@ -1701,6 +1701,23 @@
    "name": "Zalando",
    "ticker": "ZAL",
    "sector": "Consumer Discretionary"
+  },
+  "CH0010570759": {
+   "shares": 229839,
+   "asOf": "2026-10-25",
+   "source": "https://companiesmarketcap.com/lindt/shares-outstanding/",
+   "name": "Lindt & Sprüngli",
+   "ticker": "LISN",
+   "sector": "Consumer Staples",
+   "how": "registered-share equivalent: 2,298,390 participation-certificate equivalents (end 2025) at ten certificates per registered share"
+  },
+  "BE0974268972": {
+   "shares": 200000944,
+   "asOf": "2026-10-23",
+   "source": "https://www.fsma.be/sites/default/files/issuers/files/0214596464_en.pdf",
+   "name": "bpost",
+   "ticker": "BPOST",
+   "sector": "Industrials"
   }
  }
 }
