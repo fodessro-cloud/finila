@@ -374,6 +374,23 @@ def fix_eps_scale(rows):
     return fixed, dropped
 
 
+def one_company_per_isin(rows):
+    """Two issuers must never share a share ISIN (FIRDS sometimes files a subsidiary's share under its
+    parent too). The one with the larger revenue keeps it; the other loses the ISIN, so no price and
+    no market value is attached to the wrong company. Returns how many lost it."""
+    owner, lost = {}, 0
+    for r in sorted(rows, key=lambda r: -(r.get("revenueEur") or 0)):
+        if not r.get("isin"):
+            continue
+        if r["isin"] in owner:
+            log(f"  ISIN {r['isin']} already belongs to {owner[r['isin']]}, dropped from {r['name']}")
+            r["isin"], r["mic"] = None, None
+            lost += 1
+        else:
+            owner[r["isin"]] = r["name"]
+    return lost
+
+
 def apply_fixes(rows):
     """Hand-checked sector, name and ticker by ISIN (data/fixes.json) over what Wikidata and the
     name rules give (LVMH filed under Consumer Staples, Rolls-Royce under Energy), and companies left
@@ -480,6 +497,7 @@ def main():
     log(f"sector found for {sum(via.values())} of {len(missing)} without a Wikidata industry: {via}")
     log("earnings per share moved by powers of ten for %d companies, dropped for %d (checked against the price)" % fix_eps_scale(rows))
     rows, fixed = apply_fixes(rows)
+    log(f"shared ISINs taken from {one_company_per_isin(rows)} companies (kept by the larger one)")
     log(f"hand-checked fixes for {fixed} companies (data/fixes.json)")
     rows.sort(key=lambda r: -(r.get("revenueEur") or 0))
     out = {"updated": date.today().isoformat(), "fields": FIELDS,

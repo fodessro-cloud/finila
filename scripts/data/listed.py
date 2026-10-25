@@ -7,6 +7,7 @@ Streams the newest weekly full files for equities (FULINS_E), keeps shares
 """
 import io, json, sys, urllib.parse, urllib.request, zipfile
 import xml.etree.ElementTree as ET
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -72,10 +73,11 @@ def parse(raw, out):
                         e["mics"].append(rec["mic"])
 
 
-def main_line(lines):
+def main_line(lines, shared=frozenset()):
     """An issuer can have several share ISINs (old lines, other share classes);
-    the one traded on the most venues is its main share."""
-    isin = max(lines, key=lambda i: (len(lines[i]["mics"]), i))
+    the one traded on the most venues is its main share. A line FIRDS also files under
+    another issuer (a parent holding listed against its subsidiary's share) comes last."""
+    isin = max(lines, key=lambda i: (i not in shared, len(lines[i]["mics"]), i))
     return {"isin": isin, **lines[isin]}
 
 
@@ -94,7 +96,9 @@ def main():
                 print(f"{label} {name}: {len(out) - before} new issuers")
             except Exception as e:
                 print(f"  ! {label} {name}: {e}")
-    out = {lei: main_line(lines) for lei, lines in out.items()}
+    owners = Counter(isin for lines in out.values() for isin in lines)
+    shared = frozenset(i for i, n in owners.items() if n > 1)
+    out = {lei: main_line(lines, shared) for lei, lines in out.items()}
     if len(out) < 1000:
         print(f"only {len(out)} issuers found, keeping the previous data/listed.json")
         return 1 if not (ROOT / "data/listed.json").exists() else 0
