@@ -3867,6 +3867,20 @@
    "source": "https://stockanalysis.com/quote/sto/XBRANE/statistics/",
    "name": "Xbrane Biopharma",
    "ticker": "XBRANE"
+  },
+  "ES0109260291": {
+   "shares": 91040000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bme/AMP/statistics/",
+   "name": "Amper",
+   "ticker": "AMP"
+  },
+  "GB00BYZJ7G42": {
+   "shares": 325220000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/HWG/statistics/",
+   "name": "Harworth Group",
+   "ticker": "HWG"
   }
  }
 }
