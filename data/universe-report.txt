@@ -1,6 +1,6 @@
 2813 companies with figures, 186 without usable figures
-with ticker: 963, with sector: 1766
-with F-score: 1867, F-score 8-9: 100, with dividend cover: 972
+with ticker: 1041, with sector: 1768
+with F-score: 1867, F-score 8-9: 100, with dividend cover: 1074
 by country: GB 559, SE 329, FR 237, DE 195, IT 167, NO 154, PL 141, FI 131, DK 122, ES 121, NL 113, GR 105, BE 84, AT 54, CH 53, LU 37, PT 28, IE 27, MT 27, IS 24, HU 20, LT 20, HR 19, CZ 12, SI 10, CY 6, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
@@ -29,6 +29,7 @@ E.ON                               DE EOAN     Utilities              2025-12-31
 Vinci                              FR DG       Industrials            2025-12-31 rev€=75372.0 ebitda=13570.0 fcf=None roe=15.9 F=5 1101--1-1
 Enel                               IT ENEL     Utilities              2024-12-31 rev€=73914.0 ebitda=22743.0 fcf=3057.0 roe=20.8 F=5 11110-1-0
 Airbus SE                          NL AIR      Industrials            2025-12-31 rev€=73420.0 ebitda=None fcf=None roe=20.0 F=None None
+Uniper                             DE UN01     Utilities              2025-12-31 rev€=72793.0 ebitda=1442.0 fcf=-1588.0 roe=11.8 F=None None
 Engie                              FR ENGI     Utilities              2025-12-31 rev€=71944.0 ebitda=13683.0 fcf=-8743.0 roe=11.6 F=4 1010001-1
 Roche                              CH ROG      Healthcare             2025-12-31 rev€=68663.7 ebitda=24344.0 fcf=15104.0 roe=38.1 F=None None
 Accenture                          IE ACN      Technology             2026-08-31 rev€=66276.2 ebitda=13419.0 fcf=11620.25 roe=26.5 F=None None
@@ -37,10 +38,9 @@ Munich Re                          DE MUV2     Financials             2025-12-31
 Orlen                              PL PKN      Energy                 2025-12-31 rev€=60946.0 ebitda=39144.0 fcf=20536.0 roe=1.8 F=None None
 BASF                               DE BAS      Materials              2025-12-31 rev€=59657.0 ebitda=6053.0 fcf=1343.0 roe=4.9 F=None None
 Renault                            FR RNO      Consumer Discretionary 2025-12-31 rev€=57922.0 ebitda=-3628.0 fcf=-705.0 roe=-52.6 F=4 0101-01-1
+Assicurazioni Generali             IT G        Financials             2025-12-31 rev€=57803.0 ebitda=None fcf=None roe=13.0 F=None None
 Bouygues                           FR EN       Industrials            2024-12-31 rev€=56752.0 ebitda=4640.0 fcf=2664.0 roe=8.3 F=5 11011-1-0
 ArcelorMittal                      LU MT       Materials              2024-12-31 rev€=55785.8 ebitda=5942.0 fcf=447.0 roe=2.7 F=6 111100110
 Repsol SA                          ES REP      Energy                 2025-12-31 rev€=54421.0 ebitda=5148.0 fcf=1619.0 roe=6.9 F=7 1111-11-1
 Chubb                              CH CB       Financials             2025-12-31 rev€=53269.9 ebitda=None fcf=None roe=14.0 F=None None
 Anheuser-Busch InBev               BE ABI      Consumer Staples       2025-12-31 rev€=52997.4 ebitda=21057.0 fcf=11227.0 roe=7.8 F=8 111111110
-Astrazeneca PLC                    GB AZN      Healthcare             2025-12-31 rev€=52478.3 ebitda=19476.0 fcf=8670.0 roe=21.0 F=8 111111110
-Rio Tinto plc                      GB RIO      Materials              2025-12-31 rev€=51494.7 ebitda=21513.0 fcf=4497.0 roe=16.0 F=4 11010-1-0
