@@ -2285,6 +2285,1014 @@
    "shares": 88990000,
    "asOf": "2026-10-25",
    "source": "https://www.comdirect.de/inf/aktien/IT0005527616"
+  },
+  "PLTLKPL00017": {
+   "shares": 1312360000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/OPL/financials/balance-sheet/",
+   "name": "Orange Polska",
+   "ticker": "OPL"
+  },
+  "PLTAURN00011": {
+   "shares": 1753000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/TPE/financials/balance-sheet/",
+   "name": "Tauron Polska Energia",
+   "ticker": "TPE"
+  },
+  "PLSOFTB00016": {
+   "shares": 80510000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ACP/financials/balance-sheet/",
+   "name": "Asseco Poland",
+   "ticker": "ACP"
+  },
+  "PLKRK0000010": {
+   "shares": 19490000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/KRU/financials/balance-sheet/",
+   "name": "KRUK",
+   "ticker": "KRU"
+  },
+  "PLKETY000011": {
+   "shares": 9840000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/KTY/financials/balance-sheet/",
+   "name": "Grupa Kęty",
+   "ticker": "KTY"
+  },
+  "PLJSW0000015": {
+   "shares": 117410000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/JSW/financials/balance-sheet/",
+   "name": "JSW",
+   "ticker": "JSW"
+  },
+  "PLGPW0000017": {
+   "shares": 41970000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/GPW/financials/balance-sheet/",
+   "name": "GPW Warsaw Stock Exchange",
+   "ticker": "GPW"
+  },
+  "PLEURCH00011": {
+   "shares": 139160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/EUR/financials/balance-sheet/",
+   "name": "Eurocash",
+   "ticker": "EUR"
+  },
+  "PLENEA000013": {
+   "shares": 529730000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ENA/financials/balance-sheet/",
+   "name": "Enea",
+   "ticker": "ENA"
+  },
+  "PLCFRPT00013": {
+   "shares": 550700000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CPS/financials/balance-sheet/",
+   "name": "Cyfrowy Polsat",
+   "ticker": "CPS"
+  },
+  "PLCCC0000016": {
+   "shares": 83580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CCC/financials/balance-sheet/",
+   "name": "Modivo",
+   "ticker": "MDV"
+  },
+  "PLBZ00000044": {
+   "shares": 102190000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SPL/financials/balance-sheet/",
+   "name": "Erste Bank Polska",
+   "ticker": "EBP"
+  },
+  "PLBSK0000017": {
+   "shares": 130100000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ING/financials/balance-sheet/",
+   "name": "ING Bank Śląski",
+   "ticker": "ING"
+  },
+  "PLBIG0000016": {
+   "shares": 1213000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/MIL/financials/balance-sheet/",
+   "name": "Bank Millennium",
+   "ticker": "MIL"
+  },
+  "PLBH00000012": {
+   "shares": 130390000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BHW/financials/balance-sheet/",
+   "name": "Bank Handlowy",
+   "ticker": "BHW"
+  },
+  "PLBGZ0000010": {
+   "shares": 148600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BNP/financials/balance-sheet/",
+   "name": "BNP Paribas Bank Polska",
+   "ticker": "BNP"
+  },
+  "NL0009805522": {
+   "shares": 255160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/nbis/financials/balance-sheet/",
+   "name": "Nebius Group",
+   "ticker": "NBIS"
+  },
+  "GB00BRXH2664": {
+   "shares": 505010000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/au/financials/balance-sheet/",
+   "name": "AngloGold Ashanti",
+   "ticker": "AU"
+  },
+  "IE00BFRT3W74": {
+   "shares": 86070000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/alle/financials/balance-sheet/",
+   "name": "Allegion",
+   "ticker": "ALLE"
+  },
+  "FR0014004L86": {
+   "shares": 77540000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/AM/financials/balance-sheet/",
+   "name": "Dassault Aviation",
+   "ticker": "AM"
+  },
+  "FR0004125920": {
+   "shares": 204750000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/AMUN/financials/balance-sheet/",
+   "name": "Amundi",
+   "ticker": "AMUN"
+  },
+  "IT0005211237": {
+   "shares": 1016000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IG/financials/balance-sheet/",
+   "name": "Italgas",
+   "ticker": "IG"
+  },
+  "IT0005218380": {
+   "shares": 1503000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BAMI/financials/balance-sheet/",
+   "name": "Banco BPM",
+   "ticker": "BAMI"
+  },
+  "IT0001031084": {
+   "shares": 113910000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BGN/financials/balance-sheet/",
+   "name": "Banca Generali",
+   "ticker": "BGN"
+  },
+  "IE00BGH1M568": {
+   "shares": 137600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/prgo/financials/balance-sheet/",
+   "name": "Perrigo",
+   "ticker": "PRGO"
+  },
+  "LU0569974404": {
+   "shares": 73100000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ams/APAM/financials/balance-sheet/",
+   "name": "Aperam",
+   "ticker": "APAM"
+  },
+  "FR0013467479": {
+   "shares": 135420000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/cstm/financials/balance-sheet/",
+   "name": "Constellium",
+   "ticker": "CSTM"
+  },
+  "FR0000124570": {
+   "shares": 142890000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/OPM/financials/balance-sheet/",
+   "name": "OPmobility",
+   "ticker": "OPM"
+  },
+  "FR0000031577": {
+   "shares": 8380000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/VIRP/financials/balance-sheet/",
+   "name": "Virbac",
+   "ticker": "VIRP"
+  },
+  "FR0005691656": {
+   "shares": 19290000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/TRI/financials/balance-sheet/",
+   "name": "Trigano",
+   "ticker": "TRI"
+  },
+  "GB0002869419": {
+   "shares": 195960000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/lon/BYG/financials/balance-sheet/",
+   "name": "Big Yellow Group",
+   "ticker": "BYG"
+  },
+  "BE0003878957": {
+   "shares": 30350000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ebr/VGP/financials/balance-sheet/",
+   "name": "VGP",
+   "ticker": "VGP"
+  },
+  "AT0000A3EPA4": {
+   "shares": 98850000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/swx/AMS/financials/balance-sheet/",
+   "name": "ams-OSRAM",
+   "ticker": "AMS"
+  },
+  "IS0000000040": {
+   "shares": 427770000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/EMBLA/financials/balance-sheet/",
+   "name": "Embla Medical",
+   "ticker": "EMBLA"
+  },
+  "NO0010209331": {
+   "shares": 82430000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/PROT/financials/balance-sheet/",
+   "name": "Protector Forsikring",
+   "ticker": "PROT"
+  },
+  "DK0060854669": {
+   "shares": 24340000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/RILBA/financials/balance-sheet/",
+   "name": "Ringkjøbing Landbobank",
+   "ticker": "RILBA"
+  },
+  "CZ0009000121": {
+   "shares": 21290000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/pra/KOFOL/financials/balance-sheet/",
+   "name": "Kofola ČeskoSlovensko",
+   "ticker": "KOFOL"
+  },
+  "CZ0009008942": {
+   "shares": 56460000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/pra/CZG/financials/balance-sheet/",
+   "name": "Colt CZ Group",
+   "ticker": "CZG"
+  },
+  "CH0334081137": {
+   "shares": 95890000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/crsp/financials/balance-sheet/",
+   "name": "CRISPR Therapeutics",
+   "ticker": "CRSP"
+  },
+  "IE0003LFZ4U7": {
+   "shares": 95900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/dole/financials/balance-sheet/",
+   "name": "Dole",
+   "ticker": "DOLE"
+  },
+  "IE00BKYC3F77": {
+   "shares": 24350000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/cmpr/financials/balance-sheet/",
+   "name": "Cimpress",
+   "ticker": "CMPR"
+  },
+  "ES0105884011": {
+   "shares": 167960000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bme/CIRSA/financials/balance-sheet/",
+   "name": "Cirsa Enterprises",
+   "ticker": "CIRSA"
+  },
+  "SE0009778848": {
+   "shares": 150980000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/MCOV.B/financials/balance-sheet/",
+   "name": "Medicover",
+   "ticker": "MCOV-B"
+  },
+  "SE0017769995": {
+   "shares": 101160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/BIOG.B/financials/balance-sheet/",
+   "name": "BioGaia",
+   "ticker": "BIOG-B"
+  },
+  "SE0006220018": {
+   "shares": 57970000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/INWI/financials/balance-sheet/",
+   "name": "Inwido",
+   "ticker": "INWI"
+  },
+  "SE0007439443": {
+   "shares": 77670000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/STORY.B/financials/balance-sheet/",
+   "name": "Storytel",
+   "ticker": "STORY-B"
+  },
+  "SE0008294953": {
+   "shares": 105620000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/PDX/financials/balance-sheet/",
+   "name": "Paradox Interactive",
+   "ticker": "PDX"
+  },
+  "SE0004840718": {
+   "shares": 31500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/XVIVO/financials/balance-sheet/",
+   "name": "Xvivo Perfusion",
+   "ticker": "XVIVO"
+  },
+  "SE0023615638": {
+   "shares": 236720000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/ASMDEE.B/financials/balance-sheet/",
+   "name": "Asmodee Group",
+   "ticker": "ASMDEE-B"
+  },
+  "IT0003097257": {
+   "shares": 26580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BSS/financials/balance-sheet/",
+   "name": "Biesse",
+   "ticker": "BSS"
+  },
+  "FR0000120107": {
+   "shares": 12910000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/SAVE/financials/balance-sheet/",
+   "name": "Savencia",
+   "ticker": "SAVE"
+  },
+  "FR0000039091": {
+   "shares": 2187000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/RBT/financials/balance-sheet/",
+   "name": "Robertet",
+   "ticker": "RBT"
+  },
+  "FR0000121691": {
+   "shares": 77450000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/NRG/financials/balance-sheet/",
+   "name": "NRJ Group",
+   "ticker": "NRG"
+  },
+  "FR0000052680": {
+   "shares": 62640000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/SBT/financials/balance-sheet/",
+   "name": "Oeneo",
+   "ticker": "SBT"
+  },
+  "CH0012268360": {
+   "shares": 55800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/swx/KUD/financials/balance-sheet/",
+   "name": "Kudelski",
+   "ticker": "KUD"
+  },
+  "BE0003867844": {
+   "shares": 76940000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ebr/KBCA/financials/balance-sheet/",
+   "name": "KBC Ancora",
+   "ticker": "KBCA"
+  },
+  "BE0003770840": {
+   "shares": 10100000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ebr/NEXTA/financials/balance-sheet/",
+   "name": "Nextensa",
+   "ticker": "NEXTA"
+  },
+  "AT0000625108": {
+   "shares": 70530000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/vie/OBS/financials/balance-sheet/",
+   "name": "Oberbank",
+   "ticker": "OBS"
+  },
+  "PLALIOR00045": {
+   "shares": 130550000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ALR/financials/balance-sheet/",
+   "name": "Alior Bank",
+   "ticker": "ALR"
+  },
+  "PLWRTPL00027": {
+   "shares": 29670000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/WPL/financials/balance-sheet/",
+   "name": "Wirtualna Polska",
+   "ticker": "WPL"
+  },
+  "PLPKPCR00011": {
+   "shares": 44790000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/PKP/financials/balance-sheet/",
+   "name": "PKP Cargo",
+   "ticker": "PKP"
+  },
+  "PLZATRM00012": {
+   "shares": 99195000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ATT/financials/balance-sheet/",
+   "name": "Grupa Azoty",
+   "ticker": "ATT"
+  },
+  "PLDMDVL00012": {
+   "shares": 25800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/DOM/financials/balance-sheet/",
+   "name": "Dom Development",
+   "ticker": "DOM"
+  },
+  "PLTRFRM00018": {
+   "shares": 4569000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/NEU/financials/balance-sheet/",
+   "name": "Neuca",
+   "ticker": "NEU"
+  },
+  "PLLVTSF00010": {
+   "shares": 25740000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/TXT/financials/balance-sheet/",
+   "name": "Text",
+   "ticker": "TXT"
+  },
+  "PL11BTS00015": {
+   "shares": 2418000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/11B/financials/balance-sheet/",
+   "name": "11 bit studios",
+   "ticker": "11B"
+  },
+  "PLLCCRP00017": {
+   "shares": 461970000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/DVL/financials/balance-sheet/",
+   "name": "Develia",
+   "ticker": "DVL"
+  },
+  "PLATAL000046": {
+   "shares": 43280000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/1AT/financials/balance-sheet/",
+   "name": "Atal",
+   "ticker": "1AT"
+  },
+  "PLGTC0000037": {
+   "shares": 574250000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/GTC/financials/balance-sheet/",
+   "name": "Globe Trade Centre",
+   "ticker": "GTC"
+  },
+  "PLRNBWT00031": {
+   "shares": 14550000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/RBW/financials/balance-sheet/",
+   "name": "Rainbow Tours",
+   "ticker": "RBW"
+  },
+  "PLECHPS00019": {
+   "shares": 412690000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ECH/financials/balance-sheet/",
+   "name": "Echo Investment",
+   "ticker": "ECH"
+  },
+  "PLBRSZW00011": {
+   "shares": 196800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BRS/financials/balance-sheet/",
+   "name": "Boryszew",
+   "ticker": "BRS"
+  },
+  "PLNEWAG00012": {
+   "shares": 45000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/NWG/financials/balance-sheet/",
+   "name": "Newag",
+   "ticker": "NWG"
+  },
+  "PLAPATR00018": {
+   "shares": 29080000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/APT/financials/balance-sheet/",
+   "name": "Apator",
+   "ticker": "APT"
+  },
+  "PLCMPLD00016": {
+   "shares": 22720000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SGN/financials/balance-sheet/",
+   "name": "Sygnity",
+   "ticker": "SGN"
+  },
+  "PLMNNCP00011": {
+   "shares": 50990000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/MNC/financials/balance-sheet/",
+   "name": "Mennica Polska",
+   "ticker": "MNC"
+  },
+  "PLARHCM00016": {
+   "shares": 58600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ARH/financials/balance-sheet/",
+   "name": "Archicom",
+   "ticker": "ARH"
+  },
+  "PLAMICA00010": {
+   "shares": 7676000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/AMC/financials/balance-sheet/",
+   "name": "Amica",
+   "ticker": "AMC"
+  },
+  "PLAGORA00067": {
+   "shares": 46530000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/AGO/financials/balance-sheet/",
+   "name": "Agora",
+   "ticker": "AGO"
+  },
+  "PLAB00000019": {
+   "shares": 15790000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ABE/financials/balance-sheet/",
+   "name": "AB",
+   "ticker": "ABE"
+  },
+  "PLR220000018": {
+   "shares": 14450000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CBF/financials/balance-sheet/",
+   "name": "cyber_Folks",
+   "ticker": "CBF"
+  },
+  "PLBIOTN00029": {
+   "shares": 85870000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BIO/financials/balance-sheet/",
+   "name": "Bioton",
+   "ticker": "BIO"
+  },
+  "PLSELNA00010": {
+   "shares": 21630000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SEL/financials/balance-sheet/",
+   "name": "Selena FM",
+   "ticker": "SEL"
+  },
+  "PLZAPUL00057": {
+   "shares": 19115000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ZAP/financials/balance-sheet/",
+   "name": "Grupa Azoty Puławy",
+   "ticker": "ZAP"
+  },
+  "PLZEPAK00012": {
+   "shares": 50820000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/ZEP/financials/balance-sheet/",
+   "name": "ZE PAK",
+   "ticker": "ZEP"
+  },
+  "PLMCIMG00012": {
+   "shares": 52300000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/MCI/financials/balance-sheet/",
+   "name": "MCI Capital",
+   "ticker": "MCI"
+  },
+  "PLWAWEL00013": {
+   "shares": 1292000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/WWL/financials/balance-sheet/",
+   "name": "Wawel",
+   "ticker": "WWL"
+  },
+  "PLVSTLA00011": {
+   "shares": 234600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/VRG/financials/balance-sheet/",
+   "name": "VRG",
+   "ticker": "VRG"
+  },
+  "PLSTLSK00016": {
+   "shares": 26880000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/SNK/financials/balance-sheet/",
+   "name": "Sanok Rubber Company",
+   "ticker": "SNK"
+  },
+  "PLOPNPL00013": {
+   "shares": 11230000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/OPN/financials/balance-sheet/",
+   "name": "Oponeo.pl",
+   "ticker": "OPN"
+  },
+  "PLDEBCA00016": {
+   "shares": 13800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/DBC/financials/balance-sheet/",
+   "name": "Dębica",
+   "ticker": "DBC"
+  },
+  "PLLUBAW00013": {
+   "shares": 150000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/LBW/financials/balance-sheet/",
+   "name": "Lubawa",
+   "ticker": "LBW"
+  },
+  "PLVIGOS00015": {
+   "shares": 874900,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/VGO/financials/balance-sheet/",
+   "name": "VIGO Photonics",
+   "ticker": "VGO"
+  },
+  "PLTSQGM00016": {
+   "shares": 6478000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/TEN/financials/balance-sheet/",
+   "name": "Ten Square Games",
+   "ticker": "TEN"
+  },
+  "PLBLOBR00014": {
+   "shares": 19290000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BLO/financials/balance-sheet/",
+   "name": "Bloober Team",
+   "ticker": "BLO"
+  },
+  "PLCTINT00018": {
+   "shares": 182900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/CIG/financials/balance-sheet/",
+   "name": "CI Games",
+   "ticker": "CIG"
+  },
+  "PLBOS0000019": {
+   "shares": 92930000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/BOS/financials/balance-sheet/",
+   "name": "Bank Ochrony Środowiska",
+   "ticker": "BOS"
+  },
+  "PLKGNRC00015": {
+   "shares": 14900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/KGN/financials/balance-sheet/",
+   "name": "Kogeneracja",
+   "ticker": "KGN"
+  },
+  "PLMSTSD00019": {
+   "shares": 248700000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/wse/PXM/financials/balance-sheet/",
+   "name": "Polimex Mostostal",
+   "ticker": "PXM"
+  },
+  "ROTSELACNOR9": {
+   "shares": 73300000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bvb/TEL/financials/balance-sheet/",
+   "name": "Transelectrica",
+   "ticker": "TEL"
+  },
+  "NL0015073TS8": {
+   "shares": 1000000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ams/CSG/financials/balance-sheet/",
+   "name": "CSG",
+   "ticker": "CSG"
+  },
+  "GB00BN0VZ646": {
+   "shares": 90500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ams/FERGR/financials/balance-sheet/",
+   "name": "Ferrari Group",
+   "ticker": "FERGR"
+  },
+  "GB00BVG7F061": {
+   "shares": 198600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/brsl/financials/balance-sheet/",
+   "name": "Brightstar Lottery",
+   "ticker": "BRSL"
+  },
+  "SE0010442418": {
+   "shares": 107600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/BAHN.B/financials/balance-sheet/",
+   "name": "Bahnhof",
+   "ticker": "BAHN-B"
+  },
+  "FR0000075442": {
+   "shares": 6170000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/ALLDL/financials/balance-sheet/",
+   "name": "Groupe LDLC",
+   "ticker": "ALLDL"
+  },
+  "FR0012819381": {
+   "shares": 18500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/epa/ALGIL/financials/balance-sheet/",
+   "name": "Groupe Guillin",
+   "ticker": "ALGIL"
+  },
+  "IT0003173629": {
+   "shares": 79500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/BST/financials/balance-sheet/",
+   "name": "Banca Sistema",
+   "ticker": "BST"
+  },
+  "IT0004240443": {
+   "shares": 48000000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/PQ/financials/balance-sheet/",
+   "name": "Piquadro",
+   "ticker": "PQ"
+  },
+  "FR0010425595": {
+   "shares": 100900000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/clls/financials/balance-sheet/",
+   "name": "Cellectis",
+   "ticker": "ALCLS"
+  },
+  "HU0000167788": {
+   "shares": 289800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bud/4IG/financials/balance-sheet/",
+   "name": "4iG",
+   "ticker": "4IG"
+  },
+  "CZ1008000310": {
+   "shares": 31660000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/pra/DSPW/financials/balance-sheet/",
+   "name": "Doosan Škoda Power",
+   "ticker": "DSPW"
+  },
+  "NO0010895782": {
+   "shares": 44820000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/XPLRA/financials/balance-sheet/",
+   "name": "Xplora Technologies",
+   "ticker": "XPLRA"
+  },
+  "NO0013696799": {
+   "shares": 17110000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/HKY/financials/balance-sheet/",
+   "name": "Havila Kystruten",
+   "ticker": "HKY"
+  },
+  "DK0010230630": {
+   "shares": 1800000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/GRLA/financials/balance-sheet/",
+   "name": "GrønlandsBANKEN",
+   "ticker": "GRLA"
+  },
+  "LU2405144788": {
+   "shares": 45400000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/stocks/cdro/financials/balance-sheet/",
+   "name": "Codere Online",
+   "ticker": "CDRO"
+  },
+  "GB0006389398": {
+   "shares": 36600000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/lon/NICL/financials/balance-sheet/",
+   "name": "Nichols",
+   "ticker": "NICL"
+  },
+  "GB00BP6S8Z30": {
+   "shares": 975250000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/lon/ONT/statistics/",
+   "name": "Oxford Nanopore Technologies",
+   "ticker": "ONT"
+  },
+  "SE0016787071": {
+   "shares": 311240000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/TRUE.B/statistics/",
+   "name": "Truecaller",
+   "ticker": "TRUE-B"
+  },
+  "SE0009143662": {
+   "shares": 79410000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/VOLO/statistics/",
+   "name": "Volati",
+   "ticker": "VOLO"
+  },
+  "IT0005221517": {
+   "shares": 28890000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/GPI/statistics/",
+   "name": "GPI",
+   "ticker": "GPI"
+  },
+  "IT0005345233": {
+   "shares": 88330000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/GHC/statistics/",
+   "name": "Garofalo Health Care",
+   "ticker": "GHC"
+  },
+  "IT0005075764": {
+   "shares": 9240000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IWB/statistics/",
+   "name": "Italian Wine Brands",
+   "ticker": "IWB"
+  },
+  "LU1250154413": {
+   "shares": 151630000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/etr/ADJ/statistics/",
+   "name": "ADLER Group",
+   "ticker": "ADJ"
+  },
+  "ES0112458312": {
+   "shares": 24390000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bme/AZK/statistics/",
+   "name": "Azkoyen",
+   "ticker": "AZK"
+  },
+  "NO0010612450": {
+   "shares": 93690000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/SBO/statistics/",
+   "name": "Selvaag Bolig",
+   "ticker": "SBO"
+  },
+  "IT0005274094": {
+   "shares": 9580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/PHN/statistics/",
+   "name": "Pharmanutra",
+   "ticker": "PHN"
+  },
+  "FI4000490875": {
+   "shares": 60470000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/hel/HEALTH/statistics/",
+   "name": "Nightingale Health",
+   "ticker": "HEALTH"
+  },
+  "AT0000815402": {
+   "shares": 7350000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/vie/UBS/statistics/",
+   "name": "UBM Development",
+   "ticker": "UBS"
+  },
+  "NO0012916131": {
+   "shares": 34870000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/TECH/statistics/",
+   "name": "Techstep",
+   "ticker": "TECH"
+  },
+  "IT0005709909": {
+   "shares": 65580000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/TFIN/statistics/",
+   "name": "Trevi Finanziaria Industriale",
+   "ticker": "TFIN"
+  },
+  "IT0005543480": {
+   "shares": 26410000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/DEX/statistics/",
+   "name": "Dexelance",
+   "ticker": "DEX"
+  },
+  "IT0004585243": {
+   "shares": 601750000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/TES/statistics/",
+   "name": "Tesmec",
+   "ticker": "TES"
+  },
+  "IT0005438046": {
+   "shares": 132500000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IOT/statistics/",
+   "name": "Seco",
+   "ticker": "IOT"
+  },
+  "IT0003895668": {
+   "shares": 59490000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/ETH/statistics/",
+   "name": "Eurotech",
+   "ticker": "ETH"
+  },
+  "IT0005573065": {
+   "shares": 30120000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/UD/statistics/",
+   "name": "Unidata",
+   "ticker": "UD"
+  },
+  "IT0005472730": {
+   "shares": 18240000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/AGP/statistics/",
+   "name": "Altea Green Power",
+   "ticker": "AGP"
+  },
+  "IT0001447785": {
+   "shares": 83780000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/MTV/statistics/",
+   "name": "Mondo TV",
+   "ticker": "MTV"
+  },
+  "IT0003411417": {
+   "shares": 30550000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/bit/IEG/statistics/",
+   "name": "Italian Exhibition Group",
+   "ticker": "IEG"
+  },
+  "NO0003033102": {
+   "shares": 933200000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/osl/KOA/statistics/",
+   "name": "Kongsberg Automotive",
+   "ticker": "KOA"
+  },
+  "GRS144003001": {
+   "shares": 243160000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ath/ATTICA/statistics/",
+   "name": "Attica Holdings",
+   "ticker": "ATTICA"
+  },
+  "GRS543003008": {
+   "shares": 70030000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ath/QLCO/statistics/",
+   "name": "Qualco Group",
+   "ticker": "QLCO"
+  },
+  "SE0017083272": {
+   "shares": 90480000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/sto/NIVI.B/statistics/",
+   "name": "Nivika Fastigheter",
+   "ticker": "NIVI-B"
+  },
+  "GRS222213001": {
+   "shares": 27730000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/ath/EKTER/statistics/",
+   "name": "Ekter",
+   "ticker": "EKTER"
+  },
+  "DK0010258995": {
+   "shares": 117780000,
+   "asOf": "2026-10-25",
+   "source": "https://stockanalysis.com/quote/cph/AGAT/statistics/",
+   "name": "Agat Ejendomme",
+   "ticker": "AGAT"
   }
  }
 }
