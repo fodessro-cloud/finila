@@ -3832,6 +3832,13 @@
    "source": "https://stockanalysis.com/quote/sto/VOLCAR.B/statistics/",
    "name": "Volvo Cars",
    "ticker": "VOLCAR.B"
+  },
+  "GB00BYRJ5J14": {
+   "shares": 2600000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/PHP/statistics/",
+   "name": "Primary Health Properties",
+   "ticker": "PHP"
   }
  }
 }
