@@ -3832,6 +3832,55 @@
    "source": "https://stockanalysis.com/quote/sto/VOLCAR.B/statistics/",
    "name": "Volvo Cars",
    "ticker": "VOLCAR.B"
+  },
+  "GB00BYRJ5J14": {
+   "shares": 2600000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/PHP/statistics/",
+   "name": "Primary Health Properties",
+   "ticker": "PHP"
+  },
+  "DK0064532444": {
+   "shares": 147380,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/cph/WMA/statistics/",
+   "name": "WindowMaster",
+   "ticker": "WMA"
+  },
+  "SE0029300995": {
+   "shares": 14560000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/sto/ENRO/statistics/",
+   "name": "Eniro",
+   "ticker": "ENRO"
+  },
+  "ES0152768612": {
+   "shares": 1560000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bme/AI/statistics/",
+   "name": "Airtificial Intelligence Structures",
+   "ticker": "AI"
+  },
+  "SE0026598583": {
+   "shares": 20610000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/sto/XBRANE/statistics/",
+   "name": "Xbrane Biopharma",
+   "ticker": "XBRANE"
+  },
+  "ES0109260291": {
+   "shares": 91040000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bme/AMP/statistics/",
+   "name": "Amper",
+   "ticker": "AMP"
+  },
+  "GB00BYZJ7G42": {
+   "shares": 325220000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/HWG/statistics/",
+   "name": "Harworth Group",
+   "ticker": "HWG"
   }
  }
 }
