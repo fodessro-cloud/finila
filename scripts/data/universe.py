@@ -336,10 +336,13 @@ def add_financials(rows, rates):
             continue
         # a report wins when it is newer, or as new and has revenue and EPS; banks' reports often lack
         # both (Generali, DNB, CaixaBank), so they had no market value; an older report loses to a
-        # newer hand row (filings.xbrl.org still lists only 2024 for LVMH, H&M ...)
+        # newer hand row (filings.xbrl.org still lists only 2024 for LVMH, H&M ...); a hand row marked
+        # "override" also beats a report of the same year whose figures were read wrongly (Brunello
+        # Cucinelli's revenue came out as 0.2 million)
         rep = r.get("periodEnd") or ""
         has = r.get("revenue") is not None or r.get("netIncome") is not None
-        if has and (rep > k["periodEnd"] or (rep == k["periodEnd"] and r.get("revenue") is not None and r.get("eps") is not None)):
+        same_ok = not k.get("override") and r.get("revenue") is not None and r.get("eps") is not None
+        if has and (rep > k["periodEnd"] or (rep == k["periodEnd"] and same_ok)):
             continue
         rev, op, net, da = k.get("revenue"), k.get("operatingProfit"), k.get("netIncome"), k.get("da")
         fin = bool(k.get("financial"))
