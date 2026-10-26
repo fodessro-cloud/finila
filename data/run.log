@@ -78,6 +78,7 @@ EDP     Portugal     EDP - Energias de Portugal SA    [EDP ENERGIAS DE PORTUGAL]
 PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQREJT74 ORLEN SPÓŁKA AKCYJNA (exact)
 
 matched 58 / 77
+  ! https://filings.xbrl.org/213800LBQA1Y9L22JB70/2025-12-31/ESEF/GB/0/213800LBQA1Y9L22JB70-2025-12-31-T01.json: HTTP Error 429: Too Many Requests
 SAP@Germany no usable annual report (0 filings)
 SIE@Germany no usable annual report (0 filings)
 ALV@Germany no usable annual report (0 filings)
@@ -132,8 +133,8 @@ RIO@UK         2025-12-31 USD rev=57638.0 ebitda=21513.0 net=9966.0 fcf=4497.0 r
 GSK@UK         2025-12-31 GBP rev=32667.0 ebitda=None net=5716.0 fcf=4756.0 roe=34.9 nd/ebitda=None
 ULVR@UK        2025-12-31 EUR rev=50503.0 ebitda=10390.0 net=9469.0 fcf=6759.0 roe=61.0 nd/ebitda=None
 DGE@UK         2026-06-30 USD rev=27762.0 ebitda=5636.0 net=1958.0 fcf=3195.0 roe=18.0 nd/ebitda=3.11
-        missing ['revenue', 'ebitda', 'fcf']; tagged: ['bcs:CalledUpShareCapitalAndSharePremium', 'bcs:NetPurchaseOfTreasuryShares', 'bcs:OperatingIncome', 'bcs:ProfitLossFromOperatingActivitiesBeforeImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:InterestRevenueCalculatedUsingEffectiveInterestMethod', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtAmortisedCostClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncomeClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:PurchaseOfTreasuryShares']
-BARC@UK        2025-12-31 GBP rev=None ebitda=None net=7172.0 fcf=None roe=9.2 nd/ebitda=None
+        missing ['revenue', 'ebitda', 'fcf']; tagged: ['bcs:CalledUpShareCapitalAndSharePremium', 'bcs:NetPurchaseOfTreasuryShares', 'bcs:OperatingIncome', 'bcs:ProfitLossFromOperatingActivitiesBeforeImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'bcs:PurchaseOfFinancialAssetsMeasuredAtAmortisedCostClassifiedAsInvestingActivities', 'bcs:PurchaseOfFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncomeClassifiedAsInvestingActivities', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:InterestRevenueCalculatedUsingEffectiveInterestMethod', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:PurchaseOfTreasuryShares']
+BARC@UK        2024-12-31 GBP rev=None ebitda=None net=6307.0 fcf=None roe=8.8 nd/ebitda=None
         missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables', 'ifrs-full:AdjustmentsForIncreaseDecreaseInOtherOperatingPayables', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesRefundClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromInterest', 'lyg:OtherOperatingIncomeExpenseNetInvestmentReturnAndFinanceResultInRespectOfInsuranceAndInvestmentContracts', 'lyg:OtherOperatingIncomeExpenseNetInvestmentReturnOnAssetsHeldToBackInsuranceAndInvestmentContracts']
 LLOY@UK        2025-12-31 GBP rev=19422.0 ebitda=None net=4659.0 fcf=None roe=9.8 nd/ebitda=None
 ITX@Spain      2026-01-31 EUR rev=39864.0 ebitda=11267.0 net=6220.0 fcf=6520.0 roe=30.5 nd/ebitda=-0.47
@@ -171,7 +172,7 @@ FCA FULINS_E_20261024_01of01.zip: 2151 new issuers
 4000 issuers with a report for 2024 or later (15 pages)
 37 reports to read, 3963 cached
 read 37 reports this run
-  ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
+4905 listed companies with an LEI on Wikidata
 18568 issuers with listed shares (FIRDS); 2299 of them file reports here
 shares in issue for 518 companies (data/shares.json)
 annual figures by hand for 428 companies (data/financials.json)
