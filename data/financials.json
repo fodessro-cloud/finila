@@ -7456,6 +7456,23 @@
    "equity": 9038.0,
    "assets": 29280.0,
    "source": "https://stockanalysis.com/stocks/flut/financials/"
+  },
+  "FR0010411983": {
+   "name": "SCOR SE",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 15689.0,
+   "revenuePrev": 16460.0,
+   "operatingProfit": 1316.0,
+   "netIncome": 851.0,
+   "netIncomePrev": 4.0,
+   "eps": 4.68,
+   "operatingCashFlow": 1169.0,
+   "dividendsPaid": 322.0,
+   "equity": 4427.0,
+   "assets": 36100.0,
+   "financial": true,
+   "source": "https://stockanalysis.com/quote/epa/SCR/financials/"
   }
  }
 }
