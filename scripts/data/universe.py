@@ -334,11 +334,12 @@ def add_financials(rows, rates):
         k = known.get(r.get("isin") or "")
         if not k:
             continue
-        # a report wins when it is as new and has revenue and EPS; banks' reports often lack both
-        # (Generali, DNB, CaixaBank), so they had no market value
-        if (r.get("revenue") is not None or r.get("netIncome") is not None) and (
-                (r.get("revenue") is not None and r.get("eps") is not None)
-                or (r.get("periodEnd") or "") > k["periodEnd"]):
+        # a report wins when it is newer, or as new and has revenue and EPS; banks' reports often lack
+        # both (Generali, DNB, CaixaBank), so they had no market value; an older report loses to a
+        # newer hand row (filings.xbrl.org still lists only 2024 for LVMH, H&M ...)
+        rep = r.get("periodEnd") or ""
+        has = r.get("revenue") is not None or r.get("netIncome") is not None
+        if has and (rep > k["periodEnd"] or (rep == k["periodEnd"] and r.get("revenue") is not None and r.get("eps") is not None)):
             continue
         rev, op, net, da = k.get("revenue"), k.get("operatingProfit"), k.get("netIncome"), k.get("da")
         fin = bool(k.get("financial"))
