@@ -1,8 +1,10 @@
-Daily Xetra file for 2026-10-23: 595 of our shares traded
-Daily Börse Frankfurt file for 2026-10-23: 2206 of our shares traded
-Intraday charts for 2026-10-23: 2206 shares
+Xetra 2026-10-26: 82 minute files waiting, reading the newest 70
+Xetra 2026-10-26: read 70 new minute files, up to DETR-posttrade-2026-10-26T01_21.json.gz
+Börse Frankfurt 2026-10-26: 82 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-10-26: read 70 new minute files, up to DFRA-posttrade-2026-10-26T01_21.json.gz
+Intraday charts for 2026-10-26 (trading day in progress): 0 shares
 Fundamentals issuers with a price: 2210 of 2812
-Prices for 74 of 77 stocks (closed day 2026-10-23, day in progress -)
+Prices for 74 of 77 stocks (closed day 2026-10-23, day in progress 2026-10-26)
   no trades on Xetra or Frankfurt: UNA@Netherlands, ROG@Switzerland, ULVR@UK
   SAP@Germany          DE0007164600 Xetra            2026-10-23 19:58     213.15 trades  10705 change -0.84
   SIE@Germany          DE0007236101 Xetra            2026-10-23 16:06      256.9 trades   5568 change 0.57
