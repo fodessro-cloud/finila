@@ -3524,6 +3524,307 @@
    "source": "https://stockanalysis.com/quote/cph/BIF/statistics/",
    "name": "Brøndby IF",
    "ticker": "BIF"
+  },
+  "SE0016833149": {
+   "shares": 16610000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/sto/ADTR/statistics/",
+   "name": "Adtraction",
+   "ticker": "ADTR"
+  },
+  "SE0025666969": {
+   "shares": 64650000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/sto/AVARDA/statistics/",
+   "name": "Avarda Bank",
+   "ticker": "AVARDA"
+  },
+  "IT0005337818": {
+   "shares": 15880000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/ITD/statistics/",
+   "name": "Intred",
+   "ticker": "ITD"
+  },
+  "IT0005496473": {
+   "shares": 366120000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/TSL/statistics/",
+   "name": "Tessellis",
+   "ticker": "TSL"
+  },
+  "FR0010557264": {
+   "shares": 80010000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/AB/statistics/",
+   "name": "AB Science",
+   "ticker": "AB"
+  },
+  "FR0010766667": {
+   "shares": 9680000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/ALVU/statistics/",
+   "name": "Vente-Unique.com",
+   "ticker": "ALVU"
+  },
+  "FR0013331212": {
+   "shares": 13000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/ALDNE/statistics/",
+   "name": "Don't Nod Entertainment",
+   "ticker": "ALDNE"
+  },
+  "FR001400SVN0": {
+   "shares": 77520000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/ALDRV/statistics/",
+   "name": "Drone Volt",
+   "ticker": "ALDRV"
+  },
+  "NL0010661864": {
+   "shares": 9600000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/ams/VALUE/statistics/",
+   "name": "Value8",
+   "ticker": "VALUE"
+  },
+  "NL0000686509": {
+   "shares": 24470000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/AST/statistics/",
+   "name": "Astarta Holding",
+   "ticker": "AST"
+  },
+  "GB00B0BRN552": {
+   "shares": 77050000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/BGO/statistics/",
+   "name": "Bango",
+   "ticker": "BGO"
+  },
+  "GB00B0FVQX23": {
+   "shares": 859720000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/aim/RKH/statistics/",
+   "name": "Rockhopper Exploration",
+   "ticker": "RKH"
+  },
+  "GB0004339189": {
+   "shares": 95090000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/aim/CCP/statistics/",
+   "name": "Celtic",
+   "ticker": "CCP"
+  },
+  "GB0000060532": {
+   "shares": 170600000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/aim/NET/statistics/",
+   "name": "Netcall",
+   "ticker": "NET"
+  },
+  "GB00BSLKLP68": {
+   "shares": 116320000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/aim/BBSN/statistics/",
+   "name": "Brave Bison Group",
+   "ticker": "BBSN"
+  },
+  "GB00BD0CWJ91": {
+   "shares": 12520000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/aim/FIH/statistics/",
+   "name": "FIH Group",
+   "ticker": "FIH"
+  },
+  "GB00BN4M3M55": {
+   "shares": 39910000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/aim/TIA/statistics/",
+   "name": "Tialis Essential IT",
+   "ticker": "TIA"
+  },
+  "FR0012821916": {
+   "shares": 6310000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/ALHYP/statistics/",
+   "name": "HiPay Group",
+   "ticker": "ALHYP"
+  },
+  "FR00140173Y6": {
+   "shares": 2900000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/ALATA/statistics/",
+   "name": "Atari",
+   "ticker": "ALATA"
+  },
+  "PLACTIN00018": {
+   "shares": 12900000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/ACT/statistics/",
+   "name": "Action",
+   "ticker": "ACT"
+  },
+  "PLAMBRA00013": {
+   "shares": 25210000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/AMB/statistics/",
+   "name": "Ambra",
+   "ticker": "AMB"
+  },
+  "PLBEST000010": {
+   "shares": 28590000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/BST/statistics/",
+   "name": "BEST",
+   "ticker": "BST"
+  },
+  "PLCMP0000017": {
+   "shares": 19570000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/CMP/statistics/",
+   "name": "Comp",
+   "ticker": "CMP"
+  },
+  "PL4FNMD00013": {
+   "shares": 4170000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/DIG/statistics/",
+   "name": "Digital Network",
+   "ticker": "DIG"
+  },
+  "PLK2ITR00010": {
+   "shares": 2780000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/FAB/statistics/",
+   "name": "Fabrity",
+   "ticker": "FAB"
+  },
+  "PLLENTX00010": {
+   "shares": 33980000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/LTX/statistics/",
+   "name": "Lentex",
+   "ticker": "LTX"
+  },
+  "PLMSTZB00018": {
+   "shares": 68660000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/MSZ/statistics/",
+   "name": "Mostostal Zabrze",
+   "ticker": "MSZ"
+  },
+  "PLNFI1000012": {
+   "shares": 42110000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/MDI/statistics/",
+   "name": "MDI Energia",
+   "ticker": "MDI"
+  },
+  "PLODRTS00017": {
+   "shares": 13100000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/OTS/statistics/",
+   "name": "OT Logistics",
+   "ticker": "OTS"
+  },
+  "PLPHN0000014": {
+   "shares": 51220000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/PHN/statistics/",
+   "name": "Polski Holding Nieruchomosci",
+   "ticker": "PHN"
+  },
+  "PLSNTFG00017": {
+   "shares": 75620000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/ALG/statistics/",
+   "name": "All in! Games",
+   "ticker": "ALG"
+  },
+  "PLECBDZ00013": {
+   "shares": 2990000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/wse/ECB/statistics/",
+   "name": "ECB (Elektrociepłownia Będzin)",
+   "ticker": "ECB"
+  },
+  "BE0003008019": {
+   "shares": 400000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/ebr/BNB/statistics/",
+   "name": "Banque Nationale de Belgique",
+   "ticker": "BNB"
+  },
+  "NO0010257728": {
+   "shares": 275170000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/osl/HAVI/statistics/",
+   "name": "Havila Shipping",
+   "ticker": "HAVI"
+  },
+  "NO0013601245": {
+   "shares": 142320000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/osl/EAM/statistics/",
+   "name": "EAM Solar",
+   "ticker": "EAM"
+  },
+  "SE0022062055": {
+   "shares": 162990000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/sto/PRISMA/statistics/",
+   "name": "Prisma Properties",
+   "ticker": "PRISMA"
+  },
+  "CH0461929603": {
+   "shares": 5700000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/swx/XLS/statistics/",
+   "name": "Xlife Sciences",
+   "ticker": "XLS"
+  },
+  "IT0005528937": {
+   "shares": 31330000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/ART/statistics/",
+   "name": "Deodato.Gallery",
+   "ticker": "ART"
+  },
+  "FR0010095596": {
+   "shares": 499450000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/ALVIO/statistics/",
+   "name": "Valerio Therapeutics",
+   "ticker": "ALVIO"
+  },
+  "IT0005513202": {
+   "shares": 29080000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/REVO/statistics/",
+   "name": "REVO Insurance",
+   "ticker": "REVO"
+  },
+  "LU0472835155": {
+   "shares": 50150000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/etr/H2A/statistics/",
+   "name": "H2APEX Group",
+   "ticker": "H2A"
+  },
+  "CZ0005135970": {
+   "shares": 4710000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/pra/PRIUA/statistics/",
+   "name": "Primoco UAV",
+   "ticker": "PRIUA"
+  },
+  "DK0064982565": {
+   "shares": 300000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/cph/IG/statistics/",
+   "name": "InstallatørGruppen",
+   "ticker": "IG"
   }
  }
 }
