@@ -9991,26 +9991,6 @@
    "assets": 65897.0,
    "source": "https://stockanalysis.com/quote/sto/WIHL/financials/"
   },
-  "SE0006422390": {
-   "name": "Thule",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 10429.0,
-   "revenuePrev": 9541.0,
-   "operatingProfit": 1664.0,
-   "netIncome": 1114.0,
-   "netIncomePrev": 1122.0,
-   "eps": 10.33,
-   "da": 341.0,
-   "operatingCashFlow": 1132.0,
-   "capex": 348.0,
-   "dividendsPaid": 895.0,
-   "cash": 218.0,
-   "debt": 4274.0,
-   "equity": 7228.0,
-   "assets": 13742.0,
-   "source": "https://stockanalysis.com/quote/sto/THULE/financials/"
-  },
   "NO0010816093": {
    "name": "Elkem",
    "currency": "NOK",
@@ -10085,25 +10065,6 @@
    "assets": 1243.0,
    "source": "https://stockanalysis.com/quote/ebr/FAGR/financials/"
   },
-  "SE0007640156": {
-   "name": "Scandic Hotels",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 22289.0,
-   "revenuePrev": 21959.0,
-   "operatingProfit": 2793.0,
-   "netIncome": 625.0,
-   "netIncomePrev": 643.0,
-   "eps": 2.9,
-   "operatingCashFlow": 6459.0,
-   "capex": 1124.0,
-   "dividendsPaid": 618.0,
-   "cash": 950.0,
-   "debt": 44677.0,
-   "equity": 2968.0,
-   "assets": 52590.0,
-   "source": "https://stockanalysis.com/quote/sto/SHOT/financials/"
-  },
   "NO0010379266": {
    "name": "Bluenord",
    "currency": "USD",
@@ -10138,25 +10099,6 @@
    "equity": 6113.0,
    "assets": 9887.0,
    "source": "https://stockanalysis.com/quote/sto/SYSR/financials/"
-  },
-  "SE0016797732": {
-   "name": "Storskogen",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 33097.0,
-   "revenuePrev": 34182.0,
-   "operatingProfit": 2381.0,
-   "netIncome": 1063.0,
-   "netIncomePrev": -52.0,
-   "eps": 0.63,
-   "operatingCashFlow": 2451.0,
-   "capex": 551.0,
-   "dividendsPaid": 169.0,
-   "cash": 1332.0,
-   "debt": 10844.0,
-   "equity": 20599.0,
-   "assets": 41455.0,
-   "source": "https://stockanalysis.com/quote/sto/STOR.B/financials/"
   },
   "SE0000117970": {
    "name": "NCC",
@@ -10246,24 +10188,6 @@
    "financial": true,
    "source": "https://stockanalysis.com/quote/lon/IHP/financials/"
   },
-  "SE0017160773": {
-   "name": "NCAB",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 3761.0,
-   "revenuePrev": 3623.0,
-   "operatingProfit": 336.14,
-   "netIncome": 206.04,
-   "netIncomePrev": 254.67,
-   "eps": 1.1,
-   "operatingCashFlow": 286.85,
-   "capex": 3.42,
-   "cash": 333.77,
-   "debt": 1158.0,
-   "equity": 1439.0,
-   "assets": 3521.0,
-   "source": "https://stockanalysis.com/quote/sto/NCAB/financials/"
-  },
   "IM00B7S9G985": {
    "name": "Playtech",
    "currency": "EUR",
@@ -10282,25 +10206,6 @@
    "equity": 1384.0,
    "assets": 2208.0,
    "source": "https://stockanalysis.com/quote/lon/PTEC/financials/"
-  },
-  "SE0015962477": {
-   "name": "Nolato",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 9462.0,
-   "revenuePrev": 9664.0,
-   "operatingProfit": 1028.0,
-   "netIncome": 777.0,
-   "netIncomePrev": 658.0,
-   "eps": 2.88,
-   "operatingCashFlow": 1062.0,
-   "capex": 784.0,
-   "dividendsPaid": 404.0,
-   "cash": 482.0,
-   "debt": 1454.0,
-   "equity": 5532.0,
-   "assets": 9282.0,
-   "source": "https://stockanalysis.com/quote/sto/NOLA.B/financials/"
   },
   "BE0003853703": {
    "name": "Montea",
@@ -11293,25 +11198,6 @@
    "assets": 9799.0,
    "source": "https://stockanalysis.com/quote/sto/SDIP.B/financials/"
   },
-  "SE0001852419": {
-   "name": "Lindab",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 12854.0,
-   "revenuePrev": 13323.0,
-   "operatingProfit": 1017.0,
-   "netIncome": 760.0,
-   "netIncomePrev": 315.0,
-   "eps": 9.86,
-   "operatingCashFlow": 1347.0,
-   "capex": 194.0,
-   "dividendsPaid": 416.0,
-   "cash": 447.0,
-   "debt": 4471.0,
-   "equity": 7319.0,
-   "assets": 14629.0,
-   "source": "https://stockanalysis.com/quote/sto/LIAB/financials/"
-  },
   "SE0006342333": {
    "name": "NP3 Fastigheter",
    "currency": "SEK",
@@ -11379,25 +11265,6 @@
    "assets": 67527.0,
    "financial": true,
    "source": "https://stockanalysis.com/quote/sto/NORION/financials/"
-  },
-  "SE0016074249": {
-   "name": "MilDef",
-   "currency": "SEK",
-   "periodEnd": "2025-12-31",
-   "revenue": 2045.0,
-   "revenuePrev": 1201.0,
-   "operatingProfit": 212.1,
-   "netIncome": 147.7,
-   "netIncomePrev": -220.3,
-   "eps": 3.15,
-   "operatingCashFlow": -3.0,
-   "capex": 28.6,
-   "dividendsPaid": 23.5,
-   "cash": 148.6,
-   "debt": 772.8,
-   "equity": 1519.0,
-   "assets": 2907.0,
-   "source": "https://stockanalysis.com/quote/sto/MILDEF/financials/"
   },
   "BE0003883031": {
    "name": "CFE",
@@ -11634,7 +11501,8 @@
    "debt": 35.0,
    "equity": 344.0,
    "assets": 982.0,
-   "source": "https://stockanalysis.com/quote/sto/ENRO/financials/"
+   "source": "https://stockanalysis.com/quote/sto/ENRO/financials/",
+   "override": true
   },
   "BE0974263924": {
    "name": "Texaf",
