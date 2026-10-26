@@ -107,6 +107,18 @@ def check_companies():
                 err(f"{name}: market value €{m:,.0f}M against revenue €{r['revenueEur']:,.0f}M (P/S {ps:.3g}): shares, EPS or price unit is off.")
         if r["pe"] and r["pe"] < 0.5:
             warn(f"{name}: P/E {r['pe']:.2f} is impossible (price {r.get('p_price')}, EPS {r.get('eps')} {r.get('currency')}).")
+        # the misreads found by hand in October 2026: revenue read as 0-1 million (Brunello Cucinelli, REN),
+        # EPS rounded or pre-split (Telecom Italia 0.01, Eniro), EPS positive on a loss (HydrogenPro)
+        if r["pe"] and r["pe"] > 400 and m and m > 100:
+            warn(f"{name}: P/E {r['pe']:,.0f} (price {r.get('p_price')}, EPS {r.get('eps')} {r.get('currency')}): EPS misread, "
+                 f"rounded or from before a share split, unless profit really was tiny.")
+        if m and m > 100 and is_num(r.get("revenueEur")) and 20 < r["revenueEur"] <= 500 and m / r["revenueEur"] > 50:
+            warn(f"{name}: market value €{m:,.0f}M is {m / r['revenueEur']:,.0f}x revenue: share count off (reverse split?).")
+        big = max(v for v in (r.get("operatingProfit"), r.get("netIncome"), 0) if is_num(v))
+        if not r.get("financial") and is_num(r.get("revenue")) and big > 20 and r["revenue"] < 0.02 * big:
+            warn(f"{name}: revenue {r['revenue']} {r.get('currency')}M against profit {big:,.0f}M: revenue misread from the report.")
+        if is_num(r.get("eps")) and is_num(r.get("netIncome")) and r["eps"] * r["netIncome"] < 0 and abs(r["netIncome"]) > 1:
+            warn(f"{name}: EPS {r['eps']} and net income {r['netIncome']} have opposite signs.")
         if is_num(r.get("shares")) and is_num(r.get("eps")) and is_num(r.get("netIncome")) and r["eps"] * r["netIncome"] > 0:
             implied = r["netIncome"] / r["eps"]
             if not 0.6 < implied / r["shares"] < 1.6:
