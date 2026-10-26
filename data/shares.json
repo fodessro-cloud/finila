@@ -3293,6 +3293,237 @@
    "source": "https://stockanalysis.com/quote/cph/AGAT/statistics/",
    "name": "Agat Ejendomme",
    "ticker": "AGAT"
+  },
+  "FR0013153541": {
+   "shares": 38490000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/MDM/statistics/",
+   "name": "Maisons du Monde",
+   "ticker": "MDM"
+  },
+  "FR001400OKR3": {
+   "shares": 400220000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/CO/statistics/",
+   "name": "Plesio",
+   "ticker": "CO"
+  },
+  "FR0000074072": {
+   "shares": 108440000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/NACON/statistics/",
+   "name": "Nacon",
+   "ticker": "NACON"
+  },
+  "FR0010411983": {
+   "shares": 178840000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/SCR/statistics/",
+   "name": "SCOR SE",
+   "ticker": "SCR"
+  },
+  "IT0005572778": {
+   "shares": 417030000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/JUVE/statistics/",
+   "name": "Juventus FC",
+   "ticker": "JUVE"
+  },
+  "GB00B01QGK86": {
+   "shares": 272610000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/NCC/statistics/",
+   "name": "NCC Group",
+   "ticker": "NCC"
+  },
+  "AT0000785555": {
+   "shares": 20570000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/vie/SEM/statistics/",
+   "name": "Semperit",
+   "ticker": "SEM"
+  },
+  "ES01717430J3": {
+   "shares": 134850000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bme/PRS/statistics/",
+   "name": "PRISA",
+   "ticker": "PRS"
+  },
+  "FI4000476783": {
+   "shares": 9840000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/hel/CTH1V/statistics/",
+   "name": "Componenta",
+   "ticker": "CTH1V"
+  },
+  "SE0013647385": {
+   "shares": 70570000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/sto/BICO/statistics/",
+   "name": "BICO Group",
+   "ticker": "BICO"
+  },
+  "GB0033057794": {
+   "shares": 39990000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/DIA/statistics/",
+   "name": "Dialight",
+   "ticker": "DIA"
+  },
+  "NO0010715394": {
+   "shares": 133280000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/osl/AQUA/statistics/",
+   "name": "Aqualis (ABL Group)",
+   "ticker": "AQUA"
+  },
+  "IT0005411209": {
+   "shares": 187460000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/GVS/statistics/",
+   "name": "GVS",
+   "ticker": "GVS"
+  },
+  "GB00B3CX3644": {
+   "shares": 45780000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/STVG/statistics/",
+   "name": "STV Group",
+   "ticker": "STVG"
+  },
+  "FI0009008924": {
+   "shares": 65590000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/hel/KHG/statistics/",
+   "name": "KH Group",
+   "ticker": "KHG"
+  },
+  "NL00150000S7": {
+   "shares": 24710000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/ams/CABKA/statistics/",
+   "name": "Cabka",
+   "ticker": "CABKA"
+  },
+  "FI0009900724": {
+   "shares": 2700000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/hel/BOREO/statistics/",
+   "name": "Boreo",
+   "ticker": "BOREO"
+  },
+  "FI0009900187": {
+   "shares": 80740000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/hel/NLG1V/statistics/",
+   "name": "Nurminen Logistics",
+   "ticker": "NLG1V"
+  },
+  "FI4000150016": {
+   "shares": 21150000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/hel/ROBIT/statistics/",
+   "name": "Robit",
+   "ticker": "ROBIT"
+  },
+  "IT0005445280": {
+   "shares": 25540000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/ABT/statistics/",
+   "name": "Abitare In",
+   "ticker": "ABT"
+  },
+  "IT0005412504": {
+   "shares": 23120000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/CY4/statistics/",
+   "name": "Cy4gate",
+   "ticker": "CY4"
+  },
+  "IT0005634610": {
+   "shares": 19290000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/OLI/statistics/",
+   "name": "Olidata",
+   "ticker": "OLI"
+  },
+  "IT0005117848": {
+   "shares": 322770000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/CLE/statistics/",
+   "name": "Class Editori",
+   "ticker": "CLE"
+  },
+  "IT0004412497": {
+   "shares": 111300000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/bit/B/statistics/",
+   "name": "Bastogi",
+   "ticker": "B"
+  },
+  "FR0010291245": {
+   "shares": 87260000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/epa/VMX/statistics/",
+   "name": "Verimatrix",
+   "ticker": "VMX"
+  },
+  "DK0010263722": {
+   "shares": 540000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/cph/AGF.B/statistics/",
+   "name": "AGF",
+   "ticker": "AGF B"
+  },
+  "NO0010892359": {
+   "shares": 138290000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/osl/HYPRO/statistics/",
+   "name": "HydrogenPro",
+   "ticker": "HYPRO"
+  },
+  "DK0060520450": {
+   "shares": 110380000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/osl/NAPA/statistics/",
+   "name": "Napatech",
+   "ticker": "NAPA"
+  },
+  "DK0060817898": {
+   "shares": 5870000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/cph/GREENM/statistics/",
+   "name": "GreenMobility",
+   "ticker": "GREENM"
+  },
+  "GRS246003008": {
+   "shares": 170780000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/ath/LAVI/statistics/",
+   "name": "Lavipharm",
+   "ticker": "LAVI"
+  },
+  "GB00BMH19X50": {
+   "shares": 27330000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/ALTN/statistics/",
+   "name": "AltynGold",
+   "ticker": "ALTN"
+  },
+  "GB0002349065": {
+   "shares": 43830000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/lon/RE/statistics/",
+   "name": "R.E.A. Holdings",
+   "ticker": "RE"
+  },
+  "DK0010247956": {
+   "shares": 1140000000,
+   "asOf": "2026-10-26",
+   "source": "https://stockanalysis.com/quote/cph/BIF/statistics/",
+   "name": "Brøndby IF",
+   "ticker": "BIF"
   }
  }
 }
