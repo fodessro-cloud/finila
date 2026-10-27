@@ -16,7 +16,7 @@ Deutsche Telekom                   DE DTE      Communication          2025-12-31
 Allianz                            DE ALV      Financials             2025-12-31 rev€=113174.0 ebitda=None fcf=None roe=16.9 F=None None
 Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=97246.6 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
 Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=95157.3 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
-Ahold Delhaize                     NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
+Ahold                              NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
 AXA                                FR CS       Financials             2025-12-31 rev€=91139.0 ebitda=None fcf=None roe=20.8 F=None None
 Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=87940.8 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
 Carrefour Group                    FR CA       Consumer Staples       2025-12-31 rev€=84025.0 ebitda=None fcf=None roe=2.9 F=6 110110101

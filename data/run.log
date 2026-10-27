@@ -169,9 +169,9 @@ ESMA FULINS_E_20261024_02of02.zip: 0 new issuers
 FCA FULINS_E_20261024_01of01.zip: 2152 new issuers
 18568 issuers with listed shares
 4022 issuers with a report for 2024 or later (15 pages)
-38 reports to read, 3984 cached
-read 38 reports this run
-  ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
+36 reports to read, 3986 cached
+read 36 reports this run
+4905 listed companies with an LEI on Wikidata
 18568 issuers with listed shares (FIRDS); 2320 of them file reports here
 shares in issue for 526 companies (data/shares.json)
 annual figures by hand for 603 companies (data/financials.json)
@@ -200,7 +200,7 @@ Deutsche Telekom                   DE DTE      Communication          2025-12-31
 Allianz                            DE ALV      Financials             2025-12-31 rev€=113174.0 ebitda=None fcf=None roe=16.9 F=None None
 Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=97246.6 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
 Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=95157.3 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
-Ahold Delhaize                     NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
+Ahold                              NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
 AXA                                FR CS       Financials             2025-12-31 rev€=91139.0 ebitda=None fcf=None roe=20.8 F=None None
 Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=87940.8 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
 Carrefour Group                    FR CA       Consumer Staples       2025-12-31 rev€=84025.0 ebitda=None fcf=None roe=2.9 F=6 110110101
