@@ -1,5 +1,5 @@
 ok    eurostat: 30 series
-OECD measures: nominal house price indices (4740); price to income ratio (4137); price to rent ratio (4308); real house price indices (4740); rent prices (4819); standardised price-income ratio (2917); standardised price-rent ratio (2838)
+OECD measures: nominal house price indices (4740); price to income ratio (4137); price to rent ratio (4308); real house price indices (4740); rent prices (4820); standardised price-income ratio (2917); standardised price-rent ratio (2838)
 OECD areas not used: AUS Australia, BRA Brazil, CAN Canada, CHL Chile, CHN China (People’s Republic of), COL Colombia, CRI Costa Rica, EA Euro area, EA17 Euro area (17 countries), IDN Indonesia, IND India, ISR Israel, JPN Japan, KOR Korea, MEX Mexico, NZL New Zealand, OECD OECD, RUS Russia, SAU Saudi Arabia, TUR Türkiye, USA United States, ZAF South Africa
 ok    oecd: 5 series
 HICP prc_hicp_minx: HTTP Error 404: Not Found
@@ -7,7 +7,7 @@ ok    hicp_eu: 104 series
 wrote js/housing.json (186 KB), 32 countries, failed: none
   AT 2026-Q2 nominal {'1y': 5.1, '5y': 17.6, '10y': 64.4} real {'1y': 1.5, '5y': -7.9, '10y': 18.8} vsIncome 23.3 vsRent 11.5
   BE 2026-Q2 nominal {'1y': 2.1, '5y': 17.0, '10y': 43.9} real {'1y': -1.6, '5y': -7.9, '10y': 4.7} vsIncome 1.5 vsRent 12.2
-  BG 2026-Q2 nominal {'1y': 15.5, '5y': 94.8, '10y': 168.1} real {'1y': 6.4, '5y': 31.4, '10y': 57.2} vsIncome -14.0 vsRent 32.4
+  BG 2026-Q2 nominal {'1y': 15.5, '5y': 94.8, '10y': 168.1} real {'1y': 6.4, '5y': 31.4, '10y': 57.2} vsIncome -13.7 vsRent 32.4
   HR 2026-Q2 nominal {'1y': 12.7, '5y': 81.2, '10y': 151.4} real {'1y': 7.7, '5y': 34.6, '10y': 74.3} vsIncome 1.6 vsRent 35.6
   CY 2026-Q2 nominal {'1y': 7.9, '5y': 37.2, '10y': 64.7} real None vsIncome None vsRent None
   CZ 2026-Q2 nominal {'1y': 8.6, '5y': 48.6, '10y': 151.1} real {'1y': 6.1, '5y': 8.6, '10y': 58.3} vsIncome 18.7 vsRent 31.6
@@ -28,7 +28,7 @@ wrote js/housing.json (186 KB), 32 countries, failed: none
   PL 2026-Q2 nominal {'1y': 6.3, '5y': 57.5, '10y': 127.3} real {'1y': 3.1, '5y': 13.1, '10y': 44.2} vsIncome -13.4 vsRent 12.8
   PT 2026-Q2 nominal {'1y': 16.5, '5y': 81.1, '10y': 181.9} real {'1y': 13.0, '5y': 47.6, '10y': 116.4} vsIncome 46.8 vsRent 57.1
   RO 2026-Q2 nominal {'1y': 12.1, '5y': 36.2, '10y': 70.8} real {'1y': -0.6, '5y': -9.1, '10y': -3.7} vsIncome -38.4 vsRent -4.9
-  SK 2026-Q2 nominal {'1y': 13.6, '5y': 50.1, '10y': 113.0} real {'1y': 9.3, '5y': 9.0, '10y': 42.1} vsIncome 7.5 vsRent 38.8
+  SK 2026-Q2 nominal {'1y': 13.6, '5y': 50.1, '10y': 113.0} real {'1y': 9.3, '5y': 9.0, '10y': 42.1} vsIncome 7.3 vsRent 38.8
   SI 2026-Q2 nominal {'1y': 9.1, '5y': 57.0, '10y': 127.8} real {'1y': 5.4, '5y': 26.6, '10y': 67.8} vsIncome 7.7 vsRent 7.9
   ES 2026-Q2 nominal {'1y': 12.1, '5y': 53.0, '10y': 91.9} real {'1y': 8.7, '5y': 23.4, '10y': 47.3} vsIncome 16.5 vsRent 39.2
   SE 2026-Q2 nominal {'1y': 4.8, '5y': 4.4, '10y': 30.4} real {'1y': 3.4, '5y': -14.1, '10y': -3.2} vsIncome 5.8 vsRent 21.0
