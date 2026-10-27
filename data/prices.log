@@ -1,12 +1,12 @@
-Daily Xetra file for 2026-10-26: 589 of our shares traded
-Daily Börse Frankfurt file for 2026-10-26: 2207 of our shares traded
-Intraday charts for 2026-10-26: 2207 shares
-Xetra 2026-10-27: 155 minute files waiting, reading the newest 70
-Xetra 2026-10-27: read 70 new minute files, up to DETR-posttrade-2026-10-27T02_34.json.gz
-Börse Frankfurt 2026-10-27: 155 minute files waiting, reading the newest 70
-Börse Frankfurt 2026-10-27: stopped at DFRA-posttrade-2026-10-27T01_25.json.gz (HTTP Error 400: Bad Request); the next run continues from there
+Daily Xetra file for 2026-10-26: 590 of our shares traded
+Daily Börse Frankfurt file for 2026-10-26: 2220 of our shares traded
+Intraday charts for 2026-10-26: 2220 shares
+Xetra 2026-10-27: 164 minute files waiting, reading the newest 70
+Xetra 2026-10-27: read 70 new minute files, up to DETR-posttrade-2026-10-27T05_18.json.gz
+Börse Frankfurt 2026-10-27: 319 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-10-27: read 70 new minute files, up to DFRA-posttrade-2026-10-27T05_18.json.gz
 Intraday charts for 2026-10-27 (trading day in progress): 0 shares
-Fundamentals issuers with a price: 2212 of 2799
+Fundamentals issuers with a price: 2225 of 2828
 Prices for 74 of 77 stocks (closed day 2026-10-26, day in progress 2026-10-27)
   no trades on Xetra or Frankfurt: UNA@Netherlands, ROG@Switzerland, ULVR@UK
   SAP@Germany          DE0007164600 Xetra            2026-10-26 20:10     213.25 trades   9078 change 0.05
