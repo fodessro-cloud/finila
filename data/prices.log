@@ -1,21 +1,22 @@
-Xetra 2026-10-28: stopped at DETR-posttrade-2026-10-28T16_05.json.gz (HTTP Error 400: Bad Request); the next run continues from there
-Xetra 2026-10-28: read 52 new minute files, up to DETR-posttrade-2026-10-28T16_04.json.gz
-Börse Frankfurt 2026-10-28: read 60 new minute files, up to DFRA-posttrade-2026-10-28T16_13.json.gz
+Xetra 2026-10-28: 318 minute files waiting, reading the newest 70
+Xetra 2026-10-28: read 70 new minute files, up to DETR-posttrade-2026-10-28T21_22.json.gz
+Börse Frankfurt 2026-10-28: 309 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-10-28: read 70 new minute files, up to DFRA-posttrade-2026-10-28T21_22.json.gz
 Intraday charts for 2026-10-28 (trading day in progress): 2218 shares
 Fundamentals issuers with a price: 2225 of 2827
 Prices for 74 of 77 stocks (closed day 2026-10-27, day in progress 2026-10-28)
   no trades on Xetra or Frankfurt: UNA@Netherlands, ROG@Switzerland, ULVR@UK
-  SAP@Germany          DE0007164600 Xetra            2026-10-28 16:04      211.7 trades   6882 change -0.31
-  SIE@Germany          DE0007236101 Xetra            2026-10-28 16:04     270.25 trades   4430 change 1.18
-  ALV@Germany          DE0008404005 Xetra            2026-10-28 16:04      434.6 trades   1765 change 0.14
+  SAP@Germany          DE0007164600 Xetra            2026-10-28 20:52     202.55 trades   6909 change -4.62
+  SIE@Germany          DE0007236101 Xetra            2026-10-28 20:51      270.2 trades   4431 change 1.16
+  ALV@Germany          DE0008404005 Xetra            2026-10-28 20:49      435.1 trades   1766 change 0.25
   BASF@Germany         DE000BASF111 Xetra            2026-10-28 16:04     52.675 trades   4853 change 1.45
-  BMW@Germany          DE0005190003 Xetra            2026-10-28 16:04      57.52 trades   2378 change 0.88
-  MBG@Germany          DE0007100000 Xetra            2026-10-28 16:04     40.145 trades   8687 change 0.21
-  DTE@Germany          DE0005557508 Xetra            2026-10-28 16:04      25.08 trades   4139 change -0.04
-  DBK@Germany          DE0005140008 Xetra            2026-10-28 16:04      29.95 trades   9874 change 3.9
-  BAYN@Germany         DE000BAY0017 Xetra            2026-10-28 16:04      45.87 trades   2690 change 0.0
+  BMW@Germany          DE0005190003 Xetra            2026-10-28 20:33      57.32 trades   2379 change 0.53
+  MBG@Germany          DE0007100000 Xetra            2026-10-28 20:28      40.01 trades   8688 change -0.12
+  DTE@Germany          DE0005557508 Xetra            2026-10-28 20:56      25.28 trades   4160 change 0.76
+  DBK@Germany          DE0005140008 Xetra            2026-10-28 20:45     30.075 trades   9876 change 4.34
+  BAYN@Germany         DE000BAY0017 Xetra            2026-10-28 20:15      46.02 trades   2691 change 0.33
   VOW3@Germany         DE0007664039 Xetra            2026-10-28 16:04      69.26 trades   2773 change 0.82
-  IFX@Germany          DE0006231004 Xetra            2026-10-28 16:04      53.52 trades  10840 change 2.12
+  IFX@Germany          DE0006231004 Xetra            2026-10-28 20:50      52.87 trades  10847 change 0.88
   ADS@Germany          DE000A1EWWW0 Xetra            2026-10-28 16:04     158.55 trades   1847 change 0.51
   MUV2@Germany         DE0008430026 Xetra            2026-10-28 16:04      554.2 trades   1475 change -0.07
   HEN3@Germany         DE0006048432 Xetra            2026-10-28 16:02      77.76 trades    727 change -0.26
@@ -30,12 +31,12 @@ Prices for 74 of 77 stocks (closed day 2026-10-27, day in progress 2026-10-28)
   CS@France            FR0000120628 Xetra            2026-10-28 16:03      42.62 trades     67 change 0.19
   RMS@France           FR0000052292 Xetra            2026-10-28 15:34     1265.0 trades     28 change -0.39
   KER@France           FR0000121485 Xetra            2026-10-28 16:04     176.52 trades     20 change -1.67
-  DG@France            FR0000125486 Xetra            2026-10-28 15:39      108.1 trades     25 change -0.51
+  DG@France            FR0000125486 Xetra            2026-10-28 20:45      108.9 trades     26 change 0.23
   CAP@France           FR0000125338 Xetra            2026-10-28 13:02     122.05 trades      8 change -0.45
   RI@France            FR0000120693 Xetra            2026-10-28 16:01      66.14 trades     26 change -0.69
   ORA@France           FR0000133308 Xetra            2026-10-28 15:43     14.275 trades     17 change 0.07
-  ASML@Netherlands     NL0010273215 Xetra            2026-10-28 15:55     1491.6 trades    254 change 1.62
-  SHEL@Netherlands     GB00BP6MXD84 Xetra            2026-10-28 16:02     47.375 trades    191 change 0.5
+  ASML@Netherlands     NL0010273215 Xetra            2026-10-28 20:32     1477.4 trades    255 change 0.65
+  SHEL@Netherlands     GB00BP6MXD84 Xetra            2026-10-28 20:39     46.845 trades    195 change -0.63
   INGA@Netherlands     NL0011821202 Xetra            2026-10-28 15:57     29.425 trades    121 change 0.24
   HEIA@Netherlands     NL0000009165 Xetra            2026-10-28 15:55      78.14 trades     12 change 1.82
   PHIA@Netherlands     NL0000009538 Xetra            2026-10-28 16:01      24.23 trades     66 change 1.68
