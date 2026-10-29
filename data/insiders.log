@@ -1,9 +1,8 @@
-  2026-08-29..2026-09-13: 662 rows
-  2026-09-14..2026-09-28: 706 rows
-  2026-09-29..2026-10-13: 508 rows
-  2026-10-14..2026-10-28: 529 rows
+  2026-08-30..2026-09-14: 685 rows
+  2026-09-15..2026-09-29: 733 rows
+  2026-09-30..2026-10-29: 980 rows
   unmapped columns: ['Notifier', 'Details of amendment']
-2405 transactions; natures: [('Acquisition', 1455), ('Disposal', 379), ('Subscription', 161), ('Allotment', 138), ('Exercise decrease', 79), ('Exercise increase', 75), ('Exchange increase', 29), ('Exchange decrease', 15), ('Internal transaction – Disposal', 11), ('Internal transaction – Acquisition', 11), ('Gift received', 8), ('Conversion decrease', 6)]
+2398 transactions; natures: [('Acquisition', 1445), ('Disposal', 381), ('Subscription', 161), ('Allotment', 138), ('Exercise decrease', 81), ('Exercise increase', 75), ('Exchange increase', 29), ('Exchange decrease', 15), ('Internal transaction – Disposal', 11), ('Internal transaction – Acquisition', 11), ('Gift received', 8), ('Conversion decrease', 6)]
 {"published": "2026-10-28", "issuer": "Sandvik AB", "lei": "5299008ZUAXN43LVZF54", "person": "Helena Stjernholm", "position": "Member of the Board of Directors", "associated": "Yes", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Acquisition", "instrumentType": "Share", "instrument": "Sandvik AB", "isin": "SE0000667891", "date": "2026-10-28", "volume": 300000.0, "unit": "Quantity", "price": 360.0667, "currency": "SEK", "venue": "Outside a trading venue", "status": "Current", "valueEur": 9770261, "signal": false}
 {"published": "2026-10-28", "issuer": "Sandvik AB", "lei": "5299008ZUAXN43LVZF54", "person": "Helena Stjernholm", "position": "Member of the Board of Directors", "associated": "Yes", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Acquisition", "instrumentType": "Share", "instrument": "Sandvik AB", "isin": "SE0000667891", "date": "2026-10-28", "volume": 300261.0, "unit": "Quantity", "price": 358.3967, "currency": "SEK", "venue": "CBOE EUROPE EQUITIES - EUROPEAN EQUITIES (NL)", "status": "Current", "valueEur": 9733407, "signal": true}
 {"published": "2026-10-28", "issuer": "Linjmontage I Grastorp AB", "lei": "54930005660790LWPU08", "person": "Hitesh Kumbhat", "position": "Other senior executive", "associated": "Yes", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Disposal", "instrumentType": "Share", "instrument": "LMGAB", "isin": "SE0030361606", "date": "2026-10-23", "volume": 1877911.0, "unit": "Quantity", "price": 46.0, "currency": "SEK", "venue": "Outside a trading venue", "status": "Current", "valueEur": 7813306, "signal": false}
