@@ -1,11 +1,7 @@
-Daily Xetra file for 2026-10-28: 596 of our shares traded
-Daily Börse Frankfurt file for 2026-10-28: 2218 of our shares traded
-Intraday charts for 2026-10-28: 2218 shares
 Xetra 2026-10-29: 154 minute files waiting, reading the newest 70
-Xetra 2026-10-29: read 70 new minute files, up to DETR-posttrade-2026-10-29T02_33.json.gz
-Börse Frankfurt 2026-10-29: 154 minute files waiting, reading the newest 70
-Börse Frankfurt 2026-10-29: stopped at DFRA-posttrade-2026-10-29T02_30.json.gz (HTTP Error 400: Bad Request); the next run continues from there
-Börse Frankfurt 2026-10-29: read 66 new minute files, up to DFRA-posttrade-2026-10-29T02_29.json.gz
+Xetra 2026-10-29: read 70 new minute files, up to DETR-posttrade-2026-10-29T05_07.json.gz
+Börse Frankfurt 2026-10-29: 158 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-10-29: read 70 new minute files, up to DFRA-posttrade-2026-10-29T05_07.json.gz
 Intraday charts for 2026-10-29 (trading day in progress): 0 shares
 Fundamentals issuers with a price: 2225 of 2827
 Prices for 74 of 77 stocks (closed day 2026-10-28, day in progress 2026-10-29)
