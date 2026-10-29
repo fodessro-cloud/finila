@@ -12,9 +12,12 @@ Prices on a page are those of the build; js/stock-page.js refreshes them from co
 """
 import html
 import json
+import os
 import re
 import sys
+import time
 import unicodedata
+import urllib.request
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -226,12 +229,31 @@ def add_signals(rows):
             c.setdefault('events', []).extend(by_isin[c['isin']].get('events', []))
 
 
-def assign_slugs(rows):
-    """Clean name when unique; same-named companies get their ticker (or country, then LEI) added."""
+def published_slugs():
+    """The addresses already on the site ({lei: slug}). Lub's rule: an address never changes once
+    published, so a company keeps its slug even when a same-named company arrives later."""
+    url = f'{SITE}/js/stock-slugs.json?v={int(time.time())}'
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'FINILA page build'}), timeout=60) as r:
+            return json.load(r)
+    except Exception as e:
+        if os.environ.get('FINILA_NEW_SLUGS') == '1':   # a first build, or a test without the live site
+            return {}
+        sys.exit(f'::error title=Company addresses::cannot read {url} ({e}); without it addresses could change. '
+                 'Set FINILA_NEW_SLUGS=1 only for a build that is not uploaded.')
+
+
+def assign_slugs(rows, known):
+    """Published addresses stay; a new company gets its clean name when free, else the name with its
+    ticker (or country, then LEI) added. Returns every address ever given, dropped companies included,
+    so a later company never takes over an old page."""
+    used = {s: lei for lei, s in known.items()}
     groups = defaultdict(list)
     for c in rows:
-        groups[slugify(c['name'])].append(c)
-    used = {}
+        if c['lei'] in known:
+            c['slug'] = known[c['lei']]
+        else:
+            groups[slugify(c['name'])].append(c)
     for base, cs in sorted(groups.items()):
         for c in sorted(cs, key=lambda c: c['lei']):
             tries = [base] if len(cs) == 1 else []
@@ -240,7 +262,8 @@ def assign_slugs(rows):
                 tries.append(f'{base}-{ticker}')
             tries += [f'{base}-{(c["country"] or "").lower()}', f'{base}-{c["lei"][:8].lower()}', f'{base}-{c["lei"].lower()}']
             c['slug'] = next(s for s in tries if s not in used)
-            used[c['slug']] = c
+            used[c['slug']] = c['lei']
+    return {**known, **{c['lei']: c['slug'] for c in rows}}
 
 
 HEADER = '''<header class="fh">
@@ -502,7 +525,7 @@ def main():
     updated, price_day, rows = companies()
     add_signals(rows)
     add_history(rows)
-    assign_slugs(rows)
+    slugs = assign_slugs(rows, published_slugs())
     out = OUT / 'stock'
     out.mkdir(parents=True, exist_ok=True)
     for old in out.glob('*.html'):
@@ -519,7 +542,7 @@ def main():
         (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp), encoding='utf-8')
     (out / 'index.html').write_text(index_page(rows, updated), encoding='utf-8')
     (OUT / 'js').mkdir(exist_ok=True)
-    (OUT / 'js' / 'stock-slugs.json').write_text(json.dumps({c['lei']: c['slug'] for c in rows}, separators=(',', ':')), encoding='utf-8')
+    (OUT / 'js' / 'stock-slugs.json').write_text(json.dumps(slugs, separators=(',', ':')), encoding='utf-8')
     today = date.today().isoformat()
     # The old articles (archive-site/, served under their original addresses) keep their search ranking.
     old = sorted(f'{SITE}/{p.parent.relative_to(SRC / "archive-site").as_posix()}/' for p in (SRC / 'archive-site').glob('*/**/index.html'))
