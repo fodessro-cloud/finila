@@ -1,7 +1,7 @@
-FINILA data check 2026-10-29 14:38 UTC (live site)
+FINILA data check 2026-10-29 20:30 UTC (live site)
 0 errors, 87 warnings
 
-WARNING BP P.L.C. (GB0007980591): P/E 2,416 (price 7.595, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING BP P.L.C. (GB0007980591): P/E 2,385 (price 7.498, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING DCC (IE0002424939): P/E 450 (price 76.0, EPS 0.1416 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Electrolux (SE0016589188): shares in issue 787.7M but report implies 270.2M.
 WARNING Swatch Group (CH0012255151): P/E 2,928 (price 190.0, EPS 0.06 CHF): EPS misread, rounded or from before a share split, unless profit really was tiny.
@@ -18,9 +18,9 @@ WARNING Allfunds Group PLC (GB00BNTJ3546): P/E 2,526 (price 9.85, EPS 0.0039 EUR
 WARNING Bally'S Intralot Α.Ε. (GRS343313003): EPS 0.073 and net income -65.2 have opposite signs.
 WARNING InstallatørGruppen (DK0064982565): EPS -2.59 and net income 74.9 have opposite signs.
 WARNING Exail Technologies (FR0000062671): P/E 714 (price 125.6, EPS 0.176 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): P/E 520 (price 154.16, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): market value €39,335M is 83x revenue: share count off (reverse split?).
-WARNING Norcros PLC (GB00BYYJL418): P/E 882 (price 3.58, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): P/E 535 (price 158.58, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): market value €40,463M is 85x revenue: share count off (reverse split?).
+WARNING Norcros PLC (GB00BYYJL418): P/E 872 (price 3.54, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING NCC Group (GB00B01QGK86): EPS -0.03 and net income 17.1 have opposite signs.
 WARNING Nacon (FR0000074072): shares in issue 108.4M but report implies 18.6M.
 WARNING Rapala VMC Oyj (FI0009007355): shares in issue 38.5M but report implies 21.3M.
@@ -56,16 +56,16 @@ WARNING AB Sagax (SE0005127818): €5B company has no sector, falls into 'Other'
 WARNING ELIS (FR0012435121): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Reply S.P.A. (IT0005282865): €5B company has no sector, falls into 'Other' on the maps.
 WARNING British Land (GB0001367019): €5B company has no sector, falls into 'Other' on the maps.
+WARNING Soitec (FR0013227113): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Vallourec (FR0013506730): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Persimmon plc (GB0006825383): €5B company has no sector, falls into 'Other' on the maps.
-WARNING Soitec (FR0013227113): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Aalberts N.V. (NL0000852564): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Man Group PLC (JE00BJ1DLW90): €5B company has no sector, falls into 'Other' on the maps.
-WARNING Warehouses De Pauw (BE0974349814): €4B company has no sector, falls into 'Other' on the maps.
 WARNING RS Group plc (GB0003096442): €4B company has no sector, falls into 'Other' on the maps.
+WARNING Warehouses De Pauw (BE0974349814): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Holmen Aktiebolag (SE0011090018): €4B company has no sector, falls into 'Other' on the maps.
-WARNING Deme Group (BE0974413453): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Lagercrantz Group Aktiebolag (SE0014990966): €4B company has no sector, falls into 'Other' on the maps.
+WARNING Deme Group (BE0974413453): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Flughafen Wien AG (AT00000VIE62): €4B company has no sector, falls into 'Other' on the maps.
 WARNING AAK AB (Publ) (SE0011337708): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Arcadis N.V. (NL0006237562): €4B company has no sector, falls into 'Other' on the maps.
