@@ -1,13 +1,231 @@
-Traceback (most recent call last):
-  File "/home/runner/work/finila/finila/scripts/data/map_leis.py", line 93, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/home/runner/work/finila/finila/scripts/data/map_leis.py", line 60, in main
-    ents = all_entities()
-           ^^^^^^^^^^^^^^
-  File "/home/runner/work/finila/finila/scripts/data/map_leis.py", line 47, in all_entities
-    page = get(url)
-           ^^^^^^^^
-  File "/home/runner/work/finila/finila/scripts/data/map_leis.py", line 41, in get
-    raise RuntimeError(f"{url}: {err}")
-RuntimeError: https://filings.xbrl.org/api/entities?page%5Bsize%5D=500&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
+7491 entities on filings.xbrl.org
+SAP     Germany      SAP SE                           [SAP] -> 529900D6BF99LW9R2E68 SAP SE (exact)
+SIE     Germany      Siemens AG                       [SIEMENS] -> W38RGI023J3WT1HWRP32 Siemens Aktiengesellschaft (exact)
+ALV     Germany      Allianz SE                       [ALLIANZ] -> 529900K9B0N5BT694847 Allianz SE (exact)
+BASF    Germany      BASF SE                          [BASF] -> 529900PM64WH8AF1E917 BASF SE (exact)
+BMW     Germany      Bayerische Motoren Werke AG      [BAYERISCHE MOTOREN WERKE] -> none
+MBG     Germany      Mercedes-Benz Group AG           [MERCEDES BENZ] -> none
+DTE     Germany      Deutsche Telekom AG              [DEUTSCHE TELEKOM] -> 549300V9QSIG4WX4GJ96 Deutsche Telekom AG (exact)
+DBK     Germany      Deutsche Bank AG                 [DEUTSCHE BANK] -> 7LTWFZYICNSX8D621K86 DEUTSCHE BANK AKTIENGESELLSCHAFT (exact)
+BAYN    Germany      Bayer AG                         [BAYER] -> 549300J4U55H3WP1XT59 Bayer Aktiengesellschaft (exact)
+VOW3    Germany      Volkswagen AG                    [VOLKSWAGEN] -> 529900NNUPAGGOMPXZ31 VOLKSWAGEN AKTIENGESELLSCHAFT (exact)
+IFX     Germany      Infineon Technologies            [INFINEON TECHNOLOGIES] -> none
+ADS     Germany      Adidas AG                        [ADIDAS] -> 549300JSX0Z4CW0V5023 adidas AG (exact)
+MUV2    Germany      Munich Re                        [MUENCHENER RUECKVERSICHERUNGS] -> none
+HEN3    Germany      Henkel AG                        [HENKEL] -> none
+RWE     Germany      RWE AG                           [RWE] -> none
+CON     Germany      Continental AG                   [CONTINENTAL] -> none
+MC      France       LVMH Moët Hennessy               [LVMH MOET HENNESSY LOUIS VUITTON] -> IOG4E947OATN0KJYSD45 LVMH MOET HENNESSY LOUIS VUITTON (exact)
+TTE     France       TotalEnergies SE                 [TOTALENERGIES] -> 529900S21EQ1BO4ESM68 TotalEnergies SE (exact)
+OR      France       L'Oréal SA                       [L OREAL] -> 529900JI1GG6F7RKVI53 L'OREAL (exact)
+AIR     France       Airbus SE                        [AIRBUS] -> MINO79WLOO247M1IL051 AIRBUS SE (exact)
+BNP     France       BNP Paribas SA                   [BNP PARIBAS] -> R0MUWSFPU8MPRO8K5P83 BNP PARIBAS (exact)
+SAN     France       Sanofi SA                        [SANOFI] -> 549300E9PC51EN656011 SANOFI (exact)
+CS      France       AXA SA                           [AXA] -> F5WCUMTUM4RKZ1MAIE39 AXA (exact)
+RMS     France       Hermès International             [HERMES] -> 969500Y4IJGHJE2MTJ13 HERMES INTERNATIONAL (exact)
+KER     France       Kering SA                        [KERING] -> 549300VGEJKB7SVUZR78 KERING (exact)
+DG      France       Vinci SA                         [VINCI] -> 213800WFQ334R8UXUG83 VINCI (exact)
+CAP     France       Capgemini SE                     [CAPGEMINI] -> 96950077L0TN7BAROX36 CAPGEMINI (exact)
+RI      France       Pernod Ricard SA                 [PERNOD RICARD] -> 52990097YFPX9J0H5D87 PERNOD RICARD (exact)
+ORA     France       Orange SA                        [ORANGE] -> 969500MCOONR8990S771 ORANGE (exact)
+ASML    Netherlands  ASML Holding NV                  [ASML] -> 724500Y6DUVHQD6OXN27 ASML Holding N.V. (exact)
+SHEL    Netherlands  Shell PLC                        [SHELL] -> 21380068P1DRHMJ8KU70 SHELL PLC (exact)
+INGA    Netherlands  ING Groep NV                     [ING] -> 549300NYKK9MWM7GGW15 ING GROEP N.V. (exact)
+HEIA    Netherlands  Heineken NV                      [HEINEKEN] -> 724500M1WJLFM9TYBS04 Heineken Holding N.V. (exact)
+PHIA    Netherlands  Philips NV                       [KONINKLIJKE PHILIPS] -> H1FJE8H61JGM1JSGM897 Koninklijke Philips N.V. (exact)
+UNA     Netherlands  Unilever PLC                     [UNILEVER] -> 549300MKFYEKVRWML317 UNILEVER PLC (exact)
+STLAM   Netherlands  Stellantis NV                    [STELLANTIS] -> 549300LKT9PW7ZIBDF31 STELLANTIS N.V. (exact)
+NESN    Switzerland  Nestlé SA                        -> skipped (no ESEF in Switzerland)
+ROG     Switzerland  Roche Holding AG                 -> skipped (no ESEF in Switzerland)
+NOVN    Switzerland  Novartis AG                      -> skipped (no ESEF in Switzerland)
+ABBN    Switzerland  ABB Ltd                          -> skipped (no ESEF in Switzerland)
+ZURN    Switzerland  Zurich Insurance Group           -> skipped (no ESEF in Switzerland)
+UBSG    Switzerland  UBS Group AG                     -> skipped (no ESEF in Switzerland)
+GIVN    Switzerland  Givaudan SA                      -> skipped (no ESEF in Switzerland)
+AZN     UK           AstraZeneca PLC                  [ASTRAZENECA] -> PY6ZZQWO2IZFZC3IOL08 ASTRAZENECA PLC (exact)
+HSBA    UK           HSBC Holdings PLC                [HSBC] -> MLU0ZO3ML4LN2LL2TL39 HSBC HOLDINGS PLC (exact)
+BP      UK           BP PLC                           [BP] -> 213800LH1BZH3DI6G760 BP P.L.C. (exact)
+GLEN    UK           Glencore PLC                     [GLENCORE] -> 2138002658CPO9NBH955 GLENCORE PLC (exact)
+RIO     UK           Rio Tinto PLC                    [RIO TINTO] -> 213800YOEO5OQ72G2R82 RIO TINTO PLC (exact)
+GSK     UK           GSK PLC                          [GSK] -> 5493000HZTVUYLO1D793 GSK PLC (exact)
+ULVR    UK           Unilever PLC                     [UNILEVER] -> 549300MKFYEKVRWML317 UNILEVER PLC (exact)
+DGE     UK           Diageo PLC                       [DIAGEO] -> 213800ZVIELEA55JMJ32 DIAGEO PLC (exact)
+BARC    UK           Barclays PLC                     [BARCLAYS] -> 213800LBQA1Y9L22JB70 BARCLAYS PLC (exact)
+LLOY    UK           Lloyds Banking Group             [LLOYDS BANKING] -> 549300PPXHEU2JF0AM85 LLOYDS BANKING GROUP PLC (exact)
+ITX     Spain        Industria de Diseño Textil SA    [INDUSTRIA DE DISENO TEXTIL] -> 549300TTCXZOGZM2EY83 INDUSTRIA DE DISEÑO TEXTIL, S.A. (exact)
+IBE     Spain        Iberdrola SA                     [IBERDROLA] -> 5QK37QC7NWOJ8D7WVQ45 IBERDROLA SA (exact)
+SAN     Spain        Banco Santander SA               [BANCO SANTANDER] -> 5493006QMFDDMYWIAM13 BANCO SANTANDER S.A. (exact)
+BBVA    Spain        BBVA SA                          [BANCO BILBAO VIZCAYA ARGENTARIA] -> none
+TEF     Spain        Telefónica SA                    [TELEFONICA] -> 549300EEJH4FEPDBBR25 TELEFONICA SA (exact)
+ENEL    Italy        Enel SpA                         [ENEL] -> WOCMU6HCI0OJWNPRZS33 ENEL - SPA (exact)
+ENI     Italy        Eni SpA                          [ENI] -> BUCRF72VH5RBN7X3VL35 ENI S.P.A. (exact)
+RACE    Italy        Ferrari NV                       [FERRARI] -> 549300RIVY5EX8RCON76 FERRARI N.V. (exact)
+UCG     Italy        UniCredit SpA                    [UNICREDIT] -> none
+ISP     Italy        Intesa Sanpaolo SpA              [INTESA SANPAOLO] -> 2W8N8UU78PMDQKZENC08 INTESA SANPAOLO SPA (exact)
+ATCO    Sweden       Atlas Copco AB                   [ATLAS COPCO] -> 213800T8PC8Q4FYJZR07 ATLAS COPCO AKTIEBOLAG (exact)
+VOLV    Sweden       Volvo AB                         [VOLVO] -> 549300HGV012CNC8JD22 Aktiebolaget Volvo (exact)
+ERICB   Sweden       Ericsson AB                      [TELEFONAKTIEBOLAGET LM ERICSSON] -> 549300W9JLPW15XIFM52 Telefonaktiebolaget LM Ericsson (exact)
+HMB     Sweden       H&M Hennes & Mauritz AB          [H M HENNES MAURITZ] -> 529900O5RR7R39FRDM42 H & M Hennes & Mauritz AB (exact)
+NOVO    Denmark      Novo Nordisk A/S                 [NOVO NORDISK] -> 549300DAQ1CVT6CXN342 NOVO NORDISK A/S (exact)
+MAERSK  Denmark      A.P. Møller - Mærsk A/S          [A P MOLLER MAERSK] -> 549300D2K6PKKKXVNN73 A.P. MØLLER - MÆRSK A/S (exact)
+NOKIA   Finland      Nokia Oyj                        [NOKIA] -> 549300A0JPRWG1KI7U06 Nokia Oyj (exact)
+UCB     Belgium      UCB SA                           [UCB] -> none
+ABI     Belgium      Anheuser-Busch InBev SA          [ANHEUSER BUSCH INBEV] -> 5493008H3828EMEXB082 ANHEUSER-BUSCH INBEV (exact)
+CRH     Ireland      CRH PLC                          [CRH] -> none
+EQNR    Norway       Equinor ASA                      [EQUINOR] -> OW6OFBNCKXC4US5C7523 EQUINOR ASA (exact)
+OMV     Austria      OMV AG                           [OMV] -> 549300V62YJ9HTLRI486 OMV AKTIENGESELLSCHAFT (exact)
+EDP     Portugal     EDP - Energias de Portugal SA    [EDP ENERGIAS DE PORTUGAL] -> none
+PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQREJT74 ORLEN SPÓŁKA AKCYJNA (exact)
+
+matched 58 / 77
+  ! https://filings.xbrl.org/api/entities/7LTWFZYICNSX8D621K86/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800LBQA1Y9L22JB70/filings?page[size]=100: HTTP Error 429: Too Many Requests
+SAP@Germany no usable annual report (0 filings)
+SIE@Germany no usable annual report (0 filings)
+ALV@Germany no usable annual report (0 filings)
+BASF@Germany no usable annual report (0 filings)
+DTE@Germany no usable annual report (0 filings)
+DBK@Germany no usable annual report (0 filings)
+BAYN@Germany no usable annual report (0 filings)
+VOW3@Germany no usable annual report (0 filings)
+ADS@Germany no usable annual report (0 filings)
+        missing ['ebitda', 'fcf']; tagged: ['LVM:AdjustmentsForDepreciationRightOfUseAssets', 'LVM:AdjustmentsForProvisionsAndAdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'LVM:InterestPaidOnLeaseLiabilitiesClassifiedAsOperatingActivities', 'LVM:InterestPaidOtherThanLeaseLiabilitiesClassifiedAsOperatingActivities', 'LVM:OperatingFreeCashFlow', 'LVM:OperatingInvestmentsClassifiedAsInvestingActivities', 'LVM:ProfitLossFromOperatingActivitiesAfterShareOfProfitLossOfAssociatesAndJointVentures', 'LVM:ProfitLossFromOperatingActivitiesAfterShareOfProfitLossOfAssociatesAndJointVenturesInOperatingActivity', 'LVM:ProfitLossFromOperatingActivitiesRecurringIncludingShareOfProfitOfEquityAccountedInvestees', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:Revenue']
+MC@France      2024-12-31 EUR rev=84683.0 ebitda=None net=12550.0 fcf=None roe=18.6 nd/ebitda=None
+        missing ['ebitda']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:MiscellaneousOtherOperatingExpense', 'ifrs-full:MiscellaneousOtherOperatingIncome', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:RevenueFromContractsWithCustomers', 'tot:DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLossTangibleAssetsAndMineralInterests', 'tot:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssets', 'tot:RevenueFromContractsWithCustomersExcludingExciseTax']
+TTE@France     2025-12-31 USD rev=201196.0 ebitda=None net=13127.0 fcf=10390.0 roe=11.4 nd/ebitda=None
+        missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdditionalPaidinCapital', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromDividends']
+OR@France      2025-12-31 EUR rev=44052.0 ebitda=None net=6127.2 fcf=None roe=17.5 nd/ebitda=None
+        missing ['ebitda', 'fcf']; tagged: ['airbus:AdjustmentForChangeInOtherOperatingAssetsAndLiabilities', 'airbus:ChangesInCapitalAndNoncontrollingInterests', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromInterest']
+AIR@France     2025-12-31 EUR rev=73420.0 ebitda=None net=5221.0 fcf=None roe=20.0 nd/ebitda=None
+        missing ['revenue', 'ebitda', 'fcf']; tagged: ['bnpp:GrossOperatingIncomeFromContinuingActivities', 'bnpp:NetIncreaseDecreaseRelatedToAssetsAndLiabilitiesGeneratedByOperatingActivities', 'bnpp:RevenuesFromContinuingActivities', 'bnpp:ShareCapitalAdditionalPaidinCapitalAndRetainedEarnings', 'bnpp:TotalCapitalRetainedEarningsAndNetIncomeForThePeriodAttributableToShareholders', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:MiscellaneousOtherOperatingExpense', 'ifrs-full:MiscellaneousOtherOperatingIncome', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueFromInterest']
+BNP@France     2025-12-31 EUR rev=None ebitda=None net=12225.0 fcf=None roe=9.7 nd/ebitda=None
+SAN@France     2025-12-31 EUR rev=43626.0 ebitda=8120.0 net=7813.0 fcf=7212.0 roe=10.9 nd/ebitda=0.81
+        missing ['ebitda', 'fcf']; tagged: ['axa:CapitalGainNetOfTaxRelatedToTheDisposalOfAxaIM', 'axa:CashFlowsRelatedToOperatingActivitiesNotIncludedInTheProfitBeforeTax', 'axa:NetAmortizationExpenses', 'axa:NetChangeInOperatingReceivablesAndPayables', 'axa:OtherOperatingIncomeAndExpenseIncludingIntangibleImpairment', 'axa:PaidinCapital', 'axa:PurchaseOfTangibleAndIntangibleAssets', 'axa:RealizedCapitalGainsOrLossesOnEquityInstrumentsWithoutRecyclingInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfInvestmentProperty', 'ifrs-full:RepaymentsOfRegulatoryCapitalEquity', 'ifrs-full:Revenue']
+CS@France      2025-12-31 EUR rev=91139.0 ebitda=None net=9797.0 fcf=None roe=20.8 nd/ebitda=None
+RMS@France no usable annual report (0 filings)
+KER@France     2023-12-31 EUR rev=19566.0 ebitda=6466.0 net=2983.0 fcf=1848.0 roe=19.6 nd/ebitda=0.94
+        missing ['fcf']; tagged: ['VINCI:CapitalIncreasesAndReductionsOfSubsidiariesSubscribedByThirdParties', 'VINCI:Revenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'VINCI:Revenuefromcontractswithcustomersotherthanrevenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:FinanceCostsPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsOperatingActivities', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueFromContractsWithCustomers']
+DG@France      2025-12-31 EUR rev=75372.0 ebitda=13570.0 net=4903.0 fcf=None roe=15.9 nd/ebitda=-0.77
+CAP@France     2024-12-31 EUR rev=22096.0 ebitda=3039.0 net=1671.0 fcf=2211.0 roe=14.2 nd/ebitda=None
+        missing ['fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:RevenueFromContractsWithCustomers', 'pernod:VariationDeCapital']
+RI@France      2025-06-30 EUR rev=10959.0 ebitda=3165.0 net=1626.0 fcf=None roe=10.7 nd/ebitda=None
+        missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsToReconcileProfitLossOtherThanChangesInWorkingCapital', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesDiscontinuedOperations', 'ifrs-full:CurrentPayablesForPurchaseOfNoncurrentAssets', 'ifrs-full:DepreciationRightofuseAssets', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:MiscellaneousOtherOperatingExpense', 'ifrs-full:MiscellaneousOtherOperatingIncome', 'ifrs-full:NoncurrentPayablesForPurchaseOfNoncurrentAssets', 'ifrs-full:PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:PurchaseOfInvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:Revenue', 'oran:AdjustmentsForDepreciationAndAmortisationExpenseFinancedAssets', 'oran:AdjustmentsForDepreciationAndAmortisationExpenseRightOfUseAssets', 'oran:AdjustmentsForDepreciationAndAmortisationFixedAssets', 'oran:CapitalIncreaseDecreaseNonControllingInterests', 'oran:DepreciationAndAmortisationFixedAssets', 'oran:DepreciationAndAmortisationPropertyPlantAndEquipmentFinancedAssets', 'oran:InterestPaidClassifiedAsOperatingActivitiesLeaseLiabilities', 'oran:IssueAndPurchaseOfSubordinatedNotes', 'oran:OtherNetCashOutForInterestPaidAndInterestRatesEffectsOnDerivativesNetClassifiedAsOperatingActivities', 'oran:ProfitLossFromOperatingActivitiesIncludingShareOfProfitLossOfAssociatesAndJointVenturesAccountedForUsingEquityMethod', 'oran:PurchaseOfFinancedAssets', 'oran:PurchaseOfTelecommunicationLicense']
+ORA@France     2024-12-31 EUR rev=40260.0 ebitda=None net=2350.0 fcf=None roe=7.4 nd/ebitda=None
+ASML@Netherlands 2025-12-31 EUR rev=32667.3 ebitda=13486.8 net=10213.0 fcf=11116.1 roe=42.2 nd/ebitda=-0.63
+        missing ['ebitda']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsOperatingActivities', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:PurchaseOfOtherLongtermAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:Revenue', 'shel:CashOutflowForTotalCashCapitalExpenditure', 'shel:ProceedsFromJointVenturesAndAssociatesFromSaleCapitalReductionAndRepaymentOfLongTermLoans', 'shel:RevenueAndOtherIncome']
+SHEL@Netherlands 2025-12-31 USD rev=266886.0 ebitda=None net=17837.0 fcf=21948.0 roe=10.2 nd/ebitda=None
+        missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:InterestRevenueCalculatedUsingEffectiveInterestMethod', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:OperatingExpense', 'ifrs-full:PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromInterest', 'ing:NetInterestReceivedPaidClassifiedAsOperatingActivities', 'ing:OtherOperatingExpenses', 'ing:PurchaseOfOtherInvestments', 'ing:PurchaseOfSecuritiesAtAmortizedCost', 'ing:ShareCapitalAndSharePremium']
+INGA@Netherlands 2025-12-31 EUR rev=23035.0 ebitda=None net=6327.0 fcf=None roe=12.7 nd/ebitda=None
+HEIA@Netherlands 2025-12-31 EUR rev=34257.0 ebitda=6015.0 net=952.0 fcf=2610.0 roe=11.0 nd/ebitda=2.4
+        missing ['fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:RevenueFromContractsWithCustomers', 'phia:DividendsReceivedFromInvestmentsInAssociatesClassifiedAsOperatingActivities', 'phia:NetCapitalExpenditures']
+PHIA@Netherlands 2025-12-31 EUR rev=17834.0 ebitda=2549.0 net=895.0 fcf=None roe=8.2 nd/ebitda=1.62
+UNA@Netherlands 2025-12-31 EUR rev=50503.0 ebitda=10390.0 net=9469.0 fcf=6759.0 roe=61.0 nd/ebitda=None
+        missing ['fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:Revenue', 'stellantis:CashFlowsUsedInObtainingControlOfSubsidiariesOrOtherBusinessesAndPurchaseOfInterestAccountedForUsingEquityMethodClassifiedAsInvestingActivities', 'stellantis:ProceedsPaymentsFromSalePurchaseOfTreasuryShares']
+STLAM@Netherlands 2025-12-31 EUR rev=153508.0 ebitda=-19273.0 net=-22368.0 fcf=None roe=-41.8 nd/ebitda=None
+AZN@UK         2025-12-31 USD rev=58739.0 ebitda=19476.0 net=10225.0 fcf=8670.0 roe=21.0 nd/ebitda=0.98
+        missing ['revenue', 'ebitda', 'fcf']; tagged: ['group:AmortisationAndImpairmentReversalOfImpairmentRecognisedInProfitOrLossIntangibleAssetsOtherThanGoodwill', 'group:IncreaseDecreaseThroughTransferBetweenCapitalRedemptionReservesAndRetainedEarningsEquity', 'group:NetOperatingIncome', 'group:ProceedsPaymentsFromSalePurchaseOfTreasuryShares', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DepreciationPropertyPlantAndEquipment', 'ifrs-full:DepreciationRightofuseAssets', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseThroughInsuranceRevenueInsuranceContractsLiabilityAsset', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:InterestRevenueForFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncome', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueAndOperatingIncome', 'ifrs-full:RevenueFromInterest']
+HSBA@UK        2025-12-31 USD rev=None ebitda=None net=23131.0 fcf=None roe=11.7 nd/ebitda=None
+BP@UK          2025-12-31 USD rev=192549.0 ebitda=30464.0 net=55.0 fcf=11272.0 roe=0.1 nd/ebitda=0.7
+        missing ['ebitda']; tagged: ['glencoreplc:PurchaseOfInvestments', 'glencoreplc:StatedCapital', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromDividends', 'ifrs-full:RevenueFromInterest']
+GLEN@UK        2025-12-31 USD rev=247535.0 ebitda=None net=363.0 fcf=-290.0 roe=0.9 nd/ebitda=None
+RIO@UK         2025-12-31 USD rev=57638.0 ebitda=21513.0 net=9966.0 fcf=4497.0 roe=16.0 nd/ebitda=0.61
+        missing ['ebitda']; tagged: ['ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:RevenueFromRoyalties', 'ifrs-full:RevenueFromSaleOfGoods']
+GSK@UK         2025-12-31 GBP rev=32667.0 ebitda=None net=5716.0 fcf=4756.0 roe=34.9 nd/ebitda=None
+ULVR@UK        2025-12-31 EUR rev=50503.0 ebitda=10390.0 net=9469.0 fcf=6759.0 roe=61.0 nd/ebitda=None
+DGE@UK         2026-06-30 USD rev=27762.0 ebitda=5636.0 net=1958.0 fcf=3195.0 roe=18.0 nd/ebitda=3.11
+BARC@UK no usable annual report (0 filings)
+        missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables', 'ifrs-full:AdjustmentsForIncreaseDecreaseInOtherOperatingPayables', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesRefundClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromInterest', 'lyg:OtherOperatingIncomeExpenseNetInvestmentReturnAndFinanceResultInRespectOfInsuranceAndInvestmentContracts', 'lyg:OtherOperatingIncomeExpenseNetInvestmentReturnOnAssetsHeldToBackInsuranceAndInvestmentContracts']
+LLOY@UK        2025-12-31 GBP rev=19422.0 ebitda=None net=4659.0 fcf=None roe=9.8 nd/ebitda=None
+ITX@Spain      2026-01-31 EUR rev=39864.0 ebitda=11267.0 net=6220.0 fcf=6520.0 roe=30.5 nd/ebitda=-0.47
+IBE@Spain      2025-12-31 EUR rev=44076.0 ebitda=15558.0 net=6285.0 fcf=3317.0 roe=12.6 nd/ebitda=None
+        missing ['revenue', 'ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:AdjustmentsToReconcileProfitLossOtherThanChangesInWorkingCapital', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DepreciationAndAmortisationExpense', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:IssuedCapital', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfInterestsInInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueFromDividends', 'ifrs-full:RevenueFromInterest', 'san:CapitalDesembolsado', 'san:CapitalNoDesembolsadoExigido']
+SAN@Spain      2025-12-31 EUR rev=None ebitda=None net=14101.0 fcf=None roe=12.5 nd/ebitda=None
+        missing ['fcf']; tagged: ['ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesDiscontinuedOperations', 'ifrs-full:DepreciationAndAmortisationExpense', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:Revenue', 'tef:PagoscobrosPorReduccionampliacionDeCapitalDeInteresesMinoritarios']
+TEF@Spain      2025-12-31 EUR rev=35120.0 ebitda=8683.0 net=-4318.0 fcf=None roe=-30.3 nd/ebitda=None
+ENEL@Italy     2024-12-31 EUR rev=73914.0 ebitda=22743.0 net=7016.0 fcf=3057.0 roe=20.8 nd/ebitda=2.44
+ENI@Italy      2025-12-31 EUR rev=82151.0 ebitda=12359.0 net=2608.0 fcf=4101.0 roe=5.4 nd/ebitda=1.37
+RACE@Italy     2025-12-31 EUR rev=7145.8 ebitda=2771.7 net=1596.9 fcf=1406.1 roe=40.9 nd/ebitda=0.51
+        missing ['revenue', 'ebitda', 'fcf']; tagged: ['ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:InterestRevenueCalculatedUsingEffectiveInterestMethod', 'ifrs-full:IssuedCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:RevenueFromDividends', 'isp:CashFlowsFromUsedInFinancialAssetsClassifiedAsOperatingactivities', 'isp:CashFlowsFromUsedInFinancialLiabilitiesClassifiedAsOperatingactivities', 'isp:CashFlowsFromUsedInFinancialLiabilitiesClassifiedAsOperatingactivitiesCashFlows', 'isp:CashFlowsFromUsedInFinancialLiabilitiesClassifiedAsOperatingactivitiesFairValueChanges', 'isp:CashFlowsFromUsedInFinancialLiabilitiesClassifiedAsOperatingactivitiesOtherChanges', 'isp:DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLossIntangibleAssetsOtherThanGoodwill', 'isp:DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLossTangibleAssets', 'isp:InterestIncomeAndSimilarRevenues', 'isp:OperatingCosts', 'isp:OtherInflowsOutflowsFromIssuePurchaseOfEquityinstruments', 'isp:OtherInflowsOutflowsFromIssuePurchaseOfTreasuryshares', 'isp:PurchaseOfTangibleAssetsClassifiedAsInvestingactivities']
+ISP@Italy      2022-12-31 EUR rev=None ebitda=None net=4354.0 fcf=None roe=None nd/ebitda=None
+ATCO@Sweden    2025-12-31 SEK rev=168343.0 ebitda=43643.0 net=26420.0 fcf=26379.0 roe=24.0 nd/ebitda=None
+        missing ['ebitda', 'fcf']; tagged: ['abvolvo:OperatingCashFlow', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromInterest']
+VOLV@Sweden    2025-12-31 SEK rev=479183.0 ebitda=None net=34456.0 fcf=None roe=19.3 nd/ebitda=None
+        missing ['ebitda']; tagged: ['eric:AdjustmentsForDecreaseIncreaseInOtherOperatingAssetsAndLiabilitiesNet', 'eric:CapitalizedDevelopmentExpenses', 'ifrs-full:AdditionalPaidinCapital', 'ifrs-full:AdjustmentsToReconcileProfitLossOtherThanChangesInWorkingCapital', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:RevenueFromContractsWithCustomers']
+ERICB@Sweden   2025-12-31 SEK rev=236681.0 ebitda=None net=28428.0 fcf=29186.0 roe=26.0 nd/ebitda=None
+HMB@Sweden     2025-11-30 SEK rev=228285.0 ebitda=39535.0 net=12158.0 fcf=21880.0 roe=28.3 nd/ebitda=None
+NOVO@Denmark   2025-12-31 DKK rev=309064.0 ebitda=149640.0 net=102434.0 fcf=28989.0 roe=52.8 nd/ebitda=0.62
+MAERSK@Denmark 2025-12-31 USD rev=53988.0 ebitda=10171.0 net=2725.0 fcf=4962.0 roe=4.9 nd/ebitda=-0.31
+        missing ['ebitda']; tagged: ['ifrs-full:AdjustmentsForDepreciationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfInterestsInAssociates', 'ifrs-full:PurchaseOfInvestmentsOtherThanInvestmentsAccountedForUsingEquityMethod', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:RevenueFromContractsWithCustomers']
+NOKIA@Finland  2025-12-31 EUR rev=19889.0 ebitda=None net=651.0 fcf=1465.0 roe=3.1 nd/ebitda=None
+ABI@Belgium    2025-12-31 USD rev=59320.0 ebitda=21057.0 net=6837.0 fcf=11227.0 roe=7.8 nd/ebitda=2.91
+EQNR@Norway    2025-12-31 USD rev=106462.0 ebitda=37670.0 net=5043.0 fcf=5977.0 roe=12.5 nd/ebitda=0.6
+        missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesDiscontinuedOperations', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:IssuedCapital', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromDividends', 'ifrs-full:RevenueFromInterest', 'omvag:ComprehensiveIncomeThereofAttributableToHybridCapitalOwners', 'omvag:ComprehensiveIncomeThereofAttributableToStockholdersOfTheParentExcludingHybridCapitalOwners', 'omvag:DecreaseHybridCapital', 'omvag:HybridCapital', 'omvag:IncreaseHybridCapital', 'omvag:ProductionAndOperatingExpenses', 'omvag:ProfitLossThereofAttributableToHybridCapitalOwners', 'omvag:ProfitLossThereofAttributableToStockholdersOfTheParentExcludingHybridCapitalOwners', 'omvag:TotalRevenuesAndOtherIncome']
+OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.3 nd/ebitda=None
+PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
+
+47 companies with real fundamentals
+ESMA FULINS_E_20261024_01of02.zip: 16416 new issuers
+ESMA FULINS_E_20261024_02of02.zip: 0 new issuers
+FCA FULINS_E_20261024_01of01.zip: 2152 new issuers
+18568 issuers with listed shares
+  ! https://filings.xbrl.org/api/filings?include=entity&page%5Bsize%5D=500&sort=-period_end&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
+2668 issuers with a report for 2024 or later (10 pages)
+141 reports to read, 2527 cached
+read 141 reports this run
+  ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
+18568 issuers with listed shares (FIRDS); 2176 of them file reports here
+shares in issue for 525 companies (data/shares.json)
+annual figures by hand for 560 companies (data/financials.json)
+Wikidata by ISIN/LEI: labels for 1640 of 3596 keys
+sector found for 728 of 1798 without a Wikidata industry: {'wikidata': 329, 'bank': 63, 'name': 336}
+earnings per share moved by powers of ten for 37 companies, dropped for 7 (checked against the price)
+shares in issue from the annual report for 1898 more companies
+shared ISINs taken from 0 companies (kept by the larger one)
+hand-checked fixes for 139 companies (data/fixes.json)
+2718 companies with figures, 160 without usable figures
+with ticker: 1089, with sector: 1727
+with F-score: 1769, F-score 8-9: 106, with dividend cover: 1079
+by country: GB 532, SE 346, FR 231, DE 195, IT 158, NO 153, PL 140, FI 131, ES 121, DK 121, NL 110, GR 102, BE 76, AT 54, CH 53, MT 29, IE 28, PT 28, IS 24, LT 19, LU 18, CZ 12, SI 10, CY 6, SK 6, RO 5, HR 4, LV 3, HU 2, BG 1
+
+largest 40 by revenue:
+Volkswagen                         DE VOW3     Consumer Discretionary 2025-12-31 rev€=321913.0 ebitda=25836.0 fcf=-290.0 roe=3.5 F=None None
+Shell PLC                          GB SHEL     Energy                 2025-12-31 rev€=239725.1 ebitda=None fcf=21948.0 roe=10.2 F=5 1111001-0
+Glencore PLC                       GB GLEN     Materials              2025-12-31 rev€=222343.5 ebitda=None fcf=-290.0 roe=0.9 F=6 1111101-0
+TotalEnergies SE                   FR TTE      Energy                 2025-12-31 rev€=180720.4 ebitda=None fcf=10390.0 roe=11.4 F=4 1101001-0
+BP P.L.C.                          GB BP       Energy                 2025-12-31 rev€=172953.4 ebitda=30464.0 fcf=11272.0 roe=0.1 F=6 1101011-1
+Stellantis N.V.                    NL STLAM    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
+BMW                                DE BMW      Consumer Discretionary 2025-12-31 rev€=133453.0 ebitda=16651.0 fcf=-2735.0 roe=7.6 F=None None
+Mercedes-Benz Group                DE MBG      Consumer Discretionary 2025-12-31 rev€=132214.0 ebitda=11778.0 fcf=12524.0 roe=5.5 F=None None
+Deutsche Telekom                   DE DTE      Communication          2025-12-31 rev€=121816.0 ebitda=47389.0 fcf=28313.0 roe=15.5 F=None None
+Allianz                            DE ALV      Financials             2025-12-31 rev€=113174.0 ebitda=None fcf=None roe=16.9 F=None None
+Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=97204.5 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
+Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=95627.4 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
+Ahold                              NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
+AXA                                FR CS       Financials             2025-12-31 rev€=91139.0 ebitda=None fcf=None roe=20.8 F=None None
+Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=87977.6 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
+Carrefour Group                    FR CA       Consumer Staples       2025-12-31 rev€=84025.0 ebitda=None fcf=None roe=2.9 F=6 110110101
+DHL Group                          DE DHL      Industrials            2025-12-31 rev€=83433.0 ebitda=10139.0 fcf=6324.0 roe=15.8 F=None None
+ENI S.P.A.                         IT ENI      Energy                 2025-12-31 rev€=82151.0 ebitda=12359.0 fcf=4101.0 roe=5.4 F=5 11110-1-0
+LVMH                               FR MC       Consumer Discretionary 2025-12-31 rev€=80807.0 ebitda=23756.0 fcf=14307.0 roe=16.1 F=5 110101100
+Christian Dior                     FR CDI      Consumer Discretionary 2025-12-31 rev€=80807.0 ebitda=23813.0 fcf=14293.0 roe=18.5 F=None None
+Enel                               IT ENEL     Utilities              2025-12-31 rev€=79394.0 ebitda=None fcf=5420.0 roe=12.3 F=5 11110-1-0
+Siemens                            DE SIE      Industrials            2025-09-30 rev€=78914.0 ebitda=12299.0 fcf=10812.0 roe=15.5 F=None None
+E.ON                               DE EOAN     Utilities              2025-12-31 rev€=78704.0 ebitda=None fcf=-937.0 roe=9.0 F=None None
+Vinci                              FR DG       Industrials            2025-12-31 rev€=75372.0 ebitda=13570.0 fcf=None roe=15.9 F=5 1101--1-1
+Airbus SE                          NL AIR      Industrials            2025-12-31 rev€=73420.0 ebitda=None fcf=None roe=20.0 F=None None
+Uniper                             DE UN01     Utilities              2025-12-31 rev€=72793.0 ebitda=1442.0 fcf=-1588.0 roe=11.8 F=None None
+Engie                              FR ENGI     Utilities              2025-12-31 rev€=71944.0 ebitda=13683.0 fcf=-8743.0 roe=11.6 F=4 1010001-1
+Roche                              CH ROG      Healthcare             2025-12-31 rev€=68515.2 ebitda=24344.0 fcf=15104.0 roe=38.1 F=None None
+Accenture                          IE ACN      Technology             2026-08-31 rev€=66633.4 ebitda=13419.0 fcf=11620.25 roe=26.5 F=None None
+Zurich Insurance                   CH ZURN     Financials             2025-12-31 rev€=65645.4 ebitda=None fcf=None roe=23.8 F=None None
+Munich Re                          DE MUV2     Financials             2025-12-31 rev€=62313.0 ebitda=None fcf=None roe=18.4 F=None None
+Orlen                              PL PKN      Energy                 2025-12-31 rev€=60807.6 ebitda=39144.0 fcf=20536.0 roe=1.8 F=None None
+BASF                               DE BAS      Materials              2025-12-31 rev€=59657.0 ebitda=6053.0 fcf=1343.0 roe=4.9 F=None None
+Renault                            FR RNO      Consumer Discretionary 2025-12-31 rev€=57922.0 ebitda=-3628.0 fcf=-705.0 roe=-52.6 F=4 0101-01-1
+Assicurazioni Generali             IT G        Financials             2025-12-31 rev€=57803.0 ebitda=None fcf=None roe=13.0 F=None None
+Bouygues                           FR EN       Industrials            2025-12-31 rev€=56877.0 ebitda=5291.0 fcf=3592.0 roe=8.7 F=5 11011-1-0
+ArcelorMittal                      LU MT       Materials              2025-12-31 rev€=55108.2 ebitda=4612.0 fcf=471.0 roe=5.8 F=None None
+Repsol SA                          ES REP      Energy                 2025-12-31 rev€=54421.0 ebitda=5148.0 fcf=1619.0 roe=6.9 F=7 1111-11-1
+Chubb                              CH CB       Financials             2025-12-31 rev€=53557.0 ebitda=None fcf=None roe=14.0 F=None None
+Anheuser-Busch InBev               BE ABI      Consumer Staples       2025-12-31 rev€=53283.0 ebitda=21057.0 fcf=11227.0 roe=7.8 F=8 111111110
