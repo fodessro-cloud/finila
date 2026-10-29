@@ -10,4 +10,4 @@ Traceback (most recent call last):
            ^^^^^^^^
   File "/home/runner/work/finila/finila/scripts/data/map_leis.py", line 41, in get
     raise RuntimeError(f"{url}: {err}")
-RuntimeError: https://filings.xbrl.org/api/entities?page[size]=500: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>
+RuntimeError: https://filings.xbrl.org/api/entities?page%5Bsize%5D=500&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
