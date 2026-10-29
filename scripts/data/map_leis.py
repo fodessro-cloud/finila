@@ -31,13 +31,19 @@ def norm(s):
 
 
 def get(url):
-    for attempt in range(4):
+    # filings.xbrl.org answers 429 Too Many Requests or drops the connection when busy (28-29 Oct 2026):
+    # wait a minute or more instead of a few seconds, as the Retry-After header asks
+    for attempt in range(6):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
                 return json.load(r)
         except Exception as e:
             err = e
-            time.sleep(3 * (attempt + 1))
+            wait = 3 * (attempt + 1)
+            if getattr(e, "code", None) == 429 or "EOF" in str(e):
+                ra = (getattr(e, "headers", None) or {}).get("Retry-After") or ""
+                wait = max(60 * (attempt + 1), int(ra) if ra.isdigit() else 0)
+            time.sleep(min(wait, 300))
     raise RuntimeError(f"{url}: {err}")
 
 
@@ -45,6 +51,7 @@ def all_entities():
     out, url = [], f"{BASE}/api/entities?page[size]=500"
     while url:
         page = get(url)
+        time.sleep(1)   # politely, one page a second
         out += [(e["attributes"]["identifier"], e["attributes"]["name"]) for e in page["data"]]
         nxt = page.get("links", {}).get("next")
         url = (nxt if nxt.startswith("http") else BASE + nxt) if nxt else None
