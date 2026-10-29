@@ -3,10 +3,10 @@ ok    eur1m    333 months from 1999-01, latest {'date': '2026-09', 'value': 2.41
 ok    eur3m    333 months from 1999-01, latest {'date': '2026-09', 'value': 2.635}
 ok    eur6m    333 months from 1999-01, latest {'date': '2026-09', 'value': 2.922}
 ok    eur12m   333 months from 1999-01, latest {'date': '2026-09', 'value': 3.247}
-ok    gov2y    266 months from 2004-09, latest {'date': '2026-10-27', 'value': 3.227}
-ok    gov5y    266 months from 2004-09, latest {'date': '2026-10-27', 'value': 3.569}
-ok    gov10y   266 months from 2004-09, latest {'date': '2026-10-27', 'value': 4.03}
-ok    aaa10y   266 months from 2004-09, latest {'date': '2026-10-27', 'value': 3.371}
+ok    gov2y    266 months from 2004-09, latest {'date': '2026-10-28', 'value': 3.272}
+ok    gov5y    266 months from 2004-09, latest {'date': '2026-10-28', 'value': 3.615}
+ok    gov10y   266 months from 2004-09, latest {'date': '2026-10-28', 'value': 4.049}
+ok    aaa10y   266 months from 2004-09, latest {'date': '2026-10-28', 'value': 3.393}
 ok    corp     333 months from 1999-01, latest {'date': '2026-09', 'value': 4.46}
 ok    dep1y    320 months from 2000-01, latest {'date': '2026-08', 'value': 2.13}
 wrote js/rates.json (20 KB), failed: none
