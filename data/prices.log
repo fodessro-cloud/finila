@@ -1,5 +1,7 @@
-Xetra 2026-10-30: read 55 new minute files, up to DETR-posttrade-2026-10-30T17_00.json.gz
-Börse Frankfurt 2026-10-30: read 55 new minute files, up to DFRA-posttrade-2026-10-30T17_00.json.gz
+Xetra 2026-10-30: 300 minute files waiting, reading the newest 70
+Xetra 2026-10-30: read 70 new minute files, up to DETR-posttrade-2026-10-30T22_00.json.gz
+Börse Frankfurt 2026-10-30: 300 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-10-30: read 70 new minute files, up to DFRA-posttrade-2026-10-30T22_00.json.gz
 Intraday charts for 2026-10-30 (trading day in progress): 2163 shares
 Fundamentals issuers with a price: 2171 of 2718
 Prices for 74 of 77 stocks (closed day 2026-10-29, day in progress 2026-10-30)
@@ -10,11 +12,11 @@ Prices for 74 of 77 stocks (closed day 2026-10-29, day in progress 2026-10-30)
   BASF@Germany         DE000BASF111 Xetra            2026-10-30 16:42      53.21 trades   2759 change -0.06
   BMW@Germany          DE0005190003 Xetra            2026-10-30 16:36       57.8 trades   1745 change 0.28
   MBG@Germany          DE0007100000 Xetra            2026-10-30 16:54     40.615 trades   6515 change 0.23
-  DTE@Germany          DE0005557508 Xetra            2026-10-30 16:51       26.1 trades   3566 change 2.03
+  DTE@Germany          DE0005557508 Xetra            2026-10-30 20:58       26.0 trades   3568 change 1.64
   DBK@Germany          DE0005140008 Xetra            2026-10-30 16:55     30.025 trades   4713 change -3.16
   BAYN@Germany         DE000BAY0017 Xetra            2026-10-30 16:58      50.34 trades   5946 change 5.18
   VOW3@Germany         DE0007664039 Xetra            2026-10-30 16:40      70.24 trades   2381 change -0.28
-  IFX@Germany          DE0006231004 Xetra            2026-10-30 16:55       50.2 trades  11455 change -5.5
+  IFX@Germany          DE0006231004 Xetra            2026-10-30 20:59      50.94 trades  11456 change -4.1
   ADS@Germany          DE000A1EWWW0 Xetra            2026-10-30 16:36     168.55 trades   3787 change 0.84
   MUV2@Germany         DE0008430026 Xetra            2026-10-30 16:39      567.0 trades   2131 change 1.87
   HEN3@Germany         DE0006048432 Xetra            2026-10-30 16:53       80.2 trades   1515 change 1.93
