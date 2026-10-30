@@ -1,5 +1,5 @@
 2718 companies with figures, 160 without usable figures
-with ticker: 1089, with sector: 1727
+with ticker: 1090, with sector: 1727
 with F-score: 1769, F-score 8-9: 106, with dividend cover: 1079
 by country: GB 532, SE 346, FR 231, DE 195, IT 158, NO 153, PL 140, FI 131, ES 121, DK 121, NL 110, GR 102, BE 76, AT 54, CH 53, MT 29, IE 28, PT 28, IS 24, LT 19, LU 18, CZ 12, SI 10, CY 6, SK 6, RO 5, HR 4, LV 3, HU 2, BG 1
 
