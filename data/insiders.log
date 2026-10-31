@@ -1,9 +1,8 @@
-  2026-08-31..2026-09-15: 744 rows
-  2026-09-16..2026-09-30: 711 rows
-  2026-10-01..2026-10-15: 446 rows
-  2026-10-16..2026-10-30: 562 rows
+  2026-09-01..2026-09-16: 764 rows
+  2026-09-17..2026-10-01: 663 rows
+  2026-10-02..2026-10-31: 945 rows
   unmapped columns: ['Notifier', 'Details of amendment']
-2463 transactions; natures: [('Acquisition', 1480), ('Disposal', 393), ('Subscription', 163), ('Allotment', 144), ('Exercise decrease', 89), ('Exercise increase', 75), ('Exchange increase', 29), ('Exchange decrease', 15), ('Internal transaction – Disposal', 11), ('Internal transaction – Acquisition', 11), ('Gift received', 8), ('Conversion decrease', 6)]
+2372 transactions; natures: [('Acquisition', 1428), ('Disposal', 366), ('Subscription', 161), ('Allotment', 140), ('Exercise decrease', 88), ('Exercise increase', 74), ('Exchange increase', 29), ('Exchange decrease', 15), ('Internal transaction – Disposal', 11), ('Internal transaction – Acquisition', 11), ('Conversion decrease', 6), ('Gift received', 6)]
 {"published": "2026-10-30", "issuer": "NCAB Group AB (publ)", "lei": "549300RUPCK2N43ES354", "person": "Christian Salamon", "position": "Chairman of the Board of Directors", "associated": "Yes", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Disposal", "instrumentType": "Share", "instrument": "NCAB Group AB", "isin": "SE0017160773", "date": "2026-10-29", "volume": 400000.0, "unit": "Quantity", "price": 89.25, "currency": "SEK", "venue": "NASDAQ STOCKHOLM AB", "status": "Current", "valueEur": 3251958, "signal": true}
 {"published": "2026-10-30", "issuer": "BONESUPPORT HOLDING AB", "lei": "549300COLY053IGTLD63", "person": "Michael Diefenbeck", "position": "Other member of the company's administrative, management or supervisory body", "associated": "", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Disposal", "instrumentType": "Share", "instrument": "BONESUPPORT HOLDING AB", "isin": "SE0009858152", "date": "2026-10-29", "volume": 20000.0, "unit": "Quantity", "price": 316.39, "currency": "SEK", "venue": "NASDAQ STOCKHOLM AB", "status": "Current", "valueEur": 576407, "signal": true}
 {"published": "2026-10-30", "issuer": "Nordnet AB", "lei": "549300D6WW5ZTWLZ4C08", "person": "Lars-Åke Norling", "position": "Member of the Board of Directors", "associated": "", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Disposal", "instrumentType": "Share", "instrument": "Nordnet AB", "isin": "SE0015192067", "date": "2026-10-29", "volume": 18740.0, "unit": "Quantity", "price": 329.5199, "currency": "SEK", "venue": "NASDAQ STOCKHOLM AB", "status": "Current", "valueEur": 562507, "signal": true}
