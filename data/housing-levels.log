@@ -1,11 +1,10 @@
 FAIL  FI: HTTPError: HTTP Error 400: Bad Request
+FAIL  PT: URLError: <urlopen error [Errno 110] Connection timed out>
 ok    SK 3430 €/m2 2026-Q2 (0 regions: )
   FR levels: {'departement': 101, 'commune': 39162, 'section': 463086, 'epci': 1353, 'nation': 1}
 ok    FR 3374 €/m2 last 5 years (20 regions: Paris 10243, Cannes 5460, Lyon 4767, Nice 4638, Bordeaux 4375, Villeurbanne 3806)
   FI 13mx variables: timeperiod_y Year ['2006', '2007', '2008', '2009', '2010', '2011'] (20); kunta_1_20150101 Municipality ['Akaa', 'Alajärvi', 'Alavieska', 'Alavus', 'Asikkala', 'Askola'] (301); talotyyppi_5_20111209 Building type ['Building types total', 'Terraced houses', 'Blocks of flats'] (3); contentscode Information ['Price per square meter (EUR/m2)', 'Number of sales, asset transfer tax data, until 2019', 'Number of sales, asset transfer tax data starting from 2020'] (3)
   FI areas start: ['Akaa', 'Alajärvi', 'Alavieska'], has whole country: False
-  PT types: ['Flats', 'Total', 'Villas'], flats rows: 347
-ok    PT 2662 €/m2 2026-09 (20 regions: Lisboa 4773, Cascais 4112, Oeiras 4001, Loulé 3542, Odivelas 3433, Funchal 3397)
   ES columns: ['Año', 'Trimestre', 'Valor', 'Régimen', 'CPRO', 'Provincia', 'Comunidad_Autónoma', 'CODAUTO']
   ES (2026, 2): 65 rows, 48 provinces, others: [('Ceuta y Melilla', 'Ceuta y Melilla', '2184.9'), ('Total CCAA', 'Navarra, Comunidad Foral de', '1936.4'), ('Total CCAA', 'Navarra, Comunidad Foral de', '1936.4'), ('Total CCAA', 'Andalucía', '1981.6'), ('Total CCAA', 'Aragón', '1762.8'), ('Total CCAA', 'Asturias, Principado de', '1798.5'), ('Total CCAA', 'Canarias', '2279.4'), ('Total CCAA', 'Castilla y León', '1349.6'), ('Total CCAA', 'Castilla-La Mancha', '1215.4'), ('Total CCAA', 'Cataluña', '2752.9'), ('Total CCAA', 'Comunitat Valenciana', '1935'), ('Total CCAA', 'Extremadura', '996.6'), ('Total CCAA', 'Galicia', '1656.8'), ('Total CCAA', 'Madrid, Comunidad de', '4089.6'), ('Total CCAA', 'País Vasco', '3102.3'), ('Total CCAA', 'Murcia, Region de', '1350.1'), ('Total CCAA', 'Total nacional', '2355')]
 ok    ES 2355 €/m2 2026-Q2 (11 regions: Madrid 4090, Gipuzkoa 3515, Barcelona 3204, Málaga 3084, Bizkaia 3025, Santa Cruz de Tenerife 2297)
@@ -17,4 +16,4 @@ ok    NO 5956 €/m2 2024 (6 regions: Oslo 8848, Bergen 5680, Trondheim 5654, Dr
 ok    AT 4162 €/m2 2025 (9 regions: Vienna 5212, Vorarlberg 5000, Salzburg 4968, Tyrol 4965, Upper Austria 3373, Carinthia 3260)
 ok    HR 2809 €/m2 2025 (2 regions: Zagreb 3129, Rest of Croatia 2581)
 ok    CZ 2933 €/m2 2025 (17 regions: Prague 5327, Brno 4039, South Moravia 3307, Plzeň 2973, Central Bohemia 2629, Ostrava 2451)
-wrote js/housing-levels.json: 12 countries, failed: ['FI']
+wrote js/housing-levels.json: 12 countries, failed: ['FI', 'PT']
