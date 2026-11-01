@@ -1,10 +1,31 @@
-  2026-09-02..2026-09-17: 748 rows
-  2026-09-18..2026-10-02: 637 rows
-  2026-10-03..2026-11-01: 897 rows
-  unmapped columns: ['Notifier', 'Details of amendment']
-2282 transactions; natures: [('Acquisition', 1370), ('Disposal', 346), ('Subscription', 157), ('Allotment', 135), ('Exercise decrease', 86), ('Exercise increase', 74), ('Exchange increase', 29), ('Exchange decrease', 15), ('Internal transaction – Disposal', 11), ('Internal transaction – Acquisition', 11), ('Conversion decrease', 6), ('Gift received', 6)]
-{"published": "2026-10-31", "issuer": "Integrum AB", "lei": "549300L5CG5PX4514U49", "person": "Fredrik Rundqvist", "position": "Member of the Board of Directors", "associated": "", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Acquisition", "instrumentType": "Subcription warrant", "instrument": "2026/2029 II", "isin": "", "date": "2026-10-29", "volume": 30000.0, "unit": "Quantity", "price": 1.11, "currency": "SEK", "venue": "Outside a trading venue", "status": "Current", "valueEur": 3033, "signal": false}
-{"published": "2026-10-31", "issuer": "Integrum AB", "lei": "549300L5CG5PX4514U49", "person": "Kristofer Westergren", "position": "Member of the Board of Directors", "associated": "", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Acquisition", "instrumentType": "Subcription warrant", "instrument": "2026/2029 II", "isin": "", "date": "2026-10-29", "volume": 30000.0, "unit": "Quantity", "price": 1.11, "currency": "SEK", "venue": "Outside a trading venue", "status": "Current", "valueEur": 3033, "signal": false}
-{"published": "2026-10-31", "issuer": "Hernö Gin AB", "lei": "894500DCJWEVBNC5N247", "person": "Jon Hillgren", "position": "Chairman of the Board of Directors", "associated": "", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Acquisition", "instrumentType": "Share", "instrument": "Hernö B", "isin": "SE0017767494", "date": "2026-10-30", "volume": 2357.0, "unit": "Quantity", "price": 3.24, "currency": "SEK", "venue": "NASDAQ STOCKHOLM AB", "status": "Current", "valueEur": 696, "signal": true}
-{"published": "2026-10-30", "issuer": "NCAB Group AB (publ)", "lei": "549300RUPCK2N43ES354", "person": "Christian Salamon", "position": "Chairman of the Board of Directors", "associated": "Yes", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Disposal", "instrumentType": "Share", "instrument": "NCAB Group AB", "isin": "SE0017160773", "date": "2026-10-29", "volume": 400000.0, "unit": "Quantity", "price": 89.25, "currency": "SEK", "venue": "NASDAQ STOCKHOLM AB", "status": "Current", "valueEur": 3251958, "signal": true}
-{"published": "2026-10-30", "issuer": "BONESUPPORT HOLDING AB", "lei": "549300COLY053IGTLD63", "person": "Michael Diefenbeck", "position": "Other member of the company's administrative, management or supervisory body", "associated": "", "amendment": "", "initial": "Yes", "optionProgramme": "", "nature": "Disposal", "instrumentType": "Share", "instrument": "BONESUPPORT HOLDING AB", "isin": "SE0009858152", "date": "2026-10-29", "volume": 20000.0, "unit": "Quantity", "price": 316.39, "currency": "SEK", "venue": "NASDAQ STOCKHOLM AB", "status": "Current", "valueEur": 576407, "signal": true}
+Traceback (most recent call last):
+  File "/home/runner/work/finila/finila/scripts/data/insiders_se.py", line 147, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/finila/finila/scripts/data/insiders_se.py", line 95, in main
+    rows = download(today - timedelta(days=DAYS), today)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/finila/finila/scripts/data/insiders_se.py", line 82, in download
+    text = decode(fetch(URL.format(frm=frm.isoformat(), to=to.isoformat())))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/finila/finila/scripts/data/insiders_se.py", line 30, in fetch
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
