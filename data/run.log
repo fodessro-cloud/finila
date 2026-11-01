@@ -171,8 +171,8 @@ FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
 18589 issuers with listed shares
   ! https://filings.xbrl.org/api/filings?include=entity&page%5Bsize%5D=500&sort=-period_end&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
 2668 issuers with a report for 2024 or later (10 pages)
-40 reports to read, 2628 cached
-read 40 reports this run
+33 reports to read, 2635 cached
+read 33 reports this run
   ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
 18589 issuers with listed shares (FIRDS); 2177 of them file reports here
 shares in issue for 525 companies (data/shares.json)
