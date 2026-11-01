@@ -1,4 +1,4 @@
-FINILA data check 2026-10-31 13:52 UTC (live site)
+FINILA data check 2026-11-01 14:29 UTC (live site)
 0 errors, 86 warnings
 
 WARNING BP P.L.C. (GB0007980591): P/E 2,394 (price 7.5, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
@@ -86,6 +86,6 @@ WARNING Bellway P L C (GB0000904986): €3B company has no sector, falls into 'O
 WARNING 15 share counts in data/shares.json are older than 200 days: time for the quarterly refresh.
 WARNING 9 hand-entered annual figures in data/financials.json are for a year that ended over 16 months ago (Borussia Dortmund, KBC Ancora, Ambra, Juventus FC, Celtic): enter the new annual report.
 WARNING 11 daily closes jump more than 2x (share split or wrong line); first: DE000A1YC996 2026-10-16 0.02 -> 2026-10-19 0.001; GB00BQVVS097 2026-10-19 0.0005 -> 2026-10-20 0.0045; GB00BQVVS097 2026-10-22 0.0045 -> 2026-10-23 0.0005; GB00BQVVS097 2026-10-23 0.0005 -> 2026-10-26 0.0055; GB00BQVVS097 2026-10-29 0.005 -> 2026-10-30 0.0005.
-WARNING js/housing-levels.json: sources that failed last run (old values kept): FI, PT.
-NOTE    2719 companies, 2170 with a price, 2113 with a market value; newest price 2026-10-30.
+WARNING js/housing-levels.json: sources that failed last run (old values kept): FI.
+NOTE    2719 companies, 2171 with a price, 2114 with a market value; newest price 2026-10-30.
 NOTE    Priced but no market value (no report figures, no shares count): GB 13, PL 5, SE 3, NO 2, DE 2, LV 2, IT 2, BE 1, BG 1, LU 1.
