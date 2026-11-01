@@ -1,4 +1,4 @@
-ok    ecb      334 months from 1999-01, latest {'date': '2026-09-16', 'value': 2.5, 'since': True}
+ok    ecb      335 months from 1999-01, latest {'date': '2026-09-16', 'value': 2.5, 'since': True}
 ok    eur1m    333 months from 1999-01, latest {'date': '2026-09', 'value': 2.414}
 ok    eur3m    333 months from 1999-01, latest {'date': '2026-09', 'value': 2.635}
 ok    eur6m    333 months from 1999-01, latest {'date': '2026-09', 'value': 2.922}
