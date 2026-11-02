@@ -233,14 +233,17 @@ def published_slugs():
     """The addresses already on the site ({lei: slug}). Lub's rule: an address never changes once
     published, so a company keeps its slug even when a same-named company arrives later."""
     url = f'{SITE}/js/stock-slugs.json?v={int(time.time())}'
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'FINILA page build'}), timeout=60) as r:
-            return json.load(r)
-    except Exception as e:
-        if os.environ.get('FINILA_NEW_SLUGS') == '1':   # a first build, or a test without the live site
-            return {}
-        sys.exit(f'::error title=Company addresses::cannot read {url} ({e}); without it addresses could change. '
-                 'Set FINILA_NEW_SLUGS=1 only for a build that is not uploaded.')
+    for attempt in range(3):   # the host sometimes times out for a minute (30 Oct 2026)
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'FINILA page build'}), timeout=60) as r:
+                return json.load(r)
+        except Exception as e:
+            err = e
+            time.sleep(30 * (attempt + 1))
+    if os.environ.get('FINILA_NEW_SLUGS') == '1':   # a first build, or a test without the live site
+        return {}
+    sys.exit(f'::error title=Company addresses::cannot read {url} ({err}); without it addresses could change. '
+             'Set FINILA_NEW_SLUGS=1 only for a build that is not uploaded.')
 
 
 def assign_slugs(rows, known):
