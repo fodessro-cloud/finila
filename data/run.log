@@ -173,20 +173,20 @@ FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
 2668 issuers with a report for 2024 or later (10 pages)
 33 reports to read, 2635 cached
 read 33 reports this run
-  ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
+4908 listed companies with an LEI on Wikidata
 18589 issuers with listed shares (FIRDS); 2177 of them file reports here
 shares in issue for 525 companies (data/shares.json)
 annual figures by hand for 560 companies (data/financials.json)
 Wikidata by ISIN/LEI: labels for 1639 of 3594 keys
 sector found for 729 of 1797 without a Wikidata industry: {'wikidata': 330, 'bank': 63, 'name': 336}
-earnings per share moved by powers of ten for 37 companies, dropped for 8 (checked against the price)
-shares in issue from the annual report for 1900 more companies
+earnings per share moved by powers of ten for 37 companies, dropped for 7 (checked against the price)
+shares in issue from the annual report for 1899 more companies
 shared ISINs taken from 0 companies (kept by the larger one)
-hand-checked fixes for 139 companies (data/fixes.json)
-2719 companies with figures, 160 without usable figures
-with ticker: 1091, with sector: 1729
+hand-checked fixes for 138 companies (data/fixes.json)
+2718 companies with figures, 160 without usable figures
+with ticker: 1090, with sector: 1728
 with F-score: 1770, F-score 8-9: 106, with dividend cover: 1079
-by country: GB 532, SE 346, FR 231, DE 195, IT 158, NO 153, PL 140, FI 131, ES 121, DK 121, NL 110, GR 102, BE 76, AT 54, CH 53, MT 29, IE 28, PT 28, IS 24, LU 19, LT 19, CZ 12, SI 10, CY 6, SK 6, RO 5, HR 4, LV 3, HU 2, BG 1
+by country: GB 531, SE 346, FR 231, DE 195, IT 158, NO 153, PL 140, FI 131, ES 121, DK 121, NL 110, GR 102, BE 76, AT 54, CH 53, MT 29, IE 28, PT 28, IS 24, LU 19, LT 19, CZ 12, SI 10, CY 6, SK 6, RO 5, HR 4, LV 3, HU 2, BG 1
 
 largest 40 by revenue:
 Volkswagen                         DE VOW3     Consumer Discretionary 2025-12-31 rev€=321913.0 ebitda=25836.0 fcf=-290.0 roe=3.5 F=None None
