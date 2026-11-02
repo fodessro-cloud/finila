@@ -1,7 +1,8 @@
 {
  "note": "Hand-checked fixes by ISIN that beat what Wikidata and the name rules give: sector, name, ticker. 'drop' lists LEIs left off the list, with the reason.",
  "drop": {
-  "743700ATXLT0MFCHXT16": "WithSecure: taken private and delisted in 2025; FIRDS still shows it under F-Secure's ISIN FI4000519236"
+  "743700ATXLT0MFCHXT16": "WithSecure: taken private and delisted in 2025; FIRDS still shows it under F-Secure's ISIN FI4000519236",
+  "213800TCZZU84G8Z2M70": "International Distribution Services (Royal Mail, GLS): taken over by EP Group and delisted from the LSE in 2025; FCA FIRDS still lists the share as Royal Mail PLC"
  },
  "rows": {
   "AT0000730007": {
