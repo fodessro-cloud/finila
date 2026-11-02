@@ -1,5 +1,10 @@
+Xetra 2026-11-02: 88 minute files waiting, reading the newest 70
+Xetra 2026-11-02: read 70 new minute files, up to DETR-posttrade-2026-11-02T01_27.json.gz
+Börse Frankfurt 2026-11-02: 88 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-11-02: read 70 new minute files, up to DFRA-posttrade-2026-11-02T01_27.json.gz
+Intraday charts for 2026-11-02 (trading day in progress): 0 shares
 Fundamentals issuers with a price: 2171 of 2719
-Prices for 74 of 77 stocks (closed day 2026-10-30, day in progress -)
+Prices for 74 of 77 stocks (closed day 2026-10-30, day in progress 2026-11-02)
   no trades on Xetra or Frankfurt: UNA@Netherlands, ROG@Switzerland, ULVR@UK
   SAP@Germany          DE0007164600 Xetra            2026-10-30 20:30     210.65 trades   9848 change 0.86
   SIE@Germany          DE0007236101 Xetra            2026-10-30 20:18      263.8 trades   5570 change -3.65
