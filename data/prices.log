@@ -1,5 +1,7 @@
-Xetra 2026-11-03: read 55 new minute files, up to DETR-posttrade-2026-11-03T17_04.json.gz
-Börse Frankfurt 2026-11-03: read 55 new minute files, up to DFRA-posttrade-2026-11-03T17_04.json.gz
+Xetra 2026-11-03: 296 minute files waiting, reading the newest 70
+Xetra 2026-11-03: read 70 new minute files, up to DETR-posttrade-2026-11-03T22_00.json.gz
+Börse Frankfurt 2026-11-03: 296 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-11-03: read 70 new minute files, up to DFRA-posttrade-2026-11-03T22_00.json.gz
 Intraday charts for 2026-11-03 (trading day in progress): 2164 shares
 Fundamentals issuers with a price: 2172 of 2719
 Prices for 74 of 77 stocks (closed day 2026-11-02, day in progress 2026-11-03)
@@ -8,11 +10,11 @@ Prices for 74 of 77 stocks (closed day 2026-11-02, day in progress 2026-11-03)
   SIE@Germany          DE0007236101 Xetra            2026-11-03 16:40     269.45 trades   6573 change 0.54
   ALV@Germany          DE0008404005 Xetra            2026-11-03 17:00      440.7 trades   2872 change 0.36
   BASF@Germany         DE000BASF111 Xetra            2026-11-03 17:00       53.2 trades   2660 change -0.32
-  BMW@Germany          DE0005190003 Xetra            2026-11-03 16:44       57.9 trades   2107 change -0.99
+  BMW@Germany          DE0005190003 Xetra            2026-11-03 20:58       56.4 trades   2108 change -3.56
   MBG@Germany          DE0007100000 Xetra            2026-11-03 16:57     40.505 trades   6810 change -1.32
   DTE@Germany          DE0005557508 Xetra            2026-11-03 17:00      25.77 trades   3939 change 0.08
   DBK@Germany          DE0005140008 Xetra            2026-11-03 17:01      30.44 trades   5119 change -0.03
-  BAYN@Germany         DE000BAY0017 Xetra            2026-11-03 16:49      52.14 trades  12938 change 4.53
+  BAYN@Germany         DE000BAY0017 Xetra            2026-11-03 20:55      51.84 trades  12939 change 3.93
   VOW3@Germany         DE0007664039 Xetra            2026-11-03 17:00      68.88 trades   2374 change -1.46
   IFX@Germany          DE0006231004 Xetra            2026-11-03 16:59      52.48 trades   8043 change 2.74
   ADS@Germany          DE000A1EWWW0 Xetra            2026-11-03 16:52     168.15 trades   4445 change -2.3
@@ -38,7 +40,7 @@ Prices for 74 of 77 stocks (closed day 2026-11-02, day in progress 2026-11-03)
   INGA@Netherlands     NL0011821202 Xetra            2026-11-03 16:35      27.78 trades    196 change -1.31
   HEIA@Netherlands     NL0000009165 Xetra            2026-11-03 15:54      80.92 trades      7 change -0.42
   PHIA@Netherlands     NL0000009538 Xetra            2026-11-03 16:35      25.75 trades    211 change 4.8
-  STLAM@Netherlands    NL00150001Q9 Xetra            2026-11-03 16:35     4.1025 trades    153 change -2.78
+  STLAM@Netherlands    NL00150001Q9 Xetra            2026-11-03 20:53     3.9985 trades    154 change -5.25
   NESN@Switzerland     CH0038863350 Xetra            2026-11-03 16:35      92.21 trades     75 change -0.31
   NOVN@Switzerland     CH0012005267 Xetra            2026-11-03 16:35     143.82 trades     36 change -0.29
   ABBN@Switzerland     CH0012221716 Xetra            2026-11-03 16:35       78.8 trades     41 change 2.39
