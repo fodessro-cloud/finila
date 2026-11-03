@@ -79,7 +79,6 @@ PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQR
 
 matched 58 / 77
   ! https://filings.xbrl.org/api/entities/7LTWFZYICNSX8D621K86/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
 SAP@Germany no usable annual report (0 filings)
 SIE@Germany no usable annual report (0 filings)
 ALV@Germany no usable annual report (0 filings)
@@ -102,7 +101,8 @@ BNP@France     2025-12-31 EUR rev=None ebitda=None net=12225.0 fcf=None roe=9.7 
 SAN@France     2025-12-31 EUR rev=43626.0 ebitda=8120.0 net=7813.0 fcf=7212.0 roe=10.9 nd/ebitda=0.81
         missing ['ebitda', 'fcf']; tagged: ['axa:CapitalGainNetOfTaxRelatedToTheDisposalOfAxaIM', 'axa:CashFlowsRelatedToOperatingActivitiesNotIncludedInTheProfitBeforeTax', 'axa:NetAmortizationExpenses', 'axa:NetChangeInOperatingReceivablesAndPayables', 'axa:OtherOperatingIncomeAndExpenseIncludingIntangibleImpairment', 'axa:PaidinCapital', 'axa:PurchaseOfTangibleAndIntangibleAssets', 'axa:RealizedCapitalGainsOrLossesOnEquityInstrumentsWithoutRecyclingInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfInvestmentProperty', 'ifrs-full:RepaymentsOfRegulatoryCapitalEquity', 'ifrs-full:Revenue']
 CS@France      2025-12-31 EUR rev=91139.0 ebitda=None net=9797.0 fcf=None roe=20.8 nd/ebitda=None
-RMS@France no usable annual report (0 filings)
+        missing ['ebitda']; tagged: ['hermes:DepreciationOfFixedAssetsRightOfUseAssetsAndImpairmentLosses', 'hermes:RecurringOperatingIncome', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtAmortisedCostClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:Revenue']
+RMS@France     2025-12-31 EUR rev=16002.0 ebitda=None net=4524.0 fcf=4213.0 roe=24.0 nd/ebitda=None
 KER@France     2023-12-31 EUR rev=19566.0 ebitda=6466.0 net=2983.0 fcf=1848.0 roe=19.6 nd/ebitda=0.94
         missing ['fcf']; tagged: ['VINCI:CapitalIncreasesAndReductionsOfSubsidiariesSubscribedByThirdParties', 'VINCI:Revenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'VINCI:Revenuefromcontractswithcustomersotherthanrevenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:FinanceCostsPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsOperatingActivities', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueFromContractsWithCustomers']
 DG@France      2025-12-31 EUR rev=75372.0 ebitda=13570.0 net=4903.0 fcf=None roe=15.9 nd/ebitda=-0.77
@@ -164,7 +164,7 @@ EQNR@Norway    2025-12-31 USD rev=106462.0 ebitda=37670.0 net=5043.0 fcf=5977.0 
 OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.3 nd/ebitda=None
 PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
 
-48 companies with real fundamentals
+49 companies with real fundamentals
 ESMA FULINS_E_20261031_01of02.zip: 16445 new issuers
 ESMA FULINS_E_20261031_02of02.zip: 0 new issuers
 FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
@@ -179,7 +179,7 @@ shares in issue for 525 companies (data/shares.json)
 annual figures by hand for 561 companies (data/financials.json)
 Wikidata by ISIN/LEI: labels for 1641 of 3596 keys
 sector found for 729 of 1798 without a Wikidata industry: {'wikidata': 330, 'bank': 63, 'name': 336}
-earnings per share moved by powers of ten for 37 companies, dropped for 8 (checked against the price)
+earnings per share moved by powers of ten for 38 companies, dropped for 8 (checked against the price)
 shares in issue from the annual report for 1901 more companies
 shared ISINs taken from 0 companies (kept by the larger one)
 hand-checked fixes for 138 companies (data/fixes.json)
@@ -194,7 +194,7 @@ Shell PLC                          GB SHEL     Energy                 2025-12-31
 Glencore PLC                       GB GLEN     Materials              2025-12-31 rev€=220698.1 ebitda=None fcf=-290.0 roe=0.9 F=6 1111101-0
 TotalEnergies SE                   FR TTE      Energy                 2025-12-31 rev€=179383.0 ebitda=None fcf=10390.0 roe=11.4 F=4 1101001-0
 BP P.L.C.                          GB BP       Energy                 2025-12-31 rev€=171673.5 ebitda=30464.0 fcf=11272.0 roe=0.1 F=6 1101011-1
-Stellantis N.V.                    NL STLAM    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
+Stellantis N.V.                    NL STLAP    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
 BMW                                DE BMW      Consumer Discretionary 2025-12-31 rev€=133453.0 ebitda=16651.0 fcf=-2735.0 roe=7.6 F=None None
 Mercedes-Benz Group                DE MBG      Consumer Discretionary 2025-12-31 rev€=132214.0 ebitda=11778.0 fcf=12524.0 roe=5.5 F=None None
 Deutsche Telekom                   DE DTE      Communication          2025-12-31 rev€=121816.0 ebitda=47389.0 fcf=28313.0 roe=15.5 F=None None
