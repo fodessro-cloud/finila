@@ -1,7 +1,7 @@
-FINILA data check 2026-11-03 15:28 UTC (live site)
-0 errors, 89 warnings
+FINILA data check 2026-11-03 21:14 UTC (live site)
+0 errors, 88 warnings
 
-WARNING BP P.L.C. (GB0007980591): P/E 2,268 (price 7.078, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING BP P.L.C. (GB0007980591): P/E 2,274 (price 7.096, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING DCC (IE0002424939): P/E 452 (price 76.5, EPS 0.1416 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Electrolux (SE0016589188): shares in issue 787.7M but report implies 270.2M.
 WARNING Swatch Group (CH0012255151): P/E 3,058 (price 199.6, EPS 0.06 CHF): EPS misread, rounded or from before a share split, unless profit really was tiny.
@@ -17,9 +17,9 @@ WARNING Allfunds Group PLC (GB00BNTJ3546): P/E 2,480 (price 9.67, EPS 0.0039 EUR
 WARNING Bally'S Intralot Α.Ε. (GRS343313003): EPS 0.073 and net income -65.2 have opposite signs.
 WARNING InstallatørGruppen (DK0064982565): EPS -2.59 and net income 74.9 have opposite signs.
 WARNING Exail Technologies (FR0000062671): P/E 714 (price 125.6, EPS 0.176 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): P/E 447 (price 131.46, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): market value €33,543M is 71x revenue: share count off (reverse split?).
-WARNING Norcros PLC (GB00BYYJL418): P/E 865 (price 3.52, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): P/E 452 (price 133.12, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): market value €33,967M is 72x revenue: share count off (reverse split?).
+WARNING Norcros PLC (GB00BYYJL418): P/E 880 (price 3.58, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING NCC Group (GB00B01QGK86): EPS -0.03 and net income 17.1 have opposite signs.
 WARNING Nacon (FR0000074072): shares in issue 108.4M but report implies 18.6M.
 WARNING Rapala VMC Oyj (FI0009007355): shares in issue 38.5M but report implies 21.3M.
@@ -80,7 +80,6 @@ WARNING Brembo N.V. (NL0015001KT6): €3B company has no sector, falls into 'Oth
 WARNING Bellway P L C (GB0000904986): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Ocado Group PLC (GB00B3MBS747): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Loomis AB (SE0014504817): €3B company has no sector, falls into 'Other' on the maps.
-WARNING Unifiedpost Group (BE0974371032): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Cirsa Enterprises (ES0105884011): €3B company has no sector, falls into 'Other' on the maps.
 WARNING DOF Group ASA (NO0012851874): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Vidrala SA (ES0183746314): €3B company has no sector, falls into 'Other' on the maps.
