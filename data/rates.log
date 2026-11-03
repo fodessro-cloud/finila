@@ -1,12 +1,12 @@
-ok    ecb      335 months from 1999-01, latest {'date': '2026-09-16', 'value': 2.5, 'since': True}
+FAIL  ecb     HTTP Error 504: Gateway Time-out
+FAIL  eur6m   HTTP Error 504: Gateway Time-out
+FAIL  gov2y   HTTP Error 504: Gateway Time-out
+FAIL  gov5y   HTTP Error 504: Gateway Time-out
+FAIL  gov10y  HTTP Error 504: Gateway Time-out
+FAIL  aaa10y  HTTP Error 504: Gateway Time-out
+FAIL  dep1y   HTTP Error 504: Gateway Time-out
 ok    eur1m    334 months from 1999-01, latest {'date': '2026-10', 'value': 2.436}
 ok    eur3m    334 months from 1999-01, latest {'date': '2026-10', 'value': 2.635}
-ok    eur6m    334 months from 1999-01, latest {'date': '2026-10', 'value': 2.975}
 ok    eur12m   334 months from 1999-01, latest {'date': '2026-10', 'value': 3.239}
-ok    gov2y    266 months from 2004-09, latest {'date': '2026-10-30', 'value': 3.238}
-ok    gov5y    266 months from 2004-09, latest {'date': '2026-10-30', 'value': 3.575}
-ok    gov10y   266 months from 2004-09, latest {'date': '2026-10-30', 'value': 4.033}
-ok    aaa10y   266 months from 2004-09, latest {'date': '2026-10-30', 'value': 3.365}
 ok    corp     334 months from 1999-01, latest {'date': '2026-10', 'value': 4.55}
-ok    dep1y    321 months from 2000-01, latest {'date': '2026-09', 'value': 2.33}
-wrote js/rates.json (20 KB), failed: none
+wrote js/rates.json (20 KB), failed: ['ecb', 'eur6m', 'gov2y', 'gov5y', 'gov10y', 'aaa10y', 'dep1y']
