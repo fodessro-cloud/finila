@@ -1,18 +1,18 @@
+FAIL  dep1y     HTTP Error 504: Gateway Time-out
+FAIL  depon     HTTP Error 504: Gateway Time-out
+FAIL  bond10    HTTP Error 500: Internal Server Error
+FAIL  fx        HTTP Error 504: Gateway Time-out
+FAIL  dfr       HTTP Error 504: Gateway Time-out
+FAIL  stoxx50   HTTP Error 504: Gateway Time-out
+FAIL  sp500     no S&P 500 series at the ECB (HTTP Error 504: Gateway Time-out)
 ok    hicp       29 series,   9335 months, newest 2025-12
 ok    hicp_es    32 series,  11270 months, newest 2025-12
 ok    infl_old   29 series,   9335 months, newest 2025-12
 ok    infl       31 series,   1023 months, newest 2026-09
-ok    dep1y      28 series,   7744 months, newest 2026-09
-ok    depon      28 series,   7605 months, newest 2026-09
-ok    bond10     29 series,   8883 months, newest 2026-09
 ok    house      30 series,   7161 months, newest 2026-05
-ok    fx         11 series,   3565 months, newest 2026-10
-ok    dfr         1 series,     64 months, newest 2026-09
-ok    stoxx50     1 series,    334 months, newest 2026-10
-ok    sp500       1 series,    334 months, newest 2026-10
 ok    gold_usd    1 series,    333 months, newest 2026-09
 skip  GB: no recent inflation data
-wrote js/invest.json (358 KB), 31 countries, failed: none
+wrote js/invest.json (358 KB), 31 countries, failed: ['dep1y', 'depon', 'bond10', 'fx', 'dfr', 'stoxx50', 'sp500']
   U2 infl {'month': '2026-09', 'value': 3.8} dep {'month': '2026-09', 'value': 2.33} bond {'month': '2026-09', 'value': 3.928} house {'month': '2026-05', 'value': 3.84} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
   AT infl {'month': '2026-09', 'value': 3.6} dep {'month': '2026-09', 'value': 2.18} bond {'month': '2026-09', 'value': 3.687} house {'month': '2026-05', 'value': 5.07} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
   BE infl {'month': '2026-09', 'value': 4.5} dep {'month': '2026-09', 'value': 2.48} bond {'month': '2026-09', 'value': 4.12} house {'month': '2026-05', 'value': 2.13} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
