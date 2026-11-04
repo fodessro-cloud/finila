@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 5
+CACHE_VERSION = 6
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -39,7 +39,7 @@ REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|r
                r"(order intake|sales|revenue) as of (march|june|september|december) 3\d|activity indicators")
 REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly financial information|financial report"
 SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|teleconference|capital markets day|"
-             r"contrato de liquidez|operaciones (realizadas )?(al amparo|sobre acciones propias)|autocartera|recompra de acciones|"
+             r"contratos? de liquidez|acciones propias|operaciones (realizadas )?(al amparo|sobre acciones propias)|autocartera|recompra de acciones|"
              r"franchissement de seuils?|d[ée]claration des transactions|nombre total de droits de vote|contrat de liquidit[ée]|"
              r"buy-?back|own shares|treasury shares|managers'? transactions|transactions? (by|of) (persons|insiders)|"
              r"voting rights|share capital|total number of shares|listing of|admission to trading|prospectus|"
@@ -208,6 +208,9 @@ def quotes(text, year):
                 and not re.search(fr"\b({ol.EXPECT})", low):
             if len(re.findall(r"\d+(?:[.,]\d+)?", s)) > 8 or re.search(r"\b(excl|incl|approx)\.$|\b\d+ of \d+\b", s):
                 continue   # table rows, cut-off fragments and page footers
+            if re.search(r"(?<![\d,.])\d \d+[.,]\d+\s?%|\b(would|if)\b", s):
+                continue   # a number split by the PDF ("8 4.7%" for 84.7%) or a what-if, not a result
+            s = re.sub(r"^(?:[A-Z0-9&,'’/\- ]{3,}\s){2,}(?=[A-Z][a-z])", "", s)   # headings in capitals glued in front
             key = re.sub(r"\W+", "", low)[:100]
             if key not in seen:
                 seen.add(key)
