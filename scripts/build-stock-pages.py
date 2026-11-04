@@ -992,12 +992,23 @@ def about_short(t, limit=260):
 
 
 def about_html(c):
+    """What the company does (its own words) and where its revenue comes from (segments, products, regions)."""
     a = c.get('about')
-    t = about_short(a['text']) if a else ''
-    if not t:
+    if not a:
         return ''
+    t = about_short(a['text']) if a.get('text') else ''
     link = f' <a href="{esc(a["source"])}" target="_blank" rel="noopener">annual report {esc(a["period"][:4])}</a>' if a.get('source') else ''
-    return f'<p class="sp-about"><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>'
+    out = f'<p class="sp-about"><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>' if t else ''
+    split = a.get('split') or {}
+    rows = []
+    for kind, name in (('segments', 'By business'), ('products', 'By product'), ('regions', 'By region')):
+        if kind == 'products' and split.get('segments'):
+            continue   # one business split is enough
+        if split.get(kind):
+            rows.append(f'<span class="sp-split"><b>{name}:</b> ' + ' · '.join(f'{esc(n)} {p}%' for n, p in split[kind]) + '</span>')
+    if rows:
+        out += (f'<p class="sp-about sp-rev">Revenue {a["period"][:4]}: ' + ' '.join(rows) + (f' {chip("r")}' if not t else '') + '</p>')
+    return out
 
 
 def add_news(rows):

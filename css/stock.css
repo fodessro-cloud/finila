@@ -116,9 +116,12 @@ html, body { height: auto; }
 .sp-hist-table th a { color: inherit; }
 .sp-hist-table sup { color: var(--accent2); font-weight: 700; margin-left: 2px; }
 .sp-summary { border-left: 4px solid var(--accent2); }
-.sp-summary > p:first-of-type, .sp-summary > .sp-about + p { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }
-.sp-about { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0 0 10px; }
+.sp-summary > p:first-of-type, .sp-summary > .sp-about + p:not(.sp-about), .sp-summary > .sp-rev + p { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }
+.sp-summary > p.sp-about { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0 0 10px; }
 .sp-about a { font-size: 12px; }
+.sp-summary > p.sp-rev { font-size: 13px; color: var(--text2); }
+.sp-split { display: block; }
+.sp-split b { color: var(--text); font-weight: 600; }
 .sp-minis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 0 0 14px; }
 .sp-mini { margin: 0; background: var(--bg3); border-radius: 8px; padding: 8px 10px; }
 .sp-mini figcaption { display: flex; justify-content: space-between; font-size: 11px; color: var(--text2); margin-bottom: 4px; }
