@@ -25,6 +25,9 @@ fd.CONCEPTS.update({
     "receivables": ["TradeAndOtherCurrentReceivables", "CurrentTradeReceivables", "TradeReceivables"],
     "payables":    ["TradeAndOtherCurrentPayables", "CurrentTradePayables", "TradeAndOtherCurrentPayablesToTradeSuppliers"],
     "leases":      ["LeaseLiabilities"],
+    "interest":    ["FinanceCosts", "InterestExpense", "InterestExpenseOnBorrowings", "InterestPaidClassifiedAsOperatingActivities"],
+    "pbt":         ["ProfitLossBeforeTax"],
+    "tax":         ["IncomeTaxExpenseContinuingOperations"],
 })
 fd.INSTANT.update({"inventories", "receivables", "payables", "leases"})
 
@@ -38,7 +41,7 @@ WORKERS = 6
 START = time.time()
 FIELDS = ["revenue", "ebitda", "operatingProfit", "netIncome", "operatingCashFlow", "capex", "fcf", "dividendsPaid",
           "equity", "assets", "cash", "debt", "netDebt", "eps", "sharesTagged", "da", "inventories", "receivables",
-          "payables", "leases"]
+          "payables", "leases", "gross", "curAssets", "curLiab", "interest", "pbt", "tax"]
 
 
 def log(msg):
@@ -54,9 +57,11 @@ def year_row(cur, prev):
         da = sum(abs(cur.get(k, 0)) for k in ("dep_ppe", "dep_rou", "amort"))
     if da is not None and not cur.get("financial"):
         r["da"] = mil(abs(da))
-    for k in ("inventories", "receivables", "payables", "leases"):
+    for k, name in (("inventories", "inventories"), ("receivables", "receivables"), ("payables", "payables"),
+                    ("leases", "leases"), ("gross", "gross"), ("cur_assets", "curAssets"), ("cur_liab", "curLiab"),
+                    ("interest", "interest"), ("pbt", "pbt"), ("tax", "tax")):
         if cur.get(k) is not None:
-            r[k] = mil(cur[k])
+            r[name] = mil(abs(cur[k])) if k == "interest" else mil(cur[k])
     if cur.get("financial"):
         r["financial"] = True
     return r
@@ -121,6 +126,9 @@ def main():
     today = date.today().isoformat()
     todo = [l for l in leis if cache.get(l, {}).get("checked", "") < today and
             (l not in cache or cache[l].get("checked", "") <= date.fromordinal(date.today().toordinal() - 7).isoformat())]
+    if os.environ.get("FINILA_LIMIT"):   # a test run on the largest companies only
+        size = {r["lei"]: r.get("revenueEur") or 0 for r in rows}
+        todo = sorted(todo, key=lambda l: -size.get(l, 0))[:int(os.environ["FINILA_LIMIT"])]
     log(f"{len(leis)} companies with ESEF reports, {len(todo)} to check")
     done = 0
     with ThreadPoolExecutor(WORKERS) as pool:

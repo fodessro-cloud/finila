@@ -9,6 +9,10 @@ on:
   schedule:
     - cron: '15 3 * * 1'   # Mondays 03:15 UTC, before refresh-data and the page build
   workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Test: only this many of the largest companies (empty = all)'
+        required: false
 
 permissions:
   contents: write
@@ -29,6 +33,7 @@ jobs:
       - name: Read annual reports of the last six years
         env:
           FINILA_BUDGET_MIN: '320'
+          FINILA_LIMIT: ${{ inputs.limit || (github.event_name == 'push' && '60' || '') }}
         run: |
           set -o pipefail
           python scripts/data/history.py 2>&1 | tee data/history.log || { echo "::error::history: $(tail -3 data/history.log | tr '\n' ' ')"; exit 1; }
