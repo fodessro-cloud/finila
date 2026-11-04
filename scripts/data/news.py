@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 8
+CACHE_VERSION = 9
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -198,13 +198,11 @@ def report_quarter(title, text, published):
 
 def quotes(text, year):
     """Results for the period and the company's own outlook, word for word. Each result carries the period
-    it speaks of: its own words ("in Q3", "in the first nine months"), else the heading above it."""
+    it speaks of in its own words ("in Q3", "in the first nine months"), else none."""
     head = split_release(text[:15000])   # the summary at the top: highlights, CEO comment, outlook
     results, seen = [], set()
-    current = None
     for s in ol.sentences(head):
         own = period_of(s)
-        current = own or current
         low = s.lower()
         if re.search(ol.NOISE, low) or re.search(JUNK, low) or not ol.english(low) or sum(ch.isdigit() for ch in s) > len(s) * 0.25:
             continue
@@ -235,7 +233,11 @@ def quotes(text, year):
                 # A heading the PDF glued to the sentence ("January–September 2026 Orders received ...") is cut off.
                 t = re.sub(r"^(?i:(january|april|july|october)\s*[-–]\s*(march|june|september|december)|"
                            r"(first|second|third|fourth) quarter|summary of [\w-]+ results)( 20\d\d)?:?\s+(?=[A-Z])", "", s)
-                results.append({"text": re.sub(r"\.\.$", ".", t), "period": own or current})
+                if re.match(r"(January|February|March|April|May|June|July|August|September|October|November|December)\b", t):
+                    continue   # the start of the sentence was lost in the PDF ("September 2026, Group revenue ...")
+                # Only the sentence's own words give its period: a heading above it can be lost in the PDF,
+                # and a wrong "quarter" label is worse than none.
+                results.append({"text": re.sub(r"\.\.$", ".", t), "period": own})
     # Group figures before divisions and regions: releases put the group first, but not always.
     def rank(s):
         low = s.lower()
