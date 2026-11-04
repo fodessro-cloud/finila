@@ -992,17 +992,29 @@ def about_short(t, limit=170):
     return first[:cut].rstrip(' ,') + '…' if cut > 60 else ''
 
 
+def about_clean(t):
+    """Line-break hyphens ("user-friend- ly"), glued sentences ("specialist.Through") and capital headings
+    ("OUR PURPOSE") the PDF-to-ESEF conversion leaves; a lost company name at the start becomes '…'."""
+    t = re.sub(r"(?<=[a-z])- (?=[a-z])", "", t)
+    t = re.sub(r"(?<=[a-z]{3})\.(?=[A-Z][a-z])", ". ", t)
+    t = re.sub(r"^(?:[A-Z]{2,}\s){1,4}(?=[A-Z][a-z])", "", t)
+    if re.match(r"['’]s\b", t):
+        t = "…" + t
+    return t.rstrip(" ,;")
+
+
 def about_html(c):
     """What the company does (its own words) and where its revenue comes from (segments, products, regions)."""
     a = c.get('about')
     if not a:
         return ''
-    t = about_short(a['text']) if a.get('text') else ''
+    full = about_clean(a['text']) if a.get('text') else ''
+    t = about_short(full) if full else ''
     link = f' <a href="{esc(a["source"])}" target="_blank" rel="noopener">annual report {esc(a["period"][:4])}</a>' if a.get('source') else ''
-    full = a.get('text') or ''
     more = ''
     if t and len(full) > len(t) + 20:   # the whole paragraph from the report, opened on request
-        more = f'<details class="sp-more"><summary>More</summary>“{esc(full)}”</details>'
+        rest = full[len(t):].strip() if full.startswith(t) else full   # only what the first sentence did not say
+        more = f'<details class="sp-more"><summary>More</summary>“{esc(rest)}”</details>'
     out = f'<div class="sp-about"><p><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>{more}</div>' if t else ''
     split = a.get('split') or {}
     rows = []
