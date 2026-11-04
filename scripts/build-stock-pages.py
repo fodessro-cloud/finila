@@ -1016,19 +1016,31 @@ def latest_report_html(c):
             body += f'<div class="sp-q"><h3>{esc(title)} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>'
     for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
                              ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
-                             ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):
-        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if i['kind'] == kind and len(i['text']) <= 320])
+                             ('backlog', 'Order backlog', 'Orders signed and not yet delivered.'),
+                             ('projects', 'Investment projects', 'Projects the company has approved and is building, as it states: future spending, not orders.')):
+        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])
         if out:
             body += f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
     return (f'<div class="sp-latest"><p class="sp-q-date">Newest report: <b>{esc(r["title"])}</b>, published {esc(nice_date(r["date"]))} '
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the announcement</a></p>{body}</div>')
 
 
+INVEST_BACKLOG = r"\binvestments?\b(?! decisions?)"
+BROKEN = r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}|\b20\d \d\b|[a-z]20\d\d\b"
+
+
+def kind_of(i):
+    """A backlog of approved investment projects (Air Liquide's plants) is future spending, not orders: own heading."""
+    return 'projects' if i['kind'] == 'backlog' and re.search(INVEST_BACKLOG, i['text'], re.I) \
+        and not re.search(r'\border(s| book| backlog| intake)\b', i['text'], re.I) else i['kind']
+
+
 REPORT_BLOCKS = [('outlook', 'Outlook', 'What the company expects for the current year.'),
                  ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
                  ('backlog', 'Order backlog', 'Orders signed and not yet delivered.'),
+                 ('projects', 'Investment projects', 'Projects the company has approved and is building, as it states: future spending, not orders.'),
                  ('event', 'What happened', 'Deals, restructuring, approvals, prices and management changes.')]
-REPORT_SHOWN = {'outlook', 'target', 'backlog'}   # 'event' joins once its selection is checked
+REPORT_SHOWN = {'outlook', 'target', 'backlog', 'projects'}   # 'event' joins once its selection is checked
 
 
 def quote_clean(t):
@@ -1069,7 +1081,7 @@ def report_html(c):
         q = {**q, 'items': [i for i in q['items'] if not (i['kind'] == 'outlook' and topics(i['text']) and topics(i['text']) <= newer)]}
     blocks = ''
     for kind, title, sub in REPORT_BLOCKS:
-        items = quote_unique([quote_clean(i['text']) for i in q['items'] if i['kind'] == kind and len(i['text']) <= 320
+        items = quote_unique([quote_clean(i['text']) for i in q['items'] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])
                               and not re.search(r'materiality|ceteris paribus|annual report( and accounts)? 20\d\d|financial report for the period',
                                                 i['text'], re.I)])
         if kind in REPORT_SHOWN and items:
