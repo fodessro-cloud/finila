@@ -312,9 +312,10 @@ def guided_growth(c):
     """Revenue growth the company itself expects for the current year, from its outlook sentence
     ("sales growth for 2026 is expected to be 0% to -6%"): the midpoint, and the sentence."""
     q = c.get('quotes') or {}
+    items = ((c.get('latestReport') or {}).get('outlook') or []) + q.get('items', [])   # the newest report first
     pat = re.compile(r'\b(sales|revenue|turnover)\b[^.%]{0,60}?\bgrowth\b[^.%]{0,80}?(?<![\d.])(-?\+?\d{1,2}(?:\.\d)?)\s*%'
                      r'(?:\s*(?:to|and|-|–)\s*(-?\+?\d{1,2}(?:\.\d)?)\s*%)?', re.I)
-    for it in q.get('items', []):
+    for it in items:
         if it['kind'] != 'outlook':
             continue
         m = pat.search(it['text'])
@@ -377,6 +378,7 @@ def whatif_html(c, med):
       <p class="sp-sub">Three scenarios from real ranges: the company’s own margins of the last years and the spread of multiples in its sector.</p>
       {scen}
       <h3 class="sp-wi-h">Try your own</h3>
+      <p class="sp-wi-shared" hidden>Values set by the person who shared this link, not by FINILA. <button type="button" data-a="reset">Reset to FINILA start</button></p>
       <div class="sp-wi-inputs">
         <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%){g_rng}</small></label>
         <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: {m_src} ({num(data["m"])}%){m_rng}</small></label>
@@ -389,6 +391,7 @@ def whatif_html(c, med):
         <div><span>Company value (EV)</span><b data-o="ev"></b></div>
         <div class="sp-wi-main"><span>Price per share</span><b data-o="pps"></b><small data-o="ret"></small></div>
       </div>
+      <p class="sp-wi-share"><button type="button" data-a="copy">Copy link to this calculation</button> <span data-o="copied" class="ins-note"></span></p>
       <p class="sp-sub sp-after">Price per share = company value minus today’s net debt, leases and minorities (€{bn(c["claimsEur"])}), divided by today’s {num(c["shares"], 1)}M shares; dividends not counted. A calculation from your assumptions, not a forecast or advice from FINILA.</p></section>'''
 
 
@@ -966,6 +969,61 @@ def add_report_quotes(rows):
             c['quotes'] = q
 
 
+def add_news(rows):
+    """data/news.json (scripts/data/news.py): official exchange announcements and the newest report."""
+    try:
+        news = json.loads((SRC / 'data' / 'news.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return
+    for c in rows:
+        n = news.get(c['lei'])
+        if n:
+            c['news'] = n.get('news') or []
+            if n.get('report'):
+                c['latestReport'] = n['report']
+
+
+def nice_date(d):
+    try:
+        return date.fromisoformat((d or '')[:10]).strftime('%-d %b %Y')
+    except ValueError:
+        return d or ''
+
+
+def latest_report_html(c):
+    """The newest quarterly / half-year / annual report announced on the exchange, quoted word for word."""
+    r = c.get('latestReport')
+    if not r:
+        return ''
+    res = [x if isinstance(x, dict) else {'text': x, 'period': None} for x in r.get('results') or []]
+    res = [x for x in res if not re.match(r'(In|For|During) the (comparison|corresponding) period', x['text'])]   # last year's figures
+    n, yr = r.get('quarter'), (r.get('date') or '')[:4]
+    if n == 4 and (r.get('date') or '')[5:7] in ('01', '02', '03'):
+        yr = str(int(yr) - 1)
+    months = {1: 'January–March', 2: 'January–June', 3: 'January–September', 4: 'January–December'}
+    labels = {'q': (f'Quarter: Q{n} {yr}' if n else 'The quarter', 'What the company reports for the three months.'),
+              'ytd': (f'Year so far: {months[n]} {yr}' if n else 'Year so far', 'From the start of the financial year to the report date.'),
+              None: ('Results', 'The release does not say which period these sentences cover: see the announcement.')}
+    if n == 1:   # the first quarter is also the year so far
+        labels['ytd'] = labels['q']
+    body = ''
+    for per in ('q', 'ytd', None):
+        if n == 1 and per == 'ytd':
+            continue
+        items = quote_unique([quote_clean(x['text']) for x in res if x['period'] == per or (n == 1 and per == 'q' and x['period'] == 'ytd')])
+        if items:
+            title, sub = labels[per]
+            body += f'<div class="sp-q"><h3>{esc(title)} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>'
+    for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
+                             ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
+                             ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):
+        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if i['kind'] == kind and len(i['text']) <= 320])
+        if out:
+            body += f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
+    return (f'<div class="sp-latest"><p class="sp-q-date">Newest report: <b>{esc(r["title"])}</b>, published {esc(nice_date(r["date"]))} '
+            f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the announcement</a></p>{body}</div>')
+
+
 REPORT_BLOCKS = [('outlook', 'Outlook', 'What the company expects for the current year.'),
                  ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
                  ('backlog', 'Order backlog', 'Orders signed and not yet delivered.'),
@@ -991,10 +1049,24 @@ def quote_unique(items):
     return [t for t in items if t in out]
 
 
+TOPICS = {'sales': r'sales|revenue|turnover', 'profit': r'operating (profit|income|result|margin)|ebit|ebita|ebitda|margin',
+          'capex': r'capex|capital expenditure|investments?', 'cash': r'free cash flow|cash flow', 'eps': r'earnings per share|eps|net (profit|income)',
+          'dividend': r'dividend'}
+
+
+def topics(t):
+    low = t.lower()
+    return {k for k, rx in TOPICS.items() if re.search(fr'\b({rx})\b', low)}
+
+
 def report_html(c):
-    q = c.get('quotes')
-    if not q:
-        return ''
+    q = c.get('quotes') or {'items': []}
+    latest = latest_report_html(c)
+    # An outlook in the newest exchange report replaces the older report's outlook on the same lines
+    # (sales, profit, ...); older statements on other lines (e.g. capex) stay until the company updates them.
+    newer = set().union(*[topics(i['text']) for i in (c.get('latestReport') or {}).get('outlook') or [] if i['kind'] == 'outlook'])
+    if newer and (c['latestReport'].get('date') or '')[:10] > (q.get('period') or ''):
+        q = {**q, 'items': [i for i in q['items'] if not (i['kind'] == 'outlook' and topics(i['text']) and topics(i['text']) <= newer)]}
     blocks = ''
     for kind, title, sub in REPORT_BLOCKS:
         items = quote_unique([quote_clean(i['text']) for i in q['items'] if i['kind'] == kind and len(i['text']) <= 320
@@ -1003,16 +1075,17 @@ def report_html(c):
         if kind in REPORT_SHOWN and items:
             blocks += (f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' +
                        ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>')
-    if not blocks:
+    if not blocks and not latest:
         return ''
-    period = esc(q.get('period') or '')
-    pub = f', in the ESEF register since {esc(q["published"])}' if q.get('published') else ''
+    esef = ''
+    if blocks:
+        period = esc(q.get('period') or '')
+        pub = f', in the ESEF register since {esc(nice_date(q["published"]))}' if q.get('published') else ''
+        esef = (f'<p class="sp-q-date">{"Earlier: " if latest else ""}report for the period ending <b>{period}</b>{pub} '
+                f'{chip("r", "Report")} <a href="{esc(q["source"])}" target="_blank" rel="noopener">open the report</a></p>{blocks}')
     return f'''<section class="sp-card" id="report"><h2>From the company’s report</h2>
-      <p class="sp-q-date">Report for the period ending <b>{period}</b>{pub}. A newer quarterly report may exist: FINILA reads the reports the company files in ESEF.</p>
-      <p class="sp-sub">Sentences quoted word for word
-      {chip("r", "Report")} <a href="{esc(q["source"])}" target="_blank" rel="noopener">open the report</a>.
-      The company’s own statements, not FINILA’s: read the full context in the report.</p>
-      {blocks}</section>'''
+      <p class="sp-sub">Sentences quoted word for word. The company’s own statements, not FINILA’s: read the full context in the report.</p>
+      {latest}{esef}</section>'''
 
 
 def findings_html(c, med):
@@ -1154,7 +1227,11 @@ def events_html(c):
     """Company events FINILA records itself: managers' trades, short positions, the latest annual report."""
     ev = sorted(c.get('events', []), key=lambda e: e[0], reverse=True)[:12]
     nice = lambda d: date.fromisoformat(d).strftime('%-d %b %Y') if re.fullmatch(r'\d{4}-\d\d-\d\d', d or '') else d
-    items = ''.join(f'<li><time datetime="{esc(d)}">{esc(nice(d))}</time><span>{text}</span><a href="{link}">Details</a></li>' for d, text, link in ev)
+    ev += [(n['date'][:10], esc(n['title']) + ({'fr': ' <small class="ins-note">(in French)</small>', 'es': ' <small class="ins-note">(in Spanish)</small>'}.get(n.get('lang'), '')), n['url'], True)
+           for n in c.get('news', [])]
+    ev = sorted(ev, key=lambda e: e[0], reverse=True)[:12]
+    items = ''.join(f'<li><time datetime="{esc(e[0])}">{esc(nice(e[0]))}</time><span>{e[1]}</span>'
+                    + (f'<a href="{esc(e[2])}" target="_blank" rel="noopener">Read</a></li>' if len(e) > 3 else f'<a href="{e[2]}">Details</a></li>') for e in ev)
     if c.get('source') and c.get('origin') not in ('listing', 'wikidata', 'hand'):
         items += (f'<li><time>FY {esc((c.get("periodEnd") or "")[:4])}</time><span>Annual report for the year ending {esc(c["periodEnd"])}</span>'
                   f'<a href="{esc(c["source"])}" target="_blank" rel="noopener">Read</a></li>')
@@ -1162,7 +1239,7 @@ def events_html(c):
         return ''
     return f'''<section class="sp-events"><h2>Latest about {esc(c["name"])}</h2>
     <ul>{items}</ul>
-    <p class="ins-note">From the official registers: managers’ trades (so far Sweden), net short positions of funds (NL, IT, SE, NO, UK) and annual reports.</p></section>'''
+    <p class="ins-note">From official sources: company announcements filed with the exchange or regulator (so far Nasdaq Nordic, Oslo Børs, the French AMF and the Spanish CNMV), managers’ trades (so far Sweden), net short positions of funds (NL, IT, SE, NO, UK) and annual reports.</p></section>'''
 
 
 def page(c, peers, updated, med=None):
@@ -1285,6 +1362,13 @@ def page(c, peers, updated, med=None):
           {row('Total assets', bn(c.get('assets'), cur))}{row('Equity', bn(c.get('equity'), cur))}{row('Cash', bn(c.get('cash'), cur))}{row('Borrowings', bn(c.get('debt'), cur))}{row('Net debt', bn(c.get('netDebt'), cur))}
         </table></div>
       </div>'''
+    stats = stats_html(c)
+    if stats and c.get('years') and not listed_only:
+        # The figures of the last annual report are already in the key statistics and the results table,
+        # and payout, insiders and shorts in the statistics: only the quality-score tests stay here.
+        figs = ''
+        signals = f'<p class="ins-note">{" · ".join(l for l in links if l.startswith("<a"))}</p>' if any(l.startswith('<a') for l in links) else ''
+        qual = qual.replace('<div class="modal-section">', '<div class="modal-section sp-fscore">', 1)
     if listed_only:   # no report figures yet: visitors can open it, search engines wait for the figures
         extra = '  <meta name="robots" content="noindex, follow">\n' + extra
     return head(title, desc, url, extra) + f'''
@@ -1300,7 +1384,7 @@ def page(c, peers, updated, med=None):
     {price}
     {chart(c)}
     {summary_html(c, med, intro)}
-    {stats_html(c) or f'<div class="sp-keys">{keyhtml}</div>'}
+    {stats or f'<div class="sp-keys">{keyhtml}</div>'}
     {buyer_html(c, med)}
     {whatif_html(c, med)}
     {report_html(c)}
@@ -1443,6 +1527,7 @@ def main():
     add_history(rows)
     add_history_figures(rows)
     add_report_quotes(rows)
+    add_news(rows)
     for c in rows:
         if c.get('captive') and c.get('years'):
             c['years'] = {y: {k: v for k, v in r.items() if k not in ('netDebt', 'fcf', 'debt')} for y, r in c['years'].items()}

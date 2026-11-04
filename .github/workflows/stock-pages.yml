@@ -4,7 +4,7 @@ name: Stránky firiem FINILA
 # and uploads only those. Pages keep their price current through js/stock-page.js.
 on:
   workflow_run:
-    workflows: ['Obnoviť dáta FINILA']
+    workflows: ['Obnoviť dáta FINILA', 'Oznámenia firiem z búrz']   # also after new company announcements
     types: [completed]
     branches: [main]
   schedule:
