@@ -79,7 +79,6 @@ PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQR
 
 matched 58 / 77
   ! https://filings.xbrl.org/api/entities/7LTWFZYICNSX8D621K86/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
 SAP@Germany no usable annual report (0 filings)
 SIE@Germany no usable annual report (0 filings)
 ALV@Germany no usable annual report (0 filings)
@@ -102,7 +101,8 @@ BNP@France     2025-12-31 EUR rev=None ebitda=None net=12225.0 fcf=None roe=9.7 
 SAN@France     2025-12-31 EUR rev=43626.0 ebitda=8120.0 net=7813.0 fcf=7212.0 roe=10.9 nd/ebitda=0.81
         missing ['ebitda', 'fcf']; tagged: ['axa:CapitalGainNetOfTaxRelatedToTheDisposalOfAxaIM', 'axa:CashFlowsRelatedToOperatingActivitiesNotIncludedInTheProfitBeforeTax', 'axa:NetAmortizationExpenses', 'axa:NetChangeInOperatingReceivablesAndPayables', 'axa:OtherOperatingIncomeAndExpenseIncludingIntangibleImpairment', 'axa:PaidinCapital', 'axa:PurchaseOfTangibleAndIntangibleAssets', 'axa:RealizedCapitalGainsOrLossesOnEquityInstrumentsWithoutRecyclingInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfInvestmentProperty', 'ifrs-full:RepaymentsOfRegulatoryCapitalEquity', 'ifrs-full:Revenue']
 CS@France      2025-12-31 EUR rev=91139.0 ebitda=None net=9797.0 fcf=None roe=20.8 nd/ebitda=None
-RMS@France no usable annual report (0 filings)
+        missing ['ebitda']; tagged: ['hermes:DepreciationOfFixedAssetsRightOfUseAssetsAndImpairmentLosses', 'hermes:RecurringOperatingIncome', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtAmortisedCostClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:Revenue']
+RMS@France     2025-12-31 EUR rev=16002.0 ebitda=None net=4524.0 fcf=4213.0 roe=24.0 nd/ebitda=None
 KER@France     2023-12-31 EUR rev=19566.0 ebitda=6466.0 net=2983.0 fcf=1848.0 roe=19.6 nd/ebitda=0.94
         missing ['fcf']; tagged: ['VINCI:CapitalIncreasesAndReductionsOfSubsidiariesSubscribedByThirdParties', 'VINCI:Revenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'VINCI:Revenuefromcontractswithcustomersotherthanrevenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:FinanceCostsPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsOperatingActivities', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueFromContractsWithCustomers']
 DG@France      2025-12-31 EUR rev=75372.0 ebitda=13570.0 net=4903.0 fcf=None roe=15.9 nd/ebitda=-0.77
@@ -164,26 +164,16 @@ EQNR@Norway    2025-12-31 USD rev=106462.0 ebitda=37670.0 net=5043.0 fcf=5977.0 
 OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.3 nd/ebitda=None
 PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
 
-48 companies with real fundamentals
+49 companies with real fundamentals
 ESMA FULINS_E_20261031_01of02.zip: 16445 new issuers
 ESMA FULINS_E_20261031_02of02.zip: 0 new issuers
 FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
 18589 issuers with listed shares
   ! https://filings.xbrl.org/api/filings?include=entity&page%5Bsize%5D=500&sort=-period_end&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
 2668 issuers with a report for 2024 or later (10 pages)
-2177 reports to read, 491 cached
-  read 200 reports
-  read 400 reports
-  read 600 reports
-  read 800 reports
-  read 1000 reports
-  read 1200 reports
-  read 1400 reports
-  read 1600 reports
-  read 1800 reports
-  read 2000 reports
-read 2177 reports this run
-  ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
+33 reports to read, 2635 cached
+read 33 reports this run
+4908 listed companies with an LEI on Wikidata
 18589 issuers with listed shares (FIRDS); 2177 of them file reports here
 shares in issue for 525 companies (data/shares.json)
 annual figures by hand for 561 companies (data/financials.json)
