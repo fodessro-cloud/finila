@@ -1,0 +1,48 @@
+name: Čo firmy robia (z výročných správ)
+
+# Quotes what each company does, word for word, from the ESEF note on the nature of its operations
+# into data/about.json, used by the company pages. Reports are cached per report.
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['scripts/data/about.py', '.github/workflows/about.yml']
+  schedule:
+    - cron: '40 3 * * 0'   # Sundays 03:40 UTC; annual reports come once a year
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Test: only this many of the largest companies (empty = all)'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: about
+  cancel-in-progress: false
+
+jobs:
+  about:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read what each company does from its annual report
+        env:
+          FINILA_BUDGET_MIN: '320'
+          FINILA_LIMIT: ${{ inputs.limit || (github.event_name == 'push' && '60' || '') }}
+        run: |
+          set -o pipefail
+          python scripts/data/about.py 2>&1 | tee data/about.log || { echo "::error::about: $(tail -3 data/about.log | tr '\n' ' ')"; exit 1; }
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "finila-data-bot"
+          git config user.email "finila-data-bot@users.noreply.github.com"
+          git add data/about.json data/cache/about.json data/about.log
+          git diff --cached --quiet || git commit -m "Update company descriptions [data refresh]"
+          git pull --rebase -X theirs || true
+          git push
