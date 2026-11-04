@@ -31,13 +31,21 @@ fd.CONCEPTS.update({
     "minorities":  ["NoncontrollingInterests"],
     "leases_c":    ["CurrentLeaseLiabilities"],
     "leases_nc":   ["NoncurrentLeaseLiabilities"],
+    # Where the cash went (cash flow statement): buybacks, acquisitions, disposals, borrowings.
+    "buybacks":    ["PaymentsToAcquireOrRedeemEntitysShares"],
+    "acquisitions": ["CashFlowsUsedInObtainingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities"],
+    "disposals":   ["CashFlowsFromLosingControlOfSubsidiariesOrOtherBusinessesClassifiedAsInvestingActivities"],
+    "borrowed":    ["ProceedsFromBorrowingsClassifiedAsFinancingActivities", "ProceedsFromNoncurrentBorrowings"],
+    "repaid":      ["RepaymentsOfBorrowingsClassifiedAsFinancingActivities", "RepaymentsOfNoncurrentBorrowings"],
+    "leasePaid":   ["PaymentsOfLeaseLiabilitiesClassifiedAsFinancingActivities"],
+    "cogs":        ["CostOfSales"],
 })
 fd.INSTANT.update({"inventories", "receivables", "payables", "leases", "minorities", "leases_c", "leases_nc"})
 
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/history.json"
 OUT = ROOT / "data/history.json"
-CACHE_VERSION = 3          # bump when the figures read change, so every report is read again
+CACHE_VERSION = 4          # bump when the figures read change, so every report is read again
 YEARS = 6                  # newest report and the five before it
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
@@ -78,9 +86,12 @@ def year_row(cur, prev):
         r["da"] = mil(abs(da))
     for k, name in (("inventories", "inventories"), ("receivables", "receivables"), ("payables", "payables"),
                     ("leases", "leases"), ("gross", "gross"), ("cur_assets", "curAssets"), ("cur_liab", "curLiab"),
-                    ("interest", "interest"), ("pbt", "pbt"), ("tax", "tax"), ("minorities", "minorities")):
-        if cur.get(k) is not None:
-            r[name] = mil(abs(cur[k])) if k == "interest" else mil(cur[k])
+                    ("interest", "interest"), ("pbt", "pbt"), ("tax", "tax"), ("minorities", "minorities"),
+                    ("buybacks", "buybacks"), ("acquisitions", "acquisitions"), ("disposals", "disposals"),
+                    ("borrowed", "borrowed"), ("repaid", "repaid"), ("leasePaid", "leasePaid"), ("cogs", "cogs")):
+        if cur.get(k) is not None:   # cash flows and costs are stored as positive amounts
+            r[name] = mil(abs(cur[k])) if k in ("interest", "buybacks", "acquisitions", "disposals", "borrowed",
+                                                "repaid", "leasePaid", "cogs") else mil(cur[k])
     if "leases" not in r and (cur.get("leases_c") is not None or cur.get("leases_nc") is not None):
         r["leases"] = mil(cur.get("leases_c", 0) + cur.get("leases_nc", 0))
     if cur.get("financial"):
