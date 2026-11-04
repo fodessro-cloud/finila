@@ -1,19 +1,15 @@
-name: Test backlog a výhľadov z ESEF
-
+name: Test backlog v ESEF
 on:
   push:
     branches: [claude/project-thread-z7m788]
-    paths: ['scripts/data/probe_backlog.py', 'scripts/data/probe_venues.py', '.github/workflows/probe-backlog.yml']
+    paths: ['scripts/data/probe_backlog.py', '.github/workflows/probe-backlog.yml']
   workflow_dispatch:
-
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python scripts/data/probe_backlog.py
-      - run: python scripts/data/probe_venues.py
+        with: {python-version: '3.12'}
+      - run: python scripts/data/probe_backlog.py 2>&1 | tee probe.log; tail -3 probe.log | while read l; do echo "::notice::$l"; done
