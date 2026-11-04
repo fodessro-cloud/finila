@@ -1,7 +1,7 @@
-FINILA data check 2026-11-04 15:45 UTC (live site)
+FINILA data check 2026-11-04 21:27 UTC (live site)
 0 errors, 89 warnings
 
-WARNING BP P.L.C. (GB0007980591): P/E 2,208 (price 6.913, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING BP P.L.C. (GB0007980591): P/E 2,205 (price 6.905, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING DCC (IE0002424939): P/E 450 (price 76.5, EPS 0.1416 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Electrolux (SE0016589188): shares in issue 787.7M but report implies 270.2M.
 WARNING Swatch Group (CH0012255151): P/E 3,036 (price 198.75, EPS 0.06 CHF): EPS misread, rounded or from before a share split, unless profit really was tiny.
@@ -19,8 +19,8 @@ WARNING Allfunds Group PLC (GB00BNTJ3546): P/E 2,522 (price 9.835, EPS 0.0039 EU
 WARNING Bally'S Intralot Α.Ε. (GRS343313003): EPS 0.073 and net income -65.2 have opposite signs.
 WARNING InstallatørGruppen (DK0064982565): EPS -2.59 and net income 74.9 have opposite signs.
 WARNING Exail Technologies (FR0000062671): P/E 714 (price 125.7, EPS 0.176 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): P/E 447 (price 132.06, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): market value €33,696M is 71x revenue: share count off (reverse split?).
+WARNING Nebius Group (NL0009805522): P/E 426 (price 125.7, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): market value €32,074M is 68x revenue: share count off (reverse split?).
 WARNING Norcros PLC (GB00BYYJL418): P/E 868 (price 3.54, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING NCC Group (GB00B01QGK86): EPS -0.03 and net income 17.1 have opposite signs.
 WARNING Nacon (FR0000074072): shares in issue 108.4M but report implies 18.6M.
