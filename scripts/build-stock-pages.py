@@ -427,6 +427,10 @@ def findings(c, med):
             f.append((True, f'Revenue up {num(rg)}% on the year before.', 'Fast growth for a listed company.'))
         elif rg <= -5:
             f.append((False, f'Revenue down {num(-rg)}% on the year before.', 'The business shrank: check whether it is a one-off.'))
+    if ng is not None and ng <= -50 and (g('netIncome') or 0) > 0 and (rg is None or rg > -30):
+        f.append((None, f'Net income down {num(-ng, 0)}% on the year before{"" if rg is None else f", revenue {sign(rg)}%"}.',
+                  'A profit drop this large with stable sales usually comes from a one-off item (write-off, sale, '
+                  'restructuring). The P/E then looks high: check the report for the cause.'))
     rev, capex, ocf, fcf = g('revenue'), g('capex'), g('operatingCashFlow'), g('fcf')
     if not fin and rev and rev > 0 and capex is not None and ocf and ocf > 0 and capex / rev >= 0.15:
         left = max(fcf or 0, 0) / ocf * 100
