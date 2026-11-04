@@ -731,6 +731,8 @@ def page(c, peers, updated, med=None):
           {row('ROE', pct(c.get('roe')))}{row('EBITDA margin', pct(c.get('ebitdaMargin')))}{row('Operating margin', pct(c.get('operatingMargin')))}{row('Net margin', pct(c.get('netMargin')))}{row('FCF margin', pct(c.get('fcfMargin')))}{row('Net debt / EBITDA', ndv)}{row('Revenue growth', pct(c.get('revenueGrowth')))}{row('Net income growth', pct(c.get('netIncomeGrowth')))}
         </table></div>
       </div>'''
+    if listed_only:   # no report figures yet: visitors can open it, search engines wait for the figures
+        extra = '  <meta name="robots" content="noindex, follow">\n' + extra
     return head(title, desc, url, extra) + f'''
 <main class="sp-wrap">
   <nav class="sp-crumbs" aria-label="Breadcrumb"><a href="/stock/">Stocks</a> › {esc(COUNTRIES.get(c["country"], c["country"]))} › {esc(c["name"])}</nav>
@@ -824,7 +826,7 @@ def main():
     housing = json.loads((SRC / 'js' / 'housing.json').read_text()) if (SRC / 'js' / 'housing.json').exists() else {'countries': {}}
     prop = ['property/undervalued'] + sorted(f'property/{re.sub(r"[^a-z0-9]+", "-", c["name"].lower()).strip("-")}'
                                             for c in housing['countries'].values() if not c.get('agg'))
-    urls = [f'{SITE}/{p}' for p in PAGES + prop] + [f'{SITE}/stock/{c["slug"]}' for c in sorted(rows, key=lambda c: c['slug'])] + old
+    urls = [f'{SITE}/{p}' for p in PAGES + prop] + [f'{SITE}/stock/{c["slug"]}' for c in sorted(rows, key=lambda c: c['slug']) if c.get('origin') != 'listing'] + old
     (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
                                      ''.join(f'  <url><loc>{esc(u)}</loc><lastmod>{today}</lastmod></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     print(f'Built {len(rows)} company pages in {out}, sitemap with {len(urls)} addresses.')
