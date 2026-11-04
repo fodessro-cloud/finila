@@ -171,6 +171,8 @@ def quotes(text, year):
         low = i["text"].lower()
         if i["kind"] not in ("outlook", "target", "backlog") or re.search(r"please call|investor relations|interim report|press release", low):
             continue
+        if re.search(r"\b(transaction|completion|closing|expected to close|fair value)\b", low):
+            continue   # deal timetables and accounting effects, not the company's business outlook
         if re.search(r"previously expected|previous (estimate|guidance|outlook)", low) and not re.search(r"\b(now|rais|lower|updat|narrow|chang)", low):
             continue   # the old guidance on its own
         if i["kind"] == "backlog" and (i["text"] in results or not re.search(r"backlog|order book|orderbook|order stock", low)):
