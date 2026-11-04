@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 6
+CACHE_VERSION = 7
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -142,6 +142,8 @@ JUNK = (r"please call|investor relations|\+\d\d \d|visit (www|home)\.|press rele
 def split_release(text):
     """Releases list key figures as bullets glued together by PDF extraction: cut at dashes used as bullets,
     at opening quotes and after a prior-year figure in brackets followed by a new sentence."""
+    months = r"(?i:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)"
+    text = re.sub(fr"\b({months})\s[–-]\s(?={months}\b)", r"\1–", text)   # "January - September" is a period, not a bullet
     t = re.sub(r"\s[–•▪■]\s|\s-\s(?=[A-Z])", ". ", text)
     t = re.sub(r"\s[“\"]\s?(?=[A-Z])", ". ", t)
     t = re.sub(r"(\(\s?-?[\d.,\s]+\)|\d%\)|\d\))\s+(?=[A-Z][a-z])", r"\1. ", t)
@@ -177,16 +179,19 @@ QUARTER_CUES = [
 def report_quarter(title, text, published):
     """Which quarter a report is for: the latest quarter its title names ("Q1-Q3", "1 January - 30 September"
     are Q3), else its first lines, else its publication date."""
-    for t in (title, text[:600]):
+    m = int(published[5:7]) if published[5:7].isdigit() else 0
+    by_date = {1: 4, 2: 4, 3: 4, 4: 1, 5: 1, 7: 2, 8: 2, 10: 3, 11: 3}.get(m)
+    for i, t in enumerate((title, text[:600])):
         low = (t or "").lower()
         found = []
         for rx, n in QUARTER_CUES:
             for m in re.finditer(rx, low):
                 found.append(int(m.group(1)) if n is None else n)
         if found:
-            return max(found)
-    m = int(published[5:7]) if published[5:7].isdigit() else 0
-    return {1: 4, 2: 4, 3: 4, 4: 1, 5: 1, 7: 2, 8: 2, 10: 3, 11: 3}.get(m)
+            # The first lines also name comparison periods ("three months"), so there the date decides
+            # unless the text names the quarter the date points to.
+            return max(found) if i == 0 or not by_date or by_date in found else by_date
+    return by_date
 
 
 def quotes(text, year):
@@ -211,6 +216,12 @@ def quotes(text, year):
             if re.search(r"(?<![\d,.])\d \d+[.,]\d+\s?%|\b(would|if)\b", s):
                 continue   # a number split by the PDF ("8 4.7%" for 84.7%) or a what-if, not a result
             s = re.sub(r"^(?:[A-Z0-9&,'’/\- ]{3,}\s){2,}(?=[A-Z][a-z])", "", s)   # headings in capitals glued in front
+            if re.search(r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}", s):
+                continue   # a word the PDF broke across lines ("contrib - uted", "l ike-for-like"): not quoted as it reads
+            s = re.sub(r"[,\s]*[\"”]?,?[\"”]?\s+said\s+[A-Z][\w.\- ]+,.*$", ".", s)   # '..., said Jane Doe, CEO' after a quote
+            s = re.sub(r"\s+(Comments? from|Quote from|CEO comment|CEO's comment)\b.*$", "", s)
+            if re.search(r"\bsaid\b|\bsays\b", s):
+                continue
             key = re.sub(r"\W+", "", low)[:100]
             if key not in seen:
                 seen.add(key)
