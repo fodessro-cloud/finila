@@ -62,14 +62,16 @@ NOISE = (r"emission|scope [123]|co2|ghg|carbon|climate|renewable electricity|ene
          r"share-based|vesting|options? granted|pension|discount rate|impairment test|sensitivity|wacc|"
          r"gdp|inflation is|the market is expected|market is projected|industry is (expected|projected)|"
          r"sustainab|esg|csrd|taxonomy|biodiversity|children|patients reached|hedg|interest rate swap|materiality|auditor|audit |"
-         r"contingent consideration|held for sale|remuneration|pension|"
+         r"contingent consideration|held for sale|remuneration|pension|ceteris paribus|would result in|own holding|"
          r"forward-looking statements|risks and uncertainties|actual results")
 
 
 def sentences(text):
-    for s in re.split(r"(?<=[.!?])\s+(?=[A-Z•●▶(])", text):
+    """Sentences, cut also at bullets, table bars and footnote marks, which a report converted from PDF
+    glues to the next heading. Long run-ons (headings + sentence) are left out rather than cut wrongly."""
+    for s in re.split(r"(?<=[.!?])\s+(?=[A-Z•●▶(\[])|\s[•●▶|]\s|\s\[[A-Z]\]\s", text):
         s = s.strip(" •●▶-")
-        if 50 <= len(s) <= 420:
+        if 50 <= len(s) <= 320 and not re.search(r"annual report( and accounts)? 20\d\d|strategic report|financial report for the period", s.lower()):
             yield s
 
 
