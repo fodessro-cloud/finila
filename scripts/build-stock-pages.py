@@ -690,6 +690,10 @@ def buyer_html(c, med):
         if c.get('minoritiesEur'):
             parts += f'<i>+</i><div><span>Minority interests {rep}</span><b>€{bn(c["minoritiesEur"])}</b></div>'
         ev = f'<div class="sp-ev">{parts}<i>=</i><div class="sp-ev-tot"><span>Enterprise value</span><b>€{bn(c["ev"])}</b></div></div>'
+    elif c.get('captive'):
+        ev = (f'<p class="sp-sub">The group includes its own bank ({esc(c["captive"])}): its borrowings fund customer loans and '
+              'leasing, so group net debt, enterprise value and free cash flow do not describe the business and are not shown. '
+              'Analysts use the figures of the industrial division alone, which the annual report shows only in its notes.</p>')
     rows = [('EV / EBITDA', mult(c.get('evEbitda')), mult(med.get('evEbitda'))),
             ('EV / EBIT', mult(c.get('evEbit')), mult(med.get('evEbit'))),
             ('P/E', num(c.get('pe'), 1), num(med.get('pe'), 1)),
@@ -1181,12 +1185,32 @@ def index_page(rows, updated):
 '''
 
 
+# Vehicle and machinery groups with their own bank (car loans, leasing): the group's borrowings fund
+# customer loans, so group net debt, EV and free cash flow say nothing about the industrial business.
+# Analysts use the industrial division's figures, which ESEF does not tag separately: shown as a dash.
+CAPTIVE_FINANCE = {
+    '529900NNUPAGGOMPXZ31': 'Volkswagen Financial Services', 'YEH5ZCD6E441RHVHD759': 'BMW Financial Services',
+    '529900R27DL06UVNT076': 'Mercedes-Benz Mobility', '529900PW78JIYOUBSR24': 'Daimler Truck Financial Services',
+    '529900UIMQRKPFN6SV80': 'Traton Financial Services', '549300WGC2HZ5J67V817': 'CNH Capital',
+    '529900EWEX125AULXI58': 'Porsche Financial Services', '549300ZWF2ZJDD9EOR96': 'Iveco Capital',
+    '5299005KY91C4C6U9H17': 'KION Financial Services', '529900PHZORTU6FSXE73': 'Jungheinrich Finance',
+    '549300LKT9PW7ZIBDF31': 'Stellantis Financial Services', '969500F7JLTX36OUI695': 'Mobilize Financial Services',
+}
+
+
 def main():
     updated, price_day, rows = companies()
+    for c in rows:
+        if c['lei'] in CAPTIVE_FINANCE:
+            c['captive'] = CAPTIVE_FINANCE[c['lei']]
+            for k in ('netDebt', 'netDebtToEbitda', 'fcf', 'fcfMargin', 'payoutFcf'):
+                c[k] = None
     add_signals(rows)
     add_history(rows)
     add_history_figures(rows)
     for c in rows:
+        if c.get('captive') and c.get('years'):
+            c['years'] = {y: {k: v for k, v in r.items() if k not in ('netDebt', 'fcf', 'debt')} for y, r in c['years'].items()}
         add_valuation(c)
     # Peers and medians by sector. Wikidata's industry labels are too uneven to group by (Roche has none,
     # Alcon is "pharmaceutical industry"), so a finer split waits for a better classification.
