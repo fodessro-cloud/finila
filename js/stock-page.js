@@ -11,7 +11,9 @@
   const fmt = (v, d) => v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
   box.querySelector('[data-f=price]').textContent = '€' + fmt(price, 2);
   const ch = box.querySelector('[data-f=change]');
-  ch.textContent = typeof change === 'number' ? (change >= 0 ? '+' : '') + fmt(change, 2) + '%' : '';
+  // Change on the previous close in euros and per cent: +€1.23 (+0.95%).
+  const diff = typeof change === 'number' && change > -100 ? price - price / (1 + change / 100) : null;
+  ch.textContent = diff === null ? '' : `${diff >= 0 ? '+' : '−'}€${fmt(Math.abs(diff), 2)} (${change >= 0 ? '+' : ''}${fmt(change, 2)}%)`;
   ch.className = 'modal-change ' + (change >= 0 ? 'pos' : 'neg');
   box.querySelector('[data-f=badge]').textContent = `Real price · ${venue} · ${day}${final ? '' : ' · 15 min delayed'}`;
 })();

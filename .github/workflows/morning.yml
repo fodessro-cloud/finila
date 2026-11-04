@@ -29,7 +29,7 @@ jobs:
           failed=""
           for w in refresh-data.yml invest.yml housing.yml rates.yml housing-levels.yml prices.yml stock-pages.yml; do
             before=$(gh run list --workflow "$w" --limit 1 --json databaseId --jq '.[0].databaseId // 0')
-            gh workflow run "$w" --ref main
+            for wait in 0 30 60 120; do sleep $wait; gh workflow run "$w" --ref main && break; done
             id=$before
             for i in $(seq 1 30); do sleep 10; id=$(gh run list --workflow "$w" --limit 1 --json databaseId --jq '.[0].databaseId // 0'); [ "$id" != "$before" ] && break; done
             [ "$id" = "$before" ] && { echo "::warning::$w did not start"; failed="$failed $w"; continue; }
