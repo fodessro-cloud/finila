@@ -189,8 +189,8 @@ def main():
     if cache.get("_v") != CACHE_VERSION:
         cache = {"_v": CACHE_VERSION}
     today = date.today().isoformat()
-    week_ago = date.fromordinal(date.today().toordinal() - 7).isoformat()
-    todo = [l for l in leis if cache.get(l, {}).get("checked", "") <= week_ago]
+    # Every company once a day: one small API call each, and a report is downloaded only when it is new.
+    todo = [l for l in leis if cache.get(l, {}).get("checked", "") < today]
     size = {r["lei"]: r.get("revenueEur") or 0 for r in rows}
     todo.sort(key=lambda l: -size.get(l, 0))
     if os.environ.get("FINILA_LIMIT"):

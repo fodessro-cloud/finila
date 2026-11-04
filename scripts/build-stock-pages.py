@@ -948,8 +948,10 @@ def report_html(c):
     if not blocks:
         return ''
     period = esc(q.get('period') or '')
+    pub = f', in the ESEF register since {esc(q["published"])}' if q.get('published') else ''
     return f'''<section class="sp-card" id="report"><h2>From the company’s report</h2>
-      <p class="sp-sub">Sentences quoted word for word from the report for the period ending {period}
+      <p class="sp-q-date">Report for the period ending <b>{period}</b>{pub}. A newer quarterly report may exist: FINILA reads the reports the company files in ESEF.</p>
+      <p class="sp-sub">Sentences quoted word for word
       {chip("r", "Report")} <a href="{esc(q["source"])}" target="_blank" rel="noopener">open the report</a>.
       The company’s own statements, not FINILA’s: read the full context in the report.</p>
       {blocks}</section>'''
