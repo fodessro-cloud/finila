@@ -149,3 +149,7 @@ html, body { height: auto; }
 .sp-an-h { font-size: 14px; margin: 18px 0 6px; }
 .sp-an-flow td:not(:first-child), .sp-an-flow th:not(:first-child) { text-align: right; }
 .sp-an-flow .sp-an-total td { font-weight: 600; }
+.sp-q h3 { font-size: 14px; margin: 14px 0 4px; }
+.sp-q h3 small { font-weight: 400; color: var(--text2); margin-left: 6px; font-size: 12px; }
+.sp-q ul { margin: 0; padding-left: 18px; }
+.sp-q li { font-size: 13px; line-height: 1.5; margin: 4px 0; }

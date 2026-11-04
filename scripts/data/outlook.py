@@ -21,7 +21,7 @@ import fundamentals as fd   # noqa: E402
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/outlook.json"
 OUT = ROOT / "data/outlook.json"
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
@@ -61,14 +61,17 @@ NOISE = (r"emission|scope [123]|co2|ghg|carbon|climate|renewable electricity|ene
          r"female|women|gender|employee engagement|injur|safety|remuneration|incentive|bonus|\bsti\b|\blti\b|"
          r"share-based|vesting|options? granted|pension|discount rate|impairment test|sensitivity|wacc|"
          r"gdp|inflation is|the market is expected|market is projected|industry is (expected|projected)|"
-         r"sustainab|esg|csrd|taxonomy|biodiversity|children|patients reached|hedg|interest rate swap|"
+         r"sustainab|esg|csrd|taxonomy|biodiversity|children|patients reached|hedg|interest rate swap|materiality|auditor|audit |"
+         r"contingent consideration|held for sale|remuneration|pension|ceteris paribus|would result in|own holding|"
          r"forward-looking statements|risks and uncertainties|actual results")
 
 
 def sentences(text):
-    for s in re.split(r"(?<=[.!?])\s+(?=[A-Z•●▶(])", text):
+    """Sentences, cut also at bullets, table bars and footnote marks, which a report converted from PDF
+    glues to the next heading. Long run-ons (headings + sentence) are left out rather than cut wrongly."""
+    for s in re.split(r"(?<=[.!?])\s+(?=[A-Z•●▶(\[])|\s[•●▶|]\s|\s\[[A-Z]\]\s", text):
         s = s.strip(" •●▶-")
-        if 50 <= len(s) <= 420:
+        if 50 <= len(s) <= 320 and not re.search(r"annual report( and accounts)? 20\d\d|strategic report|financial report for the period", s.lower()):
             yield s
 
 
@@ -93,12 +96,27 @@ def report_text(raw):
     return b if frag(a) > 0.32 and frag(b) < frag(a) else a
 
 
+def english(low):
+    w = low.split()
+    en = sum(x in ("the", "and", "of", "to", "in", "was", "were", "our", "we") for x in w)
+    other = sum(x in ("le", "la", "les", "des", "et", "du", "och", "att", "der", "die", "und", "het", "een", "og") for x in w)
+    return en >= 2 and en > other * 2
+
+
 def pick(text, year):
     # Events only from the management report, which comes before the financial statements.
     events = []
+    recent = "|".join(str(y) for y in (year - 2, year - 1, year))
     for s in sentences(text[:int(len(text) * 0.4)]):
         low = s.lower()
-        if re.search(EVENT, s, re.I) and not re.search(NOISE, low) and not re.search(fr"\b({EXPECT})", low) \
+        # Only this year's events, in English, stated as done: a sentence naming a recent year, month or
+        # quarter, or "this year" / "during the year". History, policies and bios fall out this way.
+        when = re.search(fr"\b({recent})\b", s) or re.search(r"\b(this year|during the year|in the year|in q[1-4]|"
+                         r"in (january|february|march|april|may|june|july|august|september|october|november|december))\b", low)
+        years_named = [int(y) for y in re.findall(r"\b(19\d\d|20\d\d)\b", s)]
+        if re.search(EVENT, s, re.I) and when and not any(y < year - 2 for y in years_named) and english(low) \
+                and not re.search(NOISE, low) and not re.search(fr"\b({EXPECT})", low) \
+                and not re.search(r"\b(policy|policies|procedures?|framework|appointed:|follow \w+ on linkedin)\b", low) \
                 and sum(ch.isdigit() for ch in s) <= len(s) * 0.15 and not re.search(r"\b(may|could|might|if)\b", low):
             events.append({"kind": "event", "text": s})
     ahead = "|".join(str(y) for y in range(year, year + 7))

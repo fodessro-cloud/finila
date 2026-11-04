@@ -896,6 +896,65 @@ def analysis_html(c):
       {flow}</section>'''
 
 
+def add_report_quotes(rows):
+    """data/outlook.json (scripts/data/outlook.py): sentences quoted word for word from the newest report."""
+    try:
+        quotes = json.loads((SRC / 'data' / 'outlook.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return
+    for c in rows:
+        q = quotes.get(c['lei'])
+        if q and q.get('items'):
+            c['quotes'] = q
+
+
+REPORT_BLOCKS = [('outlook', 'Outlook', 'What the company expects for the current year.'),
+                 ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
+                 ('backlog', 'Order backlog', 'Orders signed and not yet delivered.'),
+                 ('event', 'What happened', 'Deals, restructuring, approvals, prices and management changes.')]
+REPORT_SHOWN = {'outlook', 'target', 'backlog'}   # 'event' joins once its selection is checked
+
+
+def quote_clean(t):
+    """Footnote marks and symbols the PDF-to-ESEF conversion leaves in sentences («, ◊, *)."""
+    return re.sub(r'\s+([.,;:])', r'\1', re.sub(r'\s*[«»◊*†‡]\s*', ' ', t)).strip()
+
+
+def quote_unique(items):
+    """The same statement often appears two or three times in a report (highlights, outlook, CEO letter):
+    sentences with the same figures are one statement, the shortest wording is kept."""
+    sig = lambda t: frozenset(re.sub(r'\.0\b', '', x) for x in re.findall(r'\d+(?:[.,]\d+)?', t))
+    out = []
+    for t in sorted(items, key=len):
+        k = sig(t)
+        if len(k) >= 2 and any(k <= sig(o) or sig(o) <= k for o in out):
+            continue
+        out.append(t)
+    return [t for t in items if t in out]
+
+
+def report_html(c):
+    q = c.get('quotes')
+    if not q:
+        return ''
+    blocks = ''
+    for kind, title, sub in REPORT_BLOCKS:
+        items = quote_unique([quote_clean(i['text']) for i in q['items'] if i['kind'] == kind and len(i['text']) <= 320
+                              and not re.search(r'materiality|ceteris paribus|annual report( and accounts)? 20\d\d|financial report for the period',
+                                                i['text'], re.I)])
+        if kind in REPORT_SHOWN and items:
+            blocks += (f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' +
+                       ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>')
+    if not blocks:
+        return ''
+    period = esc(q.get('period') or '')
+    return f'''<section class="sp-card" id="report"><h2>From the company’s report</h2>
+      <p class="sp-sub">Sentences quoted word for word from the report for the period ending {period}
+      {chip("r", "Report")} <a href="{esc(q["source"])}" target="_blank" rel="noopener">open the report</a>.
+      The company’s own statements, not FINILA’s: read the full context in the report.</p>
+      {blocks}</section>'''
+
+
 def findings_html(c, med):
     f = findings(c, med)
     if not f:
@@ -1183,6 +1242,7 @@ def page(c, peers, updated, med=None):
     {summary_html(c, med, intro)}
     {stats_html(c) or f'<div class="sp-keys">{keyhtml}</div>'}
     {buyer_html(c, med)}
+    {report_html(c)}
     {history_html(c)}
     {analysis_html(c)}
     {whatif_html(c, med)}
@@ -1239,6 +1299,7 @@ METHOD = [
         ('Incremental ROIC', 'Change in operating profit after tax ÷ change in capital (as in ROIC) between the first and the last year shown, when capital grew by more than 10%.'),
         ('Capex ÷ depreciation', 'Purchases of property, plant, equipment and intangibles ÷ depreciation and amortisation. Above 1× the company invests more than its assets wear out.'),
         ('Where the cash went', 'Sums of the cash flow statements over the years shown: operating cash flow, and the payments for capex, acquisitions of businesses, dividends, share buybacks and lease liabilities, and borrowings repaid minus new borrowings. A line is left out when a year does not report it.'),
+        ('From the company’s report', 'Sentences quoted word for word from the newest ESEF report (annual, or half-year where the company files it in ESEF). Kept only when a sentence names a financial line (revenue, margin, capex, dividend …), an expectation, a year ahead and a number; backlog sentences need a figure. Sustainability, pay, audit and market-forecast sentences are left out. Nothing is rewritten.'),
         ('Not shown', 'For banks and insurers, and for vehicle groups with their own bank (their borrowings fund customer loans).'),
     ]),
     ('Scenarios', [
@@ -1320,6 +1381,7 @@ def main():
     add_signals(rows)
     add_history(rows)
     add_history_figures(rows)
+    add_report_quotes(rows)
     for c in rows:
         if c.get('captive') and c.get('years'):
             c['years'] = {y: {k: v for k, v in r.items() if k not in ('netDebt', 'fcf', 'debt')} for y, r in c['years'].items()}
