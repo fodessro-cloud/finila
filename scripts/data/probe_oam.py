@@ -1,4 +1,4 @@
-"""Test (GitHub Actions only), round 4: the search API inside the UK FCA data portal's script."""
+"""Test (GitHub Actions only), round 5: the search call inside the UK FCA NSM module."""
 import json, re, urllib.request
 
 UA = {"User-Agent": "FINILA data refresh (finila.com)", "Accept": "*/*"}
@@ -16,16 +16,15 @@ def get(url, data=None, ctype=None):
         return "ERR " + str(e), getattr(e, "read", lambda: b"")()
 
 
-st, js = get("https://data.fca.org.uk/main-AQSD5GC2.js")
+st, js = get("https://data.fca.org.uk/chunk-OAPZGRPP.js")
 t = js.decode("utf-8", "replace")
-print("main.js", st, len(t))
-for pat in (r'"[^"]*api[^"]*"', r"'[^']*api[^']*'", r"`[^`]*api[^`]*`"):
-    print(pat, sorted(set(m for m in re.findall(pat, t) if len(m) < 160))[:60])
-for word in ("nsm", "NSM", "search?index", "index="):
-    for m in list(re.finditer(re.escape(word), t))[:4]:
-        print(f"--- {word} @ {m.start()}:", t[max(0, m.start() - 300):m.start() + 300].replace("\n", " "))
-
-for idx in ("fca-nsm-searchdata", "fca-nsm-searchdata-prod", "nsm", "fca-nsm"):
-    body = {"from": 0, "size": 2, "sort": "submitted_date", "sortorder": "desc", "criteriaObj": {"criteria": [], "dateCriteria": []}}
-    st, b = get(f"https://api.data.fca.org.uk/search?index={idx}", json.dumps(body).encode(), "application/json")
-    print("== index", idx, st, b[:500])
+print("nsm chunk", st, len(t))
+print("imports", sorted(set(re.findall(r'chunk-[A-Z0-9]+\.js', t))))
+for word in ("index", "search", "http", "environment", "apiUrl", "baseUrl"):
+    for m in list(re.finditer(word, t))[:5]:
+        print(f"--- {word} @ {m.start()}:", t[max(0, m.start() - 250):m.start() + 250].replace("\n", " "))
+st, main = get("https://data.fca.org.uk/main-AQSD5GC2.js")
+mt = main.decode("utf-8", "replace")
+for word in ("fca.org.uk", "apiUrl", "baseUrl", "searchUrl", "environment"):
+    for m in list(re.finditer(re.escape(word), mt))[:6]:
+        print(f"=== main {word} @ {m.start()}:", mt[max(0, m.start() - 200):m.start() + 200].replace("\n", " "))
