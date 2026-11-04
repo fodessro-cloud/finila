@@ -1,0 +1,194 @@
+"""Outlook, mid-term targets and order backlog, quoted word for word from each company's newest ESEF
+report on filings.xbrl.org (annual, or half-year/quarterly where the company files those in ESEF).
+
+ESEF does not tag these figures, so they are found in the report text: a sentence is kept only when it
+names a financial line (revenue, margin, capex, ...), an expectation (expected, guidance, outlook,
+target, ...), a year ahead and a number; backlog sentences need the word backlog / order book and a
+number. Sustainability, pay and market-forecast sentences are left out. Nothing is rewritten: the page
+shows the sentence, the report it comes from and its date.
+
+Reports never change once filed, so results are cached per report in data/cache/outlook.json.
+Writes data/outlook.json: {lei: {"period": "2026-06-30", "source": url, "items": [{"kind", "text"}]}}.
+"""
+import html, io, json, os, re, sys, time, zipfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import date
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+import fundamentals as fd   # noqa: E402
+
+ROOT = fd.ROOT
+CACHE = ROOT / "data/cache/outlook.json"
+OUT = ROOT / "data/outlook.json"
+CACHE_VERSION = 1
+BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
+WORKERS = 3
+START = time.time()
+MAX_ITEMS = {"outlook": 5, "target": 3, "backlog": 3}
+
+_get = fd.get
+
+
+def polite_get(url, as_json=True):
+    for wait in (0, 20, 40, 60, 90):
+        time.sleep(wait)
+        res = _get(url, as_json)
+        if res is not None:
+            return res
+    return None
+
+
+fd.get = polite_get
+
+FIN = (r"revenue|revenues|sales|turnover|net sales|ebitda|ebit|ebita|operating (profit|income|margin|result)|"
+       r"margin|earnings per share|eps|net (profit|income)|free cash flow|cash flow|capex|capital expenditure|"
+       r"investments?|dividend|order intake|deliveries|book-to-bill")
+EXPECT = (r"expect|expected|expects|guidance|outlook|forecast|anticipate|anticipates|target|targets|aim to|aims to|"
+          r"ambition|should (reach|be|amount)|will (reach|be|amount)|projected|plan to|plans to")
+NUMBER = r"\d+(?:[.,]\d+)?\s*(?:%|percent|per cent|pp|percentage points?|bn|billion|mn|m\b|million)|(?:EUR|USD|DKK|SEK|NOK|CHF|GBP|€|\$|£)\s?\d"
+BACKLOG = r"order backlog|backlog|order book|orderbook|remaining performance obligations|order intake"
+NOISE = (r"emission|scope [123]|co2|ghg|carbon|climate|renewable electricity|energy consumption|waste|water|diversity|"
+         r"female|women|gender|employee engagement|injur|safety|remuneration|incentive|bonus|\bsti\b|\blti\b|"
+         r"share-based|vesting|options? granted|pension|discount rate|impairment test|sensitivity|wacc|"
+         r"gdp|inflation is|the market is expected|market is projected|industry is (expected|projected)|"
+         r"sustainab|esg|csrd|taxonomy|biodiversity|children|patients reached|hedg|interest rate swap|"
+         r"forward-looking statements|risks and uncertainties|actual results")
+
+
+def sentences(text):
+    for s in re.split(r"(?<=[.!?])\s+(?=[A-Z•●▶(])", text):
+        s = s.strip(" •●▶-")
+        if 50 <= len(s) <= 420:
+            yield s
+
+
+def report_text(raw):
+    if raw[:2] == b"PK":
+        z = zipfile.ZipFile(io.BytesIO(raw))
+        raw = b" ".join(z.read(n) for n in z.namelist() if n.endswith((".xhtml", ".html", ".htm")) and "/reports/" in n
+                        or n.endswith((".xhtml", ".html")) and "META-INF" not in n)
+    src = raw.decode("utf-8", "replace")
+    src = re.sub(r"(?is)<(script|style|head)\b.*?</\1>", " ", src)
+    block = re.compile(r"(?i)</?(div|p|br|td|th|tr|li|h\d|table|section)\b[^>]*>")
+
+    def flat(inline_join):
+        t = block.sub(" ", src)
+        t = re.sub(r"<[^>]+>", inline_join, t)
+        return re.sub(r"\s+", " ", html.unescape(t))
+
+    # Reports converted from PDF often split words into pieces ("ou t l ook"): when a plain flattening
+    # leaves many 1-2 letter fragments, join inline pieces without a space instead and use whichever reads better.
+    a, b = flat(" "), flat("")
+    frag = lambda t: sum(len(w) <= 2 for w in t[:200000].split()) / max(1, len(t[:200000].split()))
+    return b if frag(a) > 0.32 and frag(b) < frag(a) else a
+
+
+def pick(text, year):
+    ahead = "|".join(str(y) for y in range(year, year + 7))
+    near = "|".join(str(y) for y in (year, year + 1))
+    out, seen = [], set()
+    for s in sentences(text):
+        low = s.lower()
+        if re.search(NOISE, low):
+            continue
+        is_backlog = re.search(BACKLOG, low) and re.search(r"\d[\d,.]*\d|\d{2,}", s)
+        if not (re.search(NUMBER, s) or is_backlog):
+            continue
+        if s.count("  ") or sum(ch.isdigit() for ch in s) > len(s) * 0.25:   # table rows, not sentences
+            continue
+        kind = None
+        if is_backlog and re.search(r"\b(stood|amount|amounted|was|were|reached|totall?ed|of)\b", low):
+            kind = "backlog"
+        elif re.search(fr"\b({FIN})\b", low) and re.search(fr"\b({EXPECT})", low):
+            if re.search(fr"\b({near})\b", s) or re.search(r"full[- ]year|for the year|next year|coming year", low):
+                kind = "outlook"
+            elif re.search(fr"\b(by|in|until|through|towards?)\s+({ahead})\b|\b20\d\d\s*[-–]\s*({ahead})\b|mid-term|medium-term|long-term", low):
+                kind = "target"
+        if not kind:
+            continue
+        key = re.sub(r"\W+", "", low)[:120]
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({"kind": kind, "text": s})
+    # Keep the first few of each kind, in report order (outlook sections come first in most reports).
+    kept, n = [], {}
+    for it in out:
+        n[it["kind"]] = n.get(it["kind"], 0) + 1
+        if n[it["kind"]] <= MAX_ITEMS[it["kind"]]:
+            kept.append(it)
+    return kept
+
+
+def read_company(lei, cached):
+    filings = fd.latest_annual(lei)
+    if not filings:
+        return None
+    f = filings[0]
+    fid = f["fxo_id"]
+    if cached.get("fxo_id") == fid:
+        return cached
+    url = f.get("report_url") or f.get("package_url")
+    raw = fd.get(fd.BASE + url, as_json=False) if url else None
+    if not raw:
+        return None
+    text = report_text(raw)
+    year = int(f["period_end"][:4])
+    annual = f["period_end"][5:7] == "12" and "interim" not in (url or "").lower() and len(text) > 600000
+    items = pick(text, year + 1 if annual else year)
+    return {"fxo_id": fid, "period": f["period_end"], "published": (f.get("date_added") or "")[:10],
+            "source": fd.BASE + f["viewer_url"] if f.get("viewer_url") else fd.BASE + url, "items": items}
+
+
+def main():
+    comp = json.loads((ROOT / "js/companies.json").read_text())
+    rows = [dict(zip(comp["fields"], r)) for r in comp["rows"]]
+    leis = sorted({r["lei"] for r in rows if r.get("origin") is None and "filings.xbrl.org" in (r.get("source") or "")})
+    cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
+    if cache.get("_v") != CACHE_VERSION:
+        cache = {"_v": CACHE_VERSION}
+    today = date.today().isoformat()
+    week_ago = date.fromordinal(date.today().toordinal() - 7).isoformat()
+    todo = [l for l in leis if cache.get(l, {}).get("checked", "") <= week_ago]
+    size = {r["lei"]: r.get("revenueEur") or 0 for r in rows}
+    todo.sort(key=lambda l: -size.get(l, 0))
+    if os.environ.get("FINILA_LIMIT"):
+        todo = todo[:int(os.environ["FINILA_LIMIT"])]
+    print(f"{len(leis)} companies with ESEF reports, {len(todo)} to check", flush=True)
+    done = 0
+    with ThreadPoolExecutor(WORKERS) as pool:
+        futs = {pool.submit(lambda l=l: read_company(l, cache.get(l, {})) if time.time() - START < BUDGET else None): l for l in todo}
+        for fut in as_completed(futs):
+            try:
+                res = fut.result()
+            except Exception as e:   # one broken report must not stop the run
+                print(f"  ! {futs[fut]}: {e}", flush=True)
+                continue
+            if res is None:
+                continue
+            cache[futs[fut]] = {**res, "checked": today}
+            done += 1
+            if done % 50 == 0:
+                print(f"  {done} companies read", flush=True)
+                CACHE.parent.mkdir(parents=True, exist_ok=True)
+                CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
+    CACHE.parent.mkdir(parents=True, exist_ok=True)
+    CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
+    out = {l: {k: v[k] for k in ("period", "published", "source", "items")}
+           for l, v in cache.items() if l != "_v" and v.get("items")}
+    OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
+    kinds = {}
+    for v in out.values():
+        for it in v["items"]:
+            kinds[it["kind"]] = kinds.get(it["kind"], 0) + 1
+    print(f"outlook quotes for {len(out)} companies {kinds}; read {done} this run", flush=True)
+    names = {r["lei"]: r["name"] for r in rows}
+    for l in sorted(out, key=lambda l: -size.get(l, 0))[:40]:   # samples for checking by eye
+        print(f"\n== {names.get(l)} ({out[l]['period']})")
+        for it in out[l]["items"]:
+            print(f"  [{it['kind']}] {it['text']}")
+
+
+if __name__ == "__main__":
+    main()
