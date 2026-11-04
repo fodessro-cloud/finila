@@ -270,9 +270,12 @@ def summary_html(c, med, intro):
       <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
 
 
+HORIZON = 3   # years ahead in the scenarios and the calculator (Lub, 2026-11-04)
+
+
 def scenarios_html(c, med, g_past, x_med):
     """Three scenarios from real ranges (the company's own margins of the last years, the sector's spread of
-    multiples) and what today's price assumes. EUR millions, shares in millions, 5 years."""
+    multiples) and what today's price assumes. EUR millions, shares in millions, HORIZON years."""
     rev, nd, sh, price, m_now = c['revenueEur'], c['claimsEur'], c['shares'], c['price'], c['ebitdaMargin']
     years = c.get('years') or {}
     margins = [v['ebitda'] / v['revenue'] * 100 for v in years.values()
@@ -281,7 +284,7 @@ def scenarios_html(c, med, g_past, x_med):
     p25, p75 = med.get('evEbitdaP25'), med.get('evEbitdaP75')
     if not (is_num(p25) and is_num(p75)):
         return ''
-    n = 5
+    n = HORIZON
     val = lambda g, m, x: (rev * (1 + g / 100) ** n * m / 100 * x - nd) / sh
     g_sec = med.get('revenueGrowth') if is_num(med.get('revenueGrowth')) else 0
     rows = [('Weak', min(g_past, 0), lo_m, p25, 'no growth (or the past decline), the lowest margin of the last years, a multiple like the cheapest quarter of the sector'),
@@ -300,9 +303,27 @@ def scenarios_html(c, med, g_past, x_med):
     if is_num(need) and -30 < need < 60:
         past = f'; the last {c["cagrYears"]} years it grew {sign(c["revenueCagr"])}% a year' if is_num(c.get('revenueCagr')) else ''
         implied = (f'<p class="sp-wi-implied"><b>What today’s price assumes:</b> revenue {"growing" if need >= 0 else "shrinking"} {num(abs(need))}% a year '
-                   f'for 5 years at today’s margin, if the company is then valued at the sector median of {num(x_med)}× EBITDA{past}.</p>')
+                   f'for {n} years at today’s margin, if the company is then valued at the sector median of {num(x_med)}× EBITDA{past}.</p>')
     return f'''{implied}
-      <div class="sp-scroll"><table class="sp-table sp-scen"><tr><th>In 5 years</th><th>Growth a year</th><th>EBITDA margin</th><th>EV/EBITDA</th><th>Price per share</th><th>vs today €{num(price, 2)}</th></tr>{trs}</table></div>'''
+      <div class="sp-scroll"><table class="sp-table sp-scen"><tr><th>In {n} years</th><th>Growth a year</th><th>EBITDA margin</th><th>EV/EBITDA</th><th>Price per share</th><th>vs today €{num(price, 2)}</th></tr>{trs}</table></div>'''
+
+
+def guided_growth(c):
+    """Revenue growth the company itself expects for the current year, from its outlook sentence
+    ("sales growth for 2026 is expected to be 0% to -6%"): the midpoint, and the sentence."""
+    q = c.get('quotes') or {}
+    pat = re.compile(r'\b(sales|revenue|turnover)\b[^.%]{0,60}?\bgrowth\b[^.%]{0,80}?(?<![\d.])(-?\+?\d{1,2}(?:\.\d)?)\s*%'
+                     r'(?:\s*(?:to|and|-|–)\s*(-?\+?\d{1,2}(?:\.\d)?)\s*%)?', re.I)
+    for it in q.get('items', []):
+        if it['kind'] != 'outlook':
+            continue
+        m = pat.search(it['text'])
+        if m:
+            a = float(m.group(2))
+            b = float(m.group(3)) if m.group(3) else a
+            if -40 <= a <= 60 and -40 <= b <= 60:
+                return round((a + b) / 2, 1), it['text']
+    return None
 
 
 def whatif_html(c, med):
@@ -312,26 +333,55 @@ def whatif_html(c, med):
         return ''
     g_past = c.get('revenueCagr') if is_num(c.get('revenueCagr')) else c.get('revenueGrowth')
     g_past = round(min(max(g_past, -10), 30), 1) if is_num(g_past) else 0
-    # The sliders start at the middle scenario: the sector's typical growth, not the company's own best years.
-    g = round(min(max(med['revenueGrowth'], -10), 30), 1) if is_num(med.get('revenueGrowth')) else g_past
-    g_src = 'median growth of the sector last year' if is_num(med.get('revenueGrowth')) else 'the company’s past growth'
+    # The sliders start at the company's own record in the years-of-results table: its revenue growth a
+    # year (CAGR) and its average EBITDA margin over those years, 3 years ahead (Lub, 2026-11-04).
+    years = c.get('years') or {}
+    ms = [v['ebitda'] / v['revenue'] * 100 for v in years.values()
+          if is_num(v.get('ebitda')) and is_num(v.get('revenue')) and v['revenue'] > 0 and v['ebitda'] > 0]
+    # Growth over the 3 years the way analysts build a base case: year 1 from the company's own outlook
+    # (else its growth last year), years 2-3 the sector's typical growth, since growth far from the
+    # sector rarely lasts. The slider starts at the average of those 3 years.
+    guided = guided_growth(c)
+    g_sec = med.get('revenueGrowth') if is_num(med.get('revenueGrowth')) else None
+    g1, g1_src = (guided[0], 'the company’s own outlook') if guided else \
+        (c['revenueGrowth'], 'its growth last year') if is_num(c.get('revenueGrowth')) else (g_past, 'its past growth')
+    g1 = min(max(g1, -30), 60)
+    if g_sec is not None:
+        avg = (((1 + g1 / 100) * (1 + g_sec / 100) ** (HORIZON - 1)) ** (1 / HORIZON) - 1) * 100
+        g = round(min(max(avg, -10), 30), 1)
+        g_src = f'year 1 {g1_src} ({sign(g1)}%), then the sector median ({sign(g_sec)}%)'
+    else:
+        g, g_src = round(min(max(g1, -10), 30), 1), g1_src
+    # Margin: the latest year, which already holds the trend (Novo 52% -> 48%). Cyclical sectors (energy,
+    # materials) swing with prices, so their start is the average over the years shown (mid-cycle margin).
+    cyclical = (c.get('sector') or '') in ('Energy', 'Materials')
+    if cyclical and len(ms) >= 3:
+        m0, m_src = round(sum(ms) / len(ms), 1), f'average of {len(ms)} years, a cyclical sector (results table)'
+    else:
+        m0, m_src = round(c['ebitdaMargin'], 1), 'last year'
+    # What the company actually did in the years shown, so a visitor sees how far the start is from its record.
+    ys_ = sorted(years)
+    gr = [(years[b]['revenue'] / years[a]['revenue'] - 1) * 100 for a, b in zip(ys_, ys_[1:])
+          if is_num(years[a].get('revenue')) and is_num(years[b].get('revenue')) and years[a]['revenue'] > 0]
+    g_rng = f'. FY {ys_[0]}–{ys_[-1]}: from {sign(min(gr))}% to {sign(max(gr))}% a year' if len(gr) >= 3 and not c.get('financial') else ''
+    m_rng = f'. FY {ys_[0]}–{ys_[-1]}: {num(min(ms))}% to {num(max(ms))}%' if len(ms) >= 3 else ''
     x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
     x_src = f'median of {esc(med.get("label") or (c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
     if not is_num(x):
         return ''
     scen = scenarios_html(c, med, g_past, x)
     data = {'rev': round(c['revenueEur'], 1), 'nd': round(c['claimsEur'], 1), 'shares': c['shares'], 'price': c['price'],
-            'g': g, 'm': round(c['ebitdaMargin'], 1), 'x': round(x, 1)}
+            'g': g, 'm': m0, 'x': round(x, 1), 'y': HORIZON}
     return f'''<section class="sp-card sp-whatif" id="whatif" data-whatif='{json.dumps(data)}'>
       <h2>What could the share be worth?</h2>
       <p class="sp-sub">Three scenarios from real ranges: the company’s own margins of the last years and the spread of multiples in its sector.</p>
       {scen}
       <h3 class="sp-wi-h">Try your own</h3>
       <div class="sp-wi-inputs">
-        <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%)</small></label>
-        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: last year ({num(data["m"])}%)</small></label>
+        <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%){g_rng}</small></label>
+        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: {m_src} ({num(data["m"])}%){m_rng}</small></label>
         <label><span>EV / EBITDA at the end <b data-o="x"></b></span><input type="range" data-i="x" min="2" max="40" step="0.5" value="{data["x"]}"><small>Start: {x_src} ({num(x)}×)</small></label>
-        <label><span>Years <b data-o="y"></b></span><input type="range" data-i="y" min="1" max="10" step="1" value="5"><small>How far ahead</small></label>
+        <label><span>Years <b data-o="y"></b></span><input type="range" data-i="y" min="1" max="10" step="1" value="{HORIZON}"><small>Start: {HORIZON} years ahead</small></label>
       </div>
       <div class="sp-wi-out">
         <div><span>Revenue then</span><b data-o="rev"></b></div>
@@ -1313,8 +1363,9 @@ METHOD = [
         ('Not shown', 'For banks and insurers, and for vehicle groups with their own bank (their borrowings fund customer loans).'),
     ]),
     ('Scenarios', [
-        ('Three scenarios', 'Revenue grows for 5 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
-        ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 5 years, EBITDA at today’s margin × the peer median multiple.'),
+        ('Calculator start', 'Revenue growth: year 1 from the company’s own revenue outlook (midpoint) when its report gives one, else its growth last year; years 2 and 3 the sector median growth; the slider starts at the average of the 3 years. EBITDA margin: the latest year; for energy and materials companies, whose margins swing with prices, the average over the results table (mid-cycle). EV/EBITDA: the sector median. 3 years ahead.'),
+        ('Three scenarios', 'Revenue grows for 3 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
+        ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 3 years, EBITDA at today’s margin × the peer median multiple.'),
     ]),
     ('Checks', [
         ('Unit and currency checks', 'A year whose revenue or assets are about 1,000× off the other years is left out (a report tagged in thousands). Years in another currency are left out. Ratios outside plausible ranges (e.g. P/S above 60) are not shown.'),
