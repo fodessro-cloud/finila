@@ -312,9 +312,10 @@ def guided_growth(c):
     """Revenue growth the company itself expects for the current year, from its outlook sentence
     ("sales growth for 2026 is expected to be 0% to -6%"): the midpoint, and the sentence."""
     q = c.get('quotes') or {}
+    items = ((c.get('latestReport') or {}).get('outlook') or []) + q.get('items', [])   # the newest report first
     pat = re.compile(r'\b(sales|revenue|turnover)\b[^.%]{0,60}?\bgrowth\b[^.%]{0,80}?(?<![\d.])(-?\+?\d{1,2}(?:\.\d)?)\s*%'
                      r'(?:\s*(?:to|and|-|–)\s*(-?\+?\d{1,2}(?:\.\d)?)\s*%)?', re.I)
-    for it in q.get('items', []):
+    for it in items:
         if it['kind'] != 'outlook':
             continue
         m = pat.search(it['text'])
@@ -1032,9 +1033,24 @@ def quote_unique(items):
     return [t for t in items if t in out]
 
 
+TOPICS = {'sales': r'sales|revenue|turnover', 'profit': r'operating (profit|income|result|margin)|ebit|ebita|ebitda|margin',
+          'capex': r'capex|capital expenditure|investments?', 'cash': r'free cash flow|cash flow', 'eps': r'earnings per share|eps|net (profit|income)',
+          'dividend': r'dividend'}
+
+
+def topics(t):
+    low = t.lower()
+    return {k for k, rx in TOPICS.items() if re.search(fr'\b({rx})\b', low)}
+
+
 def report_html(c):
     q = c.get('quotes') or {'items': []}
     latest = latest_report_html(c)
+    # An outlook in the newest exchange report replaces the older report's outlook on the same lines
+    # (sales, profit, ...); older statements on other lines (e.g. capex) stay until the company updates them.
+    newer = set().union(*[topics(i['text']) for i in (c.get('latestReport') or {}).get('outlook') or [] if i['kind'] == 'outlook'])
+    if newer and (c['latestReport'].get('date') or '')[:10] > (q.get('period') or ''):
+        q = {**q, 'items': [i for i in q['items'] if not (i['kind'] == 'outlook' and topics(i['text']) and topics(i['text']) <= newer)]}
     blocks = ''
     for kind, title, sub in REPORT_BLOCKS:
         items = quote_unique([quote_clean(i['text']) for i in q['items'] if i['kind'] == kind and len(i['text']) <= 320
