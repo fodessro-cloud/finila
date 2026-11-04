@@ -1,11 +1,54 @@
-4601 announcements since 2026-10-21
-matched 476 companies; unmatched names (top): [('Nykredit Realkredit A/S', 27), ('Sveriges Riksbank', 26), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 18), ('Loihde Oyj', 16), ('Dataproces Group A/S', 16), ('Inderes Oyj', 15), ('PPI Public Property Invest AB', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Realfiction Holding AB', 15), ('SpareBank 1 SMN', 14), ('Lánamál ríkisins', 13), ('Totalkredit A/S', 13), ('Kuntarahoitus Oyj.', 13), ('Besqab AB(publ)', 13), ('Realkredit Danmark A/S', 12), ('Alzinova AB', 12), ('Netum Group Oyj', 11), ('White Pearl Technology Group AB', 11), ('AI Revenue Assistant Software Stockholm AB', 11), ('Betolar Oyj', 10), ('Kambi Group Plc', 10), ('International Petroleum Corporation', 10), ('Minesto AB', 10)]
+AMF France: 1022 filings, 649 kept
+5250 announcements since 2026-10-21
+matched 640 companies; unmatched names (top): [('Nykredit Realkredit A/S', 27), ('Sveriges Riksbank', 26), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 18), ('Loihde Oyj', 16), ('Dataproces Group A/S', 16), ('Inderes Oyj', 15), ('PPI Public Property Invest AB', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Realfiction Holding AB', 15), ('SpareBank 1 SMN', 14), ('Lánamál ríkisins', 13), ('Kuntarahoitus Oyj.', 13), ('Besqab AB(publ)', 13), ('Realkredit Danmark A/S', 12), ('Totalkredit A/S', 12), ('Alzinova AB', 12), ('Netum Group Oyj', 11), ('White Pearl Technology Group AB', 11), ('AI Revenue Assistant Software Stockholm AB', 11), ('Betolar Oyj', 10), ('Kambi Group Plc', 10), ('International Petroleum Corporation', 10), ('Minesto AB', 10)]
 filler-word name matches: [('Ambea AB', 'Ambea AB ( publ )'), ('DNO ASA', 'DNO International'), ('Entra ASA', 'Entra Eiendom'), ('Ericsson, Telefonab. L M', 'Ericsson'), ('H. Lundbeck A/S', 'Lundbeck'), ('Kinnevik, Investment AB', 'Kinnevik AB'), ('Latour, Investmentab.', 'Investment AB Latour'), ('Lindab AB', 'Lindab International AB'), ('Moberg Pharma AB', 'Moberg Pharma (Sweden)'), ('Modern Times Group MTG AB', 'Modern Times Group'), ('Moreld ASA', 'Moreld AS'), ('Mutares SE & CO KGaA', 'Mutares'), ('Roblon A/S', 'Roblon Aktieselskab'), ('Senzime AB', 'Senzime AB (publ.)'), ('Soiltech ASA', 'Soiltech AS'), ('UPM-Kymmene Oyj', 'UPM'), ('WindowMaster International A/S', 'WindowMaster')]
-news for 476 companies, 373 with a report; read 0 reports this run
+Ignoring wrong pointing object 7 0 (offset 0)
+Ignoring wrong pointing object 11 0 (offset 0)
+Ignoring wrong pointing object 17 0 (offset 0)
+Ignoring wrong pointing object 6 0 (offset 0)
+Ignoring wrong pointing object 35 0 (offset 0)
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/WFOPPQ+MerriweatherSans-Italic', '/FirstChar': 1, '/LastChar': 52, '/Widths': [554, 339, 237, 812, 585, 285, 442, 576, 362, 583, 426, 620, 617, 257, 535, 545, 667, 454, 539, 933, 617, 617, 875, 505, 567, 559, 285, 610, 624, 567, 654, 384, 492, 864, 513, 465, 571, 568, 333, 565, 673, 573, 508, 257, 672, 749, 510, 618, 548, 283, 283, 567], '/FontDescriptor': IndirectObject(18, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(53, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/WFOPPQ+MerriweatherSans-Italic', '/FirstChar': 1, '/LastChar': 52, '/Widths': [554, 339, 237, 812, 585, 285, 442, 576, 362, 583, 426, 620, 617, 257, 535, 545, 667, 454, 539, 933, 617, 617, 875, 505, 567, 559, 285, 610, 624, 567, 654, 384, 492, 864, 513, 465, 571, 568, 333, 565, 673, 573, 508, 257, 672, 749, 510, 618, 548, 283, 283, 567], '/FontDescriptor': IndirectObject(18, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(53, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/JWUEJE+MerriweatherSans-BoldItalic', '/FirstChar': 1, '/LastChar': 10, '/Widths': [556, 524, 455, 613, 237, 500, 589, 595, 413, 452], '/FontDescriptor': IndirectObject(39, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(50, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+news for 640 companies, 461 with a report; read 88 reports this run
+
+== TotalEnergies SE | 2026-10-29 06:45 | Quarterly financial reporting / Third quarter financial report | chars 29079
+  quarter 3
+  [result q] The gearing ratio now stands at 9.1%, an improvement of 4 percentage points compared to the second quarter, benefiting from free cash flow of more than $6 billion after payment of the dividend.
+  [target] Furthermore, with the investment decisions taken this quarter for Cronos in Cyprus, Ima in Nigeria, Umm Shaif Gas Cap in the United Arab Emirates and Absheron Ph2 in Azerbaijan, all the projects contributing to achieving the production growth target of more than 3% per year by 2030 are now in execution phase.
+  [outlook] Net investments amounted to $3.3 billion in the third quarter and $11.2 billion in the first nine months of 2026, in line with the annual guidance of $15 billion.
+
+== AXA | 2026-10-29 15:48 | AXA - 9M26 Activity Indicators | chars 27353
+  quarter 3
+  [result q] Gross written premiums & other revenues1 were up +7% to Euro 44.8 billion.
+
+== Renault | 2026-10-29 05:00 | Renault Group delivers resilient Q3 revenue and confirms its 2026 financial guidance | chars 19063
+  quarter 3
+  [result q] In 2026 Q3, Renault Group sales declined by 6.0%, reflecting contrasting brand and regional dynamics.
+  [result q] Renault Group rapidly adapted its commercial and industrial execution to the acceleration in European EV demand: EV sales 3 rose by 8 4.7% in 2026 Q3 year-on-year, increasing the Group’s EV mix by 12.2 points to 25.8%.
+  [result q] Renault Group maintained strict value discipline this quarter , with retail sales up 5.0% in Europe and retail mix rising by 4.6 points to 6 4.8%, while reducing exposure to less value-accretive channels: short-term rentals and demo sales decreased by 1 8.0%.
+  [result ytd] Boulogne-Billancourt, October 29, 2026 Commercial results highlights Over the first nine months of 2026 , Group sales totalled 1,662,222 vehicles, slightly down 2.2% compared with the same period in 2025.
+  [result ytd] Internationally, sales increased in the Group’s strategic markets, including India (+36.7%), T ürkiye (+3.2%), Morocco (+6.9%) and Brazil (+3.8%).
+  [result q] In the third quarter of 2026, against a backdrop of fierce competition, Renault Group sales totalled 497,799 vehicles, down 6.0%.
+  [backlog] Total inventories remained at a healthy level (532,000 vehicles at September 30, 2026), while the European orderbook represented c.2 months of forward sales..
 
 == Astrazeneca PLC | 2026-10-30 08:00 | 3rd Quarter Results | chars 37468
   quarter 3
   [result ytd] In the first nine months we saw strong commercial momentum with total revenue up 7% and Core EPS up 14%, driven by our diverse therapy areas and global presence.
+
+== Saint-Gobain | 2026-10-27 16:01 | Q3 2026 sales | chars 14798
+  quarter 3
+  [result q] Americas: slight growth in sales The Region posted a slight increase of 0.6% like-for-like in the third quarter, reflecting growth in North America and despite the contraction in Latin America.
+  [outlook] Outlook confirmed : in a contrasted macroeconomic environment and uncertain geopolitical landscape, Saint-Gobain expects an EBITDA margin of more than 15.0% in 2026 Sales totaled €11.6 billion in the third quarter, up by 2.5% like-for-like and by 1.2% over the nine months to end-September.
+  [outlook] Saint-Gobain expects an EBITDA margin of more than 15.0% in 2026. 4 Financial calendar A conference call will be held at 6:30pm (Paris time) on October 27, 2026: dial +44 20 3059 5875, +1 718 705 8795 or +33 1 70 91 87 14 (code 4276084#).
 
 == Traton | 2026-10-28 08:00 | TRATON GROUP increases unit sales, sales revenue, and adjusted operating result in the first nine months of 2026 | chars 9379
   quarter 3
@@ -16,6 +59,10 @@ news for 476 companies, 373 with a report; read 0 reports this run
   [result ytd] In the first nine months, battery-electric vehicle sales increased by 30%, while incoming orders grew by 50%.
   [result ytd] The TRATON GROUP increased sales revenue by 3% in the first nine months, while the adjusted operating result grew by as much as 13%.
   [outlook] For unit sales and sales revenue growth in 2026, we continue to expect a range of 0 to +7%.
+
+== L'Oréal | 2026-10-22 16:00 | Sales at 30 September 2026 | chars 20981
+  quarter 3
+  [result ytd] If the exchange rates on 30 September 2026, i.e., 1€=$ 1.1355, were extrapolated until 31 December, the impact of currency fluctuations on sales would be around -0.3% for the whole of 2026.
 
 == AB Volvo | 2026-10-23 07:23 | Volvo Group - the third quarter 2026 | chars 36919
   quarter 3
@@ -51,11 +98,54 @@ news for 476 companies, 373 with a report; read 0 reports this run
   [outlook] Based on the performance in the first nine months of the year and outlook for the remainder of the year, we narrow the full-year 2026 guidance for EBIT before special items to DKK 24.0-25.0 billion (previously DKK 23.5-25.5 billion).
   [outlook] Outlook for 2026 Based on our performance in the first nine months of 2026 and our expectations for the remainder of the year, we are narrowing the full-year outlook for 2026 as follows: EBIT before special items is expected to be in the range of DKK 24,000-25,000 million (previously DKK 23,500-25,500 million).
 
+== Safran | 2026-10-23 04:59 | Safran reports third quarter 2026 revenue | chars 18139
+  quarter 3
+  [result ytd] Spare parts sales increased by 17.0% (in USD), driven by CFM56 pricing and improved part availability, supporting an elevated but stable workscope level compared with H1 2026, as well as by LEAP, benefiting from higher third-party shop visit volumes, expanded workscope and pricing.
+  [result ytd] Services revenue rose by 19.0% in $, mainly reflecting the growth of LEAP rate per flight hour (RPFH) contracts.
+  [result q] OE sales grew by 16.2%, strongly led by defense activities (AASM HammerTM, optronics, inertial navigation systems, missile seekers), illustrating the growing demand of our defense customers.
+  [result ytd] The seats market demand continues to outpace supply , allowing us to benefit from more favorable contractual terms, even though the industry still faces some certification challenges. ➢ 9m 2026 Revenue for the first nine months of 202 6 amounted to €26,574 million, up 17.5% compared to 9m 2025.
+  [result ytd] Sales increased by € 4,040 million (+17.9%) on an organic basis, reflecting growth across all divisions, with Propulsion (o/w +23.9% in USD for Spare parts , +32.5% in USD for Services, +26% in LEAP deliveries to 1,565 units) and Equipment & Defense standing out.
+
 == ABB | 2026-10-20 06:50 | ABB  Ltd: Q3 2026 results | chars 8789
   quarter 3
   [result None] We converted strong revenue growth of 14% (14% comparable) into a 24% increase in Operational EBITA which reached $2 billion with margin expanding 160 basis points to 20.8%.
   [result None] Free cash flow of $1.6 billion was supported by robust earnings combined with disciplined management of Trade net working capital, which more than compensated for higher capex spend.
   [target] We already trend at a higher capex level of around $1 billion and do not expect it to rise further in the mid-term.
+
+== Danone SA | 2026-10-28 05:30 | Danone: Solid performance in Q3; Broad-based growth across categories and geographies | chars 17414
+  quarter 3
+  [result q] Sales by operating segment In Q3 2026, EMEA LFL sales increased by +3.9%, with volume/mix at -0.4% and price at +4.3%.
+  [result q] In the Americas, LFL sales were up + 4.4%, with volume/mix at +0.7% and price at +3.7%.
+  [result q] Within the zone, North America delivered LFL sales growth of +2.4%, with volume/mix at -0.6% and price at +3.0%.
+  [result q] In Asia Pacific, LFL sales increased by +3.6%, with volume/mix at +1.7% and price at +1.9%.
+  [outlook] II. 2026 GUIDANCE 2026 guidance confirmed, in line with mid-term ambition: LFL sales growth expected between +3% and +5%, with recurring operating income growing faster than sales.
+
+== Air Liquide | 2026-10-29 05:19 | Q3 2026: Air Liquide accelerates, driven by sales growth and the launch of its strategic plan | chars 37323
+  quarter 3
+  [result ytd] Published Group revenue posted a sharp increase of +10.0% , supported by a high energy impact (+4.2%) accelerating compared to the 2 nd quarter (+1.3%), and by favorable currency (+1.5%) and signiﬁcant scope (+1.3%) impacts.
+  [result ytd] Gas & Services revenue reached 7,075 million euros in the 3 rd quarter of 2026, up +3.6% on a comparable basis ( ) . 12 Sales growth in Industrial Merchant stood at +5.3% in the 3 rd quarter (+7.2% excluding helium), sequentially increasing throughout the year.
+  [result ytd] Large Industries revenue was down -1.9% and overall stable (-0.5%) excluding the combined effect (see appendix 4): very strong demand from customers connected to pipeline networks in the US Gulf Coast offset stable sales in Asia and weaker demand in Europe.
+  [result ytd] In Industrial Merchant, revenue increased by +6.7%, supported notably by higher bulk gas and hardgoods volumes and by a price effect that remained stable at a high level.
+  [result ytd] Finally, in Electronics (-4.8%), revenue was impacted by the sharp decline in Equipment & Installations sales.
+  [result q] After a stable 1 st half, Industrial Merchant revenue grew by +3.8%, supported by a higher price effect than in the 2 nd quarter and rising volumes; sales grew in all countries across the region.
+  [backlog] Record investments since the beginning of 2026, strengthening a record backlog
+  [backlog] At 6.2 billion euros , the investment backlog reached a new record high.
+
+== Capgemini | 2026-10-30 05:00 | Q3 2026 momentum drives upgrade in Capgemini's 2026 outlook | chars 15255
+  quarter 3
+  [result q] In Q3 2026 and at constant exchange rates, revenues in North America (29% of 2025 Group revenues) grew +18.3% year- on-year, led by continued momentum in Financial Services, alongside strong performances in Manufacturing and Consumer Goods & Retail.
+  [result q] Revenue growth of + 9.0% to +9.5% at constant exchange rates (was around + 8.5% to +9. 0%).
+  [outlook] Upgraded 2026 financial targets o Constant currency revenue growth* of +9.0% to +9.5% (was around +8.5% to +9.0%) o Operating margin* of 13.6% to 13.8% (unchanged) o Organic free cash flow* of around €1.8 billion to €1.9 billion (unchanged).
+
+== Thales | 2026-10-22 04:59 | Thales reports its order intake and sales as of September 30, 2026 - Press release - 22 October 2026 | chars 16441
+  quarter 3
+  [result ytd] Geographically5, order intake in mature markets recorded organic growth of +17%, at €14,425 million.
+  [result ytd] Order intake in emerging markets amounted to €4,697 million and showed an organic inc rease of +7% at 30 September 2026.
+  [result q] At €2,724 million, order intake in the Cyber & Digital segment was structurally very close to sales, as most of the activities in this segment operate on short sales cycles.
+  [result q] In the third quarter, sales amounted to €5,473 million, growing organically by 8.7% (+9.7% on a reported basis).
+  [result q] Geographically7, sales were up in mature markets (+6.0% organic growth), notably in continental Europe excluding France (+21.8%).
+  [result ytd] In the Aerospace segment, sales for the first nine months of 2026 amounted to €4,237 million, up 4.0% at constant scope and exchange rates (+3.2% on a reported basis).
+  [outlook] Assuming no new disruptions in the macroeconomic and geopolitical contexts, Thales’ solid performance in 2026 allows the Group to expect organic sales growth now comprised in the upper- end of the +6% to +7% 8 guided range, and potentially beyond .
 
 == Ericsson | 2026-10-15 07:00 | Ericsson reports third quarter results 2026 | chars 40336
   quarter 3
@@ -67,6 +157,23 @@ news for 476 companies, 373 with a report; read 0 reports this run
   [result ytd] EBITA decreased to SEK 17.3 (28.9) b. with a margin of 10.7% (17.3%), impacted by lower net sales, increased restructuring charges, the divestment of iconectiv, and a negative currency impact of SEK -2.9 b.
   [outlook] Adjusted gross margin in Q4 2026 is expected to be in the range of 49% to 51%.
 
+== Forvia | 2026-11-02 06:00 | SALES BROADLY STABLE IN Q3, INTERIORS DIVESTITURE ON TRACK FOR Q4 CLOSING, FY 2026 GUIDANCE CONFIRMED | chars 18513
+  quarter 4
+  [result q] Organic sales were broadly stable in Q3 at -0.6%, while they declined by 1.5% over the first nine months of the year.
+  [result q] NORTH AMERICA: outperformance essentially driven by Clean Mobility Organic sales were slightly up 0.4% in Q3, representing an outperformance of 510 basis points.
+  [result ytd] CHINA: progress with Chinese OEMs reduced underperformance compared to H1 Organic sales declined by 17. 2% in Q3 , reflecting continued weakness in production among international OEM s.
+  [result ytd] Electronics maintained strong momentum, with organic sales up 7.0%, supported by continued success in radar and energy management technologies, particularly in Europe.
+  [result ytd] Seating organic sales declined by 4.4%, with the decline halved compared with H1, reflecting a gradual recovery in China and solid growth in Europe.
+  [result ytd] Clarion Electronics maintained strong organic growth of 22.0%, driven by Japanese OEMs in Asia and North America.
+  [outlook] Lighting sales declined by 7.8%, with business trends remaining broadly in line with the expected path towards stabilization in 2027..
+
+== Valeo | 2026-10-22 16:02 | Valeo - Q3 2026 Sales | chars 14186
+  quarter 3
+  [result q] Total sales for third-quarter 2026 came in at 4,881 million euros, down 2.3% compared with the same period in 2025.
+  [result q] Aftermarket sales rose by 3.0% on a like-for-like basis compared with the prior-year period, supported by ongoing momentum in North America, Asia and Europe.
+  [result q] Miscellaneous” sales, essentially comprising customer contributions to R&D costs and prototypes, were up 6.6% on a like-for-like basis.
+  [result q] While business volumes with local automakers were down slightly, efforts to reposition the customer portfolio continue to advance (56% of original equipment sales to Chinese automakers since the start of the year, compared with 52% in 2025 over the same period and 53% in first-half 2026).
+
 == Nokia | 2026-10-22 07:00 | Nokia Corporation Interim Report for Q3 2026 | chars 15047
   quarter 3
   [result q] Group net sales to AI & Cloud customers grew 123% and order intake 118%.
@@ -76,6 +183,18 @@ news for 476 companies, 373 with a report; read 0 reports this run
   [result q] In Q3, we grew net sales by 9% and improved comparable operating margin by 220 basis points.
   [outlook] Comparable financial income and expenses Positive EUR 300 to 400 million (update) Strong income from Nokia's venture fund investments is leading to an increase in the outlook assumption for 2026.
 
+== Rexel | 2026-10-22 15:45 | REXEL: Q3 2026 sales | chars 17922
+  quarter 3
+  [result q] Constant and same-day sales growth of +11.4%, with: ◦ Growth in all geographies ◦ Volume growth acceleration (+6.3% contribution) ◦ Selling price increases in both cable ( +2.9% contribution) and non-cable ( +2.2% contribution) products across all three regions.
+  [result ytd] Constant and same-day sales growth of +7.3%, with positive contributions from both volumes (+3.4%) and selling prices (+2.3% from cable products and +1.6% from non-cable).
+  [result q] A currency effect of (1.4)%, mainly due to the depreciation of the US dollar against the euro Digital sales: Digital sales in Q3 2026 increased by +256bps to represent 36% of total Group sales:.
+  [result q] Strong constant and same-day sales growth of +17.4%.
+  [result q] US same-day sales were up +18.2% in Q3 2026, driven by: ◦ Data centers up in triple digits, now representing c. 13% of US sales, mainly driven by Mountain Plains, Southeast (including Mayer) and the Gulf.
+  [result q] Strong constant and same-day sales increase of +4.5%.
+  [backlog] Backlog at end-September 2026 above USD3bn, up +42% vs end 2025 and representing 3.4 months of sales United States:.
+  [outlook] In Asia, sales in China and India grew by +19.4% and +15.1% respectively, supported by industrial automation activity, mainly in manufacturing, logistics and electronics/robotics 5/13 Outlook Rexel is raising its full-year 2026 guidance for the second time this year, on the back of its acceleration in sales.
+  [target] Free cash flow conversion2 above 65% (unchanged) Reminder of Rexel's key medium-term ambitions:.
+
 == Neste Oyj | 2026-10-29 08:00 | Neste's interim report for January-September 2026 | chars 11251
   quarter 3
   [result q] The Group’s comparable EBITDA for the third quarter reached EUR 1,555 (531) million, driven by Renewable Products sales volumes combined with strong renewables sales margins and exceptionally strong middle distillate markets.
@@ -84,6 +203,15 @@ news for 476 companies, 373 with a report; read 0 reports this run
   [result q] Group EBITDA was EUR 1,581 (447) million, impacted by inventory valuation gains of EUR 187 (losses -23) million, while changes in the fair value of open commodity and currency derivatives were EUR -159 (-58) million.
   [result ytd] The Group's January–September 2026 results Neste's revenue in the first nine months totaled EUR 17,701 (14,062) million.
   [result ytd] Group EBITDA was EUR 3,627 (893) million, impacted by inventory valuation gains of EUR 241 (losses -90) million and changes in the fair value of open commodity and currency derivatives totaling EUR -226 (-66) million.
+
+== Hermès | 2026-10-22 06:00 | Hermès International: Third Quarter 2026 Revenue | chars 13106
+  quarter 3
+  [result q] Third quarter sales reached €4.1 billion, in line with second -quarter sales, up 4% at constant exchange rates and 6% at current exchange rates.
+
+== SCOR SE | 2026-10-30 05:00 | SCOR - Third quarter 2026 results: EUR 206 million net income in Q3 2026, contributing to a nine-month net income of EUR 603 million | chars 19741
+  quarter 3
+  [result q] Strong P&C underlying performance In Q3 2026, P&C insurance revenue stands at EUR 1,876 million, up 2.3% at constant exchange rates (up 3. 5% at current exchange rates) compared to Q 3 2025.
+  [result q] L&H continues to deliver in Q3 In Q3 2026, L&H insurance revenue amounts to EUR 1,881 million, down 2.3% at constant exchange rates (down 1.0% at current exchange rates) compared to Q 3 2025.
 
 == Atlas Copco | 2026-10-22 12:00 | Third-quarter report 2026 | chars 34641
   quarter 3
@@ -139,127 +267,3 @@ news for 476 companies, 373 with a report; read 0 reports this run
   [result q] Operating income excluding non-recurring items (NRIs) was SEK 912m (890), corresponding to a margin of 2.7% (2.8).
   [result q] Cost efficiency contributed SEK 1.4bn to operating income, offsetting the significant negative impact from external factors, primarily from increased raw material and logistics cost as a consequence of the Middle East conflict, and U.S. tariff costs.
   [result q] Income for the period was SEK -340m (192) and earnings per share were SEK -0.46 (0.39).
-
-== Carlsberg Group | 2026-10-29 08:00 | Trading statement as at 30 September 2026 | chars 12829
-  quarter 3
-  [result q] Reported revenue growth was 4.9% due to a positive currency impact in all regions.
-  [result q] REGIONAL PERFORMANCE WESTERN EUROPE Organic volume growth in Western Europe was 0.3%, supported by 3.6% organic growth in soft drinks and other beverages.
-  [result q] Organic revenue growth was 2.5%, supported by solid revenue/hl growth of 2%.
-  [result q] Reported revenue growth was 3.7%, supported by a positive currency impact of 1.2% mainly due to the strengthening British and Norwegian currencies.
-  [result q] Revenue/hl increased by 2% due to price increases and a positive brand and country mix.
-  [result q] Revenue declined organically by 4.6%, while reported revenue grew by 1.0% due to a positive currency impact, mainly in China.
-  [outlook] Revenue/hl +3% with solid improvement in all regions: Western Europe +2%, Asia +2% and CEEI +4%. 2026 earnings expectations maintained.
-
-== ISS | 2026-11-04 07:22 | Trading update for 1 January - 30 September 2026 | chars 33149
-  quarter 3
-  [result q] Volume growth was driven by a combination of increased activity levels at customer sites and expansion of contracts with existing customers and contributed around 0.5%-point to organic growth.
-  [result ytd] September 2026 Group revenue in the first nine months of 2026 was DKK 67.5 billion, an increase of 8.3% compared with the same period last year.
-  [result ytd] Organic growth was 7.7%, acquisitions and divestments, net were positive by 1.4%, whereas currency effects were negative with 1.4% and the net impact from hyperinflation restatement in Türkiye (IAS 29) was positive with 0.6%.
-  [result ytd] Organic growth was 7.7% in the first nine months of 2026 (2025: 4.3%), driven by price increases, projects and above -base work, including the DTAG one-off revenue adjustment, and the annualisation of 2025 contract wins and volume growth.
-  [result ytd] This had a positive effect on organic growth of around 4 %-points of which around half related to Türkiye.
-  [result ytd] Volume growth contributed around 0.5 %-point to organic growth primarily driven by increased activity levels at customer sites in Asia & Pacific and Central & Southern Europe.
-  [outlook] We reaffirm our 2026 outlook as updated on 19 May 2026 of organic growth above 6%, operating margin around 5.25% and free cash flow above DKK 3.1bn.
-  [outlook] However, adjusted for DKK 0.2 billion in prepayments for receiv ables paid in 2025 before due date in 2026 and the payment by DTAG of previously withheld amounts, the reported free cash flow is expected to be above DKK 3.1 billion for 2026.
-  [outlook] Expected revenue impact from acquisitions, divestments and foreign exchange rates in 2026 Acquisitions and divestments completed by 31 October 2026 (including in 2025) are expected to have a positive impact on revenue growth in 2026 of 1.5%-point.
-  [outlook] Based on the current exchange rates, a negative impact on revenue growth of around 1%-point1 is expected in 2026 from the development of foreign exchange rates, excluding any effects of hyperinflation (IAS 29).
-
-== Kone OYJ | 2026-10-28 07:30 | Interim report of KONE Corporation for January-September 2026 | chars 11322
-  quarter 3
-  [result ytd] Operating income (EBIT) was EUR 339.0 (334.4) million or 11.7% (12.1%) of sales.
-  [result ytd] The adjusted EBIT was EUR 369.0 (340.7) million or 12.7% (12.3%) of sales.* Cash flow from operations (before financing items and taxes) was EUR 347.9 (444.4) million.
-  [result ytd] Operating income (EBIT) was EUR 944.2 (949.0) million or 11.0% (11.5%) of sales.
-  [outlook] Business outlook for 2026 (specified) KONE expects its sales to grow 4-6% at comparable exchange rates in 2026 and its adjusted EBIT margin to be in the range of 12.5-12.9%.
-  [backlog] Our order book provides good support for future growth, and we remain focused on consistent execution toward our mid-term adjusted EBIT margin target corridor of 13-14%.
-  [outlook] Business outlook 2026 (specified) KONE expects its sales to grow 4-6% at comparable exchange rates in 2026 and its adjusted EBIT margin to be in the range of 12.5-12.9%.
-
-== Sandvik | 2026-10-22 08:00 | Interim report third quarter 2026 | chars 40445
-  quarter 3
-  [result q] Total order intake increased by 20% compared to last year and amounted to SEK 36,948 million (30,769).
-  [result q] Total revenues increased by 29% compared to last year and amounted to SEK 37,728 million (29,218).
-  [result q] T otal order intake and revenues grew at fixed exchange rates, by 6% and 18%, respectively.
-  [result q] If we exclude Russia, organic orders and revenues grew by 5% and 16%, respectively.
-  [result q] Organic order intake and revenues grew by 17% and 25% respectively.
-  [result q] Organic revenues grew by 23%, and I am proud of how success- fully we have expanded delivery capacity over the past 18 months and efficiently converted our backlog to meet customer demand.
-
-== UPM | 2026-10-28 08:45 | UPM Interim Report Q3 2026: Strong cash flow in a challenging quarter amid destocking and cost inflation | chars 18953
-  quarter 3
-  [result q] The transaction is subject to merger control approvals Q1–Q3 2026 highlights, continuing operations Sales totaled €6,983 million (7,140 million in Q1–Q3 2025).
-  [result q] During the third quarter, sales from our continuing operations were €2,202 million, and comparable EBIT was €131 million, down 8% year on year.
-  [result q] Net debt at the end of the quarter was lower, at €2,993 million, and the net debt to EBITDA ratio improved to 2.09.
-
-== Stora Enso | 2026-10-30 07:30 | Stora Enso Interim Report January-September 2026: Introducing Bergslagets Skogar while building a stronger Stora Enso | chars 12523
-  quarter 3
-  [result ytd] Reported sales decreased by 2% to EUR 2,240 (2,283) million due to divestments.
-  [result ytd] Adjusted EBIT increased by 28% to EUR 161 (126) million, driven by higher board volumes and lower variable costs, as well as the ramp-up of the new consumer board line at the Oulu site.
-  [result ytd] The adjusted EBIT margin increased to 7.2% (5.5%).
-  [result ytd] Operating result (IFRS) was EUR 47 (231) million, including items affecting comparability of EUR -63 (117) million, mainly related to impairments, restructuring and disposals, and fair valuations and other non-operational items of EUR -51 (-11) million, mostly related to fair valuation of biological assets.
-  [result ytd] Earnings per share was EUR 0.01 (0.25) and earnings per share excl. fair valuations (FV) were EUR 0.06 (0.26).
-  [result ytd] Earnings per share (EPS) were EUR 0.02 (0.42) and EPS excl. fair valuations (FV) was EUR 0.14 (0.44).
-
-== Ssab AB | 2026-10-28 07:30 | Report for Q3 2026 | chars 26577
-  quarter 3
-  [result q] Operating result was SEK 2,157 (1,869) million, higher prices and higher shipments.
-  [result q] Compared with the second quarter of 2026, revenue decreased by 7%.
-  [result q] EBITDA amounted to SEK 3,259 (2,886) million and the EBITDA margin was 13% (13%) for the third quarter of 2026.
-  [result q] Compared to the second quarter of 2026, operating result was down by SEK 538 million, mainly driven by lower shipments and cost for planned maintenance.
-
-== Boliden | 2026-10-29 13:00 | Boliden Q3 2026: Solid performance across Mines and Smelters | chars 31906
-  quarter 3
-  [result q] Compared with the previous quarter, operating profit excluding revaluation of process inventory increased by SEK 2,022 m.
-  [result q] Net profit was SEK 3,888 m (2,294), corresponding to earnings per share of SEK 13.69 (8.07).
-
-== SKF | 2026-10-21 07:30 | SKF Q3 2026: Improved margin and selectively higher demand | chars 9040
-  quarter 3
-  [result q] We delivered 4.3% organic growth and increased adjusted operating margin by 0.9 percentage points to 16.3%, year-over-year, supported by strong commercial execution.
-  [result q] Looking at our Continuing operations, i.e. our industrial business, organic sales growth was 4.3%, driven by both volume and solid price/mix.
-  [result q] Specialized Industrial Solutions (SIS) continued its strong performance where organic sales increased by 8.3%, growing across all business units and particularly in Aerospace and Magnetic Solutions.
-  [result q] I’m pleased that the industrial business improved its adjusted operating margin, compared to the same quarter last year, to 16.3%, reflecting continued strong commercial execution, particularly in SIS.
-  [result q] Cash flow from operations increased year-over-year to BSEK 2.1, supported by the improved operating result and partly offset by an increase in inventory for components and materials, primarily within SIS to support continued growth.
-  [result q] In Q3, they delivered a solid performance with an improved adjusted operating margin of 4.6% despite challenging market conditions where organic sales declined by –4.0%.
-  [outlook] Guidance Q4 2026 Currency impact on the operating profit: around MSEK 150, year-over-year, based on exchange rates as per 30 September 2026.
-
-== Axfood AB | 2026-10-22 07:00 | Continued volume growth in a dynamic market | chars 39213
-  quarter 3
-  [result q] Operating profit amounted to SEK 1,118 m (1,059) including items affecting comparability of SEK -1 m (-39).
-  [result q] Adjusted operating profit amounted to SEK 1,119 m (1,099) and the adjusted operating margin to 4.9% (4.9).
-  [result q] Net profit for the period amounted to SEK 772 m (727) and earnings per share before dilution to SEK 3.47 (3.30).
-  [result q] Operating profit amounted to SEK 2,888 m (2,712) including items affecting comparability of SEK -15 m (-102).
-  [result q] Adjusted operating profit amounted to SEK 2,903 m (2,814) and the adjusted operating margin to 4.3% (4.2).
-  [result q] We reached a major milestone, surpassing SEK 90 billion in annualised net sales.
-
-== Telia Company | 2026-10-22 07:00 | Telia Company Interim Report January - September 2026 | chars 10314
-  quarter 3
-  [result q] Service revenue increased 3.3%, like for like, driven mainly by strong development in Sweden, Norway and the Baltics.
-  [result q] Total net income increased to SEK 2.9 billion (2.5) and total EPS increased to SEK 0.69 (0.60).
-  [result q] Free cash flow increased to SEK 3.7 billion (2.9) and cash flow from operating activities increased to SEK 7.6 billion (7.1).
-  [result q] Service revenue increased 2.8%, like for like, driven by growth in all markets, although mainly in Sweden.
-  [result q] Free cash flow increased to SEK 7.8 billion (6.9) and cash flow from operating activities increased to SEK 20.3 billion (20.1).
-  [result q] With operational expenses down -2.6%, EBITDA growth increased to 2.9%, compared with the ~2% flagged last quarter.
-  [outlook] Outlook 2026 (upgraded): Adjusted EBITDA growth, like for like, of 3-4% ( previously around 3% ), Free cash flow of at least SEK 9 billion ( previously around SEK 9 billion )..
-  [outlook] As a result, we are raising our full-year EBITDA growth outlook from around 3% to 3-4%, and our full-year free cash flow outlook from around SEK 9 billion to at least SEK 9 billion.
-
-== Wärtsilä Oyj Abp | 2026-10-27 07:30 | Wärtsilä's Interim Report January-September 2026 | chars 14094
-  quarter 3
-  [result ytd] The comparable operating result increased by 19% to EUR 212 million (179), which represents 14.2% of net sales (12.8).
-  [result ytd] The operating result increased by 4% to EUR 222 million (214), which represents 14.9% of net sales (15.3).
-  [result ytd] Organic service order intake growth was 7% The order book at the end of the period increased by 22% to EUR 9,876 million (8,064).
-  [result ytd] The comparable operating result increased by 12% to EUR 623 million (558), which represents 13.9% of net sales (12.6).
-  [result ytd] The operating result increased by 9% to EUR 621 million (568), which represents 13.8% of net sales (12.8).
-  [result q] The comparable operating result increased by 19% to EUR 212 million, representing 14.2% of net sales.
-  [outlook] Cash flow from operating activities increased to EUR 1,087 million (946) Wärtsilä's outlook Wärtsilä's outlook Marine Wärtsilä expects the demand environment for the next 12 months (Q4/2026-Q3/2027) to be similar to that of the comparison period.
-
-== Skandinaviska Enskilda Banken | 2026-10-22 06:30 | SEB's results for the third quarter 2026 | chars 45765
-  quarter 3
-
-== Alfa Laval | 2026-10-27 07:30 | Alfa Laval AB (publ) Interim report 1 July - 30 September 2026 | chars 28021
-  quarter 3
-  [result None] Order intake was SEK 23.2 (17 .1) billion, an increase of 36 percent.
-  [result None] Net sales increased by 8 percent to SEK 18.6 (17 .2) billion, with an organic increase of 6 percent.
-  [result None] Adjusted EBITA increased by 6 percent to SEK 3.4 (3.2) billion, corresponding to a margin of 18.1 (18.4) percent.
-  [result q] Net sales Net sales was SEK 18,596 (17,244) million for the third quarter and SEK 52,632 (50,528) million for the first nine months 2026.
-  [result ytd] For the first nine months, the net sales amounted to SEK 52,632 (50,528) million, a growth of 4.2 percent.
-  [result q] Net sales increased by 33 percent to SEK 6.7 (5.0) billion, with an organic increase of 24 percent.
-
-== Swedbank AB | 2026-10-22 07:00 | Swedbank's interim report for the third quarter 2026 | chars 42585
-  quarter 3
-  [result q] New sales were high in all three countries and mortgage volumes rose by 6 per cent in local currency.
