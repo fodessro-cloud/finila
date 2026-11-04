@@ -26,7 +26,7 @@ SITE = 'https://www.finila.com'
 SRC = Path(sys.argv[1] if len(sys.argv) > 1 else '.')
 OUT = Path(sys.argv[2] if len(sys.argv) > 2 else SRC)
 # Pages listed in the sitemap besides the company pages.
-PAGES = ['', 'screener', 'map', 'groups', 'insiders', 'shorts', 'property', 'rates', 'assets', 'stock/']
+PAGES = ['', 'screener', 'map', 'groups', 'insiders', 'shorts', 'property', 'rates', 'assets', 'stock/', 'stock/methodology']
 
 COUNTRIES = {
     'AT': 'Austria', 'BE': 'Belgium', 'BG': 'Bulgaria', 'CH': 'Switzerland', 'CY': 'Cyprus', 'CZ': 'Czechia',
@@ -863,6 +863,7 @@ def assign_slugs(rows, known):
     ticker (or country, then LEI) added. Returns every address ever given, dropped companies included,
     so a later company never takes over an old page."""
     used = {s: lei for lei, s in known.items()}
+    used['methodology'] = None   # /stock/methodology is the methodology page
     groups = defaultdict(list)
     for c in rows:
         if c['lei'] in known:
@@ -933,7 +934,7 @@ def head(title, description, canonical, extra=''):
 
 FOOTER = '''<footer class="sp-foot">
   <p>FINILA shows figures read automatically from official sources. They can contain errors and are not investment advice.</p>
-  <p><a href="/stock/">All companies A-Z</a> · <a href="/screener">Stock screener</a> · <a href="/insiders">Insider trades</a> · <a href="/shorts">Short positions</a> · <a href="/assets">Where to put money</a> · <a href="/property">Property prices</a> · <a href="https://www.linkedin.com/company/finila" target="_blank" rel="noopener">LinkedIn</a></p>
+  <p><a href="/stock/">All companies A-Z</a> · <a href="/stock/methodology">Methodology</a> · <a href="/screener">Stock screener</a> · <a href="/insiders">Insider trades</a> · <a href="/shorts">Short positions</a> · <a href="/assets">Where to put money</a> · <a href="/property">Property prices</a> · <a href="https://www.linkedin.com/company/finila" target="_blank" rel="noopener">LinkedIn</a></p>
   <p>Contact: <a href="mailto:info@finila.com">info@finila.com</a></p>
 </footer>
 '''
@@ -1104,11 +1105,67 @@ def page(c, peers, updated, med=None):
   </article>
   {events_html(c)}
   {peers_html(c, peers, med)}
-  <p class="sp-legend">Where each number comes from: {chip('r')} the company’s annual report or an official register · {chip('p')} Deutsche Börse delayed share price · {chip('c')} calculated by FINILA from those two.</p>
+  <p class="sp-legend">Where each number comes from: {chip('r')} the company’s annual report or an official register · {chip('p')} Deutsche Börse delayed share price · {chip('c')} calculated by FINILA from those two. <a href="/stock/methodology">How FINILA calculates</a>.</p>
 </main>
 {FOOTER}<script src="/js/url-state.js" defer></script>
 <script src="/js/stock-page.js" defer></script>
 <script src="/js/analytics.js" defer></script>
+</body>
+</html>
+'''
+
+
+METHOD = [
+    ('Sources', [
+        ('Annual figures', 'Each company’s ESEF annual report (the machine-readable report every EU-listed company files under the Transparency Directive), read from filings.xbrl.org. Group totals only, no segments. Where a company has no ESEF report, figures are copied by hand from its published annual accounts and marked “Accounts”.'),
+        ('Restated years', 'A later report sometimes restates an earlier year (a business sold, new accounting rules). The newest version of each year is shown and marked R, so the years compare.'),
+        ('Share prices', 'Deutsche Börse delayed prices (Xetra, else Börse Frankfurt), converted to euros by the exchange. Market value = price × shares in issue from the report.'),
+        ('Exchange rates', 'ECB reference rates. Ratios mixing price and report figures convert the report figures at the rate implied by revenue in euros.'),
+        ('Insiders and shorts', 'Managers’ trades from the Swedish regulator (FI); net short positions from the regulators of the Netherlands, Italy, Sweden, Norway and the UK.'),
+    ]),
+    ('Definitions', [
+        ('EBITDA', 'Operating profit + depreciation and amortisation (incl. right-of-use assets), as tagged in the report. Not the company’s “adjusted” EBITDA: one-off items stay in.'),
+        ('Net debt', 'Borrowings (current + non-current) − cash and cash equivalents. Lease liabilities are shown separately.'),
+        ('Enterprise value (EV)', 'Market value + net debt + lease liabilities (IFRS 16) + minority interests. Not shown for banks and insurers.'),
+        ('Free cash flow (FCF)', 'Cash flow from operating activities − purchases of property, plant, equipment and intangible assets.'),
+        ('Capex', 'Purchases of property, plant and equipment and of intangible assets, from the cash flow statement.'),
+        ('Working capital', 'Inventories + trade receivables − trade payables, at the year end.'),
+        ('P/E', 'Share price / basic earnings per share of the last financial year. P/S, P/B, P/FCF: market value / revenue, equity (owners of the parent), free cash flow.'),
+        ('EV/EBITDA, EV/EBIT', 'Enterprise value / EBITDA or operating profit of the last financial year.'),
+        ('ROE, ROA', 'Net income (owners of the parent) / equity or total assets at the year end.'),
+        ('ROIC', 'Operating profit × (1 − tax rate) / (equity + net debt). Tax rate = income tax / profit before tax, held between 15% and 35%.'),
+        ('Interest cover', 'Operating profit / finance costs.'),
+        ('Growth a year (CAGR)', 'Compound annual growth from FY2021 (2020 was a covid year) to the latest year; from the first year available when fewer years exist.'),
+        ('PEG (past growth)', 'P/E / EPS growth a year over the same years. Uses past growth, not analysts’ forecasts.'),
+        ('EPS history', 'Earnings per share of older years are put on today’s share basis after share splits, as companies restate them.'),
+        ('Peer median', 'Median of the companies of the same industry on FINILA (Wikidata industry, at least 8 priced companies), else of the same sector; at least 5 values.'),
+        ('Quality score', 'Piotroski F-score: nine tests of this year’s report against last year’s; shown as passed / tests possible.'),
+    ]),
+    ('Scenarios', [
+        ('Three scenarios', 'Revenue grows for 5 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
+        ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 5 years, EBITDA at today’s margin × the peer median multiple.'),
+    ]),
+    ('Checks', [
+        ('Unit and currency checks', 'A year whose revenue or assets are about 1,000× off the other years is left out (a report tagged in thousands). Years in another currency are left out. Ratios outside plausible ranges (e.g. P/S above 60) are not shown.'),
+        ('When in doubt', 'A figure that fails a check is shown as “—”, never estimated.'),
+        ('Not advice', 'FINILA shows figures from official reports and calculations from them. It is not investment advice.'),
+    ]),
+]
+
+
+def method_page(updated):
+    body = ''.join(f'<section class="sp-card"><h2>{esc(t)}</h2><table class="sp-table sp-method">' +
+                   ''.join(f'<tr><td>{esc(k)}</td><td>{esc(v)}</td></tr>' for k, v in items) + '</table></section>' for t, items in METHOD)
+    title = 'How FINILA calculates company figures | FINILA'
+    desc = 'Sources, definitions (EBITDA, EV, free cash flow, ROIC, CAGR, peer median) and checks behind the FINILA company pages.'
+    return head(title, desc, f'{SITE}/stock/methodology') + f'''
+<main class="sp-wrap">
+  <nav class="sp-crumbs" aria-label="Breadcrumb"><a href="/stock/">Stocks</a> › Methodology</nav>
+  <h1 class="sp-title">How FINILA calculates company figures</h1>
+  <p class="sp-intro">Every number on a company page comes from an official report, a share price or a calculation from those two, done the same way for every company. Updated {esc(updated)}.</p>
+  {body}
+</main>
+{FOOTER}<script src="/js/analytics.js" defer></script>
 </body>
 </html>
 '''
@@ -1166,6 +1223,7 @@ def main():
         peers = [p for p in same if p is not c][:8]
         (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(group(c), {})), encoding='utf-8')
     (out / 'index.html').write_text(index_page(rows, updated), encoding='utf-8')
+    (out / 'methodology.html').write_text(method_page(updated), encoding='utf-8')
     (OUT / 'js').mkdir(exist_ok=True)
     (OUT / 'js' / 'stock-slugs.json').write_text(json.dumps(slugs, separators=(',', ':')), encoding='utf-8')
     today = date.today().isoformat()
