@@ -995,11 +995,24 @@ def latest_report_html(c):
     r = c.get('latestReport')
     if not r:
         return ''
-    res = quote_unique([quote_clean(t) for t in r.get('results') or []])
+    res = [x if isinstance(x, dict) else {'text': x, 'period': None} for x in r.get('results') or []]
+    n, yr = r.get('quarter'), (r.get('date') or '')[:4]
+    if n == 4 and (r.get('date') or '')[5:7] in ('01', '02', '03'):
+        yr = str(int(yr) - 1)
+    months = {1: 'January–March', 2: 'January–June', 3: 'January–September', 4: 'January–December'}
+    labels = {'q': (f'Quarter: Q{n} {yr}' if n else 'The quarter', 'What the company reports for the three months.'),
+              'ytd': (f'Year so far: {months[n]} {yr}' if n else 'Year so far', 'From the start of the financial year to the report date.'),
+              None: ('Results', 'The release does not say which period these sentences cover: see the announcement.')}
+    if n == 1:   # the first quarter is also the year so far
+        labels['ytd'] = labels['q']
     body = ''
-    if res:
-        body += '<div class="sp-q"><h3>Results <small>What the company reports for the period.</small></h3><ul>' + \
-            ''.join(f'<li>“{esc(t)}”</li>' for t in res) + '</ul></div>'
+    for per in ('q', 'ytd', None):
+        if n == 1 and per == 'ytd':
+            continue
+        items = quote_unique([quote_clean(x['text']) for x in res if x['period'] == per or (n == 1 and per == 'q' and x['period'] == 'ytd')])
+        if items:
+            title, sub = labels[per]
+            body += f'<div class="sp-q"><h3>{esc(title)} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>'
     for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
                              ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
                              ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):

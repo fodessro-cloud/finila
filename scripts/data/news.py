@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 3
+CACHE_VERSION = 4
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -140,11 +140,48 @@ def split_release(text):
     return t
 
 
+YTD = (r"nine months|nine-month|\b9m\b|first nine|first half|six months|six-month|\bh1\b|half[- ]year|full[- ]year|year to date|\bytd\b|"
+       r"january\s*[-–]\s*(june|september|december)|jan\s*[-–]\s*(jun|sep|dec)|\b1\.1\.?\s*[-–]\s*3\d\.\d|\b1\s*[-–]\s*(6|9|12)/20|for the year 20\d\d")
+QUARTER = (r"\bq[1-4]\b|(first|second|third|fourth) quarter|the quarter|quarterly|"
+           r"(january|april|july|october)\s*[-–]\s*(march|june|september|december)|\b(4\s*[-–]\s*6|7\s*[-–]\s*9|10\s*[-–]\s*12)/20")
+
+
+def period_of(s):
+    """'q' when a sentence speaks of the quarter, 'ytd' of the year so far, None when it does not say."""
+    low = s.lower()
+    q, y = re.search(QUARTER, low), re.search(YTD, low)
+    if q and y:
+        return "q" if q.start() < y.start() else "ytd"
+    return "q" if q else "ytd" if y else None
+
+
+def report_quarter(title, text, published):
+    """Which quarter a report is for: from its title, else its first lines, else its publication date."""
+    for t in (title, text[:600]):
+        low = (t or "").lower()
+        m = re.search(r"\bq([1-4])\b", low) or re.search(r"\b(first|second|third|fourth) quarter", low)
+        if m:
+            g = m.group(1)
+            return {"first": 1, "second": 2, "third": 3, "fourth": 4}.get(g, int(g) if g.isdigit() else None)
+        if re.search(r"half[- ]year|first half|six months|january\s*[-–]\s*june", low):
+            return 2
+        if re.search(r"nine months|nine-month|january\s*[-–]\s*september|1\.1\.?\s*[-–]\s*30\.9", low):
+            return 3
+        if re.search(r"year[- ]end|full[- ]year|annual report|fourth quarter|january\s*[-–]\s*december", low):
+            return 4
+    m = int(published[5:7]) if published[5:7].isdigit() else 0
+    return {1: 4, 2: 4, 3: 4, 4: 1, 5: 1, 7: 2, 8: 2, 10: 3, 11: 3}.get(m)
+
+
 def quotes(text, year):
-    """Results for the period and the company's own outlook, word for word."""
+    """Results for the period and the company's own outlook, word for word. Each result carries the period
+    it speaks of: its own words ("in Q3", "in the first nine months"), else the heading above it."""
     head = split_release(text[:15000])   # the summary at the top: highlights, CEO comment, outlook
     results, seen = [], set()
+    current = None
     for s in ol.sentences(head):
+        own = period_of(s)
+        current = own or current
         low = s.lower()
         if re.search(ol.NOISE, low) or re.search(JUNK, low) or not ol.english(low) or sum(ch.isdigit() for ch in s) > len(s) * 0.25:
             continue
@@ -158,13 +195,16 @@ def quotes(text, year):
             key = re.sub(r"\W+", "", low)[:100]
             if key not in seen:
                 seen.add(key)
-                results.append(re.sub(r"\.\.$", ".", s))
+                # A heading the PDF glued to the sentence ("January–September 2026 Orders received ...") is cut off.
+                t = re.sub(r"^((january|april|july|october)\s*[-–]\s*(march|june|september|december)|q[1-4]|(first|second|third|fourth) quarter|"
+                           r"summary of [\w-]+ results)( 20\d\d)?:?\s+(?=[A-Z])", "", s, flags=re.I)
+                results.append({"text": re.sub(r"\.\.$", ".", t), "period": own or current})
     # Group figures before divisions and regions: releases put the group first, but not always.
     def rank(s):
         low = s.lower()
         return (-2 if re.match(r"(in|at) (?!q[1-4]|the |our |total|\d)[A-Z]", s) or re.match(r"[A-Z][\w&-]+( [A-Z][\w&-]+)* (achieved|reported|generated|increased|delivered) ", s) and not re.match(r"(Net|Group|Total|Revenue|Sales|Operating|Adjusted|Reported|Organic|Orders|Order|Earnings|Profit|EBIT|Cash|Free)", s) else 0) \
             + (2 if re.search(r"\b(group|net sales|total|we delivered|our net sales|revenues? (was|were|amounted|increased|decreased|grew)|net sales (was|were|amounted|increased|decreased|grew))\b", low) else 0)
-    top = sorted(range(len(results)), key=lambda i: -rank(results[i]))[:5]
+    top = sorted(range(len(results)), key=lambda i: -rank(results[i]["text"]))[:6]
     results = [results[i] for i in sorted(top)]
     out = []
     for i in ol.pick(split_release(text[:60000]), year):
@@ -175,7 +215,7 @@ def quotes(text, year):
             continue   # deal timetables and accounting effects, not the company's business outlook
         if re.search(r"previously expected|previous (estimate|guidance|outlook)", low) and not re.search(r"\b(now|rais|lower|updat|narrow|chang)", low):
             continue   # the old guidance on its own
-        if i["kind"] == "backlog" and (i["text"] in results or not re.search(r"backlog|order book|orderbook|order stock", low)):
+        if i["kind"] == "backlog" and (i["text"] in [r["text"] for r in results] or not re.search(r"backlog|order book|orderbook|order stock", low)):
             continue   # order intake is a result of the period; backlog means orders not yet delivered
         out.append(i)
     return results, out[:5]
@@ -304,6 +344,7 @@ def main():
         year = int(a["time"][:4]) if a["time"][:4].isdigit() else today.year
         a["chars"] = len(text)
         a["results"], a["outlook"] = quotes(text, year) if text else ([], [])
+        a["quarter"] = report_quarter(a["title"], text, a["time"])
         read += 1
     cutoff = (today - timedelta(days=KEEP_DAYS)).isoformat()
     cache["ann"] = {k: v for k, v in cache["ann"].items() if v["time"][:10] >= cutoff}
@@ -316,7 +357,8 @@ def main():
             o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"]})
         if is_report(a) and "report" not in o and "results" in a:
             o["report"] = {"date": a["time"][:16], "title": a["title"], "url": a["url"], "src": a["src"],
-                           "results": a["results"], "outlook": a["outlook"]}
+                           "results": a["results"], "outlook": a["outlook"],
+                           "quarter": a.get("quarter")}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
     print(f"news for {len(out)} companies, {sum('report' in v for v in out.values())} with a report; read {read} reports this run", flush=True)
     names = {r["lei"]: r["name"] for r in rows}
@@ -324,8 +366,9 @@ def main():
     for lei in sorted((l for l in out if "report" in out[l]), key=lambda l: -size.get(l, 0))[:30]:   # samples to check by eye
         rep = out[lei]["report"]
         print(f"\n== {names.get(lei)} | {rep['date']} | {rep['title']} | chars {cache['ann'].get(next((k for k,v in cache['ann'].items() if v['url']==rep['url']), ''), {}).get('chars')}")
+        print("  quarter", rep.get("quarter"))
         for s in rep["results"]:
-            print("  [result]", s)
+            print(f"  [result {s['period']}]", s["text"])
         for i in rep["outlook"]:
             print(f"  [{i['kind']}]", i["text"])
 
