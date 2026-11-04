@@ -16,13 +16,13 @@ import fundamentals as fd   # noqa: E402
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/about.json"
 OUT = ROOT / "data/about.json"
-CACHE_VERSION = 4
+CACHE_VERSION = 5
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
 CONCEPTS = ("ifrs-full:DescriptionOfNatureOfEntitysOperationsAndPrincipalActivities",
             "ifrs-full:DescriptionOfNatureOfFinancialStatements")
-MAX_CHARS = 420
+MAX_CHARS = 900
 _get = fd.get
 
 

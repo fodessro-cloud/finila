@@ -999,7 +999,11 @@ def about_html(c):
         return ''
     t = about_short(a['text']) if a.get('text') else ''
     link = f' <a href="{esc(a["source"])}" target="_blank" rel="noopener">annual report {esc(a["period"][:4])}</a>' if a.get('source') else ''
-    out = f'<p class="sp-about"><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>' if t else ''
+    full = a.get('text') or ''
+    more = ''
+    if t and len(full) > len(t) + 20:   # the whole paragraph from the report, opened on request
+        more = f'<details class="sp-more"><summary>More</summary>“{esc(full)}”</details>'
+    out = f'<div class="sp-about"><p><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>{more}</div>' if t else ''
     split = a.get('split') or {}
     rows = []
     for kind, name in (('segments', 'By business'), ('products', 'By product'), ('regions', 'By region')):
