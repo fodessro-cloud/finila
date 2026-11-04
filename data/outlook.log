@@ -1,6 +1,46 @@
-1946 companies with ESEF reports, 60 to check
+1946 companies with ESEF reports, 1946 to check
+  ! https://filings.xbrl.org/api/entities/BUCRF72VH5RBN7X3VL35/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800WFQ334R8UXUG83/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/MINO79WLOO247M1IL051/filings?page[size]=100: HTTP Error 429: Too Many Requests
   50 companies read
-outlook quotes for 36 companies {'target': 24, 'event': 141, 'outlook': 59, 'backlog': 13}; read 60 this run
+  100 companies read
+  150 companies read
+  200 companies read
+  250 companies read
+  300 companies read
+  350 companies read
+  400 companies read
+  450 companies read
+  500 companies read
+  550 companies read
+  600 companies read
+  650 companies read
+  700 companies read
+  750 companies read
+  800 companies read
+  850 companies read
+  900 companies read
+  950 companies read
+  1000 companies read
+  1050 companies read
+  1100 companies read
+  1150 companies read
+  1200 companies read
+  1250 companies read
+  1300 companies read
+  1350 companies read
+  1400 companies read
+  1450 companies read
+  1500 companies read
+  1550 companies read
+  1600 companies read
+  1650 companies read
+  1700 companies read
+  1750 companies read
+  1800 companies read
+  1850 companies read
+  1900 companies read
+outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059, 'backlog': 418}; read 1946 this run
 
 == Shell PLC (2025-12-31)
   [outlook] The fourth quarter 2025 dividend of $ 0.372 per ordinary share will be paid on March 30, 2026 , to shareholders on the register at February 20, 2026 , and represents an increase of 4% compared with the third quarter 2025 dividend.
@@ -135,7 +175,7 @@ outlook quotes for 36 companies {'target': 24, 'event': 141, 'outlook': 59, 'bac
   [event] In July 2025, we launched our industry leading ‘Just Ask Once’ customer care promise for Vodafone customers.
   [event] In April 2026, we launched our ‘5G Slicing’ proposition for business customers, delivering enhanced and dependable mobile connectivity with guaranteed performance for enterprises, as a part of our strategy to further monetise our network differentiation.
 
-== Sainsbury's (2026-02-28)
+== J Sainsbury (2026-02-28)
   [target] More than 2,500 farms will be backed by long-term contracts, representing over £5billion of committed investment over the lifespan of these agreements, securing 3.1 million tonnes ofhomegrown fresh food.
   [outlook] In the year ahead, we expect to open around ten new supermarkets and at least 20 new convenience stores, adding around 0.5 per cent to sales growth in 2026/27.
   [outlook] We are increasingly well placed to capitalise on the strong forecast growth of Retail Media in the UK through the high-returning investments we are making in our capabilities, and we remain ahead of plan to deliver at least £100 million of incremental profit over the three years to March 2027.
@@ -206,8 +246,6 @@ outlook quotes for 36 companies {'target': 24, 'event': 141, 'outlook': 59, 'bac
   [event] It was especially pleasing for our Space & Mission Systems business, which we acquired in 2024, to secure a $1.2bn (£0.9bn) US Space Systems Command contract for the Resilient Missile Warning & Tracking – Medium Earth Orbit Epoch 2 programme.
   [event] The significant increase in 2024 primarily reflected the $5.5bn (£4.4bn) acquisition of Ball Aerospace, which was funded through debt finance and existing cash reserves.
   [event] In 2025 , we launched an additional pilot programme with Unmind, allowing employees to access virtual counselling via a network of qualified counsellors.
-
-== DSV A/S (2026-06-30)
 
 == ASML Holding (2025-12-31)
   [backlog] Our backlog currently stands at a healthy level of €38.8 billion .
@@ -310,3 +348,39 @@ outlook quotes for 36 companies {'target': 24, 'event': 141, 'outlook': 59, 'bac
   [event] In the UK, building on pioneering initiatives including the Great Grid Partnership, in July 2025 we launched our c. £8bn Electricity Transmission Partnership to unlock long-term supply chain capacity and skills .
   [event] In November 2025 we completed the sale of Grain LNG, our UK LNG asset.
   [event] Following a review of strategic priorities in 2025/26, the major transformation programme launched in 2024 has been reshaped and the associated programme costs in the current year no longer meet the quantitative threshold to be treated as exceptional.
+
+== Valeo (2025-12-31)
+  [outlook] (1) Pour l’année 2026, la cible pour le taux de ROCE est à partir de 15,8 % et la guidance pour l’EBIT est à partir de 4,7 % .
+
+== Coca-Cola Europacific Partners PLC (2025-12-31)
+  [event] We launched a number of campaigns across our markets in 2025, celebrating the people behind every bottle we make, and showcasing our local business model.
+  [event] Refer to Note 4 of the 2024 consolidated financial statements for further details about the acquisition of CCBPI.
+  [event] Revenue per unit case in Europe increased by 3.6% in 2025, on a comparable and FX neutral basis, reflecting positive headline price increases and promotional optimisation alongside favourable mix and the impact of sugar tax in France.
+  [event] These initiatives resulted in total restructuring charges of €8 million within reported cost of sales and €97 million within reported operating expenses for the year ended 31 December 2025.
+  [event] Restructuring charges of €10 million and €254 million were recognised within reported cost of sales and reported operating expenses, respectively, for the year ended 31 December 2024, related principally to various productivity initiatives.
+  [event] The Committee reviewed the Group’s restructuring expense of €105 million as well as the restructuring provision balance of €135 million as at 31 December 2025, and continued to agree that it does not contain significant uncertainty.
+
+== Marks AND Spencer Group P.L.C. (2026-03-28)
+  [target] This year M&S capital expenditure will increase to c.£650m-£750m, with approximately two-thirds targeting the long-term growth opportunity in Food.
+  [outlook] STRATEGIC PROGRESS CONTINUED In 2026/27, M&S capital expenditure net of disposals will be c.£650-£750m in line with previous forecasts, with approximately £150m on maintenance investment and the balance on growth and cost out spend.
+  [outlook] Anticipated 2026/27 capital expenditure: 2026/27 £m Total maintenance £150m Property £200m Supply chain £200m Digital & Technology £140m Other £20m Total growth & cost out £560m M&S capital expenditure £710m Property disposals (£40m) Lichfield investment £70m M&S capital expenditure £740m
+  [outlook] There will be a period of economic recession in 2026/27, resulting in a reduction in sales growth of 3.0 – 5.0% across all three business units compared to the budget and three-year plan.
+  [outlook] This final dividend of c.£62.0m (last year: £52.4m) will be paid on 10 July 2026 to shareholders whose names are on the Register of Members at the close of business on 5 June 2026.
+  [event] In Food this year we launched a Nutrient Dense range, developed by M&S chefs and nutritionists, to help customers get more fibre, vitamins and minerals even when eating smaller portions.
+  [event] This year, we launched several initiatives to make shopping at M&S easier and more rewarding, while also rolling out technology to better support our colleagues.
+  [event] In April 2026, we launched a transformed Sparks loyalty programme hosted on the M&S app, with enhanced data and personalisation at the heart.
+  [event] One idea was our gluten-free Made Without Colin, which launched in January 2026 after more than 25 suggestions from colleagues across the UK.
+  [event] Made Well workshops: In November 2025 we launched our Made Well product workshops, inviting key suppliers to London for a five-day learning week.
+  [event] How M&S engages International partner Pulse survey: In February 2026 we launched a ‘Pulse’ feedback survey for our International partners.
+
+== Naturgy Energy Group SA (2025-12-31)
+  [outlook] Los objetivos y ponderaciones son los siguientes: ▪ Objetivos financieros pondera un 65% ▪ Ebitda 2026 comunicado como guidance al mercado al inicio de 2026.
+
+== Galp Energia, SGPS, S.A. (2025-12-31)
+  [outlook] Start‑up is expected by the end of 2026, with a total estimated investment of approximately €400 m, with Galp acting as the operator.
+  [outlook] Start‑up is expected in the second half of 2026, with a total estimated investment of approximately €250 m.
+  [event] Completion of the sale of Area 4 upstream assets in Mozambique Following the agreement signed in 2024 with ADNOC (through XRG P.J.S.C.) for the sale of the upstream assets in Area 4, Mozambique, Galp completed the transaction in the first quarter of 2025, having received a first payment of c.$881 m.
+  [event] In line with such guidelines, the Board of Directors will propose to the 2026 AGM the distribution of a €0.64 dividend per share, related to 2025, and has launched a €250 m share buyback program, aimed at capital reduction, to be executed during 2026.
+  [event] During the first quarter of 2025, Galp completed the divestment of its 10% interest in Area 4, offshore Mozambique.
+  [event] Additionally, in 2024, Petrobras launched the “Tupi + Valor” programme, to identify and develop new value-enhancing opportunities in the Tupi and Iracema fields.
+  [event] The e‑learning course on Unconscious Bias was also launched in 2025 as planned.

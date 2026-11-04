@@ -1,32 +1,34 @@
-FINILA data check 2026-11-03 21:14 UTC (live site)
-0 errors, 88 warnings
+FINILA data check 2026-11-04 15:45 UTC (live site)
+0 errors, 89 warnings
 
-WARNING BP P.L.C. (GB0007980591): P/E 2,274 (price 7.096, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING DCC (IE0002424939): P/E 452 (price 76.5, EPS 0.1416 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING BP P.L.C. (GB0007980591): P/E 2,208 (price 6.913, EPS 0.0035 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING DCC (IE0002424939): P/E 450 (price 76.5, EPS 0.1416 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Electrolux (SE0016589188): shares in issue 787.7M but report implies 270.2M.
-WARNING Swatch Group (CH0012255151): P/E 3,058 (price 199.6, EPS 0.06 CHF): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Wizz AIR Holdings PLC (JE00BN574F90): P/E 608 (price 12.16, EPS 0.02 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Clariane (FR0010386334): P/E 772 (price 3.088, EPS 0.004 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Informa PLC (GB00BMJ6DW54): P/E 1,055 (price 10.1, EPS 0.008 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Swatch Group (CH0012255151): P/E 3,036 (price 198.75, EPS 0.06 CHF): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Wizz AIR Holdings PLC (JE00BN574F90): P/E 629 (price 12.58, EPS 0.02 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Clariane (FR0010386334): P/E 794 (price 3.178, EPS 0.004 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Informa PLC (GB00BMJ6DW54): P/E 1,042 (price 10.0, EPS 0.008 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Construcciones Y Auxiliar DE Ferrocarriles, S.A. (ES0121975009): EPS 4.27 and net income -146.3 have opposite signs.
+WARNING Amdocs (GB0022569080): price moved -44.4% on 2026-11-04 (check it is real news, not a data error).
+WARNING W.A.G Payment Solutions PLC (GB00BLGXWY71): P/E 403 (price 1.21, EPS 0.003 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Zealand Pharma (DK0060257814): revenue growth 14,599% looks like a unit change between reports.
 WARNING PRISA (ES01717430J3): shares in issue 134.8M but report implies 1,355.0M.
 WARNING Norma Group (DE000A1H8BV3): shares in issue 19.4M but report implies 31.8M.
-WARNING Semperit (AT0000785555): P/E 850 (price 17.0, EPS 0.02 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Allfunds Group PLC (GB00BNTJ3546): P/E 2,480 (price 9.67, EPS 0.0039 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Semperit (AT0000785555): P/E 857 (price 17.15, EPS 0.02 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Allfunds Group PLC (GB00BNTJ3546): P/E 2,522 (price 9.835, EPS 0.0039 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Bally'S Intralot Α.Ε. (GRS343313003): EPS 0.073 and net income -65.2 have opposite signs.
 WARNING InstallatørGruppen (DK0064982565): EPS -2.59 and net income 74.9 have opposite signs.
-WARNING Exail Technologies (FR0000062671): P/E 714 (price 125.6, EPS 0.176 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): P/E 452 (price 133.12, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
-WARNING Nebius Group (NL0009805522): market value €33,967M is 72x revenue: share count off (reverse split?).
-WARNING Norcros PLC (GB00BYYJL418): P/E 880 (price 3.58, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Exail Technologies (FR0000062671): P/E 714 (price 125.7, EPS 0.176 EUR): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): P/E 447 (price 132.06, EPS 0.33 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Nebius Group (NL0009805522): market value €33,696M is 71x revenue: share count off (reverse split?).
+WARNING Norcros PLC (GB00BYYJL418): P/E 868 (price 3.54, EPS 0.0034 GBP): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING NCC Group (GB00B01QGK86): EPS -0.03 and net income 17.1 have opposite signs.
 WARNING Nacon (FR0000074072): shares in issue 108.4M but report implies 18.6M.
 WARNING Rapala VMC Oyj (FI0009007355): shares in issue 38.5M but report implies 21.3M.
 WARNING STV Group (GB00B3CX3644): EPS 0.108 and net income -5.0 have opposite signs.
 WARNING Cabka (NL00150000S7): shares in issue 24.7M but report implies 24,666.7M.
 WARNING R.E.A. Holdings (GB0002349065): EPS -0.007 and net income 8.5 have opposite signs.
-WARNING Dialight (GB0033057794): P/E 735 (price 6.55, EPS 0.01 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
+WARNING Dialight (GB0033057794): P/E 732 (price 6.55, EPS 0.01 USD): EPS misread, rounded or from before a share split, unless profit really was tiny.
 WARNING Boreo (FI0009900724): EPS -0.3 and net income 1.1 have opposite signs.
 WARNING Cy4gate (IT0005412504): EPS 0.34 and net income -10.0 have opposite signs.
 WARNING Bastogi (IT0004412497): EPS -0.137 and net income 15.2 have opposite signs.
@@ -49,27 +51,27 @@ WARNING Italgas (IT0005211237): €9B company has no sector, falls into 'Other' 
 WARNING Lottomatica Group S.P.A. (IT0005541336): €6B company has no sector, falls into 'Other' on the maps.
 WARNING Allfunds Group PLC (GB00BNTJ3546): €6B company has no sector, falls into 'Other' on the maps.
 WARNING Temenos Group (CH0012453913): €6B company has no sector, falls into 'Other' on the maps.
+WARNING SOL S.P.A. (IT0001206769): €6B company has no sector, falls into 'Other' on the maps.
 WARNING ELIS (FR0012435121): €5B company has no sector, falls into 'Other' on the maps.
-WARNING SOL S.P.A. (IT0001206769): €5B company has no sector, falls into 'Other' on the maps.
-WARNING British Land (GB0001367019): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Mycronic AB (publ) (SE0025158629): €5B company has no sector, falls into 'Other' on the maps.
+WARNING British Land (GB0001367019): €5B company has no sector, falls into 'Other' on the maps.
 WARNING AB Sagax (SE0005127818): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Reply S.P.A. (IT0005282865): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Persimmon plc (GB0006825383): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Vallourec (FR0013506730): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Aalberts N.V. (NL0000852564): €5B company has no sector, falls into 'Other' on the maps.
 WARNING Man Group PLC (JE00BJ1DLW90): €5B company has no sector, falls into 'Other' on the maps.
-WARNING Soitec (FR0013227113): €4B company has no sector, falls into 'Other' on the maps.
-WARNING Flughafen Wien AG (AT00000VIE62): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Warehouses De Pauw (BE0974349814): €4B company has no sector, falls into 'Other' on the maps.
+WARNING Flughafen Wien AG (AT00000VIE62): €4B company has no sector, falls into 'Other' on the maps.
 WARNING RS Group plc (GB0003096442): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Lagercrantz Group Aktiebolag (SE0014990966): €4B company has no sector, falls into 'Other' on the maps.
-WARNING AAK AB (Publ) (SE0011337708): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Holmen Aktiebolag (SE0011090018): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Berkeley Group Holdings (GB00BP0RGD03): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Arcadis N.V. (NL0006237562): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Bridgepoint Group PLC (GB00BND88V85): €4B company has no sector, falls into 'Other' on the maps.
+WARNING AAK AB (Publ) (SE0011337708): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Française des jeux (FR0013451333): €4B company has no sector, falls into 'Other' on the maps.
+WARNING Soitec (FR0013227113): €4B company has no sector, falls into 'Other' on the maps.
 WARNING ΓΕΚ Τερνα Α.Ε. (GRS145003000): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Fluidra S.A. (ES0137650018): €4B company has no sector, falls into 'Other' on the maps.
 WARNING Asmodee Group (SE0023615638): €4B company has no sector, falls into 'Other' on the maps.
@@ -77,17 +79,16 @@ WARNING Taylor Wimpey (GB0008782301): €4B company has no sector, falls into 'O
 WARNING Eurazeo (FR0000121121): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Banijay Group N.V. (NL0015000X07): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Brembo N.V. (NL0015001KT6): €3B company has no sector, falls into 'Other' on the maps.
-WARNING Bellway P L C (GB0000904986): €3B company has no sector, falls into 'Other' on the maps.
-WARNING Ocado Group PLC (GB00B3MBS747): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Loomis AB (SE0014504817): €3B company has no sector, falls into 'Other' on the maps.
+WARNING Bellway P L C (GB0000904986): €3B company has no sector, falls into 'Other' on the maps.
+WARNING Worldline (FR00140182K6): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Cirsa Enterprises (ES0105884011): €3B company has no sector, falls into 'Other' on the maps.
-WARNING DOF Group ASA (NO0012851874): €3B company has no sector, falls into 'Other' on the maps.
+WARNING Ocado Group PLC (GB00B3MBS747): €3B company has no sector, falls into 'Other' on the maps.
 WARNING Vidrala SA (ES0183746314): €3B company has no sector, falls into 'Other' on the maps.
+WARNING DOF Group ASA (NO0012851874): €3B company has no sector, falls into 'Other' on the maps.
 WARNING 15 share counts in data/shares.json are older than 200 days: time for the quarterly refresh.
 WARNING 9 hand-entered annual figures in data/financials.json are for a year that ended over 16 months ago (Borussia Dortmund, KBC Ancora, Ambra, Juventus FC, Celtic): enter the new annual report.
-WARNING 11 daily closes jump more than 2x (share split or wrong line); first: DE000A1YC996 2026-10-16 0.02 -> 2026-10-19 0.001; GB00BQVVS097 2026-10-19 0.0005 -> 2026-10-20 0.0045; GB00BQVVS097 2026-10-22 0.0045 -> 2026-10-23 0.0005; GB00BQVVS097 2026-10-23 0.0005 -> 2026-10-26 0.0055; GB00BQVVS097 2026-10-29 0.005 -> 2026-10-30 0.0005.
-WARNING js/invest.json: sources that failed last run (old values kept): hicp, infl_old, dep1y, depon, bond10, dfr, stoxx50, sp500.
-WARNING js/housing-levels.json: sources that failed last run (old values kept): FI, NO.
-WARNING js/rates.json: sources that failed last run (old values kept): eur1m, eur3m, eur6m, gov2y, gov10y.
-NOTE    2719 companies, 2172 with a price, 2115 with a market value; newest price 2026-11-03.
-NOTE    Priced but no market value (no report figures, no shares count): GB 13, PL 5, SE 3, NO 2, DE 2, LV 2, IT 2, BE 1, BG 1, LU 1.
+WARNING 12 daily closes jump more than 2x (share split or wrong line); first: DE000A1YC996 2026-10-16 0.02 -> 2026-10-19 0.001; GB00BQVVS097 2026-10-19 0.0005 -> 2026-10-20 0.0045; GB00BQVVS097 2026-10-22 0.0045 -> 2026-10-23 0.0005; GB00BQVVS097 2026-10-23 0.0005 -> 2026-10-26 0.0055; GB00BQVVS097 2026-10-29 0.005 -> 2026-10-30 0.0005.
+WARNING js/housing-levels.json: sources that failed last run (old values kept): FI.
+NOTE    2719 companies, 2174 with a price, 2114 with a market value; newest price 2026-11-04.
+NOTE    Priced but no market value (no report figures, no shares count): GB 13, PL 5, SE 3, NO 2, DE 2, LV 2, HR 2, IT 2, BE 1, BG 1, LU 1.
