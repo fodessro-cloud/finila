@@ -1,0 +1,19 @@
+name: Test oznámení z búrz
+
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['scripts/data/probe_news.py', '.github/workflows/probe-news.yml']
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pypdf
+      - run: python scripts/data/probe_news.py
