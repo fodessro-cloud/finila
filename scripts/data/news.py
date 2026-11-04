@@ -33,9 +33,12 @@ REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|r
                r"interim management statement|business review|"
                r"chiffre d.affaires (du|au) (premier|deuxi[eè]me|troisi[eè]me|quatri[eè]me|1er|[1-4]e|[1-4][eè]me) trimestre|"
                r"r[ée]sultats (annuels|semestriels|du (premier|deuxi[eè]me|troisi[eè]me|quatri[eè]me|1er|[1-4]e) trimestre)|"
-               r"information financi[eè]re trimestrielle|rapport financier (semestriel|annuel)")
+               r"information financi[eè]re trimestrielle|rapport financier (semestriel|annuel)|"
+               r"\b(q[1-4]|h[12]|9m|[1-4]q)\s?20\d\d\b|\b(first|second|third|fourth)[- ]quarter\b|fiscal 20\d\d results|sales at 3\d (march|june|september|december)|"
+               r"(order intake|sales|revenue) as of (march|june|september|december) 3\d|activity indicators")
 REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly financial information|financial report"
 SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|teleconference|capital markets day|"
+             r"franchissement de seuils?|d[ée]claration des transactions|nombre total de droits de vote|contrat de liquidit[ée]|"
              r"buy-?back|own shares|treasury shares|managers'? transactions|transactions? (by|of) (persons|insiders)|"
              r"voting rights|share capital|total number of shares|listing of|admission to trading|prospectus|"
              r"notice (to|of) (the )?(annual|extraordinary) general meeting|bond|notes? due|coupon|nomination committee")
@@ -392,6 +395,8 @@ def main():
     CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
     out = {}
     for a in sorted(cache["ann"].values(), key=lambda a: a["time"], reverse=True):
+        if not (is_report(a) or keep_news(a)):   # rules tightened after the announcement was cached
+            continue
         o = out.setdefault(a["lei"], {"news": []})
         if len(o["news"]) < MAX_NEWS:
             o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"],
