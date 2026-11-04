@@ -1,6 +1,5 @@
-"""Test (GitHub Actions only), round 3: find the search API the UK FCA National Storage Mechanism page uses,
-and try German announcement feeds."""
-import re, urllib.request
+"""Test (GitHub Actions only), round 4: the search API inside the UK FCA data portal's script."""
+import json, re, urllib.request
 
 UA = {"User-Agent": "FINILA data refresh (finila.com)", "Accept": "*/*"}
 
@@ -12,30 +11,21 @@ def get(url, data=None, ctype=None):
     try:
         req = urllib.request.Request(url, data=data, headers=h)
         with urllib.request.urlopen(req, timeout=40) as r:
-            return r.status, r.headers.get("Content-Type"), r.read()
+            return r.status, r.read()
     except Exception as e:
-        return "ERR " + str(e), None, getattr(e, "read", lambda: b"")()
+        return "ERR " + str(e), getattr(e, "read", lambda: b"")()
 
 
-for page in ("https://data.fca.org.uk/", "https://data.fca.org.uk/#/nsm/nationalstoragemechanism"):
-    st, ct, body = get(page)
-    print("==", page, st, ct, len(body))
-    text = body.decode("utf-8", "replace")
-    scripts = re.findall(r'src="([^"]+\.js)"', text)
-    print("scripts", scripts[:20])
-    for src in scripts[:20]:
-        url = src if src.startswith("http") else "https://data.fca.org.uk/" + src.lstrip("/")
-        st, ct, js = get(url)
-        t = js.decode("utf-8", "replace")
-        hits = set(re.findall(r'index=[\w-]+|https://api\.data\.fca\.org\.uk[^"\'` ]*|fca-nsm[\w-]*', t))
-        if hits:
-            print("  ", url, st, len(js), sorted(hits)[:30])
-            for m in re.finditer(r'nsm', t):
-                pass
-            i = t.find("fca-nsm")
-            print("   context:", t[max(0, i - 600):i + 600].replace("\n", " ") if i >= 0 else "")
+st, js = get("https://data.fca.org.uk/main-AQSD5GC2.js")
+t = js.decode("utf-8", "replace")
+print("main.js", st, len(t))
+for pat in (r'"[^"]*api[^"]*"', r"'[^']*api[^']*'", r"`[^`]*api[^`]*`"):
+    print(pat, sorted(set(m for m in re.findall(pat, t) if len(m) < 160))[:60])
+for word in ("nsm", "NSM", "search?index", "index="):
+    for m in list(re.finditer(re.escape(word), t))[:4]:
+        print(f"--- {word} @ {m.start()}:", t[max(0, m.start() - 300):m.start() + 300].replace("\n", " "))
 
-for url in ("https://www.dgap.de/dgap/Rss/?newsType=ADHOC", "https://www.eqs-news.com/news/feed/?lang=en",
-            "https://www.eqs-news.com/?feed=rss2", "https://www.unternehmensregister.de/ureg/"):
-    st, ct, body = get(url)
-    print("==", url, st, ct, len(body), body[:300])
+for idx in ("fca-nsm-searchdata", "fca-nsm-searchdata-prod", "nsm", "fca-nsm"):
+    body = {"from": 0, "size": 2, "sort": "submitted_date", "sortorder": "desc", "criteriaObj": {"criteria": [], "dateCriteria": []}}
+    st, b = get(f"https://api.data.fca.org.uk/search?index={idx}", json.dumps(body).encode(), "application/json")
+    print("== index", idx, st, b[:500])
