@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 7
+CACHE_VERSION = 8
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -143,7 +143,9 @@ def split_release(text):
     """Releases list key figures as bullets glued together by PDF extraction: cut at dashes used as bullets,
     at opening quotes and after a prior-year figure in brackets followed by a new sentence."""
     months = r"(?i:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)"
-    text = re.sub(fr"\b({months})\s[–-]\s(?={months}\b)", r"\1–", text)   # "January - September" is a period, not a bullet
+    text = re.sub(fr"\b({months})((?:\s\d{{1,2}})?)\s?[–-]\s?(?=(?:\d{{1,2}}\s)?{months}\b)", r"\1\2–", text)   # "January 1 - September 30" is a period, not a bullet
+    text = re.sub(r"\b([1-4])\s(st|nd|rd|th)\s(?=quarter)", r"\1\2 ", text)   # "3 rd quarter" from superscripts
+    text = re.sub(r"\s[o•]\s(?=[A-Z])", ". ", text)                               # "o" used as a bullet
     t = re.sub(r"\s[–•▪■]\s|\s-\s(?=[A-Z])", ". ", text)
     t = re.sub(r"\s[“\"]\s?(?=[A-Z])", ". ", t)
     t = re.sub(r"(\(\s?-?[\d.,\s]+\)|\d%\)|\d\))\s+(?=[A-Z][a-z])", r"\1. ", t)
@@ -152,7 +154,7 @@ def split_release(text):
 
 YTD = (r"nine months|nine-month|\b9m\b|first nine|first half|six months|six-month|\bh1\b|half[- ]year|full[- ]year|year to date|\bytd\b|"
        r"january\s*[-–]\s*(june|september|december)|jan\s*[-–]\s*(jun|sep|dec)|\b1\.1\.?\s*[-–]\s*3\d\.\d|\b1\s*[-–]\s*(6|9|12)/20|for the year 20\d\d")
-QUARTER = (r"\bq[1-4]\b|(first|second|third|fourth) quarter|the quarter|quarterly|"
+QUARTER = (r"\bq[1-4]\b|(first|second|third|fourth|1st|2nd|3rd|4th) quarter|the quarter|quarterly|"
            r"(january|april|july|october)\s*[-–]\s*(march|june|september|december)|\b(4\s*[-–]\s*6|7\s*[-–]\s*9|10\s*[-–]\s*12)/20")
 
 
@@ -220,8 +222,13 @@ def quotes(text, year):
                 continue   # a word the PDF broke across lines ("contrib - uted", "l ike-for-like"): not quoted as it reads
             s = re.sub(r"[,\s]*[\"”]?,?[\"”]?\s+said\s+[A-Z][\w.\- ]+,.*$", ".", s)   # '..., said Jane Doe, CEO' after a quote
             s = re.sub(r"\s+(Comments? from|Quote from|CEO comment|CEO's comment)\b.*$", "", s)
-            if re.search(r"\bsaid\b|\bsays\b", s):
-                continue
+            s = re.sub(r"^Page \d+\s+", "", s)
+            s = re.sub(r"^(?:[A-Z][a-z]+ \d{1,2}|[A-Z][a-z]+ 20\d\d)\s+(?=[A-Z])", "", s)   # a date heading left in front
+            head_glue = re.match(r"^([A-Z][^.:;]{0,70}?\b20\d\d)\s+(?=[A-Z])", s)        # "Revenue for the first nine months of 2026 At constant..."
+            if head_glue and not re.search(fr"\b({RESULT_VERB})\b", head_glue.group(1).lower()):
+                s = s[head_glue.end():]
+            if re.search(r"\bsaid\b|\bsays\b|\(\s*\)|ticker:|\(was\b", s, re.I) or not s[:1].isupper():
+                continue   # quotes, empty footnote marks, ticker lines and guidance changes ("was around ...") are not results
             key = re.sub(r"\W+", "", low)[:100]
             if key not in seen:
                 seen.add(key)
