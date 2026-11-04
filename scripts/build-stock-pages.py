@@ -229,6 +229,272 @@ def add_signals(rows):
             c.setdefault('events', []).extend(by_isin[c['isin']].get('events', []))
 
 
+# Valuation figures a buyer of the whole company looks at, in EUR millions (report figures are
+# converted with the same rate as revenueEur). Only for companies with a market value.
+VAL_KEYS = ['evEbitda', 'evEbit', 'evSales', 'pe', 'ps', 'pb', 'pfcf', 'fcfYield', 'divYield', 'ebitdaMargin',
+            'operatingMargin', 'netMargin', 'revenueGrowth', 'netDebtToEbitda', 'roe', 'roa', 'fcfMargin', 'debtEquity']
+
+
+def add_valuation(c):
+    rev, rev_eur = c.get('revenue'), c.get('revenueEur')
+    fx = rev_eur / rev if is_num(rev_eur) and is_num(rev) and rev else 1 if c.get('currency') == 'EUR' else None
+    c['fx'] = fx
+    if is_num(c.get('netIncome')) and is_num(c.get('assets')) and c['assets'] > 0:
+        c['roa'] = c['netIncome'] / c['assets'] * 100
+    if is_num(c.get('debt')) and is_num(c.get('equity')) and c['equity'] > 0 and not c.get('financial'):
+        c['debtEquity'] = c['debt'] / c['equity']
+    if not (fx and is_num(c.get('mcap'))):
+        return
+    mcap = c['mcap']
+    if is_num(rev_eur) and rev_eur > 0:
+        c['ps'] = mcap / rev_eur
+    if is_num(c.get('equity')) and c['equity'] > 0:
+        pb = mcap / (c['equity'] * fx)
+        if 0.05 <= pb <= 100:
+            c['pb'] = pb
+    if is_num(c.get('fcf')):
+        y = c['fcf'] * fx / mcap * 100
+        if -50 <= y <= 50:
+            c['fcfYield'] = y
+            if c['fcf'] > 0 and y > 0.2:
+                c['pfcf'] = 100 / y
+    if c.get('financial'):
+        return   # banks and insurers: debt is their raw material, EV multiples say nothing
+    if is_num(c.get('netDebt')):
+        c['netDebtEur'] = c['netDebt'] * fx
+        c['ev'] = mcap + c['netDebtEur']
+    ev = c.get('ev')
+    if is_num(ev) and ev > 0:
+        for key, base, hi in (('evEbitda', 'ebitda', 200), ('evEbit', 'operatingProfit', 300), ('evSales', 'revenue', 60)):
+            if is_num(c.get(base)) and c[base] > 0:
+                m = ev / (c[base] * fx)
+                if 0.02 <= m <= hi:
+                    c[key] = m
+
+
+def sector_medians(rows):
+    """Median of each valuation figure per sector, only where at least 5 companies have it."""
+    out, by = {}, defaultdict(list)
+    for c in rows:
+        if c.get('sector') and is_num(c.get('mcap')):
+            by[c['sector']].append(c)
+    for sec, cs in by.items():
+        m = {'n': len(cs)}
+        for k in VAL_KEYS:
+            v = sorted(c[k] for c in cs if is_num(c.get(k)))
+            if len(v) >= 5:
+                m[k] = v[len(v) // 2] if len(v) % 2 else (v[len(v) // 2 - 1] + v[len(v) // 2]) / 2
+        out[sec] = m
+    return out
+
+
+SRC_LABEL = {'r': 'Report', 'p': 'Price', 'c': 'FINILA calc'}
+
+
+def chip(kind, label=None):
+    """Where a figure comes from: r = the annual report, p = the share price, c = FINILA's calculation."""
+    return f'<span class="sp-src sp-src-{kind}">{label or SRC_LABEL[kind]}</span>'
+
+
+def report_chip(c):
+    return chip('r', 'Accounts' if c.get('origin') == 'hand' else 'Wikidata' if c.get('origin') == 'wikidata' else 'Report')
+
+
+def mult(v, d=1):
+    return f'{num(v, d)}×' if is_num(v) else '—'
+
+
+def pc(v, d=1):
+    return f'{num(v, d)}%' if is_num(v) else '—'
+
+
+def stats_html(c):
+    """Finviz-style key statistics: a dense grid of the standard figures, only those FINILA has."""
+    cur = esc(c.get('currency') or '')
+    ins = c.get('insNet')
+    cells = [
+        ('Market value', f'€{bn(c["mcap"])}' if is_num(c.get('mcap')) else '—', 'c'),
+        ('Enterprise value', f'€{bn(c["ev"])}' if is_num(c.get('ev')) else '—', 'c'),
+        ('P/E', num(c.get('pe'), 1), 'c'),
+        ('P/S', num(c.get('ps'), 2), 'c'),
+        ('P/B', num(c.get('pb'), 2), 'c'),
+        ('P/FCF', num(c.get('pfcf'), 1), 'c'),
+        ('EV/EBITDA', mult(c.get('evEbitda')), 'c'),
+        ('EV/Sales', mult(c.get('evSales'), 2), 'c'),
+        ('EPS', f'{num(c["eps"], 2)} {cur}' if is_num(c.get('eps')) else '—', 'r'),
+        ('Revenue', bn(c.get('revenue'), cur), 'r'),
+        ('Net income', bn(c.get('netIncome'), cur), 'r'),
+        ('EBITDA', bn(c.get('ebitda'), cur), 'r'),
+        ('Revenue growth', pc(c.get('revenueGrowth')), 'r'),
+        ('Net income growth', pc(c.get('netIncomeGrowth')), 'r'),
+        ('Dividend yield', pc(c.get('divYield')), 'c'),
+        ('Payout (of profit)', pc(c.get('payoutNet'), 0), 'r'),
+        ('ROE', pc(c.get('roe')), 'r'),
+        ('ROA', pc(c.get('roa')), 'c'),
+        ('EBITDA margin', pc(c.get('ebitdaMargin')), 'r'),
+        ('Operating margin', pc(c.get('operatingMargin')), 'r'),
+        ('Net margin', pc(c.get('netMargin')), 'r'),
+        ('FCF margin', pc(c.get('fcfMargin')), 'r'),
+        ('Debt / equity', num(c.get('debtEquity'), 2), 'r'),
+        ('Net debt / EBITDA', ('net cash' if c['netDebtToEbitda'] < 0 else mult(c['netDebtToEbitda'], 2)) if is_num(c.get('netDebtToEbitda')) and not c.get('financial') else '—', 'r'),
+        ('Shares in issue', f'{num(c["shares"], 1)}M' if is_num(c.get('shares')) else '—', 'r'),
+        ('Quality score', f'{c["fscore"]}/{c["fscoreKnown"]}' if is_num(c.get('fscore')) else '—', 'c'),
+        ('Shorted by funds', pc(c.get('shortPct'), 2), 'r'),
+        ('Managers, 30 days', (('+' if ins > 0 else '') + eur(ins)) if is_num(ins) and ins else '—', 'r'),
+    ]
+    cells = [x for x in cells if x[1] != '—']
+    if len(cells) < 4:
+        return ''
+    tip = {'r': 'From the annual report or official register', 'c': 'Calculated by FINILA', 'p': 'Share price'}
+    items = ''.join(f'<div title="{tip[s]}"><span>{k}</span><b>{v}</b></div>' for k, v, s in cells)
+    fy = (c.get('periodEnd') or '')[:4]
+    return f'''<section class="sp-stats" id="stats" aria-label="Key statistics"><div class="sp-stats-grid">{items}</div>
+      <p class="sp-sub">Financial year {esc(fy)} figures, today’s price. Hover a figure for its source.</p></section>'''
+
+
+def buyer_html(c, med):
+    """If you bought the whole company: shares + net debt = enterprise value, and the price tags."""
+    if not is_num(c.get('mcap')):
+        return ''
+    sec = (c.get('sector') or '').lower()
+    rep = report_chip(c)
+    ev = ''
+    if is_num(c.get('ev')):
+        nd = c['netDebtEur']
+        ev = (f'<div class="sp-ev"><div><span>All shares {chip("p")}</span><b>€{bn(c["mcap"])}</b></div><i>{"+" if nd >= 0 else "−"}</i>'
+              f'<div><span>{"Net debt" if nd >= 0 else "Net cash"} {rep}</span><b>€{bn(abs(nd))}</b></div><i>=</i>'
+              f'<div class="sp-ev-tot"><span>Enterprise value</span><b>€{bn(c["ev"])}</b></div></div>')
+    rows = [('EV / EBITDA', mult(c.get('evEbitda')), mult(med.get('evEbitda'))),
+            ('EV / EBIT', mult(c.get('evEbit')), mult(med.get('evEbit'))),
+            ('P/E', num(c.get('pe'), 1), num(med.get('pe'), 1)),
+            ('P/B (price / book value)', num(c.get('pb'), 1), num(med.get('pb'), 1)),
+            ('Free cash flow yield', pc(c.get('fcfYield')), pc(med.get('fcfYield'))),
+            ('Dividend yield', pc(c.get('divYield')), pc(med.get('divYield'))),
+            ('Net debt / EBITDA', ('net cash' if c['netDebtToEbitda'] < 0 else mult(c['netDebtToEbitda'], 2))
+             if is_num(c.get('netDebtToEbitda')) and not c.get('financial') else '—', mult(med.get('netDebtToEbitda'), 2))]
+    rows = [r for r in rows if r[1] != '—']
+    if not rows:
+        return ''
+    trs = ''.join(f'<tr><td>{k}</td><td><b>{v}</b></td><td class="sp-med">{m}</td></tr>' for k, v, m in rows)
+    note = f'Sector median of {med["n"]} {esc(sec)} companies on FINILA. ' if med.get('n') else ''
+    if is_num(c.get('evEbitda')):
+        note += f'A buyer of the whole firm would pay about {num(c["evEbitda"], 1)} years of this year’s EBITDA. '
+    if c.get('financial'):
+        note += 'Bank or insurer: enterprise value and EBITDA multiples are not shown, debt is part of the business. '
+    return f'''<section class="sp-card" id="buyer"><h2>If you bought the whole company</h2>
+      <p class="sp-sub">What a buyer pays: all the shares at today’s price{"" if c.get("financial") else " plus the debt that comes with the company"} {chip("c")}</p>
+      {ev}
+      <table class="sp-table"><tr><th>Price tag</th><th>{esc(c["name"])}</th><th>Sector median</th></tr>{trs}</table>
+      <p class="sp-sub sp-after">{note}</p></section>'''
+
+
+def sign(v):
+    return ('+' if v >= 0 else '') + num(v)
+
+
+def findings(c, med):
+    """Plain-language observations FINILA draws from the figures: (good: True/False/None, what, what it means)."""
+    f, cur = [], esc(c.get('currency') or '')
+    g = lambda k: c.get(k) if is_num(c.get(k)) else None
+    sec = esc((c.get('sector') or 'its sector').lower())
+    fin = c.get('financial')
+    em, mm = g('ebitdaMargin'), med.get('ebitdaMargin')
+    if em is not None and mm is not None and not fin and abs(em - mm) >= 5:
+        f.append((em > mm, f'EBITDA margin {num(em)}% vs a median of {num(mm)}% for {sec} companies.',
+                  'Above the sector: more of every euro of sales stays as operating profit before depreciation.' if em > mm
+                  else 'Below the sector: the company keeps less of its sales than its typical competitor.'))
+    ve, vm = g('evEbitda'), med.get('evEbitda')
+    if ve is not None and vm is not None:
+        if ve <= vm * 0.75:
+            f.append((True, f'Priced at {num(ve)}× EBITDA vs {num(vm)}× for the sector median.',
+                      'Cheaper than its sector: the market expects slower growth or more risk, or it is overlooked.'))
+        elif ve >= vm * 1.33:
+            f.append((False, f'Priced at {num(ve)}× EBITDA vs {num(vm)}× for the sector median.',
+                      'More expensive than its sector: the price already counts on above-average growth.'))
+    elif fin and g('pb') is not None and med.get('pb'):
+        pb, pm = c['pb'], med['pb']
+        if pb <= pm * 0.75 or pb >= pm * 1.33:
+            f.append((pb < pm, f'Priced at {num(pb, 2)}× book value vs {num(pm, 2)}× for the sector median.',
+                      'Cheaper than its sector on book value.' if pb < pm else 'More expensive than its sector on book value.'))
+    rg, ng = g('revenueGrowth'), g('netIncomeGrowth')
+    # Growth from a tiny or negative base (+900%) says little, so only moderate changes are explained.
+    if rg is not None and ng is not None and (g('netIncome') or 0) > 0 and -80 <= ng <= 300 and -60 <= rg <= 200:
+        if rg > 0 and ng < rg - 5:
+            f.append((False, f'Revenue {sign(rg)}% but net income {sign(ng)}% vs the year before.', 'Costs grew faster than sales: margins narrowed.'))
+        elif ng > rg + 5 and rg > -5:
+            f.append((True, f'Net income {sign(ng)}% on revenue {sign(rg)}% vs the year before.', 'Profit grew faster than sales: margins widened.'))
+        elif rg >= 10:
+            f.append((True, f'Revenue up {num(rg)}% on the year before.', 'Fast growth for a listed company.'))
+        elif rg <= -5:
+            f.append((False, f'Revenue down {num(-rg)}% on the year before.', 'The business shrank: check whether it is a one-off.'))
+    rev, capex, ocf, fcf = g('revenue'), g('capex'), g('operatingCashFlow'), g('fcf')
+    if not fin and rev and rev > 0 and capex is not None and ocf and ocf > 0 and capex / rev >= 0.15:
+        left = max(fcf or 0, 0) / ocf * 100
+        f.append((None, f'Capex {cur} {bn(capex)} = {num(capex / rev * 100, 0)}% of revenue; {num(left, 0)}% of operating cash flow is left as free cash flow.',
+                  'Heavy investment: if the new capacity sells, free cash flow should rise; if not, the money is tied up.'))
+    pf = g('payoutFcf')
+    if pf is not None and pf > 100 and (g('dividendsPaid') or 0) > 0 and (fcf or 0) > 0:
+        nd = g('netDebtToEbitda')
+        room = '' if fin or nd is None else ' The company has net cash.' if nd < 0 else f' Net debt is {num(nd, 1)}× EBITDA.'
+        f.append((False, f'Dividends paid {cur} {bn(c["dividendsPaid"])} = {num(pf, 0)}% of free cash flow.',
+                  'Part of the dividend came from cash or new debt, which cannot go on for years.' + room))
+    nd = g('netDebtToEbitda')
+    if nd is not None and not fin:
+        if nd < 0:
+            f.append((True, 'More cash than debt (net cash).', 'Strong balance sheet: room for dividends, buybacks or acquisitions.'))
+        elif nd >= 3.5:
+            f.append((False, f'Net debt {num(nd, 1)}× EBITDA.', 'High debt: a weaker year or higher interest rates would hurt.'))
+    roe = g('roe')
+    if roe is not None and (g('equity') or 0) > 0:
+        if 20 <= roe <= 150:
+            f.append((True, f'Return on equity {num(roe)}%.', 'Every 100 of shareholders’ money earned more than 20 in a year.'))
+        elif roe < 0:
+            f.append((False, f'Return on equity {num(roe)}%.', 'Loss-making in the last financial year.'))
+    sp = g('shortPct')
+    if sp is not None and sp >= 2:
+        f.append((False, f'Funds hold net short positions of {num(sp, 2)}% of the shares.', 'Professional investors bet on a falling price.'))
+    ins = g('insNet')
+    if ins is not None and ins >= 100000:
+        f.append((True, f'Managers bought shares worth {eur(ins)} net in the last 30 days.', 'People who know the company best are buying.'))
+    return f
+
+
+def findings_html(c, med):
+    f = findings(c, med)
+    if not f:
+        return ''
+    icon = {True: '<span class="sp-ic pos">▲</span>', False: '<span class="sp-ic neg">▼</span>', None: '<span class="sp-ic">●</span>'}
+    items = ''.join(f'<li>{icon[good]}<div>{what}<em>{means}</em></div></li>' for good, what, means in f)
+    good, bad = sum(1 for x in f if x[0] is True), sum(1 for x in f if x[0] is False)
+    fy = (c.get('periodEnd') or '')[:4]
+    return f'''<section class="sp-card" id="findings"><h2>What the numbers say</h2>
+      <p class="sp-sub">Strengths and weaknesses found automatically in the {esc(fy)} annual figures and today’s price {chip("c")}</p>
+      <ul class="sp-find">{items}</ul>
+      <p class="sp-sub sp-after">{good} strength{"" if good == 1 else "s"}, {bad} weakness{"" if bad == 1 else "es"}. Not investment advice: read the report itself before deciding.</p></section>'''
+
+
+def peers_html(c, peers, med):
+    """Competitors table: same sector, largest first, with the sector median row."""
+    if not peers:
+        return ''
+    cols = [('Market value', lambda x: f'€{bn(x["mcap"])}' if is_num(x.get('mcap')) else '—'),
+            ('EV/EBITDA', lambda x: mult(x.get('evEbitda'))), ('P/E', lambda x: num(x.get('pe'), 1)),
+            ('P/B', lambda x: num(x.get('pb'), 1)), ('EBITDA margin', lambda x: pc(x.get('ebitdaMargin'))),
+            ('Revenue growth', lambda x: pc(x.get('revenueGrowth'))), ('ROE', lambda x: pc(x.get('roe')))]
+    if c.get('financial'):   # banks and insurers: no EBITDA or enterprise value
+        cols = [x for x in cols if x[0] not in ('EV/EBITDA', 'EBITDA margin')]
+    th = ''.join(f'<th>{h}</th>' for h, _ in cols)
+    tds = lambda x: ''.join(f'<td>{fn(x)}</td>' for _, fn in cols)
+    me = f'<tr class="sp-me"><td>{esc(c["name"])}</td>{tds(c)}</tr>'
+    body = ''.join(f'<tr><td><a href="/stock/{p["slug"]}">{esc(p["name"])}</a></td>{tds(p)}</tr>' for p in peers)
+    medrow = (f'<tr class="sp-medrow"><td>Median of {med["n"]} companies</td><td></td>' +
+              ''.join(f'<td>{fn(med)}</td>' for _, fn in cols[1:]) + '</tr>') if med.get('n') else ''
+    title = f'Versus other {esc(c["sector"].lower())} companies' if c.get('sector') else f'Other companies from {esc(COUNTRIES.get(c["country"], c["country"] or ""))}'
+    return f'''<section class="sp-card" id="peers"><h2>{title}</h2>
+      <p class="sp-sub">Largest European companies of the sector, latest annual figures and prices {chip("r", "Reports")}{chip("p", "Prices")}{chip("c")}</p>
+      <div class="sp-scroll"><table class="sp-table sp-peer-table"><tr><th>Company</th>{th}</tr>{me}{body}{medrow}</table></div></section>'''
+
+
 def published_slugs():
     """The addresses already on the site ({lei: slug}). Lub's rule: an address never changes once
     published, so a company keeps its slug even when a same-named company arrives later."""
@@ -342,7 +608,8 @@ def events_html(c):
     <p class="ins-note">From the official registers: managers’ trades (so far Sweden), net short positions of funds (NL, IT, SE, NO, UK) and annual reports.</p></section>'''
 
 
-def page(c, peers, updated):
+def page(c, peers, updated, med=None):
+    med = med or {}
     cur = c.get('currency') or ''
     country = COUNTRIES.get(c['country'], c['country'] or '')
     who = f'{c["name"]} ({c["ticker"]})' if c.get('ticker') else c['name']
@@ -435,8 +702,6 @@ def page(c, peers, updated):
     fin = '<p class="modal-report-src">Bank or insurer: EBITDA, free cash flow and net debt are not shown because they do not describe these businesses well.</p>' if c.get('financial') else ''
     nd = c.get('netDebtToEbitda')
     ndv = ('<span class="pos">net cash</span>' if nd < 0 else f'{num(nd, 2)}×') if is_num(nd) else '—'
-    peer_html = ''.join(f'<li><a href="/stock/{p["slug"]}">{esc(p["name"])}</a><span>{"€" + bn(p["mcap"]) if is_num(p.get("mcap")) else esc(COUNTRIES.get(p["country"], p["country"]))}</span></li>' for p in peers)
-    peer_title = f'Other {esc(c["sector"].lower())} companies' if c.get('sector') else f'Other companies from {esc(country)}'
     intro = f'{esc(c["name"])} is a{"n" if (c.get("sector") or "x")[0].lower() in "aeiou" else ""} {esc((c.get("sector") or "listed").lower())} company from {esc(country)}' + \
         (f', listed on {esc(c["exchange"])}' + (f' under the ticker {esc(c["ticker"])}' if c.get('ticker') else '') if c.get('exchange') else '') + \
         (f'. In the financial year ending {esc(c["periodEnd"])} it reported revenue of {bn(c["revenue"], cur)}' if is_num(c.get('revenue')) else '') + \
@@ -478,8 +743,10 @@ def page(c, peers, updated):
     </div>
     {price}
     {chart(c)}
-    <div class="sp-keys">{keyhtml}</div>
+    {stats_html(c) or f'<div class="sp-keys">{keyhtml}</div>'}
     <p class="sp-intro">{intro}</p>
+    {buyer_html(c, med)}
+    {findings_html(c, med)}
     <div class="modal-report">
 {figs}
       <div class="modal-grid modal-scores">{qual}{signals}</div>
@@ -489,7 +756,8 @@ def page(c, peers, updated):
     <p class="sp-cta"><a class="btn btn-primary" href="/screener?lei={esc(c["lei"])}">Compare in the stock screener</a></p>
   </article>
   {events_html(c)}
-  {f'<section class="sp-peers"><h2>{peer_title}</h2><ul>{peer_html}</ul></section>' if peer_html else ''}
+  {peers_html(c, peers, med)}
+  <p class="sp-legend">Where each number comes from: {chip('r')} the company’s annual report or an official register · {chip('p')} Deutsche Börse delayed share price · {chip('c')} calculated by FINILA from those two.</p>
 </main>
 {FOOTER}<script src="/js/stock-page.js" defer></script>
 <script src="/js/analytics.js" defer></script>
@@ -528,6 +796,9 @@ def main():
     updated, price_day, rows = companies()
     add_signals(rows)
     add_history(rows)
+    for c in rows:
+        add_valuation(c)
+    medians = sector_medians(rows)
     slugs = assign_slugs(rows, published_slugs())
     out = OUT / 'stock'
     out.mkdir(parents=True, exist_ok=True)
@@ -542,7 +813,7 @@ def main():
     for c in rows:
         same = by_sector[c.get('sector')] if c.get('sector') else [p for p in rows if p['country'] == c['country']]
         peers = [p for p in same if p is not c][:8]
-        (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp), encoding='utf-8')
+        (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(c.get('sector'), {})), encoding='utf-8')
     (out / 'index.html').write_text(index_page(rows, updated), encoding='utf-8')
     (OUT / 'js').mkdir(exist_ok=True)
     (OUT / 'js' / 'stock-slugs.json').write_text(json.dumps(slugs, separators=(',', ':')), encoding='utf-8')
