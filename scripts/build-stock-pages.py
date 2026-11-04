@@ -264,8 +264,9 @@ def summary_html(c, med, intro):
         s = ', '.join(bits)
         out.append(s[0].upper() + s[1:] + '.')
     if len(out) < 2:
-        return f'<p class="sp-intro">{intro}</p>'
+        return about_html(c) + f'<p class="sp-intro">{intro}</p>'
     return f'''<section class="sp-card sp-summary" id="summary"><h2>In short</h2>
+      {about_html(c)}
       <p>{" ".join(out)}</p>
       <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
 
@@ -969,6 +970,36 @@ def add_report_quotes(rows):
             c['quotes'] = q
 
 
+def add_about(rows):
+    """data/about.json (scripts/data/about.py): what the company does, quoted from its annual report."""
+    try:
+        about = json.loads((SRC / 'data' / 'about.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return
+    for c in rows:
+        a = about.get(c['lei'])
+        if a and a.get('text'):
+            c['about'] = a
+
+
+def about_short(t, limit=260):
+    """One or two sentences, never cut mid-sentence: the first sentence alone when two are too long."""
+    parts = re.split(r'(?<=[a-z0-9\)][.])\s+(?=[A-Z])', t)
+    out = parts[0]
+    if len(parts) > 1 and len(out) + len(parts[1]) < limit:
+        out += ' ' + parts[1]
+    return out if len(out) <= limit + 80 else ''
+
+
+def about_html(c):
+    a = c.get('about')
+    t = about_short(a['text']) if a else ''
+    if not t:
+        return ''
+    link = f' <a href="{esc(a["source"])}" target="_blank" rel="noopener">annual report {esc(a["period"][:4])}</a>' if a.get('source') else ''
+    return f'<p class="sp-about"><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>'
+
+
 def add_news(rows):
     """data/news.json (scripts/data/news.py): official exchange announcements and the newest report."""
     try:
@@ -1538,6 +1569,7 @@ def main():
     add_history_figures(rows)
     add_report_quotes(rows)
     add_news(rows)
+    add_about(rows)
     for c in rows:
         if c.get('captive') and c.get('years'):
             c['years'] = {y: {k: v for k, v in r.items() if k not in ('netDebt', 'fcf', 'debt')} for y, r in c['years'].items()}

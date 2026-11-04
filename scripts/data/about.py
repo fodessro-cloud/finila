@@ -16,7 +16,7 @@ import fundamentals as fd   # noqa: E402
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/about.json"
 OUT = ROOT / "data/about.json"
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
@@ -62,6 +62,69 @@ def summary(t):
     return out if len(out) >= 40 else ""
 
 
+REVENUE = ("ifrs-full:Revenue", "ifrs-full:RevenueFromContractsWithCustomers")
+AXES = {"ifrs-full:SegmentsAxis": "segments", "ifrs-full:ProductsAndServicesAxis": "products",
+        "ifrs-full:GeographicalAreasAxis": "regions"}
+NOT_PARTS = r"(Operating|Reportable|Total|All|Other)?Segments?Member$|Elimination|Intersegment|Unallocated|Reconciling|" \
+            r"Consolidat|Adjustment|Corporate(AndOther)?Member$|OtherSegmentsMember|AggregatedMember|GroupMember$|^ifrs-full:.*Member$"
+COUNTRY = {"DK": "Denmark", "SE": "Sweden", "NO": "Norway", "FI": "Finland", "DE": "Germany", "FR": "France", "NL": "Netherlands",
+           "BE": "Belgium", "IT": "Italy", "ES": "Spain", "PT": "Portugal", "GB": "United Kingdom", "IE": "Ireland", "US": "United States",
+           "CH": "Switzerland", "AT": "Austria", "PL": "Poland", "CN": "China", "JP": "Japan", "IN": "India", "CA": "Canada",
+           "BR": "Brazil", "AU": "Australia", "LU": "Luxembourg", "IS": "Iceland", "EE": "Estonia", "LV": "Latvia", "LT": "Lithuania",
+           "GR": "Greece", "CZ": "Czechia", "HU": "Hungary", "RO": "Romania", "SK": "Slovakia", "SI": "Slovenia", "HR": "Croatia",
+           "BG": "Bulgaria", "MX": "Mexico", "KR": "South Korea", "SG": "Singapore", "IL": "Israel", "TR": "Turkey", "ZA": "South Africa"}
+
+
+def label(member):
+    """'nn:DiabetesAndObesityCareMember' -> 'Diabetes and obesity care'; 'country:DK' -> 'Denmark'."""
+    prefix, _, name = member.partition(":")
+    if prefix == "country":
+        return COUNTRY.get(name, name)
+    name = re.sub(r"(Member|Segment|Domain)$", "", name)
+    t = re.sub(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[A-Za-z])(?=\d)", " ", name).replace("_", " ").strip()
+    t = re.sub(r"\b(And|Of|The|For|In|To|With|Other)\b", lambda m: m.group(1).lower(), t)
+    return t[:1].upper() + t[1:]
+
+
+def revenue_split(facts):
+    """Revenue by segment, product line and region for the newest full year, as % of group revenue. A split is
+    kept only when its parts add up to the group total (95-105%): otherwise parts are missing or overlap."""
+    total, parts = {}, {}
+    for fact in facts:
+        d = fact.get("dimensions", {})
+        if d.get("concept") not in REVENUE or "/" not in d.get("period", ""):
+            continue
+        try:
+            start, stop = fd.parse_period(d["period"])
+            v = float(fact.get("value"))
+        except (TypeError, ValueError):
+            continue
+        if not 330 <= (stop - start).days <= 400:
+            continue
+        extra = set(d) - {"concept", "entity", "period", "unit", "language"}
+        if not extra:
+            total[(stop, d["concept"])] = v
+        elif len(extra) == 1:
+            axis = extra.pop()
+            if axis in AXES and not re.search(NOT_PARTS, d[axis]):
+                parts.setdefault((stop, d["concept"], AXES[axis]), {})[d[axis]] = v
+    out = {}
+    for (stop, concept, kind), members in parts.items():
+        tot = total.get((stop, concept)) or total.get((stop, REVENUE[0])) or total.get((stop, REVENUE[1]))
+        if not tot or tot <= 0 or len(members) < 2 or any(v < 0 for v in members.values()):
+            continue
+        if not 0.95 <= sum(members.values()) / tot <= 1.05:
+            continue
+        latest = out.get(kind)
+        if latest and latest[0] >= stop:
+            continue
+        rows = sorted(((label(m), round(100 * v / tot)) for m, v in members.items()), key=lambda x: -x[1])
+        rows = [(n, p) for n, p in rows if n and p >= 1]
+        if len(rows) >= 2:
+            out[kind] = (stop, rows[:6])
+    return {k: v[1] for k, v in out.items()}
+
+
 def read_company(lei, cached):
     filings = fd.latest_annual(lei)
     if not filings:
@@ -74,15 +137,17 @@ def read_company(lei, cached):
         if not xj:
             continue
         found = {}
-        for fact in (xj.get("facts") or {}).values():
+        facts = list((xj.get("facts") or {}).values())
+        split = revenue_split(facts)
+        for fact in facts:
             c = fact.get("dimensions", {}).get("concept")
             if c in CONCEPTS and fact.get("value"):
                 t = plain(fact["value"])
                 if english(t):
                     found.setdefault(c, t)
         text = summary(found.get(CONCEPTS[0], ""))
-        if text:
-            return {"fxo_id": fid, "text": text, "period": f["period_end"],
+        if text or split:
+            return {"fxo_id": fid, "text": text or None, "split": split, "period": f["period_end"],
                     "source": fd.BASE + f["viewer_url"] if f.get("viewer_url") else None}
     return {"fxo_id": filings[0]["fxo_id"], "text": None}
 
@@ -121,12 +186,14 @@ def main():
                 CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
-    out = {l: {k: v.get(k) for k in ("text", "period", "source")} for l, v in cache.items() if l != "_v" and v.get("text")}
+    out = {l: {k: v.get(k) for k in ("text", "split", "period", "source")} for l, v in cache.items()
+           if l != "_v" and (v.get("text") or v.get("split"))}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
-    print(f"descriptions for {len(out)} of {len(leis)} companies; read {done} this run", flush=True)
+    print(f"descriptions for {sum(1 for v in out.values() if v['text'])}, revenue splits for "
+          f"{sum(1 for v in out.values() if v.get('split'))} of {len(leis)} companies; read {done} this run", flush=True)
     names = {r["lei"]: r["name"] for r in rows}
     for l in sorted(out, key=lambda l: -size.get(l, 0))[:60]:
-        print(f"== {names.get(l)}: {out[l]['text']}")
+        print(f"== {names.get(l)}: {out[l]['text']}\n   {out[l].get('split')}")
 
 
 if __name__ == "__main__":
