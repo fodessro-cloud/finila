@@ -1,6 +1,30 @@
 1946 companies with ESEF reports, 1946 to check
   ! https://filings.xbrl.org/api/entities/2138002SS843EUABKP94/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/2138003QHTNX34CN9V93/filings?page[size]=100: HTTP Error 429: Too Many Requests
   100 companies read
   200 companies read
   300 companies read
   400 companies read
+  500 companies read
+  600 companies read
+  700 companies read
+  800 companies read
+  900 companies read
+  1000 companies read
+  1100 companies read
+  1200 companies read
+  1300 companies read
+  ! https://filings.xbrl.org/api/entities/636700TZLHWHJV5B7Z64/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/636700W1VM86O2G2AA36/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/636700WDI7YVR5F6V241/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/6488IGA378IE710UU959/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/6488UNV33KXZ9498L870/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/7245000G0HS48PZWUD53/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  1400 companies read
+  1500 companies read
+  ! https://filings.xbrl.org/api/entities/8156008B101B97A43B02/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  1600 companies read
+  1700 companies read
+  1800 companies read
+  1900 companies read
+history for 1933 companies (1600 with 5+ years); read 1946 this run; 15 years dropped as unit errors, 78 reports in another currency skipped
