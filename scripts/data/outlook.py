@@ -21,7 +21,7 @@ import fundamentals as fd   # noqa: E402
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/outlook.json"
 OUT = ROOT / "data/outlook.json"
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
@@ -61,7 +61,8 @@ NOISE = (r"emission|scope [123]|co2|ghg|carbon|climate|renewable electricity|ene
          r"female|women|gender|employee engagement|injur|safety|remuneration|incentive|bonus|\bsti\b|\blti\b|"
          r"share-based|vesting|options? granted|pension|discount rate|impairment test|sensitivity|wacc|"
          r"gdp|inflation is|the market is expected|market is projected|industry is (expected|projected)|"
-         r"sustainab|esg|csrd|taxonomy|biodiversity|children|patients reached|hedg|interest rate swap|"
+         r"sustainab|esg|csrd|taxonomy|biodiversity|children|patients reached|hedg|interest rate swap|materiality|auditor|audit |"
+         r"contingent consideration|held for sale|remuneration|pension|"
          r"forward-looking statements|risks and uncertainties|actual results")
 
 
