@@ -359,6 +359,12 @@ def whatif_html(c, med):
         m0, m_src = round(sum(ms) / len(ms), 1), f'average of {len(ms)} years, a cyclical sector (results table)'
     else:
         m0, m_src = round(c['ebitdaMargin'], 1), 'last year'
+    # What the company actually did in the years shown, so a visitor sees how far the start is from its record.
+    ys_ = sorted(years)
+    gr = [(years[b]['revenue'] / years[a]['revenue'] - 1) * 100 for a, b in zip(ys_, ys_[1:])
+          if is_num(years[a].get('revenue')) and is_num(years[b].get('revenue')) and years[a]['revenue'] > 0]
+    g_rng = f'. FY {ys_[0]}–{ys_[-1]}: from {sign(min(gr))}% to {sign(max(gr))}% a year' if len(gr) >= 3 and not c.get('financial') else ''
+    m_rng = f'. FY {ys_[0]}–{ys_[-1]}: {num(min(ms))}% to {num(max(ms))}%' if len(ms) >= 3 else ''
     x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
     x_src = f'median of {esc(med.get("label") or (c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
     if not is_num(x):
@@ -372,8 +378,8 @@ def whatif_html(c, med):
       {scen}
       <h3 class="sp-wi-h">Try your own</h3>
       <div class="sp-wi-inputs">
-        <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%)</small></label>
-        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: {m_src} ({num(data["m"])}%)</small></label>
+        <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%){g_rng}</small></label>
+        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: {m_src} ({num(data["m"])}%){m_rng}</small></label>
         <label><span>EV / EBITDA at the end <b data-o="x"></b></span><input type="range" data-i="x" min="2" max="40" step="0.5" value="{data["x"]}"><small>Start: {x_src} ({num(x)}×)</small></label>
         <label><span>Years <b data-o="y"></b></span><input type="range" data-i="y" min="1" max="10" step="1" value="{HORIZON}"><small>Start: {HORIZON} years ahead</small></label>
       </div>
