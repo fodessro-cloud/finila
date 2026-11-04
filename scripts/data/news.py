@@ -155,20 +155,25 @@ def period_of(s):
     return "q" if q else "ytd" if y else None
 
 
+QUARTER_CUES = [
+    (r"\bq([1-4])\b", None), (r"\b(first)[- ]quarter", 1), (r"\b(second)[- ]quarter", 2), (r"\b(third)[- ]quarter", 3), (r"\b(fourth)[- ]quarter", 4),
+    (r"january\s*[-–]\s*march|jan\.?\s*[-–]\s*mar|three months", 1),
+    (r"april\s*[-–]\s*june|january\s*[-–]\s*june|jan\.?\s*1?\s*(to|[-–])\s*jun|half[- ]year|first half|six months|\bh1\b|30 june|june 30", 2),
+    (r"july\s*[-–]\s*september|january\s*[-–]\s*september|jan\.?\s*1?\s*(to|[-–])\s*sep|nine months|nine-month|30 september|september 30|30\.9\.", 3),
+    (r"october\s*[-–]\s*december|january\s*[-–]\s*december|year[- ]end report|full[- ]year (report|results)|annual (report|results)", 4)]
+
+
 def report_quarter(title, text, published):
-    """Which quarter a report is for: from its title, else its first lines, else its publication date."""
+    """Which quarter a report is for: the latest quarter its title names ("Q1-Q3", "1 January - 30 September"
+    are Q3), else its first lines, else its publication date."""
     for t in (title, text[:600]):
         low = (t or "").lower()
-        m = re.search(r"\bq([1-4])\b", low) or re.search(r"\b(first|second|third|fourth)[- ]quarter", low)
-        if m:
-            g = m.group(1)
-            return {"first": 1, "second": 2, "third": 3, "fourth": 4}.get(g, int(g) if g.isdigit() else None)
-        if re.search(r"half[- ]year|first half|six months|january\s*[-–]\s*june", low):
-            return 2
-        if re.search(r"nine months|nine-month|january\s*[-–]\s*september|1\.1\.?\s*[-–]\s*30\.9", low):
-            return 3
-        if re.search(r"year[- ]end report|full[- ]year (report|results)|annual (report|results)|january\s*[-–]\s*december", low):
-            return 4
+        found = []
+        for rx, n in QUARTER_CUES:
+            for m in re.finditer(rx, low):
+                found.append(int(m.group(1)) if n is None else n)
+        if found:
+            return max(found)
     m = int(published[5:7]) if published[5:7].isdigit() else 0
     return {1: 4, 2: 4, 3: 4, 4: 1, 5: 1, 7: 2, 8: 2, 10: 3, 11: 3}.get(m)
 
@@ -355,6 +360,8 @@ def main():
         o = out.setdefault(a["lei"], {"news": []})
         if len(o["news"]) < MAX_NEWS:
             o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"]})
+        if is_report(a) and "results" in a:
+            a["quarter"] = report_quarter(a["title"], "", a["time"]) if report_quarter(a["title"], "", "") else a.get("quarter")
         if is_report(a) and "report" not in o and "results" in a:
             o["report"] = {"date": a["time"][:16], "title": a["title"], "url": a["url"], "src": a["src"],
                            "results": a["results"], "outlook": a["outlook"],
