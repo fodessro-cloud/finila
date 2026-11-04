@@ -35,9 +35,11 @@ REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|r
                r"r[ée]sultats (annuels|semestriels|du (premier|deuxi[eè]me|troisi[eè]me|quatri[eè]me|1er|[1-4]e) trimestre)|"
                r"information financi[eè]re trimestrielle|rapport financier (semestriel|annuel)|"
                r"\b(q[1-4]|h[12]|9m|[1-4]q)\s?20\d\d\b|\b(first|second|third|fourth)[- ]quarter\b|fiscal 20\d\d results|sales at 3\d (march|june|september|december)|"
+               r"resultados (del|correspondientes al) (primer|segundo|tercer|cuarto|[1-4]t)|(primer|segundo|tercer|cuarto) trimestre|primer semestre|\b[1-4]t ?20\d\d\b|"
                r"(order intake|sales|revenue) as of (march|june|september|december) 3\d|activity indicators")
 REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly financial information|financial report"
 SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|teleconference|capital markets day|"
+             r"contrato de liquidez|operaciones (realizadas )?(al amparo|sobre acciones propias)|autocartera|recompra de acciones|"
              r"franchissement de seuils?|d[ée]claration des transactions|nombre total de droits de vote|contrat de liquidit[ée]|"
              r"buy-?back|own shares|treasury shares|managers'? transactions|transactions? (by|of) (persons|insiders)|"
              r"voting rights|share capital|total number of shares|listing of|admission to trading|prospectus|"
@@ -68,8 +70,8 @@ def get(url, as_json=True, tries=(0, 5, 20)):
     return None
 
 
-LEGAL = (r"\(publ\)|\bp\.?l\.?c\.?|\ba/s\b|\bab\b|\basa\b|\boyj\b|\babp\b|\bhf\b|\bp/f\b|\bse\b|\bn\.?v\.?|"
-         r"\bs\.?a\.?|\bag\b|\bltd\b|\blimited\b|\bcorporation\b|\bcorp\b|\bgroup\b|\bholding\b|\binc\b|"
+LEGAL = (r"\(publ\)|\bp\.?l\.?c\.?(?!\w)|\ba/s\b|\bab\b|\basa\b|\boyj\b|\babp\b|\bhf\b|\bp/f\b|\bse\b|\bn\.?v\.?(?!\w)|"
+         r"\bs\.?a\.?(?!\w)|\bs\.?p\.?a\.?(?!\w)|\bag\b|\bltd\b|\blimited\b|\bcorporation\b|\bcorp\b|\bgroup\b|\bholding\b|\binc\b|"
          r"\bpublic limited company\b|\baktiebolag\b|\baktieselskabet\b|\bbank\b|\bpankki\b|\bd/s\b")
 # Words that some announcements add to the registered name and others leave out ("Ericsson, Telefonab. L M",
 # "Kinnevik, Investment AB", "UPM-Kymmene Oyj", "Lindab International"). Only these may differ.
@@ -166,6 +168,7 @@ QUARTER_CUES = [
     (r"january\s*[-–]\s*march|jan\.?\s*[-–]\s*mar|three months", 1),
     (r"april\s*[-–]\s*june|january\s*[-–]\s*june|jan\.?\s*1?\s*(to|[-–])\s*jun|half[- ]year|first half|six months|\bh1\b|30 june|june 30", 2),
     (r"july\s*[-–]\s*september|january\s*[-–]\s*september|jan\.?\s*1?\s*(to|[-–])\s*sep|nine months|nine-month|30 september|september 30|30\.9\.", 3),
+    (r"primer trimestre|\b1t\b", 1), (r"segundo trimestre|primer semestre|\b2t\b", 2), (r"tercer trimestre|\b3t\b|nueve meses", 3), (r"cuarto trimestre|\b4t\b", 4),
     (r"premier trimestre|1er trimestre", 1), (r"deuxi[eè]me trimestre|2e trimestre|semestriel|premier semestre", 2),
     (r"troisi[eè]me trimestre|3e trimestre|neuf (premiers )?mois", 3), (r"quatri[eè]me trimestre|4e trimestre|r[ée]sultats annuels|rapport financier annuel", 4),
     (r"october\s*[-–]\s*december|january\s*[-–]\s*december|year[- ]end report|full[- ]year (report|results)|annual (report|results)", 4)]
@@ -284,6 +287,33 @@ def france(since, today):
     return out
 
 
+def spain(since, today):
+    """CNMV 'other relevant information' feed (in Spanish): the day's notices since the last session; the cache
+    keeps earlier days because the job runs several times a day."""
+    from email.utils import parsedate_to_datetime
+    try:
+        req = urllib.request.Request("https://www.cnmv.es/portal/Otra-Informacion-Relevante/RSS.asmx/GetNoticiasCNMV", headers=UA)
+        with urllib.request.urlopen(req, timeout=60) as r:
+            xml = r.read().decode("utf-8", "replace")
+    except Exception as e:
+        print(f"  ! CNMV: {e}", flush=True)
+        return []
+    out = []
+    for item in re.findall(r"(?is)<item>(.*?)</item>", xml):
+        tag = lambda t: html.unescape(re.sub(r"<!\[CDATA\[|\]\]>", "", (re.search(fr"(?is)<{t}>(.*?)</{t}>", item) or [None, ""])[1])).strip()
+        link, desc = tag("link"), tag("description")
+        parts = [re.sub(r"<[^>]+>", " ", x).strip() for x in re.split(r"(?i)<br\s*/?>\s*<br\s*/?>", desc)]
+        cat = re.sub(r"^\d\d:\d\d\s+\d\d/\d\d/\d{4}\s*", "", parts[0]).strip() if parts else ""
+        try:
+            t = parsedate_to_datetime(tag("pubDate")).strftime("%Y-%m-%d %H:%M:%S")
+        except (TypeError, ValueError):
+            t = today.isoformat() + " 00:00:00"
+        out.append({"id": "es" + (re.search(r"nreg=(\d+)", link) or [None, link])[1], "src": "CNMV Spain", "company": tag("Title"),
+                    "title": " ".join(parts[1:]).strip() or cat, "cat": cat, "time": t, "url": link, "att": [], "lang": "es"})
+    print(f"CNMV Spain: {len(out)} notices", flush=True)
+    return out
+
+
 def oslo(since, today):
     data = get("https://api3.oslo.oslobors.no/v1/newsreader/list?category=&issuer=&fromDate=%s&toDate=%s&market=&messageTitle="
                % (since, today))
@@ -358,7 +388,7 @@ def main():
     today = date.today()
     since = today - timedelta(days=DAYS)
     by_isin = {r["isin"]: r["lei"] for r in rows if r.get("isin")}
-    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today)
+    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today) + spain(since, today)
     print(f"{len(fresh)} announcements since {since}", flush=True)
     unmatched = {}
     for a in fresh:
@@ -400,7 +430,7 @@ def main():
         o = out.setdefault(a["lei"], {"news": []})
         if len(o["news"]) < MAX_NEWS:
             o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"],
-                              **({"lang": a["lang"]} if a.get("lang") == "fr" else {})})
+                              **({"lang": a["lang"]} if a.get("lang") in ("fr", "es") else {})})
         if is_report(a) and "results" in a:
             a["quarter"] = report_quarter(a["title"], "", a["time"]) if report_quarter(a["title"], "", "") else a.get("quarter")
         if is_report(a) and "report" not in o and "results" in a:
