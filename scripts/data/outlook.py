@@ -25,7 +25,7 @@ CACHE_VERSION = 1
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
-MAX_ITEMS = {"outlook": 5, "target": 3, "backlog": 3}
+MAX_ITEMS = {"outlook": 5, "target": 3, "backlog": 3, "event": 6}
 
 _get = fd.get
 
@@ -48,6 +48,15 @@ EXPECT = (r"expect|expected|expects|guidance|outlook|forecast|anticipate|anticip
           r"ambition|should (reach|be|amount)|will (reach|be|amount)|projected|plan to|plans to")
 NUMBER = r"\d+(?:[.,]\d+)?\s*(?:%|percent|per cent|pp|percentage points?|bn|billion|mn|m\b|million)|(?:EUR|USD|DKK|SEK|NOK|CHF|GBP|€|\$|£)\s?\d"
 BACKLOG = r"order backlog|backlog|order book|orderbook|remaining performance obligations|order intake"
+# What happened: deals, restructuring, approvals and launches, prices, management changes, incidents.
+EVENT = (r"\b(completed|closed|finali[sz]ed|announced|agreed|signed)\b.{0,80}\b(acquisition|merger|divestment|divestiture|sale of|disposal|takeover|joint venture|spin-off|demerger)\b|"
+         r"\b(we|the group|the company) (acquired|divested|sold)\b|\bacquisition of [A-Z]|"
+         r"\b(restructuring|transformation programme|transformation program|cost[- ]saving programme)\b.{0,120}\b(\d|announced|launched|initiated)|"
+         r"\breduc\w* (of )?(the )?(workforce|headcount|approximately [\d,.]+|around [\d,.]+|about [\d,.]+) ?(employees|positions|jobs|fte)?|"
+         r"\b(launched|received (marketing |regulatory )?approval|approved by the (fda|ema|european commission)|fda approv\w+)\b|"
+         r"\b(price (cuts?|reductions?|increases?|pressure)|lower (realised |net )?prices|higher (realised |net )?prices)\b|"
+         r"\b(ceo|chief executive officer|cfo|chief financial officer)\b.{0,80}\b(appointed|stepped down|resigned|succeeded)\b|"
+         r"\b(product recall|cyber[- ]?attack|strike action|fined|antitrust|class action)\b")
 NOISE = (r"emission|scope [123]|co2|ghg|carbon|climate|renewable electricity|energy consumption|waste|water|diversity|"
          r"female|women|gender|employee engagement|injur|safety|remuneration|incentive|bonus|\bsti\b|\blti\b|"
          r"share-based|vesting|options? granted|pension|discount rate|impairment test|sensitivity|wacc|"
@@ -85,6 +94,13 @@ def report_text(raw):
 
 
 def pick(text, year):
+    # Events only from the management report, which comes before the financial statements.
+    events = []
+    for s in sentences(text[:int(len(text) * 0.4)]):
+        low = s.lower()
+        if re.search(EVENT, s, re.I) and not re.search(NOISE, low) and not re.search(fr"\b({EXPECT})", low) \
+                and sum(ch.isdigit() for ch in s) <= len(s) * 0.15 and not re.search(r"\b(may|could|might|if)\b", low):
+            events.append({"kind": "event", "text": s})
     ahead = "|".join(str(y) for y in range(year, year + 7))
     near = "|".join(str(y) for y in (year, year + 1))
     out, seen = [], set()
@@ -112,6 +128,12 @@ def pick(text, year):
             continue
         seen.add(key)
         out.append({"kind": kind, "text": s})
+    keys = {re.sub(r"\W+", "", i["text"].lower())[:120] for i in out}
+    for e in events:
+        k = re.sub(r"\W+", "", e["text"].lower())[:120]
+        if k not in keys and e["text"].endswith((".", "!")):
+            keys.add(k)
+            out.append(e)
     # Keep the first few of each kind, in report order (outlook sections come first in most reports).
     kept, n = [], {}
     for it in out:
