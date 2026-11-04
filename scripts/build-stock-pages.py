@@ -141,6 +141,140 @@ def add_history(rows):
             c['history'] = sorted(hist[c['isin']].items())
 
 
+
+def add_history_figures(rows):
+    """data/history.json (scripts/data/history.py): five years of annual figures per LEI. Adds the
+    multi-year figures, and the ratios that need lines the daily data does not carry (gross profit,
+    current assets, interest), only from the same report the page's other figures come from."""
+    try:
+        hist = json.loads((SRC / 'data' / 'history.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return
+    for c in rows:
+        h = hist.get(c['lei'])
+        if not h or c.get('origin') is not None or h['currency'] != c.get('currency'):
+            continue
+        years = h['years']
+        last = years.get((c.get('periodEnd') or '')[:4])
+        if not last or last.get('end') != c.get('periodEnd'):
+            last = None
+        c['years'] = years
+        ys = sorted(years)
+        first, newest = years[ys[0]], years[ys[-1]]
+        n = int(ys[-1]) - int(ys[0])
+
+        def cagr(k):
+            a, b = first.get(k), newest.get(k)
+            if n >= 3 and is_num(a) and is_num(b) and a > 0 and b > 0:
+                return ((b / a) ** (1 / n) - 1) * 100
+        c['revenueCagr'], c['epsCagr'], c['cagrYears'] = cagr('revenue'), cagr('eps'), n
+        sh = [years[y].get('sharesTagged') or (years[y]['netIncome'] / years[y]['eps']
+              if is_num(years[y].get('netIncome')) and is_num(years[y].get('eps')) and abs(years[y]['eps']) > 1e-6
+              and years[y]['netIncome'] * years[y]['eps'] > 0 else None) for y in ys]
+        if n >= 3 and is_num(sh[0]) and is_num(sh[-1]) and sh[0] > 0:
+            ch = (sh[-1] / sh[0] - 1) * 100
+            if -60 < ch < 300:
+                c['sharesChange'] = ch
+        div_years = 0
+        for y in reversed(ys):
+            if (years[y].get('dividendsPaid') or 0) > 0:
+                div_years += 1
+            else:
+                break
+        c['divYears'], c['yearsKnown'] = div_years, len(ys)
+        if is_num(c.get('pe')) and is_num(c.get('epsCagr')) and c['epsCagr'] >= 1:
+            c['pegPast'] = c['pe'] / c['epsCagr']
+        if not last:
+            continue
+        rev = last.get('revenue')
+        if is_num(last.get('gross')) and is_num(rev) and rev > 0 and 0 < last['gross'] <= rev:
+            c['grossMargin'] = last['gross'] / rev * 100
+        if is_num(last.get('curAssets')) and is_num(last.get('curLiab')) and last['curLiab'] > 0:
+            c['currentRatio'] = last['curAssets'] / last['curLiab']
+        op = last.get('operatingProfit')
+        if not c.get('financial') and is_num(op) and is_num(last.get('interest')) and last['interest'] > 0:
+            c['interestCover'] = op / last['interest']
+        # ROIC: operating profit after tax / (equity + net debt), tax rate from the report (15-35%).
+        pbt, tax = last.get('pbt'), last.get('tax')
+        rate = tax / pbt if is_num(pbt) and is_num(tax) and pbt > 0 else None
+        rate = min(max(rate, 0.15), 0.35) if rate is not None else 0.25
+        cap = (c.get('equity') or 0) + (c.get('netDebt') or 0)
+        if not c.get('financial') and is_num(op) and is_num(c.get('equity')) and c['equity'] > 0 and cap > 0:
+            c['roic'] = op * (1 - rate) / cap * 100
+        for k, base in (('bvps', 'equity'), ('fcfps', 'fcf')):
+            shares = c.get('shares')
+            if is_num(c.get(base)) and is_num(shares) and shares > 0:
+                c[k] = c[base] / shares
+
+
+RESTATED = '<sup title="Restated by the next annual report">R</sup>'
+
+
+def history_html(c):
+    """Five years of results: one column per financial year, each from its own (or the restating) report."""
+    years = c.get('years')
+    if not years or len(years) < 2:
+        return ''
+    ys = sorted(years)
+    cur = esc(c.get('currency') or '')
+    pc_ = lambda a, b: a / b * 100 if is_num(a) and is_num(b) and b > 0 else None
+    lines = [
+        ('Revenue', lambda y: bn(y.get('revenue'))),
+        ('EBITDA', lambda y: bn(y.get('ebitda'))),
+        ('EBITDA margin', lambda y: pc(pc_(y.get('ebitda'), y.get('revenue')))),
+        ('Operating profit', lambda y: bn(y.get('operatingProfit'))),
+        ('Net income', lambda y: bn(y.get('netIncome'))),
+        ('Net margin', lambda y: pc(pc_(y.get('netIncome'), y.get('revenue')))),
+        ('EPS', lambda y: num(y.get('eps'), 2)),
+        ('Operating cash flow', lambda y: bn(y.get('operatingCashFlow'))),
+        ('Capex', lambda y: bn(y.get('capex'))),
+        ('Free cash flow', lambda y: bn(y.get('fcf'))),
+        ('Dividends paid', lambda y: bn(y.get('dividendsPaid'))),
+        ('Net debt', lambda y: bn(y.get('netDebt'))),
+        ('Equity', lambda y: bn(y.get('equity'))),
+        ('Working capital', lambda y: bn(y['inventories'] + y['receivables'] - y['payables'])
+         if all(is_num(y.get(k)) for k in ('inventories', 'receivables', 'payables')) else '—'),
+    ]
+    if c.get('financial'):
+        lines = [l for l in lines if l[0] in ('Revenue', 'Net income', 'Net margin', 'EPS', 'Dividends paid', 'Equity')]
+    body = ''
+    for label, fn in lines:
+        cells = [fn(years[y]) for y in ys]
+        if sum(v != '—' for v in cells) >= 2:
+            body += f'<tr><td>{label}</td>' + ''.join(f'<td>{v}</td>' for v in cells) + '</tr>'
+    if not body:
+        return ''
+    head_ = ''.join(
+        f'<th><a href="{esc(years[y]["source"])}" target="_blank" rel="noopener" title="Open the annual report">FY {y}</a>'
+        f'{RESTATED if years[y].get("restated") else ""}</th>'
+        if years[y].get('source') else f'<th>FY {y}</th>' for y in ys)
+    # Revenue bars, the newest year darkest.
+    revs = [years[y].get('revenue') for y in ys]
+    bars = ''
+    if sum(is_num(v) and v > 0 for v in revs) >= 3:
+        top = max(v for v in revs if is_num(v))
+        bars = '<div class="sp-bars" aria-hidden="true">' + ''.join(
+            f'<div><i style="height:{max(2, v / top * 100):.0f}%"></i><span>FY {y}</span></div>' if is_num(v) and v > 0
+            else f'<div><i class="sp-bar-none"></i><span>FY {y}</span></div>' for y, v in zip(ys, revs)) + '</div>'
+    tiles = []
+    if is_num(c.get('revenueCagr')):
+        tiles.append(('Revenue growth a year', f'{sign(c["revenueCagr"])}%', f'FY {ys[0]}–{ys[-1]} (CAGR)'))
+    if is_num(c.get('epsCagr')):
+        tiles.append(('EPS growth a year', f'{sign(c["epsCagr"])}%', f'FY {ys[0]}–{ys[-1]} (CAGR)'))
+    if is_num(c.get('sharesChange')):
+        tiles.append(('Shares in issue', f'{sign(c["sharesChange"])}%', f'since FY {ys[0]}' + (' (dilution)' if c['sharesChange'] > 2 else ' (buybacks)' if c['sharesChange'] < -2 else '')))
+    if c.get('divYears'):
+        tiles.append(('Dividend paid', f'{c["divYears"]} of {c["yearsKnown"]} years', 'in a row, newest first'))
+    tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
+    restated = any(years[y].get('restated') for y in ys)
+    return f'''<section class="sp-card" id="history"><h2>{len(ys)} years of results</h2>
+      <p class="sp-sub">Each year from the company’s ESEF annual report; click a year to open it {chip("r", "Reports")}. Millions of {cur}.</p>
+      {f'<div class="sp-tiles">{tiles_html}</div>' if tiles_html else ''}
+      {bars}
+      <div class="sp-scroll"><table class="sp-table sp-hist-table"><tr><th></th>{head_}</tr>{body}</table></div>
+      <p class="sp-sub sp-after">{"R = restated: the next annual report changed this year’s figures (e.g. a business sold), the newer figures are shown. " if restated else ""}Working capital = inventories + trade receivables − trade payables.</p></section>'''
+
+
 def chart(c):
     """Price chart. Daily closes are embedded; js/stock-page.js adds the minute prices of the last
     trading day (/js/intraday/<ISIN>.json) for 4H and 1D, and 1D is shown first."""
@@ -309,47 +443,57 @@ def pc(v, d=1):
 
 
 def stats_html(c):
-    """Finviz-style key statistics: a dense grid of the standard figures, only those FINILA has."""
+    """Finviz-style key statistics, grouped by the questions a buyer asks; only figures FINILA has."""
     cur = esc(c.get('currency') or '')
     ins = c.get('insNet')
-    cells = [
-        ('Market value', f'€{bn(c["mcap"])}' if is_num(c.get('mcap')) else '—', 'c'),
-        ('Enterprise value', f'€{bn(c["ev"])}' if is_num(c.get('ev')) else '—', 'c'),
-        ('P/E', num(c.get('pe'), 1), 'c'),
-        ('P/S', num(c.get('ps'), 2), 'c'),
-        ('P/B', num(c.get('pb'), 2), 'c'),
-        ('P/FCF', num(c.get('pfcf'), 1), 'c'),
-        ('EV/EBITDA', mult(c.get('evEbitda')), 'c'),
-        ('EV/Sales', mult(c.get('evSales'), 2), 'c'),
-        ('EPS', f'{num(c["eps"], 2)} {cur}' if is_num(c.get('eps')) else '—', 'r'),
-        ('Revenue', bn(c.get('revenue'), cur), 'r'),
-        ('Net income', bn(c.get('netIncome'), cur), 'r'),
-        ('EBITDA', bn(c.get('ebitda'), cur), 'r'),
-        ('Revenue growth', pc(c.get('revenueGrowth')), 'r'),
-        ('Net income growth', pc(c.get('netIncomeGrowth')), 'r'),
-        ('Dividend yield', pc(c.get('divYield')), 'c'),
-        ('Payout (of profit)', pc(c.get('payoutNet'), 0), 'r'),
-        ('ROE', pc(c.get('roe')), 'r'),
-        ('ROA', pc(c.get('roa')), 'c'),
-        ('EBITDA margin', pc(c.get('ebitdaMargin')), 'r'),
-        ('Operating margin', pc(c.get('operatingMargin')), 'r'),
-        ('Net margin', pc(c.get('netMargin')), 'r'),
-        ('FCF margin', pc(c.get('fcfMargin')), 'r'),
-        ('Debt / equity', num(c.get('debtEquity'), 2), 'r'),
-        ('Net debt / EBITDA', ('net cash' if c['netDebtToEbitda'] < 0 else mult(c['netDebtToEbitda'], 2)) if is_num(c.get('netDebtToEbitda')) and not c.get('financial') else '—', 'r'),
-        ('Shares in issue', f'{num(c["shares"], 1)}M' if is_num(c.get('shares')) else '—', 'r'),
-        ('Quality score', f'{c["fscore"]}/{c["fscoreKnown"]}' if is_num(c.get('fscore')) else '—', 'c'),
-        ('Shorted by funds', pc(c.get('shortPct'), 2), 'r'),
-        ('Managers, 30 days', (('+' if ins > 0 else '') + eur(ins)) if is_num(ins) and ins else '—', 'r'),
+    yrs = c.get('cagrYears')
+    nd = c.get('netDebtToEbitda')
+    groups = [
+        ('Is it cheap?', [
+            ('Market value', f'€{bn(c["mcap"])}' if is_num(c.get('mcap')) else '—'),
+            ('Enterprise value', f'€{bn(c["ev"])}' if is_num(c.get('ev')) else '—'),
+            ('P/E', num(c.get('pe'), 1)), ('P/S', num(c.get('ps'), 2)), ('P/B', num(c.get('pb'), 2)),
+            ('P/FCF', num(c.get('pfcf'), 1)), ('EV/EBITDA', mult(c.get('evEbitda'))), ('EV/EBIT', mult(c.get('evEbit'))),
+            (f'PEG ({yrs}y past growth)' if yrs else 'PEG', num(c.get('pegPast'), 2)),
+            ('FCF yield', pc(c.get('fcfYield')))]),
+        ('Does it earn well?', [
+            ('Gross margin', pc(c.get('grossMargin'))), ('EBITDA margin', pc(c.get('ebitdaMargin'))),
+            ('Operating margin', pc(c.get('operatingMargin'))), ('Net margin', pc(c.get('netMargin'))),
+            ('FCF margin', pc(c.get('fcfMargin'))), ('ROE', pc(c.get('roe'))), ('ROA', pc(c.get('roa'))),
+            ('ROIC', pc(c.get('roic')))]),
+        ('Is it growing?', [
+            ('Revenue, 1 year', pc(c.get('revenueGrowth'))), ('Net income, 1 year', pc(c.get('netIncomeGrowth'))),
+            (f'Revenue, {yrs}y a year' if yrs else 'Revenue CAGR', pc(c.get('revenueCagr'))),
+            (f'EPS, {yrs}y a year' if yrs else 'EPS CAGR', pc(c.get('epsCagr')))]),
+        ('Is it healthy?', [
+            ('Net debt / EBITDA', ('net cash' if nd < 0 else mult(nd, 2)) if is_num(nd) and not c.get('financial') else '—'),
+            ('Debt / equity', num(c.get('debtEquity'), 2)), ('Current ratio', num(c.get('currentRatio'), 2)),
+            ('Interest cover', mult(c.get('interestCover'))), ('Cash', bn(c.get('cash'), cur)),
+            ('Quality score', f'{c["fscore"]}/{c["fscoreKnown"]}' if is_num(c.get('fscore')) else '—')]),
+        ('Dividend', [
+            ('Dividend yield', pc(c.get('divYield'))), ('Payout of profit', pc(c.get('payoutNet'), 0)),
+            ('Payout of free cash flow', pc(c.get('payoutFcf'), 0)),
+            ('Paid in a row', f'{c["divYears"]} of {c["yearsKnown"]} years' if c.get('divYears') else '—')]),
+        ('Per share', [
+            ('EPS', f'{num(c["eps"], 2)} {cur}' if is_num(c.get('eps')) else '—'),
+            ('Book value / share', f'{num(c["bvps"], 2)} {cur}' if is_num(c.get('bvps')) else '—'),
+            ('FCF / share', f'{num(c["fcfps"], 2)} {cur}' if is_num(c.get('fcfps')) else '—'),
+            ('Shares in issue', f'{num(c["shares"], 1)}M' if is_num(c.get('shares')) else '—'),
+            (f'Shares, {yrs}y change' if yrs else 'Shares change', pc(c.get('sharesChange')))]),
+        ('Signals', [
+            ('Shorted by funds', pc(c.get('shortPct'), 2)),
+            ('Managers, 30 days', (('+' if ins > 0 else '') + eur(ins)) if is_num(ins) and ins else '—')]),
     ]
-    cells = [x for x in cells if x[1] != '—']
-    if len(cells) < 4:
+    html_ = ''
+    for title, cells in groups:
+        cells = [x for x in cells if x[1] != '—']
+        if cells:
+            html_ += f'<div class="sp-stat-group"><h3>{title}</h3>' + ''.join(f'<div><span>{k}</span><b>{v}</b></div>' for k, v in cells) + '</div>'
+    if html_.count('<span>') < 4:
         return ''
-    tip = {'r': 'From the annual report or official register', 'c': 'Calculated by FINILA', 'p': 'Share price'}
-    items = ''.join(f'<div title="{tip[s]}"><span>{k}</span><b>{v}</b></div>' for k, v, s in cells)
     fy = (c.get('periodEnd') or '')[:4]
-    return f'''<section class="sp-stats" id="stats" aria-label="Key statistics"><div class="sp-stats-grid">{items}</div>
-      <p class="sp-sub">Financial year {esc(fy)} figures, today’s price. Hover a figure for its source.</p></section>'''
+    return f'''<section class="sp-stats" id="stats" aria-label="Key statistics"><div class="sp-stats-grid">{html_}</div>
+      <p class="sp-sub">From the FY {esc(fy)} annual report{"s of the last " + str(c["yearsKnown"]) + " years" if c.get("yearsKnown") else ""} and today’s price; ratios calculated by FINILA. Not available for free, so not shown: analysts’ forecasts (forward P/E).</p></section>'''
 
 
 def buyer_html(c, med):
@@ -753,6 +897,7 @@ def page(c, peers, updated, med=None):
     <p class="sp-intro">{intro}</p>
     {buyer_html(c, med)}
     {findings_html(c, med)}
+    {history_html(c)}
     <div class="modal-report">
 {figs}
       <div class="modal-grid modal-scores">{qual}{signals}</div>
@@ -802,6 +947,7 @@ def main():
     updated, price_day, rows = companies()
     add_signals(rows)
     add_history(rows)
+    add_history_figures(rows)
     for c in rows:
         add_valuation(c)
     medians = sector_medians(rows)
