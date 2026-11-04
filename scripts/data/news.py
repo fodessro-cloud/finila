@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 4
+CACHE_VERSION = 5
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -159,7 +159,7 @@ def report_quarter(title, text, published):
     """Which quarter a report is for: from its title, else its first lines, else its publication date."""
     for t in (title, text[:600]):
         low = (t or "").lower()
-        m = re.search(r"\bq([1-4])\b", low) or re.search(r"\b(first|second|third|fourth) quarter", low)
+        m = re.search(r"\bq([1-4])\b", low) or re.search(r"\b(first|second|third|fourth)[- ]quarter", low)
         if m:
             g = m.group(1)
             return {"first": 1, "second": 2, "third": 3, "fourth": 4}.get(g, int(g) if g.isdigit() else None)
@@ -167,7 +167,7 @@ def report_quarter(title, text, published):
             return 2
         if re.search(r"nine months|nine-month|january\s*[-–]\s*september|1\.1\.?\s*[-–]\s*30\.9", low):
             return 3
-        if re.search(r"year[- ]end|full[- ]year|annual report|fourth quarter|january\s*[-–]\s*december", low):
+        if re.search(r"year[- ]end report|full[- ]year (report|results)|annual (report|results)|january\s*[-–]\s*december", low):
             return 4
     m = int(published[5:7]) if published[5:7].isdigit() else 0
     return {1: 4, 2: 4, 3: 4, 4: 1, 5: 1, 7: 2, 8: 2, 10: 3, 11: 3}.get(m)
@@ -196,8 +196,8 @@ def quotes(text, year):
             if key not in seen:
                 seen.add(key)
                 # A heading the PDF glued to the sentence ("January–September 2026 Orders received ...") is cut off.
-                t = re.sub(r"^((january|april|july|october)\s*[-–]\s*(march|june|september|december)|q[1-4]|(first|second|third|fourth) quarter|"
-                           r"summary of [\w-]+ results)( 20\d\d)?:?\s+(?=[A-Z])", "", s, flags=re.I)
+                t = re.sub(r"^(?i:(january|april|july|october)\s*[-–]\s*(march|june|september|december)|"
+                           r"(first|second|third|fourth) quarter|summary of [\w-]+ results)( 20\d\d)?:?\s+(?=[A-Z])", "", s)
                 results.append({"text": re.sub(r"\.\.$", ".", t), "period": own or current})
     # Group figures before divisions and regions: releases put the group first, but not always.
     def rank(s):
