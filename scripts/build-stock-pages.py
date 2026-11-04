@@ -996,6 +996,7 @@ def latest_report_html(c):
     if not r:
         return ''
     res = [x if isinstance(x, dict) else {'text': x, 'period': None} for x in r.get('results') or []]
+    res = [x for x in res if not re.match(r'(In|For|During) the (comparison|corresponding) period', x['text'])]   # last year's figures
     n, yr = r.get('quarter'), (r.get('date') or '')[:4]
     if n == 4 and (r.get('date') or '')[5:7] in ('01', '02', '03'):
         yr = str(int(yr) - 1)

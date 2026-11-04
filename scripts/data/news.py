@@ -225,6 +225,8 @@ def quotes(text, year):
             head_glue = re.match(r"^([A-Z][^.:;]{0,70}?\b20\d\d)\s+(?=[A-Z])", s)        # "Revenue for the first nine months of 2026 At constant..."
             if head_glue and not re.search(fr"\b({RESULT_VERB})\b", head_glue.group(1).lower()):
                 s = s[head_glue.end():]
+            if re.match(r"(In|For|During) the (comparison|corresponding) period", s):
+                continue   # last year's figures
             if re.search(r"\bsaid\b|\bsays\b|\(\s*\)|ticker:|\(was\b", s, re.I) or not s[:1].isupper():
                 continue   # quotes, empty footnote marks, ticker lines and guidance changes ("was around ...") are not results
             key = re.sub(r"\W+", "", low)[:100]
