@@ -263,9 +263,6 @@ def summary_html(c, med, intro):
     if bits:
         s = ', '.join(bits)
         out.append(s[0].upper() + s[1:] + '.')
-    risks = [w for ok, w, _ in findings(c, med) if ok is False]
-    if risks:
-        out.append('Also in the figures: ' + risks[0][0].lower() + risks[0][1:])
     if len(out) < 2:
         return f'<p class="sp-intro">{intro}</p>'
     return f'''<section class="sp-card sp-summary" id="summary"><h2>In short</h2>
@@ -793,6 +790,112 @@ def findings(c, med):
     return f
 
 
+def analysis_html(c):
+    """What a due diligence looks at, year by year from the reports: cash conversion, working capital in
+    days, returns on capital, investment against depreciation, and where the cash went. Definitions only,
+    no comment: every figure is a ratio of lines the company itself reports."""
+    years = c.get('years')
+    if c.get('financial') or c.get('captive') or not years or len(years) < 2:
+        return ''
+    ys = sorted(years)
+    cur = esc(c.get('currency') or '')
+    ok = lambda *v: all(is_num(x) for x in v)
+
+    def ratio(a, b, k=100, lo=None, hi=None):
+        if not ok(a, b) or b <= 0:
+            return None
+        r = a / b * k
+        return None if (lo is not None and r < lo) or (hi is not None and r > hi) else r
+
+    def cogs(y):
+        if is_num(y.get('cogs')) and y['cogs'] > 0:
+            return y['cogs']
+        if ok(y.get('revenue'), y.get('gross')) and 0 < y['gross'] < y['revenue']:
+            return y['revenue'] - y['gross']
+
+    def nopat(y):
+        op = y.get('operatingProfit')
+        if not is_num(op):
+            return None
+        pbt, tax = y.get('pbt'), y.get('tax')
+        rate = tax / pbt if ok(pbt, tax) and pbt > 0 else 0.25
+        return op * (1 - min(max(rate, 0.15), 0.35))
+
+    def capital(y):
+        eq, nd = y.get('equity'), y.get('netDebt')
+        if not ok(eq, nd):
+            return None
+        cap = eq + nd + (y.get('leases') or 0)
+        return cap if cap > 0 else None
+
+    days = lambda a, b: ratio(a, b, 365, 0, 730)
+    groups = [
+        ('Cash conversion', 'How much of the profit arrives as cash.', [
+            ('Operating cash flow / EBITDA', lambda y: ratio(y.get('operatingCashFlow'), y.get('ebitda'), lo=-100, hi=250), 'pct'),
+            ('Free cash flow / EBITDA', lambda y: ratio(y.get('fcf'), y.get('ebitda'), lo=-300, hi=200), 'pct'),
+            ('Operating cash flow / net income', lambda y: ratio(y.get('operatingCashFlow'), y.get('netIncome'), 1, -20, 20), 'x'),
+        ]),
+        ('Working capital in days', 'Days of sales or purchases tied up at the year end.', [
+            ('Inventory days (DIO)', lambda y: days(y.get('inventories'), cogs(y)), 'd'),
+            ('Receivable days (DSO)', lambda y: days(y.get('receivables'), y.get('revenue')), 'd'),
+            ('Payable days (DPO)', lambda y: days(y.get('payables'), cogs(y)), 'd'),
+            ('Cash cycle (DIO + DSO − DPO)', lambda y: (lambda a, b, p: a + b - p if ok(a, b, p) else None)(
+                days(y.get('inventories'), cogs(y)), days(y.get('receivables'), y.get('revenue')), days(y.get('payables'), cogs(y))), 'd'),
+        ]),
+        ('Returns and investment', 'What the money in the business earns, and how much is reinvested.', [
+            ('ROIC (operating profit after tax / capital)', lambda y: ratio(nopat(y), capital(y), lo=-100, hi=200), 'pct'),
+            ('Capex / depreciation and amortisation', lambda y: ratio(y.get('capex'), y.get('da'), 1, 0, 20), 'x'),
+            ('Capex / revenue', lambda y: ratio(y.get('capex'), y.get('revenue'), lo=0, hi=100), 'pct'),
+        ]),
+    ]
+    fmt = {'pct': lambda v: f'{num(v, 0)}%', 'x': lambda v: f'{num(v, 1)}×', 'd': lambda v: num(v, 0)}
+    head_ = ''.join(f'<th>FY {y}</th>' for y in ys)
+    body = ''
+    for title, sub, lines in groups:
+        rows = ''
+        for label, fn, f in lines:
+            vals = [fn(years[y]) for y in ys]
+            if sum(v is not None for v in vals) >= 2:
+                rows += f'<tr><td>{label}</td>' + ''.join(f'<td>{fmt[f](v) if v is not None else "—"}</td>' for v in vals) + '</tr>'
+        if rows:
+            body += f'<tr class="sp-an-group"><th colspan="{len(ys) + 1}">{title} <small>{sub}</small></th></tr>{rows}'
+    # Incremental ROIC: extra operating profit after tax per extra unit of capital, first to last year.
+    tiles = []
+    a, b = years[ys[0]], years[ys[-1]]
+    n0, n1, k0, k1 = nopat(a), nopat(b), capital(a), capital(b)
+    if ok(n0, n1, k0, k1) and k1 - k0 > 0.1 * k0 and len(ys) >= 4:
+        tiles.append(('Incremental ROIC', f'{num((n1 - n0) / (k1 - k0) * 100, 0)}%',
+                      f'extra profit after tax on the extra capital, FY {ys[0]}–{ys[-1]}'))
+    # Where the cash went, all years together.
+    tot = lambda k: sum(years[y][k] for y in ys if is_num(years[y].get(k)))
+    has = lambda k: sum(is_num(years[y].get(k)) for y in ys)
+    ocf = tot('operatingCashFlow') if has('operatingCashFlow') == len(ys) else None
+    uses = []
+    if ocf and ocf > 0:
+        for label, k in (('Capex', 'capex'), ('Acquisitions', 'acquisitions'), ('Dividends', 'dividendsPaid'),
+                         ('Share buybacks', 'buybacks'), ('Lease payments', 'leasePaid')):
+            if has(k) == len(ys) or (k in ('acquisitions', 'buybacks') and has(k) >= len(ys) - 1):
+                uses.append((label, tot(k)))
+        if has('borrowed') == len(ys) and has('repaid') == len(ys):
+            net = tot('repaid') - tot('borrowed')
+            uses.append(('Debt repaid, net' if net >= 0 else 'New debt, net', net))
+    flow = ''
+    if len(uses) >= 3:
+        flow = ''.join(f'<tr><td>{l}</td><td>{bn(v)}</td><td>{num(v / ocf * 100, 0)}%</td></tr>' for l, v in uses)
+        flow = f'''<h3 class="sp-an-h">Where the cash went, FY {ys[0]}–{ys[-1]}</h3>
+      <div class="sp-scroll"><table class="sp-table sp-an-flow"><tr><th></th><th>{cur}</th><th>of operating cash flow</th></tr>
+      <tr class="sp-an-total"><td>Operating cash flow, {len(ys)} years</td><td>{bn(ocf)}</td><td>100%</td></tr>{flow}</table></div>
+      <p class="sp-sub sp-after">From the cash flow statements. New debt counts against repayments; the rest is the change in cash, disposals and other items.</p>'''
+    if not body and not flow:
+        return ''
+    tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
+    return f'''<section class="sp-card" id="analysis"><h2>Analysis</h2>
+      <p class="sp-sub">The ratios a due diligence looks at, each year from that year’s annual report {chip("r", "Reports")} {chip("c")}. Definitions: <a href="/stock/methodology#analysis">methodology</a>.</p>
+      {f'<div class="sp-tiles">{tiles_html}</div>' if tiles_html else ''}
+      {f'<div class="sp-scroll"><table class="sp-table sp-hist-table sp-an"><tr><th></th>{head_}</tr>{body}</table></div>' if body else ''}
+      {flow}</section>'''
+
+
 def findings_html(c, med):
     f = findings(c, med)
     if not f:
@@ -1080,8 +1183,8 @@ def page(c, peers, updated, med=None):
     {summary_html(c, med, intro)}
     {stats_html(c) or f'<div class="sp-keys">{keyhtml}</div>'}
     {buyer_html(c, med)}
-    {findings_html(c, med)}
     {history_html(c)}
+    {analysis_html(c)}
     {whatif_html(c, med)}
     <div class="modal-report">
 {figs}
@@ -1129,6 +1232,15 @@ METHOD = [
         ('Peer median', 'Median of the companies of the same industry on FINILA (Wikidata industry, at least 8 priced companies), else of the same sector; at least 5 values.'),
         ('Quality score', 'Piotroski F-score: nine tests of this year’s report against last year’s; shown as passed / tests possible.'),
     ]),
+    ('Analysis', [
+        ('Cash conversion', 'Operating cash flow ÷ EBITDA, free cash flow ÷ EBITDA, and operating cash flow ÷ net income, each year from its own report.'),
+        ('Working capital in days', 'Inventory days = inventories ÷ cost of sales × 365; receivable days = trade receivables ÷ revenue × 365; payable days = trade payables ÷ cost of sales × 365; cash cycle = inventory + receivable − payable days. Year-end balances. Cost of sales as reported, else revenue − gross profit.'),
+        ('ROIC', 'Operating profit × (1 − tax rate) ÷ (equity + net debt + lease liabilities). Tax rate = income tax ÷ profit before tax from the same report, limited to 15–35% (25% when not reported).'),
+        ('Incremental ROIC', 'Change in operating profit after tax ÷ change in capital (as in ROIC) between the first and the last year shown, when capital grew by more than 10%.'),
+        ('Capex ÷ depreciation', 'Purchases of property, plant, equipment and intangibles ÷ depreciation and amortisation. Above 1× the company invests more than its assets wear out.'),
+        ('Where the cash went', 'Sums of the cash flow statements over the years shown: operating cash flow, and the payments for capex, acquisitions of businesses, dividends, share buybacks and lease liabilities, and borrowings repaid minus new borrowings. A line is left out when a year does not report it.'),
+        ('Not shown', 'For banks and insurers, and for vehicle groups with their own bank (their borrowings fund customer loans).'),
+    ]),
     ('Scenarios', [
         ('Three scenarios', 'Revenue grows for 5 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
         ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 5 years, EBITDA at today’s margin × the peer median multiple.'),
@@ -1142,7 +1254,7 @@ METHOD = [
 
 
 def method_page(updated):
-    body = ''.join(f'<section class="sp-card"><h2>{esc(t)}</h2><table class="sp-table sp-method">' +
+    body = ''.join(f'<section class="sp-card" id="{esc(t.lower())}"><h2>{esc(t)}</h2><table class="sp-table sp-method">' +
                    ''.join(f'<tr><td>{esc(k)}</td><td>{esc(v)}</td></tr>' for k, v in items) + '</table></section>' for t, items in METHOD)
     title = 'How FINILA calculates company figures | FINILA'
     desc = 'Sources, definitions (EBITDA, EV, free cash flow, ROIC, CAGR, peer median) and checks behind the FINILA company pages.'
