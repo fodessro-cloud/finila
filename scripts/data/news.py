@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 2
+CACHE_VERSION = 3
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -36,7 +36,10 @@ SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|tele
              r"buy-?back|own shares|treasury shares|managers'? transactions|transactions? (by|of) (persons|insiders)|"
              r"voting rights|share capital|total number of shares|listing of|admission to trading|prospectus|"
              r"notice (to|of) (the )?(annual|extraordinary) general meeting|bond|notes? due|coupon|nomination committee")
-SKIP_CAT = r"managers' transactions|own shares|voting rights|major shareholder|articles of association|prospectus|corporate action|notice to general meeting"
+SKIP_CAT = (r"managers.? transaction|own shares|voting rights|major shareholder|articles of association|prospectus|corporate action|"
+            r"notice to general meeting|ex date|adjustment of interest rate|trading halt|announcement from oslo|non-regulatory|investor news")
+# Oslo Børs carries most releases twice, in Norwegian and English: the Norwegian one is left out.
+NORWEGIAN = r"\b(og|av|til|med|ved|fra|eller|inngår|melding|kvartal|kvartalet|resultat|resultater|selskap|utlån|vekst i|økt|invitasjon|korreksjon|flaggemelding|meldepliktig)\b"
 # Results for the period: a financial line, a number and a word that says what happened to it.
 RESULT_LINE = (r"net sales|revenue|revenues|sales|turnover|ebitda|ebita|ebit|operating (profit|income|result|margin)|"
                r"net (profit|income|result)|profit (before|after) tax|earnings per share|eps|free cash flow|"
@@ -59,34 +62,52 @@ def get(url, as_json=True, tries=(0, 5, 20)):
     return None
 
 
-def norm(name):
+LEGAL = (r"\(publ\)|\bp\.?l\.?c\.?|\ba/s\b|\bab\b|\basa\b|\boyj\b|\babp\b|\bhf\b|\bp/f\b|\bse\b|\bn\.?v\.?|"
+         r"\bs\.?a\.?|\bag\b|\bltd\b|\blimited\b|\bcorporation\b|\bcorp\b|\bgroup\b|\bholding\b|\binc\b|"
+         r"\bpublic limited company\b|\baktiebolag\b|\baktieselskabet\b|\bbank\b|\bpankki\b|\bd/s\b")
+# Words that some announcements add to the registered name and others leave out ("Ericsson, Telefonab. L M",
+# "Kinnevik, Investment AB", "UPM-Kymmene Oyj", "Lindab International"). Only these may differ.
+FILLER = {"telefonab", "l", "m", "h", "investment", "investmentab", "international", "sweden", "aktieselskab", "eiendom",
+          "kymmene", "publ", "as", "asa", "co", "kgaa", "mtg", "holdings", "the", "and", "sol", "abp"}
+# Renamed or differently styled names, checked by hand: announcement name -> name on FINILA.
+ALIASES = {"tieto": "tietoevry", "novonesisnovozymes": "novonesis", "alsydbank": "sydbank"}
+
+
+def words(name):
     s = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode().lower()
-    s = re.sub(r"\(publ\)|\bp\.?l\.?c\.?\b|\ba/s\b|\bab\b|\basa\b|\boyj\b|\babp\b|\bhf\.?|\bp/f\b|\bse\b|\bn\.?v\.?\b|"
-               r"\bs\.?a\.?\b|\bag\b|\bltd\.?\b|\blimited\b|\bcorporation\b|\bcorp\.?\b|\bgroup\b|\bholding\b|\binc\.?\b|"
-               r"\bpublic limited company\b|\baktiebolag\b|\baktieselskabet\b|\bbank\b|\bpankki\b|\bd/s\b|\bco\.?$", " ", s)
-    return re.sub(r"[^a-z0-9]+", "", s)
+    s = re.sub(LEGAL, " ", s)
+    return [w for w in re.split(r"[^a-z0-9]+", s) if w]
+
+
+def norm(name):
+    return "".join(words(name))
 
 
 def matcher(by_name):
-    """Exact normalised name, else one unique company whose name starts or ends the other (UPM / UPM-Kymmene,
-    Tietoevry / Tieto, D/S Norden / NORDEN). Fuzzy matches are logged so they can be checked by eye."""
-    keys = sorted(by_name)
-    fuzzy, memo = {}, {}
+    """Exact normalised name; else the same name once the filler words above are left out on both sides.
+    Never a partial match (Vincit is not Vinci). Such matches are logged so they can be checked by eye."""
+    fuzzy = {}
+
+    def core(ws):
+        return "".join(w for w in ws if w not in FILLER)
+
+    by_core = {}
+    for k, (lei, ws) in by_name.items():
+        c = core(ws)
+        if len(c) >= 3:
+            by_core.setdefault(c, set()).add(lei)
 
     def find(name):
         a = norm(name)
+        a = ALIASES.get(a, a)
         if a in by_name:
-            return by_name[a]
-        if a in memo:
-            return memo[a]
-        hit = None
-        if len(a) >= 5:
-            c = [k for k in keys if len(k) >= 5 and (a.startswith(k) or k.startswith(a) or a.endswith(k) or k.endswith(a))]
-            if len(c) == 1:
-                hit = by_name[c[0]]
-                fuzzy[name] = c[0]
-        memo[a] = hit
-        return hit
+            return by_name[a][0]
+        c = core(words(name))
+        hit = by_core.get(ALIASES.get(c, c))
+        if hit and len(hit) == 1:
+            fuzzy[name] = next(iter(hit))
+            return next(iter(hit))
+        return None
     return find, fuzzy
 
 
@@ -113,7 +134,7 @@ JUNK = (r"please call|investor relations|\+\d\d \d|visit (www|home)\.|press rele
 def split_release(text):
     """Releases list key figures as bullets glued together by PDF extraction: cut at dashes used as bullets,
     at opening quotes and after a prior-year figure in brackets followed by a new sentence."""
-    t = re.sub(r"\s[–•▪■]\s", ". ", text)
+    t = re.sub(r"\s[–•▪■]\s|\s-\s(?=[A-Z])", ". ", text)
     t = re.sub(r"\s[“\"]\s?(?=[A-Z])", ". ", t)
     t = re.sub(r"(\(\s?-?[\d.,\s]+\)|\d%\)|\d\))\s+(?=[A-Z][a-z])", r"\1. ", t)
     return t
@@ -132,11 +153,19 @@ def quotes(text, year):
             continue
         if re.search(fr"\b({RESULT_LINE})", low) and re.search(fr"\b({RESULT_VERB})", low) and re.search(ol.NUMBER, s) \
                 and not re.search(fr"\b({ol.EXPECT})", low):
+            if len(re.findall(r"\d+(?:[.,]\d+)?", s)) > 8 or re.search(r"\b(excl|incl|approx)\.$|\b\d+ of \d+\b", s):
+                continue   # table rows, cut-off fragments and page footers
             key = re.sub(r"\W+", "", low)[:100]
             if key not in seen:
                 seen.add(key)
-                results.append(s)
-    results = results[:5]
+                results.append(re.sub(r"\.\.$", ".", s))
+    # Group figures before divisions and regions: releases put the group first, but not always.
+    def rank(s):
+        low = s.lower()
+        return (-2 if re.match(r"(in|at) (?!q[1-4]|the |our |total|\d)[A-Z]", s) or re.match(r"[A-Z][\w&-]+( [A-Z][\w&-]+)* (achieved|reported|generated|increased|delivered) ", s) and not re.match(r"(Net|Group|Total|Revenue|Sales|Operating|Adjusted|Reported|Organic|Orders|Order|Earnings|Profit|EBIT|Cash|Free)", s) else 0) \
+            + (2 if re.search(r"\b(group|net sales|total|we delivered|our net sales|revenues? (was|were|amounted|increased|decreased|grew)|net sales (was|were|amounted|increased|decreased|grew))\b", low) else 0)
+    top = sorted(range(len(results)), key=lambda i: -rank(results[i]))[:5]
+    results = [results[i] for i in sorted(top)]
     out = []
     for i in ol.pick(split_release(text[:60000]), year):
         low = i["text"].lower()
@@ -185,13 +214,20 @@ def oslo(since, today):
 
 
 def is_report(a):
+    if norwegian(a):
+        return False
     if re.search(SKIP_HEAD + r"|to (present|publish|release)|will (present|publish|release)|ceo comments|comments on", a["title"], re.I):
         return False
     return bool(re.search(REPORT_CAT, a["cat"], re.I) or re.search(REPORT_HEAD, a["title"], re.I))
 
 
+def norwegian(a):
+    return a["src"] == "Oslo Børs" and bool(re.search(NORWEGIAN, a["title"], re.I))
+
+
 def keep_news(a):
-    return not re.search(SKIP_CAT, a["cat"], re.I) and not re.search(SKIP_HEAD, a["title"], re.I)
+    return not re.search(SKIP_CAT, a["cat"], re.I) and not re.search(SKIP_HEAD + r"|flagg|shareholding disclosure|primary insider|mandatory notification", a["title"], re.I) \
+        and not norwegian(a)
 
 
 def read_report(a):
@@ -228,7 +264,7 @@ def main():
     for r in rows:
         k = norm(r["name"])
         if len(k) >= 3:
-            by_name.setdefault(k, r["lei"])
+            by_name.setdefault(k, (r["lei"], words(r["name"])))
         if r.get("country") == "NO" and r.get("ticker"):
             by_sign[r["ticker"].upper()] = r["lei"]
     find, fuzzy = matcher(by_name)
@@ -251,7 +287,8 @@ def main():
         cache["ann"][a["id"]] = a
     print(f"matched {len({a.get('lei') for a in cache['ann'].values()})} companies; unmatched names (top): "
           f"{sorted(unmatched.items(), key=lambda x: -x[1])[:25]}", flush=True)
-    print("fuzzy name matches:", sorted(fuzzy.items()), flush=True)
+    names = {r["lei"]: r["name"] for r in rows}
+    print("filler-word name matches:", sorted((k, names[v]) for k, v in fuzzy.items()), flush=True)
     # Reports: read the newest per company once.
     newest = {}
     for a in cache["ann"].values():
