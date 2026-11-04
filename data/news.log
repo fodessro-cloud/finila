@@ -2,23 +2,7 @@ AMF France: 1022 filings, 649 kept
 5250 announcements since 2026-10-21
 matched 640 companies; unmatched names (top): [('Nykredit Realkredit A/S', 27), ('Sveriges Riksbank', 26), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 18), ('Loihde Oyj', 16), ('Dataproces Group A/S', 16), ('Inderes Oyj', 15), ('PPI Public Property Invest AB', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Realfiction Holding AB', 15), ('SpareBank 1 SMN', 14), ('Lánamál ríkisins', 13), ('Kuntarahoitus Oyj.', 13), ('Besqab AB(publ)', 13), ('Realkredit Danmark A/S', 12), ('Totalkredit A/S', 12), ('Alzinova AB', 12), ('Netum Group Oyj', 11), ('White Pearl Technology Group AB', 11), ('AI Revenue Assistant Software Stockholm AB', 11), ('Betolar Oyj', 10), ('Kambi Group Plc', 10), ('International Petroleum Corporation', 10), ('Minesto AB', 10)]
 filler-word name matches: [('Ambea AB', 'Ambea AB ( publ )'), ('DNO ASA', 'DNO International'), ('Entra ASA', 'Entra Eiendom'), ('Ericsson, Telefonab. L M', 'Ericsson'), ('H. Lundbeck A/S', 'Lundbeck'), ('Kinnevik, Investment AB', 'Kinnevik AB'), ('Latour, Investmentab.', 'Investment AB Latour'), ('Lindab AB', 'Lindab International AB'), ('Moberg Pharma AB', 'Moberg Pharma (Sweden)'), ('Modern Times Group MTG AB', 'Modern Times Group'), ('Moreld ASA', 'Moreld AS'), ('Mutares SE & CO KGaA', 'Mutares'), ('Roblon A/S', 'Roblon Aktieselskab'), ('Senzime AB', 'Senzime AB (publ.)'), ('Soiltech ASA', 'Soiltech AS'), ('UPM-Kymmene Oyj', 'UPM'), ('WindowMaster International A/S', 'WindowMaster')]
-Ignoring wrong pointing object 7 0 (offset 0)
-Ignoring wrong pointing object 11 0 (offset 0)
-Ignoring wrong pointing object 17 0 (offset 0)
-Ignoring wrong pointing object 6 0 (offset 0)
-Ignoring wrong pointing object 35 0 (offset 0)
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/WFOPPQ+MerriweatherSans-Italic', '/FirstChar': 1, '/LastChar': 52, '/Widths': [554, 339, 237, 812, 585, 285, 442, 576, 362, 583, 426, 620, 617, 257, 535, 545, 667, 454, 539, 933, 617, 617, 875, 505, 567, 559, 285, 610, 624, 567, 654, 384, 492, 864, 513, 465, 571, 568, 333, 565, 673, 573, 508, 257, 672, 749, 510, 618, 548, 283, 283, 567], '/FontDescriptor': IndirectObject(18, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(53, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/WFOPPQ+MerriweatherSans-Italic', '/FirstChar': 1, '/LastChar': 52, '/Widths': [554, 339, 237, 812, 585, 285, 442, 576, 362, 583, 426, 620, 617, 257, 535, 545, 667, 454, 539, 933, 617, 617, 875, 505, 567, 559, 285, 610, 624, 567, 654, 384, 492, 864, 513, 465, 571, 568, 333, 565, 673, 573, 508, 257, 672, 749, 510, 618, 548, 283, 283, 567], '/FontDescriptor': IndirectObject(18, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(53, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/NNTUPM+MerriweatherSans-Bold', '/FirstChar': 1, '/LastChar': 66, '/Widths': [664, 701, 612, 589, 327, 547, 694, 490, 782, 779, 610, 791, 353, 634, 745, 729, 963, 685, 571, 313, 631, 1068, 677, 559, 697, 921, 665, 688, 690, 636, 660, 512, 328, 322, 654, 597, 446, 581, 452, 582, 647, 654, 580, 662, 660, 419, 1000, 654, 694, 759, 654, 408, 689, 831, 408, 338, 512, 637, 734, 604, 664, 858, 753, 596, 273, 313], '/FontDescriptor': IndirectObject(10, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(55, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/DYRKTW+MerriweatherSans-Regular', '/FirstChar': 1, '/LastChar': 72, '/Widths': [527, 552, 625, 296, 592, 294, 320, 620, 670, 766, 489, 415, 604, 548, 400, 677, 826, 599, 294, 654, 604, 963, 667, 543, 610, 413, 735, 413, 604, 629, 594, 299, 568, 659, 396, 477, 448, 604, 683, 294, 606, 680, 958, 560, 638, 312, 554, 636, 545, 797, 254, 529, 641, 654, 714, 553, 348, 594, 620, 417, 939, 687, 719, 748, 280, 700, 617, 377, 937, 669, 766, 1083], '/FontDescriptor': IndirectObject(14, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(51, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/Type': '/Font', '/BaseFont': '/JWUEJE+MerriweatherSans-BoldItalic', '/FirstChar': 1, '/LastChar': 10, '/Widths': [556, 524, 455, 613, 237, 500, 589, 595, 413, 452], '/FontDescriptor': IndirectObject(39, 0, 125395666320032), '/Subtype': '/Type1', '/Encoding': IndirectObject(50, 0, 125395666320032)}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-news for 640 companies, 461 with a report; read 88 reports this run
+news for 636 companies, 491 with a report; read 30 reports this run
 
 == TotalEnergies SE | 2026-10-29 06:45 | Quarterly financial reporting / Third quarter financial report | chars 29079
   quarter 3
@@ -29,6 +13,17 @@ news for 640 companies, 461 with a report; read 88 reports this run
 == AXA | 2026-10-29 15:48 | AXA - 9M26 Activity Indicators | chars 27353
   quarter 3
   [result q] Gross written premiums & other revenues1 were up +7% to Euro 44.8 billion.
+
+== Vinci | 2026-10-22 15:45 | VINCI - 9M 2026 - FURTHER GROWTH IN REVENUE AND ORDER INTAKE | chars 22493
+  quarter 3
+  [result q] GOOD OVERALL PERFORMANCE DRIVEN BY BUSINESS OUTSIDE FRANCE AND ENERGY SOLUTIONS FURTHER REVENUE GROWTH Consolidated revenue in the third quarter grew strongly by 5% (after remaining stable in the first quarter and rising by 4% in the second quarter), with revenue outside France up 10%.
+  [result ytd] At 30 September 2026, the order book reached the high level of €75.4 billion, up 7% year on year.
+  [result ytd] KEY HIGHLIGHTS BY BUSINESS CONCESSIONS Revenue in the Concessions business amounted to €9.6 billion, up 1.8% on an actual basis (up 2.4% like - for - like) despite an unfavourable economic environment.
+  [result q] Nevertheless, revenue at VINCI Airports rose by 2.8% on an actual basis (including a 4.2% rise in the third quarter) to €3.8 billion, despite negative scope effects 7 .
+  [result ytd] This growth was driven in particular by flow business (60% of total revenue), which remains very st rong in Spain.
+  [result ytd] VINCI Immobilier In a property development market still facing very challenging conditions, VINCI Immobilier’s revenue was down 14% to €630 million.
+  [backlog] International business made up 71% of the order book (70% at 30 September 2025).
+  [backlog] Highlights included: - revenue growth (up 7.4% to €22.3 billion, 70% of which was generated outside France), with strong growth in the third quarter (up 8.6%); - increases in order intake (up 9% to €24.3 billion) and the order book (up 9% year on year to €38.5 billion);.
 
 == Renault | 2026-10-29 05:00 | Renault Group delivers resilient Q3 revenue and confirms its 2026 financial guidance | chars 19063
   quarter 3
@@ -77,6 +72,16 @@ news for 640 companies, 461 with a report; read 88 reports this run
   [outlook] The net of capitalization and amortization of research and development expenses is expected to have a positive impact on operating income of approximately SEK 4.0 billion for the full year 2026.
   [backlog] Order books for 2027 were opened at the beginning of September.
 
+== Sanofi | 2026-10-30 05:30 | Press Release: Q3 2026: double-digit growth in sales and business EPS FY 2026: guidance upgraded | chars 41916
+  quarter 3
+  [result q] Dupixent sales increased by 34.8% to €5.7 billion, above €5 billion per quarter for the second time.
+  [result q] In Q3 2026, sales were €14,444 million and increased by 14.3%.
+  [result ytd] In YTD 2026, sales were €36,550 million and increased by 15.2%.
+  [result q] The growth was driven by Immunology (Dupixent and Kevzara), pharma launches, and insulins with vaccines decreasing by 6.8% from lower influenza and Beyfortus sales partly offset by newly acquired Heplisav-B.
+  [result q] The ratio of BOI to net sales was 37.4% and increased by 1.7pp (37.6% at actual exchange rates, up by 1.9pp).
+  [result ytd] The ratio of BOI to net sales was 31.9% and increased by 1.6pp (32.0% at actual exchange rates, up by 1.7pp).
+  [outlook] Q3 2026: double-digit growth in sales and business EPS FY 2026: guidance upgraded October 30, 2026 Q3 sales growth of 14.3% at CER1 and business earnings per share (EPS)2 of €3.55.
+
 == Novo Nordisk A/S | 2026-11-04 07:30 | Novo raises full-year outlook on continued GLP-1 momentum, with third-quarter adjusted operating profit increasing 27% at CER to DKK 31,720 million | chars 39761
   quarter 3
   [result q] Q3 2026 adjusted and reported sales increased by 4% at CER, driven by continued GLP-1 volume growth across the US and International operations, primarily in obesity.
@@ -86,6 +91,16 @@ news for 640 companies, 461 with a report; read 88 reports this run
   [result ytd] Reported sales in 9M 2026 increased by 11% measured in Danish kroner and by 13% at CER, driven by GLP-1.
   [result q] Q3 2026 adjusted sales increased by 4% at CER to DKK 79,195 million, driven by GLP-1 volume growth in both operating units, partly offset by lower realised prices.
   [outlook] Adjusted sales growth for 2026 is now expected to be -2% to +2% at CER and adjusted operating profit growth is now expected to be -2% to +2% at CER.
+
+== Orange | 2026-10-27 05:30 | Orange: Orange maintains solid revenue growth in the third quarter and raises its full-year EBITDAaL growth target | chars 20798
+  quarter 3
+  [result q] Europe 6” and includes Poland, Belgium, Luxembourg, Slovakia, Romania and Moldova. 2 In the third quarter of 2026, the Group generated revenue of €12.2 billion, up 3.6%.
+  [result q] The Group’s EBITDAaL reached €4.1 billion in the third quarter, up 4.6%, driven by accelerating revenue growth and continued operational efficiency initiatives.
+  [result q] Operating cash-flow (EBITDAaL. eCapex) increased significantly by 10.3% in the third quarter, fueling growth to 8.8% over the first nine months of the year.
+  [result q] In the third quarter of 2026, revenue in Spain reached €1,910 million, up +3.5%, driven by equipment sales (+28%) and wholesale services (+3.6%).
+  [result q] The performance in Poland was particularly strong with convergent ARPO up +5.0% yoy, while quarterly revenue increased +7.9%.
+  [result q] TOTEM’s revenue was €173 million in the third quarter, down -2.9%.
+  [outlook] These strong results confirm our ambition to deliver “stable +” EBITDAaL in 2026. 5 Spain In millions of euros 3Q 2026 change comparable basis change historical basis 4M 2026 change comparable basis change historical basis Revenue 1,910 3.5 % - 2,558 3.1 %.
 
 == DSV A/S | 2026-10-21 07:31 | DSV, 1175 - INTERIM FINANCIAL REPORT Q3 2026 | chars 8265
   quarter 3
@@ -130,6 +145,16 @@ news for 640 companies, 461 with a report; read 88 reports this run
   [result q] After a stable 1 st half, Industrial Merchant revenue grew by +3.8%, supported by a higher price effect than in the 2 nd quarter and rising volumes; sales grew in all countries across the region.
   [backlog] Record investments since the beginning of 2026, strengthening a record backlog
   [backlog] At 6.2 billion euros , the investment backlog reached a new record high.
+
+== Sodexo | 2026-10-23 05:00 | Sodexo - Fiscal 2026 results: organic growth above guidance; Fiscal 2027 outlook confirmed | chars 36509
+  quarter 4
+  [result q] Fiscal 2026 financial performance Revenue and commercial activity Fiscal 2026 consolidated revenues amounted to 24.0 billion euros, down -0.5% year-on-year.
+  [result q] Organic revenue growth of +2.0% and a positive net contribution from acquisitions and disposals of +0.5% were offset by a negative currency impact of -3.0%, mainly due to the depreciation of the U.S. dollar.
+  [result q] Organic revenue growth was supported by pricing of around +2.4% and like-for-like volume growth of around +0.6%, including strong Sodexo Live! activity.
+  [result q] By service line, organic revenue growth was +1.6% in Food services and +2.9% in Facilities Management services.
+  [result q] By geography: — North America: organic growth of -1.0%, mainly reflecting prior contract losses in Education and Business & Administrations and the contract reclassification.
+  [result q] Healthcare & Seniors delivered strong growth, driven by new contract ramp-ups, while Sodexo Live! sustained its momentum, supported by high activity levels across stadiums, conference centers and airport lounges. — Europe: organic growth of +2.1%, supported by Healthcare & Seniors.
+  [outlook] Proposed dividend of 1.74 euros per share, in line with the Group's policy (50% payout) — Fiscal 2027 guidance confirmed:.
 
 == Capgemini | 2026-10-30 05:00 | Q3 2026 momentum drives upgrade in Capgemini's 2026 outlook | chars 15255
   quarter 3
@@ -222,48 +247,12 @@ news for 640 companies, 461 with a report; read 88 reports this run
   [result ytd] Revenues increased by 6% to MSEK 133 434 (125 561), corresponding to an organic increase of 7%.
   [result q] Revenues and profitability Revenues increased 7% to MSEK 20 399 (19 151), corresponding to an organic increase of 5%.
 
-== Securitas | 2026-10-23 08:00 | Securitas AB Interim Report Q3 2026 | January-September | chars 8143
+== Kering | 2026-10-22 15:40 | Kering: Revenue for the Third Quarter of 2026 | chars 14702
   quarter 3
-  [result q] Solid performance supported by technology momentum” Organic sales growth in the third quarter was 3 percent, adjusted for the close-down of the SCIS govern­ment business.
-  [result q] Real sales growth in technology and solutions was 6 percent in the third quarter.
-  [result q] The adjusted operating margin in the third quarter was 8.2 percent (8.3), supported by continued good performance in North America.
-  [result q] This was primarily due to the airport security business in Europe which had an impact in the third quarter of –0.2 percent on Group adjusted operating margin.
-  [result ytd] For the first nine months of the year, earnings per share increased by 6 percent.
-  [outlook] We remain well positioned to achieve our full-year cash flow target of 80–90 percent of operating income before amortization.
-  [target] CREATING LONG-TERM SHAREHOLDER VALUE In conjunction with the launch of our 2030 strategy, we updated the Group’s financial targets, including our target to deliver average annual earnings per share growth of 10 percent over a business cycle.
-
-== Assa Abloy | 2026-10-27 08:00 | Quarterly Report Q3 2026 | chars 35252
-  quarter 3
-  [result q] Net sales totaled SEK 40,771 M (38,146), with organic growth of 4% (3) and acquired net growth of 2% (5).
-  [result q] The Group’s sales totaled SEK 40,771 M (38,146), an increase of 7% over last year.
-  [result q] The Group’s operating income before amortizations from acquisitions2 (EBITA) amounted to SEK 7,612 M (6,815).
-  [result q] The Group’s operating income2 (EBIT) totaled SEK 7,102 M (6,416), an increase of 11%.
-  [result ytd] First nine months of the year The Group’s sales for the first nine months of 2026 totaled SEK 115,781 M (114,102), an increase of 1% over last year.
-  [result ytd] The Group’s operating income before amortizations from acquisitions2 (EBITA) amounted to SEK 20,561 M (19,421).
-
-== Essity | 2026-10-22 07:00 | Interim Report Quarter 3, 2026 | chars 26740
-  quarter 3
-  [result None] Organic sales growth amounted to -0.3%, of which volume accounted for -0.1% and price/mix -0.2%.
-  [result q] The acquisition in Feminine Care in North America increased the Group's consolidated net sales by 1.9%.
-  [result q] Organic sales decreased 0.3%, primarily as a result of price reductions in previous quarters.
-  [result q] Sales and administration costs amounted to 18.6% (18.8), of which marketing costs amounted to 5.2% (5.2).
-  [result q] Cost savings in sales and administration amounted to approximately SEK 150m.
-  [result q] Working capital amounted to 10.6% (9.2) of net sales.
-
-== Kesko Oyj | 2026-10-29 07:00 | Kesko interim report 1.1.-30.9.2026: Kesko's profit improved significantly - technical trade continues as the driver | chars 10135
-  quarter 3
-  [result q] Our net sales totalled €3,394 million, representing an increase of 4.7% in comparable terms.
-  [result q] In the grocery trade division, net sales increased by 2.7% and totalled €1,690 million.
-  [result q] K Group’s grocery sales grew by 1.8%, while the total grocery market in Finland grew by approximately 0.6%.
-  [result q] Kespro’s net sales decreased by 1.0% as the foodservice market remained challenging, but Kespro managed to gain market share.
-  [result q] In the building and technical trade division, net sales grew in all operating countries, totalling €1,328 million.
-  [result q] The marked improvement in profit was attributable in particular to technical trade, where net sales grew by 11.3%, with sales growth being the strongest in Finland, Norway and Poland.
-  [outlook] Kesko estimates that its 2026 comparable operating profit will amount to €690–‍730 million.
-  [backlog] Our order book for new cars was up by nearly 70% year-on-year and by some 65% since the start of the year.
-  [outlook] We are updating our profit guidance, and now estimate that Kesko’s comparable operating profit for 2026 will amount to €690–730 million, while our previous estimate was €670–730 million.
-
-== Electrolux | 2026-10-23 07:00 | Electrolux Group Interim report Q3 2026 | chars 8457
-  quarter 3
-  [result q] Operating income excluding non-recurring items (NRIs) was SEK 912m (890), corresponding to a margin of 2.7% (2.8).
-  [result q] Cost efficiency contributed SEK 1.4bn to operating income, offsetting the significant negative impact from external factors, primarily from increased raw material and logistics cost as a consequence of the Middle East conflict, and U.S. tariff costs.
-  [result q] Income for the period was SEK -340m (192) and earnings per share were SEK -0.46 (0.39).
+  [result q] Wholesale and Other revenues were up 3% on a comparable basis.
+  [result ytd] In the first nine months of 2026, the Group generated revenue of €10,565 million, down 2% as reported and stable on a comparable basis, while advancing the optimization of its store network.
+  [result q] Kering Fashion & Leather Goods In the third quarter of 2026, Kering Fashion & Leather Goods revenue amounted to €2,743 million, down 1% as reported and 3% on a comparable basis.
+  [result q] Excluding Gucci, retail sales increased by 2%, driven by continued growth at Saint Laurent , Bottega Veneta and Brioni , underscoring the increasing breadth of the Group’s portfolio.
+  [result q] Wholesale and Other revenues were up 35% on a comparable basis in the third quarter.
+  [result q] Sales in the directly operated retail network increased by 18% on both a reported and a comparable basis, while Wholesale and Other revenues decreased by 6%.
+  [outlook] Kering Eyewear In the third quarter of 2026, Kering Eyewear revenue amounted to €373 million, up 6% as reported and up 4% on a comparable basis , reflecting the resilience of the business despite the anticipated phasing effects between the third and fourth quarters.
