@@ -126,3 +126,17 @@ html, body { height: auto; }
 .sp-mini-axis { display: flex; justify-content: space-between; font-size: 10px; color: var(--text2); margin-top: 3px; }
 .sp-hist-table td small { display: block; font-size: 10px; font-weight: 600; }
 .sp-hist-table td small.pos { color: var(--pos); } .sp-hist-table td small.neg { color: var(--neg); }
+.sp-wi-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 18px; margin: 0 0 14px; }
+.sp-wi-inputs label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text2); }
+.sp-wi-inputs label span { display: flex; justify-content: space-between; }
+.sp-wi-inputs b { color: var(--strong); font-size: 13px; }
+.sp-wi-inputs input { width: 100%; accent-color: var(--accent2); }
+.sp-wi-inputs small { font-size: 10.5px; }
+.sp-wi-out { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.sp-wi-out div { background: var(--bg3); border-radius: 8px; padding: 8px 12px; }
+.sp-wi-out span { display: block; font-size: 11px; color: var(--text2); }
+.sp-wi-out b { font-size: 17px; color: var(--strong); }
+.sp-wi-out .sp-wi-main { background: var(--strong); }
+.sp-wi-out .sp-wi-main span { color: #C9D3E6; } .sp-wi-out .sp-wi-main b { color: #fff; font-size: 20px; }
+.sp-wi-out small { display: block; font-size: 11px; font-weight: 600; margin-top: 2px; }
+.sp-wi-out .sp-wi-main small.pos { color: #7FE0B0; } .sp-wi-out .sp-wi-main small.neg { color: #FF9C9C; }

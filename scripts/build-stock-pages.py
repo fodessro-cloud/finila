@@ -249,6 +249,40 @@ def summary_html(c, med, intro):
       <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
 
 
+def whatif_html(c, med):
+    """What if the company grows: the visitor's own assumptions -> price per share. js/stock-page.js computes it."""
+    need = ('revenueEur', 'netDebtEur', 'mcap', 'price', 'shares', 'ebitdaMargin')
+    if c.get('financial') or not all(is_num(c.get(k)) for k in need) or c['revenueEur'] <= 0 or c['ebitdaMargin'] <= 0 or c['shares'] <= 0:
+        return ''
+    g = c.get('revenueCagr') if is_num(c.get('revenueCagr')) else c.get('revenueGrowth')
+    g_src = f'revenue growth a year over the last {c["cagrYears"]} years' if is_num(c.get('revenueCagr')) else 'revenue growth last year'
+    if not is_num(g):
+        g, g_src = 5, 'an example'
+    g = round(min(max(g, -10), 30), 1)
+    x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
+    x_src = f'median of {esc((c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
+    if not is_num(x):
+        return ''
+    data = {'rev': round(c['revenueEur'], 1), 'nd': round(c['netDebtEur'], 1), 'shares': c['shares'], 'price': c['price'],
+            'g': g, 'm': round(c['ebitdaMargin'], 1), 'x': round(x, 1)}
+    return f'''<section class="sp-card sp-whatif" id="whatif" data-whatif='{json.dumps(data)}'>
+      <h2>What if the company grows?</h2>
+      <p class="sp-sub">Set your own assumptions; the page works out what the share would be worth. Start values are real figures from the report.</p>
+      <div class="sp-wi-inputs">
+        <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%)</small></label>
+        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: last year ({num(data["m"])}%)</small></label>
+        <label><span>EV / EBITDA at the end <b data-o="x"></b></span><input type="range" data-i="x" min="2" max="40" step="0.5" value="{data["x"]}"><small>Start: {x_src} ({num(x)}×)</small></label>
+        <label><span>Years <b data-o="y"></b></span><input type="range" data-i="y" min="1" max="10" step="1" value="5"><small>How far ahead</small></label>
+      </div>
+      <div class="sp-wi-out">
+        <div><span>Revenue then</span><b data-o="rev"></b></div>
+        <div><span>EBITDA then</span><b data-o="ebitda"></b></div>
+        <div><span>Company value (EV)</span><b data-o="ev"></b></div>
+        <div class="sp-wi-main"><span>Price per share</span><b data-o="pps"></b><small data-o="ret"></small></div>
+      </div>
+      <p class="sp-sub sp-after">Price per share = company value minus today’s net debt (€{bn(c["netDebtEur"])}), divided by today’s {num(c["shares"], 1)}M shares; dividends not counted. A calculation from your assumptions, not a forecast or advice from FINILA.</p></section>'''
+
+
 def history_html(c):
     """Five years of results: one column per financial year, each from its own (or the restating) report,
     with the change on the year before and small bar charts of the main lines."""
@@ -969,6 +1003,7 @@ def page(c, peers, updated, med=None):
     {buyer_html(c, med)}
     {findings_html(c, med)}
     {history_html(c)}
+    {whatif_html(c, med)}
     <div class="modal-report">
 {figs}
       <div class="modal-grid modal-scores">{qual}{signals}</div>
@@ -981,7 +1016,8 @@ def page(c, peers, updated, med=None):
   {peers_html(c, peers, med)}
   <p class="sp-legend">Where each number comes from: {chip('r')} the company’s annual report or an official register · {chip('p')} Deutsche Börse delayed share price · {chip('c')} calculated by FINILA from those two.</p>
 </main>
-{FOOTER}<script src="/js/stock-page.js" defer></script>
+{FOOTER}<script src="/js/url-state.js" defer></script>
+<script src="/js/stock-page.js" defer></script>
 <script src="/js/analytics.js" defer></script>
 </body>
 </html>

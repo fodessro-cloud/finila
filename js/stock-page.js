@@ -121,3 +121,47 @@
   svg.addEventListener('pointerleave', () => { cursor.style.display = 'none'; tip.style.display = 'none'; });
   draw(usable ? 'i0' : 'd0');
 })();
+
+// "What if the company grows?": the visitor's assumptions -> revenue, EBITDA, company value and price
+// per share after N years. Amounts in EUR millions, shares in millions. Choices go into the address
+// (?growth=6&margin=40&multiple=12&years=5) so a scenario can be shared.
+(function () {
+  const box = document.getElementById('whatif');
+  if (!box) return;
+  const d = JSON.parse(box.dataset.whatif);
+  const inp = k => box.querySelector(`[data-i="${k}"]`), out = k => box.querySelector(`[data-o="${k}"]`);
+  const keys = { g: 'growth', m: 'margin', x: 'multiple', y: 'years' };
+  Object.entries(keys).forEach(([k, q]) => {
+    const v = typeof urlParam === 'function' ? parseFloat(urlParam(q)) : NaN;
+    if (!isNaN(v)) inp(k).value = v;
+  });
+  const fmt = (v, dg = 1) => v.toLocaleString('en-GB', { minimumFractionDigits: dg, maximumFractionDigits: dg });
+  const money = v => Math.abs(v) >= 1000 ? '€' + fmt(v / 1000, 2) + 'B' : '€' + fmt(v, 0) + 'M';
+  function calc(write) {
+    const g = +inp('g').value, m = +inp('m').value, x = +inp('x').value, y = +inp('y').value;
+    out('g').textContent = (g >= 0 ? '+' : '') + fmt(g) + '%';
+    out('m').textContent = fmt(m) + '%';
+    out('x').textContent = fmt(x) + '×';
+    out('y').textContent = y;
+    const rev = d.rev * Math.pow(1 + g / 100, y), ebitda = rev * m / 100, ev = ebitda * x;
+    const pps = (ev - d.nd) / d.shares;
+    out('rev').textContent = money(rev);
+    out('ebitda').textContent = money(ebitda);
+    out('ev').textContent = money(ev);
+    if (pps <= 0) {
+      out('pps').textContent = '€0';
+      out('ret').textContent = 'debt would be larger than the company value';
+    } else {
+      out('pps').textContent = '€' + fmt(pps, 2);
+      const r = (Math.pow(pps / d.price, 1 / y) - 1) * 100, tot = (pps / d.price - 1) * 100;
+      out('ret').textContent = `${tot >= 0 ? '+' : ''}${fmt(tot, 0)}% vs today’s €${fmt(d.price, 2)} · ${r >= 0 ? '+' : ''}${fmt(r)}% a year`;
+      out('ret').className = r >= 0 ? 'pos' : 'neg';
+    }
+    if (write && typeof urlSet === 'function') {
+      const start = { g: d.g, m: d.m, x: d.x, y: 5 };
+      urlSet(Object.fromEntries(Object.entries(keys).map(([k, q]) => [q, +inp(k).value === start[k] ? null : inp(k).value])));
+    }
+  }
+  box.querySelectorAll('input[type=range]').forEach(i => i.addEventListener('input', () => calc(true)));
+  calc(false);
+})();
