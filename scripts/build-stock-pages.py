@@ -1016,8 +1016,7 @@ def latest_report_html(c):
             body += f'<div class="sp-q"><h3>{esc(title)} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>'
     for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
                              ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
-                             ('backlog', 'Order backlog', 'Orders signed and not yet delivered.'),
-                             ('projects', 'Investment projects', 'Projects the company has approved and is building, as it states: future spending, not orders.')):
+                             ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):
         out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])
         if out:
             body += f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
@@ -1030,7 +1029,7 @@ BROKEN = r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{
 
 
 def kind_of(i):
-    """A backlog of approved investment projects (Air Liquide's plants) is future spending, not orders: own heading."""
+    """A backlog of approved investment projects (Air Liquide's plants) is future spending, not orders: not shown."""
     return 'projects' if i['kind'] == 'backlog' and re.search(INVEST_BACKLOG, i['text'], re.I) \
         and not re.search(r'\border(s| book| backlog| intake)\b', i['text'], re.I) else i['kind']
 
@@ -1038,9 +1037,8 @@ def kind_of(i):
 REPORT_BLOCKS = [('outlook', 'Outlook', 'What the company expects for the current year.'),
                  ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
                  ('backlog', 'Order backlog', 'Orders signed and not yet delivered.'),
-                 ('projects', 'Investment projects', 'Projects the company has approved and is building, as it states: future spending, not orders.'),
                  ('event', 'What happened', 'Deals, restructuring, approvals, prices and management changes.')]
-REPORT_SHOWN = {'outlook', 'target', 'backlog', 'projects'}   # 'event' joins once its selection is checked
+REPORT_SHOWN = {'outlook', 'target', 'backlog'}   # 'event' joins once its selection is checked
 
 
 def quote_clean(t):
