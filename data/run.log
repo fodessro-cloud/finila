@@ -1,4 +1,4 @@
-7491 entities on filings.xbrl.org
+7492 entities on filings.xbrl.org
 SAP     Germany      SAP SE                           [SAP] -> 529900D6BF99LW9R2E68 SAP SE (exact)
 SIE     Germany      Siemens AG                       [SIEMENS] -> W38RGI023J3WT1HWRP32 Siemens Aktiengesellschaft (exact)
 ALV     Germany      Allianz SE                       [ALLIANZ] -> 529900K9B0N5BT694847 Allianz SE (exact)
@@ -80,7 +80,6 @@ PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQR
 matched 58 / 77
   ! https://filings.xbrl.org/api/entities/7LTWFZYICNSX8D621K86/filings?page[size]=100: HTTP Error 429: Too Many Requests
   ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800LBQA1Y9L22JB70/filings?page[size]=100: HTTP Error 429: Too Many Requests
 SAP@Germany no usable annual report (0 filings)
 SIE@Germany no usable annual report (0 filings)
 ALV@Germany no usable annual report (0 filings)
@@ -134,7 +133,8 @@ RIO@UK         2025-12-31 USD rev=57638.0 ebitda=21513.0 net=9966.0 fcf=4497.0 r
 GSK@UK         2025-12-31 GBP rev=32667.0 ebitda=None net=5716.0 fcf=4756.0 roe=34.9 nd/ebitda=None
 ULVR@UK        2025-12-31 EUR rev=50503.0 ebitda=10390.0 net=9469.0 fcf=6759.0 roe=61.0 nd/ebitda=None
 DGE@UK         2026-06-30 USD rev=27762.0 ebitda=5636.0 net=1958.0 fcf=3195.0 roe=18.0 nd/ebitda=3.11
-BARC@UK no usable annual report (0 filings)
+        missing ['revenue', 'ebitda', 'fcf']; tagged: ['bcs:CalledUpShareCapitalAndSharePremium', 'bcs:NetPurchaseOfTreasuryShares', 'bcs:OperatingIncome', 'bcs:ProfitLossFromOperatingActivitiesBeforeImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:InterestRevenueCalculatedUsingEffectiveInterestMethod', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtAmortisedCostClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtFairValueThroughOtherComprehensiveIncomeClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:PurchaseOfTreasuryShares']
+BARC@UK        2025-12-31 GBP rev=None ebitda=None net=7172.0 fcf=None roe=9.2 nd/ebitda=None
         missing ['ebitda', 'fcf']; tagged: ['ifrs-full:AdjustmentsForDecreaseIncreaseInOtherOperatingReceivables', 'ifrs-full:AdjustmentsForIncreaseDecreaseInOtherOperatingPayables', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesRefundClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestRevenueExpense', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:PurchaseOfFinancialInstrumentsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:Revenue', 'ifrs-full:RevenueFromInterest', 'lyg:OtherOperatingIncomeExpenseNetInvestmentReturnAndFinanceResultInRespectOfInsuranceAndInvestmentContracts', 'lyg:OtherOperatingIncomeExpenseNetInvestmentReturnOnAssetsHeldToBackInsuranceAndInvestmentContracts']
 LLOY@UK        2025-12-31 GBP rev=19422.0 ebitda=None net=4659.0 fcf=None roe=9.8 nd/ebitda=None
 ITX@Spain      2026-01-31 EUR rev=39864.0 ebitda=11267.0 net=6220.0 fcf=6520.0 roe=30.5 nd/ebitda=-0.47
@@ -164,23 +164,33 @@ EQNR@Norway    2025-12-31 USD rev=106462.0 ebitda=37670.0 net=5043.0 fcf=5977.0 
 OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.3 nd/ebitda=None
 PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
 
-47 companies with real fundamentals
+48 companies with real fundamentals
 ESMA FULINS_E_20261031_01of02.zip: 16445 new issuers
 ESMA FULINS_E_20261031_02of02.zip: 0 new issuers
 FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
 18589 issuers with listed shares
   ! https://filings.xbrl.org/api/filings?include=entity&page%5Bsize%5D=500&sort=-period_end&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
 2668 issuers with a report for 2024 or later (10 pages)
-33 reports to read, 2635 cached
-read 33 reports this run
-4908 listed companies with an LEI on Wikidata
+2177 reports to read, 491 cached
+  read 200 reports
+  read 400 reports
+  read 600 reports
+  read 800 reports
+  read 1000 reports
+  read 1200 reports
+  read 1400 reports
+  read 1600 reports
+  read 1800 reports
+  read 2000 reports
+read 2177 reports this run
+  ! Wikidata: HTTP Error 429: Aggressively rate-limiting to 1 req / min - this rule was created during active wdqs outage (797a132); using the last saved copy
 18589 issuers with listed shares (FIRDS); 2177 of them file reports here
 shares in issue for 525 companies (data/shares.json)
 annual figures by hand for 561 companies (data/financials.json)
 Wikidata by ISIN/LEI: labels for 1641 of 3596 keys
 sector found for 729 of 1798 without a Wikidata industry: {'wikidata': 330, 'bank': 63, 'name': 336}
-earnings per share moved by powers of ten for 38 companies, dropped for 8 (checked against the price)
-shares in issue from the annual report for 1901 more companies
+earnings per share moved by powers of ten for 37 companies, dropped for 7 (checked against the price)
+shares in issue from the annual report for 1900 more companies
 shared ISINs taken from 0 companies (kept by the larger one)
 hand-checked fixes for 138 companies (data/fixes.json)
 2719 companies with figures, 160 without usable figures
