@@ -248,10 +248,10 @@ def summary_html(c, med, intro):
     pe, pm = c.get('pe'), med.get('pe')
     if is_num(ve) and is_num(vm):
         word = 'below' if ve <= vm * 0.85 else 'above' if ve >= vm * 1.15 else 'close to'
-        out.append(f'At today’s price the whole company is valued at {num(ve)}× EBITDA, {word} the {sec} median of {num(vm)}×.')
+        out.append(f'At today’s price the whole company is valued at {num(ve)}× EBITDA, {word} the European {sec} median of {num(vm)}×.')
     elif is_num(pe) and is_num(pm):
         word = 'below' if pe <= pm * 0.85 else 'above' if pe >= pm * 1.15 else 'close to'
-        out.append(f'The share price is {num(pe)}× last year’s profit per share (P/E), {word} the {sec} median of {num(pm)}.')
+        out.append(f'The share price is {num(pe)}× last year’s profit per share (P/E), {word} the European {sec} median of {num(pm)}.')
     em, mm = c.get('ebitdaMargin'), med.get('ebitdaMargin')
     nd = c.get('netDebtToEbitda')
     bits = []
@@ -703,7 +703,7 @@ def buyer_html(c, med):
     if not rows:
         return ''
     trs = ''.join(f'<tr><td>{k}</td><td><b>{v}</b></td><td class="sp-med">{m}</td></tr>' for k, v, m in rows)
-    note = f'Median of {med["n"]} {esc(sec)} companies on FINILA. ' if med.get('n') else ''
+    note = f'Median of {med["n"]} European {esc(sec)} companies on FINILA. ' if med.get('n') else ''
     if is_num(c.get('evEbitda')):
         note += f'A buyer of the whole firm would pay about {num(c["evEbitda"], 1)} years of this year’s EBITDA. '
     if c.get('financial'):
@@ -926,7 +926,7 @@ def peers_html(c, peers, med):
     body = ''.join(f'<tr><td><a href="/stock/{p["slug"]}">{esc(p["name"])}</a></td>{tds(p)}</tr>' for p in peers)
     medrow = (f'<tr class="sp-medrow"><td>Median of {med["n"]} companies</td><td></td>' +
               ''.join(f'<td>{fn(med)}</td>' for _, fn in cols[1:]) + '</tr>') if med.get('n') else ''
-    title = f'Versus other {esc(med["label"])} companies' if med.get('label') else f'Other companies from {esc(COUNTRIES.get(c["country"], c["country"] or ""))}'
+    title = f'Versus other European {esc(med["label"])} companies' if med.get('label') else f'Other companies from {esc(COUNTRIES.get(c["country"], c["country"] or ""))}'
     return f'''<section class="sp-card" id="peers"><h2>{title}</h2>
       <p class="sp-sub">Largest European companies of the sector, latest annual figures and prices {chip("r", "Reports")}{chip("p", "Prices")}{chip("c")}</p>
       <div class="sp-scroll"><table class="sp-table sp-peer-table"><tr><th>Company</th>{th}</tr>{me}{body}{medrow}</table></div></section>'''
