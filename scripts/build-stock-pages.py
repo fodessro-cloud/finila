@@ -982,13 +982,14 @@ def add_about(rows):
             c['about'] = a
 
 
-def about_short(t, limit=260):
-    """One or two sentences, never cut mid-sentence: the first sentence alone when two are too long."""
-    parts = re.split(r'(?<=[a-z0-9\)][.])\s+(?=[A-Z])', t)
-    out = parts[0]
-    if len(parts) > 1 and len(out) + len(parts[1]) < limit:
-        out += ' ' + parts[1]
-    return out if len(out) <= limit + 80 else ''
+def about_short(t, limit=170):
+    """The first sentence, at most about `limit` characters: a longer one is cut after a comma or 'and' with '…'
+    (the words stay the company's own; Lub, 2026-11-04: keep it short)."""
+    first = re.split(r'(?<=[a-z0-9\)][.])\s+(?=[A-Z])', t)[0]
+    if len(first) <= limit:
+        return first
+    cut = max(first.rfind(', ', 0, limit), first.rfind(' and ', 0, limit))
+    return first[:cut].rstrip(' ,') + '…' if cut > 60 else ''
 
 
 def about_html(c):
