@@ -1398,7 +1398,6 @@ def page(c, peers, updated, med=None):
     {summary_html(c, med, intro)}
     {stats or f'<div class="sp-keys">{keyhtml}</div>'}
     {buyer_html(c, med)}
-    {whatif_html(c, med)}
     {report_html(c)}
     {history_html(c)}
     {analysis_html(c)}
@@ -1408,10 +1407,11 @@ def page(c, peers, updated, med=None):
       {fin}
       <div class="modal-report-src">{"" if listed_only else src + ". "}Prices: Deutsche Börse delayed data. Market value is estimated from net income / EPS. Figures are read automatically from the report; every year links to it as proof. Page updated {esc(updated)}.</div>
     </div>
+    {whatif_html(c, med)}
     <p class="sp-cta"><a class="btn btn-primary" href="/screener?lei={esc(c["lei"])}">Compare in the stock screener</a></p>
   </article>
-  {events_html(c)}
   {peers_html(c, peers, med)}
+  {events_html(c)}
   <p class="sp-legend">Where each number comes from: {chip('r')} the company’s annual report or an official register · {chip('p')} Deutsche Börse delayed share price · {chip('c')} calculated by FINILA from those two. <a href="/stock/methodology">How FINILA calculates</a>.</p>
 </main>
 {FOOTER}<script src="/js/url-state.js" defer></script>
