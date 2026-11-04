@@ -313,16 +313,16 @@ def whatif_html(c, med):
     need = ('revenueEur', 'claimsEur', 'mcap', 'price', 'shares', 'ebitdaMargin')
     if c.get('financial') or not all(is_num(c.get(k)) for k in need) or c['revenueEur'] <= 0 or c['ebitdaMargin'] <= 0 or c['shares'] <= 0:
         return ''
-    g = c.get('revenueCagr') if is_num(c.get('revenueCagr')) else c.get('revenueGrowth')
-    g_src = f'revenue growth a year over the last {c["cagrYears"]} years' if is_num(c.get('revenueCagr')) else 'revenue growth last year'
-    if not is_num(g):
-        g, g_src = 5, 'an example'
-    g = round(min(max(g, -10), 30), 1)
+    g_past = c.get('revenueCagr') if is_num(c.get('revenueCagr')) else c.get('revenueGrowth')
+    g_past = round(min(max(g_past, -10), 30), 1) if is_num(g_past) else 0
+    # The sliders start at the middle scenario: the sector's typical growth, not the company's own best years.
+    g = round(min(max(med['revenueGrowth'], -10), 30), 1) if is_num(med.get('revenueGrowth')) else g_past
+    g_src = 'median growth of the sector last year' if is_num(med.get('revenueGrowth')) else 'the company’s past growth'
     x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
     x_src = f'median of {esc(med.get("label") or (c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
     if not is_num(x):
         return ''
-    scen = scenarios_html(c, med, g, x)
+    scen = scenarios_html(c, med, g_past, x)
     data = {'rev': round(c['revenueEur'], 1), 'nd': round(c['claimsEur'], 1), 'shares': c['shares'], 'price': c['price'],
             'g': g, 'm': round(c['ebitdaMargin'], 1), 'x': round(x, 1)}
     return f'''<section class="sp-card sp-whatif" id="whatif" data-whatif='{json.dumps(data)}'>
@@ -581,22 +581,6 @@ def add_valuation(c):
                     c[key] = m
 
 
-def peer_group(c, good_industries):
-    """Peers and medians come from the narrower industry (Wikidata, e.g. pharmaceutical industry) when it
-    has at least 8 priced companies, else from the sector (Healthcare mixes drug makers and hospitals)."""
-    ind = (c.get('industry') or '').split(', ')[0]
-    return ('i', ind) if ind in good_industries else ('s', c.get('sector')) if c.get('sector') else None
-
-
-def good_industries(rows):
-    n = defaultdict(int)
-    for c in rows:
-        ind = (c.get('industry') or '').split(', ')[0]
-        if ind and is_num(c.get('mcap')):
-            n[ind] += 1
-    return {k for k, v in n.items() if v >= 8}
-
-
 def sector_medians(rows, key=lambda c: ('s', c.get('sector')) if c.get('sector') else None):
     """Median of each valuation figure per peer group, only where at least 5 companies have it."""
     out, by = {}, defaultdict(list)
@@ -610,7 +594,7 @@ def sector_medians(rows, key=lambda c: ('s', c.get('sector')) if c.get('sector')
             v = sorted(c[k] for c in cs if is_num(c.get(k)))
             if len(v) >= 5:
                 m[k] = v[len(v) // 2] if len(v) % 2 else (v[len(v) // 2 - 1] + v[len(v) // 2]) / 2
-                if k == 'evEbitda' and len(v) >= 12:   # spread of the sector, for the scenarios
+                if k == 'evEbitda' and len(v) >= 8:   # spread of the sector, for the scenarios
                     m['evEbitdaP25'], m['evEbitdaP75'] = v[len(v) // 4], v[(3 * len(v)) // 4]
         out[sec] = m
     return out
@@ -1204,8 +1188,9 @@ def main():
     add_history_figures(rows)
     for c in rows:
         add_valuation(c)
-    good = good_industries(rows)
-    group = lambda c: peer_group(c, good)
+    # Peers and medians by sector. Wikidata's industry labels are too uneven to group by (Roche has none,
+    # Alcon is "pharmaceutical industry"), so a finer split waits for a better classification.
+    group = lambda c: ('s', c['sector']) if c.get('sector') else None
     medians = sector_medians(rows, group)
     slugs = assign_slugs(rows, published_slugs())
     out = OUT / 'stock'
