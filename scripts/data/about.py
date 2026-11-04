@@ -16,7 +16,7 @@ import fundamentals as fd   # noqa: E402
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/about.json"
 OUT = ROOT / "data/about.json"
-CACHE_VERSION = 3
+CACHE_VERSION = 4
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
@@ -45,7 +45,9 @@ def plain(v):
 
 def english(t):
     low = f" {t.lower()} "
-    return sum(low.count(f" {w} ") for w in ("the", "and", "of", "is", "in", "its")) >= 3
+    en = sum(low.count(f" {w} ") for w in ("the", "and", "of", "is", "in", "its", "our", "with"))
+    other = sum(low.count(f" {w} ") for w in ("di", "della", "il", "le", "des", "der", "und", "och", "og", "en", "la", "el", "y", "et", "al", "sono", "che", "nei", "come", "per"))
+    return en >= 3 and en > 2 * other
 
 
 def summary(t):
@@ -59,6 +61,8 @@ def summary(t):
         if len(out) + len(s) > MAX_CHARS:
             break
         out += (" " if out else "") + s
+    if out[:1].islower():
+        out = "…" + out   # the note starts mid-sentence after its heading
     return out if len(out) >= 40 else ""
 
 
@@ -86,9 +90,6 @@ def label(member):
     return t[:1].upper() + t[1:]
 
 
-DEBUG = {}
-
-
 def revenue_split(facts):
     """Revenue by segment, product line and region for the newest full year, as % of group revenue. A split is
     kept only when its parts add up to the group total (95-105%): otherwise parts are missing or overlap."""
@@ -105,10 +106,9 @@ def revenue_split(facts):
         if not 330 <= (stop - start).days <= 400:
             continue
         extra = set(d) - {"concept", "entity", "period", "unit", "language"}
-        DEBUG.setdefault(tuple(sorted(extra)), d.get(next(iter(extra)), "") if extra else "")
-        if d.get("ifrs-full:ConsolidationItemsAxis", "ifrs-full:OperatingSegmentsMember") in (
+        if d.get("ifrs-full:SegmentConsolidationItemsAxis", "ifrs-full:OperatingSegmentsMember") in (
                 "ifrs-full:OperatingSegmentsMember", "ifrs-full:ReportableSegmentsMember"):
-            extra.discard("ifrs-full:ConsolidationItemsAxis")   # the segment note's own column, not an adjustment
+            extra.discard("ifrs-full:SegmentConsolidationItemsAxis")   # the segment note's own column, not an adjustment
         else:
             continue
         if not extra:
@@ -198,7 +198,6 @@ def main():
     out = {l: {k: v.get(k) for k in ("text", "split", "period", "source")} for l, v in cache.items()
            if l != "_v" and (v.get("text") or v.get("split"))}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
-    print("revenue dimension combinations seen:", sorted(DEBUG.items(), key=lambda x: len(x[0]))[:60], flush=True)
     print(f"descriptions for {sum(1 for v in out.values() if v['text'])}, revenue splits for "
           f"{sum(1 for v in out.values() if v.get('split'))} of {len(leis)} companies; read {done} this run", flush=True)
     names = {r["lei"]: r["name"] for r in rows}
