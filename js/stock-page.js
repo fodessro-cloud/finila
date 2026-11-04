@@ -126,20 +126,26 @@
 
 // "What if the company grows?": the visitor's assumptions -> revenue, EBITDA, company value and price
 // per share after N years. Amounts in EUR millions, shares in millions. Choices go into the address
-// (?growth=6&margin=40&multiple=12&years=5) so a scenario can be shared.
+// (?growth=6&margin=40&multiple=12&years=5) only through the copy button, so a scenario can be shared on purpose.
 (function () {
   const box = document.getElementById('whatif');
   if (!box) return;
   const d = JSON.parse(box.dataset.whatif);
   const inp = k => box.querySelector(`[data-i="${k}"]`), out = k => box.querySelector(`[data-o="${k}"]`);
   const keys = { g: 'growth', m: 'margin', x: 'multiple', y: 'years' };
+  const start = { g: d.g, m: d.m, x: d.x, y: d.y || 3 };
+  // The address stays clean while someone plays with the sliders; a calculation is shared only on purpose,
+  // with the copy button. A shared link opens with its values and says they are not FINILA's.
+  let shared = false;
   Object.entries(keys).forEach(([k, q]) => {
     const v = typeof urlParam === 'function' ? parseFloat(urlParam(q)) : NaN;
-    if (!isNaN(v)) inp(k).value = v;
+    if (!isNaN(v)) { inp(k).value = v; shared = true; }
   });
+  const note = box.querySelector('.sp-wi-shared');
+  if (shared && note) note.hidden = false;
   const fmt = (v, dg = 1) => v.toLocaleString('en-GB', { minimumFractionDigits: dg, maximumFractionDigits: dg });
   const money = v => Math.abs(v) >= 1000 ? '€' + fmt(v / 1000, 2) + 'B' : '€' + fmt(v, 0) + 'M';
-  function calc(write) {
+  function calc() {
     const g = +inp('g').value, m = +inp('m').value, x = +inp('x').value, y = +inp('y').value;
     out('g').textContent = (g >= 0 ? '+' : '') + fmt(g) + '%';
     out('m').textContent = fmt(m) + '%';
@@ -159,11 +165,22 @@
       out('ret').textContent = `${tot >= 0 ? '+' : ''}${fmt(tot, 0)}% vs today’s €${fmt(d.price, 2)} · ${r >= 0 ? '+' : ''}${fmt(r)}% a year`;
       out('ret').className = r >= 0 ? 'pos' : 'neg';
     }
-    if (write && typeof urlSet === 'function') {
-      const start = { g: d.g, m: d.m, x: d.x, y: d.y || 3 };
-      urlSet(Object.fromEntries(Object.entries(keys).map(([k, q]) => [q, +inp(k).value === start[k] ? null : inp(k).value])));
-    }
   }
-  box.querySelectorAll('input[type=range]').forEach(i => i.addEventListener('input', () => calc(true)));
-  calc(false);
+  box.querySelectorAll('input[type=range]').forEach(i => i.addEventListener('input', () => calc()));
+  const reset = box.querySelector('[data-a="reset"]');
+  if (reset) reset.addEventListener('click', () => {
+    Object.keys(keys).forEach(k => { inp(k).value = start[k]; });
+    note.hidden = true;
+    if (typeof urlSet === 'function') urlSet(Object.fromEntries(Object.values(keys).map(q => [q, null])));
+    calc();
+  });
+  const copy = box.querySelector('[data-a="copy"]');
+  if (copy) copy.addEventListener('click', async () => {
+    const u = new URL(location.href);
+    Object.entries(keys).forEach(([k, q]) => { if (+inp(k).value === start[k]) u.searchParams.delete(q); else u.searchParams.set(q, inp(k).value); });
+    u.hash = 'whatif';
+    try { await navigator.clipboard.writeText(u.href); out('copied').textContent = 'Link copied.'; }
+    catch (e) { out('copied').textContent = u.href; }
+  });
+  calc();
 })();
