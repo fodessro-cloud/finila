@@ -117,3 +117,12 @@ html, body { height: auto; }
 .sp-hist-table sup { color: var(--accent2); font-weight: 700; margin-left: 2px; }
 .sp-summary { border-left: 4px solid var(--accent2); }
 .sp-summary > p:first-of-type { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }
+.sp-minis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 0 0 14px; }
+.sp-mini { margin: 0; background: var(--bg3); border-radius: 8px; padding: 8px 10px; }
+.sp-mini figcaption { display: flex; justify-content: space-between; font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+.sp-mini figcaption b { color: var(--strong); font-size: 13px; }
+.sp-mini svg { display: block; width: 100%; height: 64px; }
+.sp-mini rect { fill: #5B78B0; } .sp-mini rect.sp-bar-last { fill: #2E4A7D; } .sp-mini rect.sp-bar-neg { fill: var(--neg); }
+.sp-mini-axis { display: flex; justify-content: space-between; font-size: 10px; color: var(--text2); margin-top: 3px; }
+.sp-hist-table td small { display: block; font-size: 10px; font-weight: 600; }
+.sp-hist-table td small.pos { color: var(--pos); } .sp-hist-table td small.neg { color: var(--neg); }

@@ -250,53 +250,89 @@ def summary_html(c, med, intro):
 
 
 def history_html(c):
-    """Five years of results: one column per financial year, each from its own (or the restating) report."""
+    """Five years of results: one column per financial year, each from its own (or the restating) report,
+    with the change on the year before and small bar charts of the main lines."""
     years = c.get('years')
     if not years or len(years) < 2:
         return ''
     ys = sorted(years)
     cur = esc(c.get('currency') or '')
-    pc_ = lambda a, b: a / b * 100 if is_num(a) and is_num(b) and b > 0 else None
+    big = max((abs(years[y].get('revenue') or years[y].get('assets') or 0) for y in ys), default=0) >= 5000
+    unit = f'billions of {cur}' if big else f'millions of {cur}'
+    amt = lambda v: '—' if not is_num(v) else num(v / 1000, 2) if big else num(v, 1 if abs(v) < 100 else 0)
+    ratio = lambda a, b: a / b * 100 if is_num(a) and is_num(b) and b > 0 else None
+    wc = lambda y: y['inventories'] + y['receivables'] - y['payables'] if all(is_num(y.get(k)) for k in ('inventories', 'receivables', 'payables')) else None
+    # (label, value of a year, shown as, change on the year before: 'pct' for amounts, 'pp' for margins, None)
     lines = [
-        ('Revenue', lambda y: bn(y.get('revenue'))),
-        ('EBITDA', lambda y: bn(y.get('ebitda'))),
-        ('EBITDA margin', lambda y: pc(pc_(y.get('ebitda'), y.get('revenue')))),
-        ('Operating profit', lambda y: bn(y.get('operatingProfit'))),
-        ('Net income', lambda y: bn(y.get('netIncome'))),
-        ('Net margin', lambda y: pc(pc_(y.get('netIncome'), y.get('revenue')))),
-        ('EPS', lambda y: num(y.get('eps'), 2)),
-        ('Operating cash flow', lambda y: bn(y.get('operatingCashFlow'))),
-        ('Capex', lambda y: bn(y.get('capex'))),
-        ('Free cash flow', lambda y: bn(y.get('fcf'))),
-        ('Dividends paid', lambda y: bn(y.get('dividendsPaid'))),
-        ('Net debt', lambda y: bn(y.get('netDebt'))),
-        ('Equity', lambda y: bn(y.get('equity'))),
-        ('Working capital', lambda y: bn(y['inventories'] + y['receivables'] - y['payables'])
-         if all(is_num(y.get(k)) for k in ('inventories', 'receivables', 'payables')) else '—'),
+        ('Revenue', lambda y: y.get('revenue'), amt, 'pct'),
+        ('EBITDA', lambda y: y.get('ebitda'), amt, 'pct'),
+        ('EBITDA margin', lambda y: ratio(y.get('ebitda'), y.get('revenue')), pc, 'pp'),
+        ('Operating profit', lambda y: y.get('operatingProfit'), amt, 'pct'),
+        ('Net income', lambda y: y.get('netIncome'), amt, 'pct'),
+        ('Net margin', lambda y: ratio(y.get('netIncome'), y.get('revenue')), pc, 'pp'),
+        ('EPS', lambda y: y.get('eps'), lambda v: num(v, 2), 'pct'),
+        ('Operating cash flow', lambda y: y.get('operatingCashFlow'), amt, 'pct'),
+        ('Capex', lambda y: y.get('capex'), amt, 'pctn'),
+        ('Free cash flow', lambda y: y.get('fcf'), amt, 'pct'),
+        ('Dividends paid', lambda y: y.get('dividendsPaid'), amt, 'pct'),
+        ('Net debt', lambda y: y.get('netDebt'), amt, None),
+        ('Equity', lambda y: y.get('equity'), amt, 'pct'),
+        ('Working capital', wc, amt, None),
     ]
-    if c.get('financial'):
-        lines = [l for l in lines if l[0] in ('Net income', 'EPS', 'Dividends paid', 'Equity')]   # bank 'revenue' is not comparable
+    if c.get('financial'):   # a bank's 'revenue' is not comparable from year to year
+        lines = [l for l in lines if l[0] in ('Net income', 'EPS', 'Dividends paid', 'Equity')]
+
+    def change(a, b, kind):
+        if kind in ('pct', 'pctn') and is_num(a) and is_num(b) and a > 0 and b > 0:
+            d = (b / a - 1) * 100
+            if abs(d) < 1000:   # capex up or down is neither good nor bad: grey
+                return f'<small class="{"" if kind == "pctn" else "pos" if d >= 0 else "neg"}">{sign(d)}%</small>'
+        if kind == 'pp' and is_num(a) and is_num(b):
+            d = b - a
+            return f'<small class="{"pos" if d >= 0 else "neg"}">{sign(d)} pp</small>'
+        return ''
     body = ''
-    for label, fn in lines:
-        cells = [fn(years[y]) for y in ys]
-        if sum(v != '—' for v in cells) >= 2:
-            body += f'<tr><td>{label}</td>' + ''.join(f'<td>{v}</td>' for v in cells) + '</tr>'
+    for label, get, fmt, kind in lines:
+        vals = [get(years[y]) for y in ys]
+        if sum(is_num(v) for v in vals) < 2:
+            continue
+        cells = ''.join(f'<td>{fmt(v) if is_num(v) else "—"}{change(vals[i - 1], v, kind) if i else ""}</td>' for i, v in enumerate(vals))
+        body += f'<tr><td>{label}</td>{cells}</tr>'
     if not body:
         return ''
     head_ = ''.join(
         f'<th><a href="{esc(years[y]["source"])}" target="_blank" rel="noopener" title="Open the annual report">FY {y}</a>'
         f'{RESTATED if years[y].get("restated") else ""}</th>'
         if years[y].get('source') else f'<th>FY {y}</th>' for y in ys)
-    # Revenue bars, the newest year darkest.
-    revs = [years[y].get('revenue') for y in ys]
-    bars = ''
-    if sum(is_num(v) and v > 0 for v in revs) >= 3:
-        top = max(v for v in revs if is_num(v))
-        bars = '<div class="sp-bars" aria-hidden="true">' + ''.join(
-            f'<div><i style="height:{max(2, v / top * 100):.0f}%"></i><span>FY {y}</span></div>' if is_num(v) and v > 0
-            else f'<div><i class="sp-bar-none"></i><span>FY {y}</span></div>' for y, v in zip(ys, revs)) + '</div>'
+
+    def bars(label, key):
+        vals = [years[y].get(key) for y in ys]
+        if sum(is_num(v) for v in vals) < 3:
+            return ''
+        top = max(abs(v) for v in vals if is_num(v)) or 1
+        neg = any(is_num(v) and v < 0 for v in vals)
+        w, h, gap = 200, 70, 6
+        bw = (w - gap * (len(ys) - 1)) / len(ys)
+        base = h / 2 if neg else h
+        scale = (h / 2 if neg else h) / top
+        rects = ''
+        for i, v in enumerate(vals):
+            x = i * (bw + gap)
+            if not is_num(v):
+                continue
+            bh = max(1, abs(v) * scale)
+            y0 = base - bh if v >= 0 else base
+            cls = 'sp-bar-neg' if v < 0 else 'sp-bar-last' if i == len(vals) - 1 else ''
+            rects += f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="2" class="{cls}"><title>FY {ys[i]}: {amt(v)}</title></rect>'
+        last = next((v for v in reversed(vals) if is_num(v)), None)
+        return (f'<figure class="sp-mini"><figcaption><span>{label}</span><b>{amt(last)}</b></figcaption>'
+                f'<svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="{label}, FY {ys[0]} to {ys[-1]}">{rects}</svg>'
+                f'<div class="sp-mini-axis"><span>FY {ys[0]}</span><span>FY {ys[-1]}</span></div></figure>')
+    keys = [('Net income', 'netIncome'), ('Equity', 'equity'), ('Dividends paid', 'dividendsPaid')] if c.get('financial') else \
+        [('Revenue', 'revenue'), ('EBITDA', 'ebitda'), ('Net income', 'netIncome'), ('Free cash flow', 'fcf')]
+    minis = ''.join(bars(l, k) for l, k in keys)
     tiles = []
-    if is_num(c.get('revenueCagr')):
+    if is_num(c.get('revenueCagr')) and not c.get('financial'):
         tiles.append(('Revenue growth a year', f'{sign(c["revenueCagr"])}%', f'FY {ys[0]}–{ys[-1]} (CAGR)'))
     if is_num(c.get('epsCagr')):
         tiles.append(('EPS growth a year', f'{sign(c["epsCagr"])}%', f'FY {ys[0]}–{ys[-1]} (CAGR)'))
@@ -307,12 +343,11 @@ def history_html(c):
     tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
     restated = any(years[y].get('restated') for y in ys)
     return f'''<section class="sp-card" id="history"><h2>{len(ys)} years of results</h2>
-      <p class="sp-sub">Each year from the company’s ESEF annual report; click a year to open it {chip("r", "Reports")}. Millions of {cur}.</p>
+      <p class="sp-sub">Each year from the company’s ESEF annual report; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
       {f'<div class="sp-tiles">{tiles_html}</div>' if tiles_html else ''}
-      {bars}
+      {f'<div class="sp-minis">{minis}</div>' if minis else ''}
       <div class="sp-scroll"><table class="sp-table sp-hist-table"><tr><th></th>{head_}</tr>{body}</table></div>
-      <p class="sp-sub sp-after">{"R = restated: the next annual report changed this year’s figures (e.g. a business sold), the newer figures are shown. " if restated else ""}Working capital = inventories + trade receivables − trade payables.</p></section>'''
-
+      <p class="sp-sub sp-after">{"R = restated: the next annual report changed this year’s figures (e.g. a business sold), the newer figures are shown. " if restated else ""}pp = percentage points. Working capital = inventories + trade receivables − trade payables.</p></section>'''
 
 def chart(c):
     """Price chart. Daily closes are embedded; js/stock-page.js adds the minute prices of the last
