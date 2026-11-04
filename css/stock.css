@@ -115,3 +115,5 @@ html, body { height: auto; }
 .sp-bars + .sp-scroll { margin-top: 22px; }
 .sp-hist-table th a { color: inherit; }
 .sp-hist-table sup { color: var(--accent2); font-weight: 700; margin-left: 2px; }
+.sp-summary { border-left: 4px solid var(--accent2); }
+.sp-summary > p:first-of-type { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }

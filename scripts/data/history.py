@@ -34,14 +34,30 @@ fd.INSTANT.update({"inventories", "receivables", "payables", "leases"})
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/history.json"
 OUT = ROOT / "data/history.json"
-CACHE_VERSION = 1          # bump when the figures read change, so every report is read again
+CACHE_VERSION = 2          # bump when the figures read change, so every report is read again
 YEARS = 6                  # newest report and the five before it
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
-WORKERS = 6
+WORKERS = 3
 START = time.time()
 FIELDS = ["revenue", "ebitda", "operatingProfit", "netIncome", "operatingCashFlow", "capex", "fcf", "dividendsPaid",
           "equity", "assets", "cash", "debt", "netDebt", "eps", "sharesTagged", "da", "inventories", "receivables",
           "payables", "leases", "gross", "curAssets", "curLiab", "interest", "pbt", "tax"]
+
+
+_get = fd.get
+
+
+def polite_get(url, as_json=True):
+    """filings.xbrl.org answers 429 when read too fast: wait and try again, up to ~5 minutes."""
+    for wait in (0, 20, 40, 60, 90, 120):
+        time.sleep(wait)
+        res = _get(url, as_json)
+        if res is not None:
+            return res
+    return None
+
+
+fd.get = polite_get
 
 
 def log(msg):
@@ -176,6 +192,11 @@ def main():
                           for k in ("revenue", "netIncome", "operatingProfit"))
             years[y] = {**old, **r["prev"], "end": old["end"], "source": r.get("source") if changed else old["source"],
                         **({"restated": True, "originalSource": old["source"]} if changed else {})}
+        # A year known only from the next report's comparatives is on the old basis when that next
+        # year was itself restated later (GSK before the Haleon demerger): it would not compare.
+        for y in [y for y, v in years.items() if v.get("fromNext")]:
+            if years.get(str(int(y) + 1), {}).get("restated"):
+                del years[y]
         years, bad = clean(years)
         dropped += len(bad)
         keep = sorted(years)[-YEARS:]

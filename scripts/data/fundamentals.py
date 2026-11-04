@@ -160,8 +160,20 @@ def extract(xjson, period_end):
     if financial and "cur_assets" not in cur:
         cur["financial"] = True
     prev = {k: v[1] for (k, w), v in found.items() if w == "prev"}
-    units = {v[2] for (k, w), v in found.items() if k not in ("eps", "shares", "shares_out")}
-    currency = next((u.split(":")[1] for u in units if u.startswith("iso4217:")), None)
+    # The report currency is the unit of revenue / profit / assets. A set of all units picked one at
+    # random, so a Danish report with one EUR fact came out as EUR (Schouw & Co., Nov 2026).
+    currency = None
+    for key in ("revenue", "net", "assets", "equity", "cfo", "op_profit"):
+        unit = found.get((key, "cur"), (None, None, ""))[2]
+        if unit.startswith("iso4217:"):
+            currency = unit.split(":")[1]
+            break
+    if currency is None:
+        counts = {}
+        for (k, w), v in found.items():
+            if k not in ("eps", "shares", "shares_out") and v[2].startswith("iso4217:"):
+                counts[v[2]] = counts.get(v[2], 0) + 1
+        currency = max(counts, key=counts.get).split(":")[1] if counts else None
     return cur, prev, currency, end - timedelta(days=1), seen
 
 

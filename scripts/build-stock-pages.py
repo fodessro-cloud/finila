@@ -210,6 +210,45 @@ def add_history_figures(rows):
 RESTATED = '<sup title="Restated by the next annual report">R</sup>'
 
 
+
+def summary_html(c, med, intro):
+    """In short: what a buyer would want to know first, in plain sentences built from the figures."""
+    out = [intro]
+    sec = esc((c.get('sector') or '').lower())
+    yrs = c.get('cagrYears')
+    if is_num(c.get('revenueCagr')) and yrs and not c.get('financial'):
+        r = c['revenueCagr']
+        out.append(f'Revenue grew {num(r)}% a year over the last {yrs} years.' if r >= 0.5 else
+                   f'Revenue shrank {num(-r)}% a year over the last {yrs} years.' if r <= -0.5 else
+                   f'Revenue was flat over the last {yrs} years.')
+    ve, vm = c.get('evEbitda'), med.get('evEbitda')
+    pe, pm = c.get('pe'), med.get('pe')
+    if is_num(ve) and is_num(vm):
+        word = 'below' if ve <= vm * 0.85 else 'above' if ve >= vm * 1.15 else 'close to'
+        out.append(f'At today’s price the whole company is valued at {num(ve)}× EBITDA, {word} the {sec} median of {num(vm)}×.')
+    elif is_num(pe) and is_num(pm):
+        word = 'below' if pe <= pm * 0.85 else 'above' if pe >= pm * 1.15 else 'close to'
+        out.append(f'The share price is {num(pe)}× last year’s profit per share (P/E), {word} the {sec} median of {num(pm)}.')
+    em, mm = c.get('ebitdaMargin'), med.get('ebitdaMargin')
+    nd = c.get('netDebtToEbitda')
+    bits = []
+    if is_num(em) and is_num(mm) and not c.get('financial'):
+        bits.append(f'margins are {"above" if em > mm * 1.1 else "below" if em < mm * 0.9 else "close to"} the sector')
+    if is_num(nd) and not c.get('financial'):
+        bits.append('it has more cash than debt' if nd < 0 else f'debt is {"low" if nd < 1.5 else "moderate" if nd < 3 else "high"} ({num(nd, 1)}× EBITDA)')
+    if bits:
+        s = ', '.join(bits)
+        out.append(s[0].upper() + s[1:] + '.')
+    risks = [w for ok, w, _ in findings(c, med) if ok is False]
+    if risks:
+        out.append('Also in the figures: ' + risks[0][0].lower() + risks[0][1:])
+    if len(out) < 2:
+        return f'<p class="sp-intro">{intro}</p>'
+    return f'''<section class="sp-card sp-summary" id="summary"><h2>In short</h2>
+      <p>{" ".join(out)}</p>
+      <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
+
+
 def history_html(c):
     """Five years of results: one column per financial year, each from its own (or the restating) report."""
     years = c.get('years')
@@ -236,7 +275,7 @@ def history_html(c):
          if all(is_num(y.get(k)) for k in ('inventories', 'receivables', 'payables')) else '—'),
     ]
     if c.get('financial'):
-        lines = [l for l in lines if l[0] in ('Revenue', 'Net income', 'Net margin', 'EPS', 'Dividends paid', 'Equity')]
+        lines = [l for l in lines if l[0] in ('Net income', 'EPS', 'Dividends paid', 'Equity')]   # bank 'revenue' is not comparable
     body = ''
     for label, fn in lines:
         cells = [fn(years[y]) for y in ys]
@@ -449,23 +488,23 @@ def stats_html(c):
     yrs = c.get('cagrYears')
     nd = c.get('netDebtToEbitda')
     groups = [
-        ('Is it cheap?', [
+        ('Valuation', [
             ('Market value', f'€{bn(c["mcap"])}' if is_num(c.get('mcap')) else '—'),
             ('Enterprise value', f'€{bn(c["ev"])}' if is_num(c.get('ev')) else '—'),
             ('P/E', num(c.get('pe'), 1)), ('P/S', num(c.get('ps'), 2)), ('P/B', num(c.get('pb'), 2)),
             ('P/FCF', num(c.get('pfcf'), 1)), ('EV/EBITDA', mult(c.get('evEbitda'))), ('EV/EBIT', mult(c.get('evEbit'))),
             (f'PEG ({yrs}y past growth)' if yrs else 'PEG', num(c.get('pegPast'), 2)),
             ('FCF yield', pc(c.get('fcfYield')))]),
-        ('Does it earn well?', [
+        ('Profitability', [
             ('Gross margin', pc(c.get('grossMargin'))), ('EBITDA margin', pc(c.get('ebitdaMargin'))),
             ('Operating margin', pc(c.get('operatingMargin'))), ('Net margin', pc(c.get('netMargin'))),
             ('FCF margin', pc(c.get('fcfMargin'))), ('ROE', pc(c.get('roe'))), ('ROA', pc(c.get('roa'))),
             ('ROIC', pc(c.get('roic')))]),
-        ('Is it growing?', [
+        ('Growth', [
             ('Revenue, 1 year', pc(c.get('revenueGrowth'))), ('Net income, 1 year', pc(c.get('netIncomeGrowth'))),
             (f'Revenue, {yrs}y a year' if yrs else 'Revenue CAGR', pc(c.get('revenueCagr'))),
             (f'EPS, {yrs}y a year' if yrs else 'EPS CAGR', pc(c.get('epsCagr')))]),
-        ('Is it healthy?', [
+        ('Financial health', [
             ('Net debt / EBITDA', ('net cash' if nd < 0 else mult(nd, 2)) if is_num(nd) and not c.get('financial') else '—'),
             ('Debt / equity', num(c.get('debtEquity'), 2)), ('Current ratio', num(c.get('currentRatio'), 2)),
             ('Interest cover', mult(c.get('interestCover'))), ('Cash', bn(c.get('cash'), cur)),
@@ -545,21 +584,21 @@ def findings(c, med):
     em, mm = g('ebitdaMargin'), med.get('ebitdaMargin')
     if em is not None and mm is not None and not fin and abs(em - mm) >= 5:
         f.append((em > mm, f'EBITDA margin {num(em)}% vs a median of {num(mm)}% for {sec} companies.',
-                  'Above the sector: more of every euro of sales stays as operating profit before depreciation.' if em > mm
-                  else 'Below the sector: the company keeps less of its sales than its typical competitor.'))
+                  'More of every euro of sales stays as operating profit before depreciation than at the typical company of the sector.' if em > mm
+                  else 'Less of every euro of sales stays as operating profit before depreciation than at the typical company of the sector.'))
     ve, vm = g('evEbitda'), med.get('evEbitda')
     if ve is not None and vm is not None:
         if ve <= vm * 0.75:
-            f.append((True, f'Priced at {num(ve)}× EBITDA vs {num(vm)}× for the sector median.',
-                      'Cheaper than its sector: the market expects slower growth or more risk, or it is overlooked.'))
+            f.append((None, f'Priced at {num(ve)}× EBITDA vs {num(vm)}× for the sector median.',
+                      'A multiple below the sector median usually reflects lower expected growth or higher risk.'))
         elif ve >= vm * 1.33:
-            f.append((False, f'Priced at {num(ve)}× EBITDA vs {num(vm)}× for the sector median.',
-                      'More expensive than its sector: the price already counts on above-average growth.'))
+            f.append((None, f'Priced at {num(ve)}× EBITDA vs {num(vm)}× for the sector median.',
+                      'A multiple above the sector median usually reflects higher expected growth.'))
     elif fin and g('pb') is not None and med.get('pb'):
         pb, pm = c['pb'], med['pb']
         if pb <= pm * 0.75 or pb >= pm * 1.33:
-            f.append((pb < pm, f'Priced at {num(pb, 2)}× book value vs {num(pm, 2)}× for the sector median.',
-                      'Cheaper than its sector on book value.' if pb < pm else 'More expensive than its sector on book value.'))
+            f.append((None, f'Priced at {num(pb, 2)}× book value vs {num(pm, 2)}× for the sector median.',
+                      'Below the sector median on book value.' if pb < pm else 'Above the sector median on book value.'))
     rg, ng = g('revenueGrowth'), g('netIncomeGrowth')
     # Growth from a tiny or negative base (+900%) says little, so only moderate changes are explained.
     if rg is not None and ng is not None and (g('netIncome') or 0) > 0 and -80 <= ng <= 300 and -60 <= rg <= 200:
@@ -568,9 +607,9 @@ def findings(c, med):
         elif ng > rg + 5 and rg > -5:
             f.append((True, f'Net income {sign(ng)}% on revenue {sign(rg)}% vs the year before.', 'Profit grew faster than sales: margins widened.'))
         elif rg >= 10:
-            f.append((True, f'Revenue up {num(rg)}% on the year before.', 'Fast growth for a listed company.'))
+            f.append((True, f'Revenue up {num(rg)}% on the year before.', 'Growth well above the typical listed company.'))
         elif rg <= -5:
-            f.append((False, f'Revenue down {num(-rg)}% on the year before.', 'The business shrank: check whether it is a one-off.'))
+            f.append((False, f'Revenue down {num(-rg)}% on the year before.', 'Lower sales than the year before.'))
     if ng is not None and ng <= -50 and (g('netIncome') or 0) > 0 and (rg is None or rg > -30):
         f.append((None, f'Net income down {num(-ng, 0)}% on the year before{"" if rg is None else f", revenue {sign(rg)}%"}.',
                   'A profit drop this large with stable sales usually comes from a one-off item (write-off, sale, '
@@ -589,21 +628,21 @@ def findings(c, med):
     nd = g('netDebtToEbitda')
     if nd is not None and not fin:
         if nd < 0:
-            f.append((True, 'More cash than debt (net cash).', 'Strong balance sheet: room for dividends, buybacks or acquisitions.'))
+            f.append((True, 'More cash than debt (net cash).', 'Net cash leaves room for dividends, buybacks or acquisitions.'))
         elif nd >= 3.5:
-            f.append((False, f'Net debt {num(nd, 1)}× EBITDA.', 'High debt: a weaker year or higher interest rates would hurt.'))
+            f.append((False, f'Net debt {num(nd, 1)}× EBITDA.', 'At this level a weaker year or higher interest rates weigh more on profit.'))
     roe = g('roe')
     if roe is not None and (g('equity') or 0) > 0:
         if 20 <= roe <= 150:
-            f.append((True, f'Return on equity {num(roe)}%.', 'Every 100 of shareholders’ money earned more than 20 in a year.'))
+            f.append((True, f'Return on equity {num(roe)}%.', 'Every 100 of shareholders’ equity earned more than 20 in the year.'))
         elif roe < 0:
             f.append((False, f'Return on equity {num(roe)}%.', 'Loss-making in the last financial year.'))
     sp = g('shortPct')
     if sp is not None and sp >= 2:
-        f.append((False, f'Funds hold net short positions of {num(sp, 2)}% of the shares.', 'Professional investors bet on a falling price.'))
+        f.append((False, f'Funds hold net short positions of {num(sp, 2)}% of the shares.', 'A net short position is a bet on a falling price, as reported to the regulator.'))
     ins = g('insNet')
     if ins is not None and ins >= 100000:
-        f.append((True, f'Managers bought shares worth {eur(ins)} net in the last 30 days.', 'People who know the company best are buying.'))
+        f.append((True, f'Managers bought shares worth {eur(ins)} net in the last 30 days.', 'Managers’ own purchases, as reported to the regulator.'))
     return f
 
 
@@ -616,9 +655,9 @@ def findings_html(c, med):
     good, bad = sum(1 for x in f if x[0] is True), sum(1 for x in f if x[0] is False)
     fy = (c.get('periodEnd') or '')[:4]
     return f'''<section class="sp-card" id="findings"><h2>What the numbers say</h2>
-      <p class="sp-sub">Strengths and weaknesses found automatically in the {esc(fy)} annual figures and today’s price {chip("c")}</p>
+      <p class="sp-sub">Found automatically in the {esc(fy)} annual figures and today’s price {chip("c")}</p>
       <ul class="sp-find">{items}</ul>
-      <p class="sp-sub sp-after">{good} strength{"" if good == 1 else "s"}, {bad} weakness{"" if bad == 1 else "es"}. Not investment advice: read the report itself before deciding.</p></section>'''
+      <p class="sp-sub sp-after">▲ favourable, ▼ unfavourable, ● neutral compared with the sector median or the year before. Facts from the figures, not investment advice.</p></section>'''
 
 
 def peers_html(c, peers, med):
@@ -875,9 +914,6 @@ def page(c, peers, updated, med=None):
         <div class="modal-section"><h2 class="sp-h">Balance sheet</h2><table class="kv-table">
           {row('Total assets', bn(c.get('assets'), cur))}{row('Equity', bn(c.get('equity'), cur))}{row('Cash', bn(c.get('cash'), cur))}{row('Borrowings', bn(c.get('debt'), cur))}{row('Net debt', bn(c.get('netDebt'), cur))}
         </table></div>
-        <div class="modal-section"><h2 class="sp-h">Ratios</h2><table class="kv-table">
-          {row('ROE', pct(c.get('roe')))}{row('EBITDA margin', pct(c.get('ebitdaMargin')))}{row('Operating margin', pct(c.get('operatingMargin')))}{row('Net margin', pct(c.get('netMargin')))}{row('FCF margin', pct(c.get('fcfMargin')))}{row('Net debt / EBITDA', ndv)}{row('Revenue growth', pct(c.get('revenueGrowth')))}{row('Net income growth', pct(c.get('netIncomeGrowth')))}
-        </table></div>
       </div>'''
     if listed_only:   # no report figures yet: visitors can open it, search engines wait for the figures
         extra = '  <meta name="robots" content="noindex, follow">\n' + extra
@@ -893,8 +929,8 @@ def page(c, peers, updated, med=None):
     </div>
     {price}
     {chart(c)}
+    {summary_html(c, med, intro)}
     {stats_html(c) or f'<div class="sp-keys">{keyhtml}</div>'}
-    <p class="sp-intro">{intro}</p>
     {buyer_html(c, med)}
     {findings_html(c, med)}
     {history_html(c)}
@@ -902,7 +938,7 @@ def page(c, peers, updated, med=None):
 {figs}
       <div class="modal-grid modal-scores">{qual}{signals}</div>
       {fin}
-      <div class="modal-report-src">{"" if listed_only else src + ". "}Prices: Deutsche Börse delayed data. Market value is estimated from net income / EPS. Figures are read automatically and can contain errors; check the report before relying on them. Page updated {esc(updated)}.</div>
+      <div class="modal-report-src">{"" if listed_only else src + ". "}Prices: Deutsche Börse delayed data. Market value is estimated from net income / EPS. Figures are read automatically from the report; every year links to it as proof. Page updated {esc(updated)}.</div>
     </div>
     <p class="sp-cta"><a class="btn btn-primary" href="/screener?lei={esc(c["lei"])}">Compare in the stock screener</a></p>
   </article>
