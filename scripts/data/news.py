@@ -26,17 +26,20 @@ KEEP_DAYS = 120                                         # how long an announceme
 MAX_NEWS = 8
 UA = {"User-Agent": "FINILA data refresh (finila.com)", "Accept": "application/json, text/html, */*"}
 
-REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|results|interim)|"
+REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|results|interim|revenue|sales|turnover)|"
                r"(first|second|third|fourth)[- ]quarter.{0,20}(report|results)|results for the (first|second|third|fourth) quarter|"
                r"half[- ]year(ly)? (report|results|financial report)|year[- ]end report|full[- ]year results|annual results|"
                r"nine[- ]month|six[- ]month|january\s*[-–]\s*(march|june|september|december)|trading update|"
-               r"interim management statement|business review")
-REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end"
+               r"interim management statement|business review|"
+               r"chiffre d.affaires (du|au) (premier|deuxi[eè]me|troisi[eè]me|quatri[eè]me|1er|[1-4]e|[1-4][eè]me) trimestre|"
+               r"r[ée]sultats (annuels|semestriels|du (premier|deuxi[eè]me|troisi[eè]me|quatri[eè]me|1er|[1-4]e) trimestre)|"
+               r"information financi[eè]re trimestrielle|rapport financier (semestriel|annuel)")
+REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly financial information|financial report"
 SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|teleconference|capital markets day|"
              r"buy-?back|own shares|treasury shares|managers'? transactions|transactions? (by|of) (persons|insiders)|"
              r"voting rights|share capital|total number of shares|listing of|admission to trading|prospectus|"
              r"notice (to|of) (the )?(annual|extraordinary) general meeting|bond|notes? due|coupon|nomination committee")
-SKIP_CAT = (r"managers.? transaction|own shares|voting rights|major shareholder|articles of association|prospectus|corporate action|"
+SKIP_CAT = (r"managers.? transaction|own shares|liquidity contract|terms of availability|total number of shares|description of the share buyback|voting rights|major shareholder|articles of association|prospectus|corporate action|"
             r"notice to general meeting|ex date|adjustment of interest rate|trading halt|announcement from oslo|non-regulatory|investor news")
 # Oslo Børs carries most releases twice, in Norwegian and English: the Norwegian one is left out.
 NORWEGIAN = r"\b(og|av|til|med|ved|fra|eller|inngår|melding|kvartal|kvartalet|resultat|resultater|selskap|utlån|vekst i|økt|invitasjon|korreksjon|flaggemelding|meldepliktig)\b"
@@ -160,6 +163,8 @@ QUARTER_CUES = [
     (r"january\s*[-–]\s*march|jan\.?\s*[-–]\s*mar|three months", 1),
     (r"april\s*[-–]\s*june|january\s*[-–]\s*june|jan\.?\s*1?\s*(to|[-–])\s*jun|half[- ]year|first half|six months|\bh1\b|30 june|june 30", 2),
     (r"july\s*[-–]\s*september|january\s*[-–]\s*september|jan\.?\s*1?\s*(to|[-–])\s*sep|nine months|nine-month|30 september|september 30|30\.9\.", 3),
+    (r"premier trimestre|1er trimestre", 1), (r"deuxi[eè]me trimestre|2e trimestre|semestriel|premier semestre", 2),
+    (r"troisi[eè]me trimestre|3e trimestre|neuf (premiers )?mois", 3), (r"quatri[eè]me trimestre|4e trimestre|r[ée]sultats annuels|rapport financier annuel", 4),
     (r"october\s*[-–]\s*december|january\s*[-–]\s*december|year[- ]end report|full[- ]year (report|results)|annual (report|results)", 4)]
 
 
@@ -247,6 +252,35 @@ def nasdaq(since, today):
     return items
 
 
+def france(since, today):
+    """AMF regulated information (info-financiere.gouv.fr, open data): every filing carries the issuer's ISIN.
+    French and English versions of the same release are both filed: the English one is kept when there is one."""
+    base = "https://www.info-financiere.gouv.fr/api/explore/v2.1/catalog/datasets/flux-amf-new-prod/records?"
+    rows, offset = [], 0
+    while offset < 9900:
+        q = {"limit": 100, "offset": offset, "order_by": "uin_dat_amf desc",
+             "where": f"uin_dat_amf >= date'{since}' and identificationsociete_iso_cd_isi != '999999999999'"}
+        data = get(base + urllib.parse.urlencode(q))
+        page = (data or {}).get("results") or []
+        rows += page
+        if len(page) < 100:
+            break
+        offset += 100
+    out, english = [], {(r.get("identificationsociete_iso_cd_isi"), (r.get("uin_dat_amf") or "")[:10])
+                        for r in rows if r.get("informationdeposee_inf_lng_inf") == "Anglais"}
+    for r in rows:
+        isin, day = r.get("identificationsociete_iso_cd_isi"), (r.get("uin_dat_amf") or "")[:10]
+        if r.get("informationdeposee_inf_lng_inf") != "Anglais" and (isin, day) in english:
+            continue
+        cat = " / ".join(x for x in (r.get("type_of_information"), r.get("subtype_of_information")) if x)
+        out.append({"id": "fr" + str(r.get("uin_idt_uin")), "src": "AMF France", "company": r.get("identificationsociete_iso_nom_soc") or "",
+                    "isin": isin, "title": (r.get("informationdeposee_inf_tit_inf") or "").strip(), "cat": cat,
+                    "time": (r.get("uin_dat_amf") or "").replace("T", " ")[:19], "url": r.get("url_de_recuperation"), "att": [],
+                    "lang": "fr" if r.get("informationdeposee_inf_lng_inf") == "Français" else "en"})
+    print(f"AMF France: {len(rows)} filings, {len(out)} kept", flush=True)
+    return out
+
+
 def oslo(since, today):
     data = get("https://api3.oslo.oslobors.no/v1/newsreader/list?category=&issuer=&fromDate=%s&toDate=%s&market=&messageTitle="
                % (since, today))
@@ -320,11 +354,12 @@ def main():
         cache = {"_v": CACHE_VERSION, "ann": {}}
     today = date.today()
     since = today - timedelta(days=DAYS)
-    fresh = nasdaq(since, today) + oslo(since, today)
+    by_isin = {r["isin"]: r["lei"] for r in rows if r.get("isin")}
+    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today)
     print(f"{len(fresh)} announcements since {since}", flush=True)
     unmatched = {}
     for a in fresh:
-        lei = by_sign.get((a.get("sign") or "").upper()) or find(a["company"])
+        lei = by_isin.get(a.get("isin") or "") or by_sign.get((a.get("sign") or "").upper()) or (None if a.get("isin") else find(a["company"]))
         if not lei:
             unmatched[a["company"]] = unmatched.get(a["company"], 0) + 1
             continue
@@ -359,7 +394,8 @@ def main():
     for a in sorted(cache["ann"].values(), key=lambda a: a["time"], reverse=True):
         o = out.setdefault(a["lei"], {"news": []})
         if len(o["news"]) < MAX_NEWS:
-            o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"]})
+            o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"],
+                              **({"lang": a["lang"]} if a.get("lang") == "fr" else {})})
         if is_report(a) and "results" in a:
             a["quarter"] = report_quarter(a["title"], "", a["time"]) if report_quarter(a["title"], "", "") else a.get("quarter")
         if is_report(a) and "report" not in o and "results" in a:

@@ -1226,7 +1226,8 @@ def events_html(c):
     """Company events FINILA records itself: managers' trades, short positions, the latest annual report."""
     ev = sorted(c.get('events', []), key=lambda e: e[0], reverse=True)[:12]
     nice = lambda d: date.fromisoformat(d).strftime('%-d %b %Y') if re.fullmatch(r'\d{4}-\d\d-\d\d', d or '') else d
-    ev += [(n['date'][:10], esc(n['title']), n['url'], True) for n in c.get('news', [])]
+    ev += [(n['date'][:10], esc(n['title']) + (' <small class="ins-note">(in French)</small>' if n.get('lang') == 'fr' else ''), n['url'], True)
+           for n in c.get('news', [])]
     ev = sorted(ev, key=lambda e: e[0], reverse=True)[:12]
     items = ''.join(f'<li><time datetime="{esc(e[0])}">{esc(nice(e[0]))}</time><span>{e[1]}</span>'
                     + (f'<a href="{esc(e[2])}" target="_blank" rel="noopener">Read</a></li>' if len(e) > 3 else f'<a href="{e[2]}">Details</a></li>') for e in ev)
@@ -1237,7 +1238,7 @@ def events_html(c):
         return ''
     return f'''<section class="sp-events"><h2>Latest about {esc(c["name"])}</h2>
     <ul>{items}</ul>
-    <p class="ins-note">From official sources: company announcements on the exchange (so far Nasdaq Nordic and Oslo Børs), managers’ trades (so far Sweden), net short positions of funds (NL, IT, SE, NO, UK) and annual reports.</p></section>'''
+    <p class="ins-note">From official sources: company announcements filed with the exchange or regulator (so far Nasdaq Nordic, Oslo Børs and the French AMF), managers’ trades (so far Sweden), net short positions of funds (NL, IT, SE, NO, UK) and annual reports.</p></section>'''
 
 
 def page(c, peers, updated, med=None):
