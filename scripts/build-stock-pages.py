@@ -1017,11 +1017,21 @@ def latest_report_html(c):
     for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
                              ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
                              ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):
-        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if i['kind'] == kind and len(i['text']) <= 320])
+        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])
         if out:
             body += f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
     return (f'<div class="sp-latest"><p class="sp-q-date">Newest report: <b>{esc(r["title"])}</b>, published {esc(nice_date(r["date"]))} '
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the announcement</a></p>{body}</div>')
+
+
+INVEST_BACKLOG = r"\binvestments?\b(?! decisions?)"
+BROKEN = r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}|\b20\d \d\b|[a-z]20\d\d\b"
+
+
+def kind_of(i):
+    """A backlog of approved investment projects (Air Liquide's plants) is future spending, not orders: not shown."""
+    return 'projects' if i['kind'] == 'backlog' and re.search(INVEST_BACKLOG, i['text'], re.I) \
+        and not re.search(r'\border(s| book| backlog| intake)\b', i['text'], re.I) else i['kind']
 
 
 REPORT_BLOCKS = [('outlook', 'Outlook', 'What the company expects for the current year.'),
@@ -1069,7 +1079,7 @@ def report_html(c):
         q = {**q, 'items': [i for i in q['items'] if not (i['kind'] == 'outlook' and topics(i['text']) and topics(i['text']) <= newer)]}
     blocks = ''
     for kind, title, sub in REPORT_BLOCKS:
-        items = quote_unique([quote_clean(i['text']) for i in q['items'] if i['kind'] == kind and len(i['text']) <= 320
+        items = quote_unique([quote_clean(i['text']) for i in q['items'] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])
                               and not re.search(r'materiality|ceteris paribus|annual report( and accounts)? 20\d\d|financial report for the period',
                                                 i['text'], re.I)])
         if kind in REPORT_SHOWN and items:
@@ -1386,7 +1396,6 @@ def page(c, peers, updated, med=None):
     {summary_html(c, med, intro)}
     {stats or f'<div class="sp-keys">{keyhtml}</div>'}
     {buyer_html(c, med)}
-    {whatif_html(c, med)}
     {report_html(c)}
     {history_html(c)}
     {analysis_html(c)}
@@ -1396,10 +1405,11 @@ def page(c, peers, updated, med=None):
       {fin}
       <div class="modal-report-src">{"" if listed_only else src + ". "}Prices: Deutsche Börse delayed data. Market value is estimated from net income / EPS. Figures are read automatically from the report; every year links to it as proof. Page updated {esc(updated)}.</div>
     </div>
+    {whatif_html(c, med)}
     <p class="sp-cta"><a class="btn btn-primary" href="/screener?lei={esc(c["lei"])}">Compare in the stock screener</a></p>
   </article>
-  {events_html(c)}
   {peers_html(c, peers, med)}
+  {events_html(c)}
   <p class="sp-legend">Where each number comes from: {chip('r')} the company’s annual report or an official register · {chip('p')} Deutsche Börse delayed share price · {chip('c')} calculated by FINILA from those two. <a href="/stock/methodology">How FINILA calculates</a>.</p>
 </main>
 {FOOTER}<script src="/js/url-state.js" defer></script>

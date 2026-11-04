@@ -144,7 +144,7 @@ def split_release(text):
     at opening quotes and after a prior-year figure in brackets followed by a new sentence."""
     months = r"(?i:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)"
     text = re.sub(fr"\b({months})((?:\s\d{{1,2}})?)\s?[–-]\s?(?=(?:\d{{1,2}}\s)?{months}\b)", r"\1\2–", text)   # "January 1 - September 30" is a period, not a bullet
-    text = re.sub(r"\b([1-4])\s(st|nd|rd|th)\s(?=quarter)", r"\1\2 ", text)   # "3 rd quarter" from superscripts
+    text = re.sub(r"\b([1-4])\s(st|nd|rd|th)\s(?=quarter|half)", r"\1\2 ", text)   # "3 rd quarter" from superscripts
     text = re.sub(r"\s[o•]\s(?=[A-Z])", ". ", text)                               # "o" used as a bullet
     t = re.sub(r"\s[–•▪■]\s|\s-\s(?=[A-Z])", ". ", text)
     t = re.sub(r"\s[“\"]\s?(?=[A-Z])", ". ", t)
