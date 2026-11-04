@@ -1,2 +1,6 @@
-1946 companies with ESEF reports, 60 to check
-history for 60 companies (55 with 5+ years); read 60 this run; 0 years dropped as unit errors, 7 reports in another currency skipped
+1946 companies with ESEF reports, 1946 to check
+  ! https://filings.xbrl.org/api/entities/2138002SS843EUABKP94/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  100 companies read
+  200 companies read
+  300 companies read
+  400 companies read
