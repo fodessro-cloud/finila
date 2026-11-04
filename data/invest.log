@@ -1,7 +1,7 @@
 ok    hicp       29 series,   9335 months, newest 2025-12
 ok    hicp_es    32 series,  11270 months, newest 2025-12
 ok    infl_old   29 series,   9335 months, newest 2025-12
-ok    infl       31 series,   1023 months, newest 2026-09
+ok    infl       31 series,   1045 months, newest 2026-10
 ok    dep1y      28 series,   7744 months, newest 2026-09
 ok    depon      28 series,   7765 months, newest 2026-09
 ok    bond10     29 series,   8883 months, newest 2026-09
@@ -13,28 +13,28 @@ ok    sp500       1 series,    334 months, newest 2026-10
 ok    gold_usd    1 series,    334 months, newest 2026-10
 skip  GB: no recent inflation data
 wrote js/invest.json (359 KB), 31 countries, failed: none
-  U2 infl {'month': '2026-09', 'value': 3.8} dep {'month': '2026-09', 'value': 2.33} bond {'month': '2026-09', 'value': 3.928} house {'month': '2026-05', 'value': 3.84} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  AT infl {'month': '2026-09', 'value': 3.6} dep {'month': '2026-09', 'value': 2.18} bond {'month': '2026-09', 'value': 3.687} house {'month': '2026-05', 'value': 5.07} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  BE infl {'month': '2026-09', 'value': 4.5} dep {'month': '2026-09', 'value': 2.48} bond {'month': '2026-09', 'value': 4.12} house {'month': '2026-05', 'value': 2.13} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  BG infl {'month': '2026-09', 'value': 5.6} dep {'month': '2026-09', 'value': 1.49} bond {'month': '2026-09', 'value': 4.09} house {'month': '2026-05', 'value': 15.47} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  HR infl {'month': '2026-09', 'value': 4.3} dep {'month': '2026-09', 'value': 1.55} bond {'month': '2026-09', 'value': 3.59} house {'month': '2026-05', 'value': 12.71} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  CY infl {'month': '2026-09', 'value': 5.2} dep {'month': '2026-09', 'value': 1.62} bond {'month': '2026-09', 'value': 3.92} house {'month': '2026-05', 'value': 7.9} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  EE infl {'month': '2026-09', 'value': 3.1} dep {'month': '2026-09', 'value': 2.41} bond {'month': '2026-09', 'value': 4.09} house {'month': '2026-05', 'value': 5.8} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  FI infl {'month': '2026-09', 'value': 2.7} dep {'month': '2026-09', 'value': 2.82} bond {'month': '2026-09', 'value': 3.8} house {'month': '2026-05', 'value': -2.69} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  FR infl {'month': '2026-09', 'value': 3.4} dep {'month': '2026-09', 'value': 2.54} bond {'month': '2026-09', 'value': 4.44} house {'month': '2026-05', 'value': -0.79} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  DE infl {'month': '2026-09', 'value': 3.3} dep {'month': '2026-09', 'value': 2.39} bond {'month': '2026-09', 'value': 3.473} house {'month': '2026-05', 'value': 0.59} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  GR infl {'month': '2026-09', 'value': 5.1} dep {'month': '2026-09', 'value': 1.28} bond {'month': '2026-09', 'value': 4.22} house None assets ['bonds', 'deposit', 'prices', 'savings']
-  IE infl {'month': '2026-09', 'value': 3.8} dep {'month': '2026-09', 'value': 1.99} bond {'month': '2026-09', 'value': 3.591} house {'month': '2026-05', 'value': 5.97} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  IT infl {'month': '2026-09', 'value': 4.2} dep {'month': '2026-09', 'value': 2.91} bond {'month': '2026-09', 'value': 4.362} house {'month': '2026-05', 'value': 3.95} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  LV infl {'month': '2026-09', 'value': 3.0} dep {'month': '2026-09', 'value': 2.75} bond {'month': '2026-09', 'value': 4.15} house {'month': '2026-05', 'value': 11.36} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  LT infl {'month': '2026-09', 'value': 6.1} dep {'month': '2026-09', 'value': 2.34} bond {'month': '2026-09', 'value': 2.88} house {'month': '2026-05', 'value': 14.34} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  LU infl {'month': '2026-09', 'value': 5.2} dep {'month': '2026-09', 'value': 2.2} bond {'month': '2026-09', 'value': 3.697} house {'month': '2026-05', 'value': -2.16} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  MT infl {'month': '2026-09', 'value': 2.4} dep {'month': '2026-09', 'value': 2.39} bond {'month': '2026-09', 'value': 4.19} house {'month': '2026-05', 'value': 6.95} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  NL infl {'month': '2026-09', 'value': 3.0} dep {'month': '2026-09', 'value': 2.65} bond {'month': '2026-09', 'value': 3.564} house {'month': '2026-05', 'value': 4.34} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  PT infl {'month': '2026-09', 'value': 3.6} dep {'month': '2026-09', 'value': 1.83} bond {'month': '2026-09', 'value': 3.846} house {'month': '2026-05', 'value': 16.48} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  SK infl {'month': '2026-09', 'value': 3.0} dep {'month': '2026-09', 'value': 2.43} bond {'month': '2026-09', 'value': 4.164} house {'month': '2026-05', 'value': 13.61} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  SI infl {'month': '2026-09', 'value': 3.7} dep {'month': '2026-09', 'value': 0.77} bond {'month': '2026-09', 'value': 3.86} house {'month': '2026-05', 'value': 9.11} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
-  ES infl {'month': '2026-09', 'value': 5.0} dep {'month': '2026-09', 'value': 2.29} bond {'month': '2026-09', 'value': 3.927} house {'month': '2026-05', 'value': 12.14} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  U2 infl {'month': '2026-10', 'value': 4.0} dep {'month': '2026-09', 'value': 2.33} bond {'month': '2026-09', 'value': 3.928} house {'month': '2026-05', 'value': 3.84} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  AT infl {'month': '2026-10', 'value': 3.5} dep {'month': '2026-09', 'value': 2.18} bond {'month': '2026-09', 'value': 3.687} house {'month': '2026-05', 'value': 5.07} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  BE infl {'month': '2026-10', 'value': 5.2} dep {'month': '2026-09', 'value': 2.48} bond {'month': '2026-09', 'value': 4.12} house {'month': '2026-05', 'value': 2.13} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  BG infl {'month': '2026-10', 'value': 6.0} dep {'month': '2026-09', 'value': 1.49} bond {'month': '2026-09', 'value': 4.09} house {'month': '2026-05', 'value': 15.47} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  HR infl {'month': '2026-10', 'value': 4.4} dep {'month': '2026-09', 'value': 1.55} bond {'month': '2026-09', 'value': 3.59} house {'month': '2026-05', 'value': 12.71} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  CY infl {'month': '2026-10', 'value': 5.4} dep {'month': '2026-09', 'value': 1.62} bond {'month': '2026-09', 'value': 3.92} house {'month': '2026-05', 'value': 7.9} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  EE infl {'month': '2026-10', 'value': 3.6} dep {'month': '2026-09', 'value': 2.41} bond {'month': '2026-09', 'value': 4.09} house {'month': '2026-05', 'value': 5.8} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  FI infl {'month': '2026-10', 'value': 3.4} dep {'month': '2026-09', 'value': 2.82} bond {'month': '2026-09', 'value': 3.8} house {'month': '2026-05', 'value': -2.69} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  FR infl {'month': '2026-10', 'value': 3.8} dep {'month': '2026-09', 'value': 2.54} bond {'month': '2026-09', 'value': 4.44} house {'month': '2026-05', 'value': -0.79} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  DE infl {'month': '2026-10', 'value': 2.8} dep {'month': '2026-09', 'value': 2.39} bond {'month': '2026-09', 'value': 3.473} house {'month': '2026-05', 'value': 0.59} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  GR infl {'month': '2026-10', 'value': 5.6} dep {'month': '2026-09', 'value': 1.28} bond {'month': '2026-09', 'value': 4.22} house None assets ['bonds', 'deposit', 'prices', 'savings']
+  IE infl {'month': '2026-10', 'value': 4.0} dep {'month': '2026-09', 'value': 1.99} bond {'month': '2026-09', 'value': 3.591} house {'month': '2026-05', 'value': 5.97} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  IT infl {'month': '2026-10', 'value': 5.6} dep {'month': '2026-09', 'value': 2.91} bond {'month': '2026-09', 'value': 4.362} house {'month': '2026-05', 'value': 3.95} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  LV infl {'month': '2026-10', 'value': 3.0} dep {'month': '2026-09', 'value': 2.75} bond {'month': '2026-09', 'value': 4.15} house {'month': '2026-05', 'value': 11.36} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  LT infl {'month': '2026-10', 'value': 6.1} dep {'month': '2026-09', 'value': 2.34} bond {'month': '2026-09', 'value': 2.88} house {'month': '2026-05', 'value': 14.34} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  LU infl {'month': '2026-10', 'value': 4.9} dep {'month': '2026-09', 'value': 2.2} bond {'month': '2026-09', 'value': 3.697} house {'month': '2026-05', 'value': -2.16} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  MT infl {'month': '2026-10', 'value': 2.3} dep {'month': '2026-09', 'value': 2.39} bond {'month': '2026-09', 'value': 4.19} house {'month': '2026-05', 'value': 6.95} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  NL infl {'month': '2026-10', 'value': 3.3} dep {'month': '2026-09', 'value': 2.65} bond {'month': '2026-09', 'value': 3.564} house {'month': '2026-05', 'value': 4.34} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  PT infl {'month': '2026-10', 'value': 3.9} dep {'month': '2026-09', 'value': 1.83} bond {'month': '2026-09', 'value': 3.846} house {'month': '2026-05', 'value': 16.48} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  SK infl {'month': '2026-10', 'value': 2.9} dep {'month': '2026-09', 'value': 2.43} bond {'month': '2026-09', 'value': 4.164} house {'month': '2026-05', 'value': 13.61} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  SI infl {'month': '2026-10', 'value': 3.8} dep {'month': '2026-09', 'value': 0.77} bond {'month': '2026-09', 'value': 3.86} house {'month': '2026-05', 'value': 9.11} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
+  ES infl {'month': '2026-10', 'value': 4.9} dep {'month': '2026-09', 'value': 2.29} bond {'month': '2026-09', 'value': 3.927} house {'month': '2026-05', 'value': 12.14} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
   CZ infl {'month': '2026-09', 'value': 2.2} dep {'month': '2026-09', 'value': 3.4} bond {'month': '2026-09', 'value': 5.24} house {'month': '2026-05', 'value': 8.6} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
   DK infl {'month': '2026-09', 'value': 2.1} dep {'month': '2026-09', 'value': 1.78} bond {'month': '2026-09', 'value': 3.287} house {'month': '2026-05', 'value': 9.41} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
   HU infl {'month': '2026-09', 'value': 2.1} dep {'month': '2026-09', 'value': 4.23} bond {'month': '2026-09', 'value': 5.685} house {'month': '2026-05', 'value': 10.17} assets ['bonds', 'deposit', 'house', 'prices', 'savings']
