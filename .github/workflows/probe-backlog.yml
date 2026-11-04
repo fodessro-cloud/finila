@@ -3,7 +3,7 @@ name: Test backlog a výhľadov z ESEF
 on:
   push:
     branches: [claude/project-thread-z7m788]
-    paths: ['scripts/data/probe_backlog.py', '.github/workflows/probe-backlog.yml']
+    paths: ['scripts/data/probe_backlog.py', 'scripts/data/probe_venues.py', '.github/workflows/probe-backlog.yml']
   workflow_dispatch:
 
 jobs:
@@ -16,3 +16,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/data/probe_backlog.py
+      - run: python scripts/data/probe_venues.py
