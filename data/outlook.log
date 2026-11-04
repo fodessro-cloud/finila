@@ -1,10 +1,6 @@
 1946 companies with ESEF reports, 60 to check
-  ! https://filings.xbrl.org/api/entities/5493000HZTVUYLO1D793/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300DFVPOB67JL3A42/filings?page[size]=100: HTTP Error 429: Too Many Requests
   50 companies read
-  ! https://filings.xbrl.org/api/entities/GBQKSY6W7G0OHCQ8OQ72/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300PPXHEU2JF0AM85/filings?page[size]=100: HTTP Error 429: Too Many Requests
-outlook quotes for 39 companies {'target': 29, 'event': 187, 'outlook': 78, 'backlog': 13}; read 60 this run
+outlook quotes for 72 companies {'target': 48, 'event': 334, 'outlook': 146, 'backlog': 29}; read 60 this run
 
 == Shell PLC (2025-12-31)
   [outlook] The fourth quarter 2025 dividend of $ 0.372 per ordinary share will be paid on March 30, 2026 , to shareholders on the register at February 20, 2026 , and represents an increase of 4% compared with the third quarter 2025 dividend.
@@ -390,3 +386,6 @@ outlook quotes for 39 companies {'target': 29, 'event': 187, 'outlook': 78, 'bac
   [event] This year we also launched the Kraken programme, a cutting-edge customer information and relationship management platform.
   [event] We launched an after-call survey via text message to capture real-time customer feedback and improve digital experience.
   [event] Since we completed the sale of National Grid Renewables in 2025, our generation portfolio is made up solely of gas and oil generation assets, which are operated by LIPA.
+
+== Valeo (2025-12-31)
+  [outlook] (1) Pour l’année 2026, la cible pour le taux de ROCE est à partir de 15,8 % et la guidance pour l’EBIT est à partir de 4,7 % .

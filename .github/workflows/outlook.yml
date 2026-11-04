@@ -7,7 +7,7 @@ on:
     branches: [claude/project-thread-z7m788]
     paths: ['scripts/data/outlook.py', '.github/workflows/outlook.yml']
   schedule:
-    - cron: '45 4 * * 2'   # Tuesdays 04:45 UTC
+    - cron: '20 4 * * *'   # daily 04:20 UTC, before the page build at 05:45
   workflow_dispatch:
     inputs:
       limit:

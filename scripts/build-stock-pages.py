@@ -715,6 +715,14 @@ def buyer_html(c, med):
       <p class="sp-sub sp-after">{note}</p></section>'''
 
 
+def price_change(price, ch):
+    """Change on the previous close in euros and per cent: +€1.23 (+0.95%)."""
+    if not (is_num(price) and is_num(ch)) or ch <= -100:
+        return ''
+    d = price - price / (1 + ch / 100)
+    return f'{"+" if d >= 0 else "−"}€{num(abs(d), 2)} ({"+" if ch >= 0 else ""}{num(ch, 2)}%)'
+
+
 def sign(v):
     return ('+' if v >= 0 else '') + num(v)
 
@@ -948,8 +956,10 @@ def report_html(c):
     if not blocks:
         return ''
     period = esc(q.get('period') or '')
+    pub = f', in the ESEF register since {esc(q["published"])}' if q.get('published') else ''
     return f'''<section class="sp-card" id="report"><h2>From the company’s report</h2>
-      <p class="sp-sub">Sentences quoted word for word from the report for the period ending {period}
+      <p class="sp-q-date">Report for the period ending <b>{period}</b>{pub}. A newer quarterly report may exist: FINILA reads the reports the company files in ESEF.</p>
+      <p class="sp-sub">Sentences quoted word for word
       {chip("r", "Report")} <a href="{esc(q["source"])}" target="_blank" rel="noopener">open the report</a>.
       The company’s own statements, not FINILA’s: read the full context in the report.</p>
       {blocks}</section>'''
@@ -1157,7 +1167,7 @@ def page(c, peers, updated, med=None):
         ch = c.get('change')
         price = f'''<div class="modal-price-row sp-price" data-isin="{esc(c["isin"])}">
       <span class="modal-price" data-f="price">€{num(c["price"], 2)}</span>
-      <span class="modal-change {"pos" if is_num(ch) and ch >= 0 else "neg"}" data-f="change">{(("+" if ch >= 0 else "") + num(ch, 2) + "%") if is_num(ch) else ""}</span>
+      <span class="modal-change {"pos" if is_num(ch) and ch >= 0 else "neg"}" data-f="change">{price_change(c["price"], ch)}</span>
       <span class="real-badge" data-f="badge">Real price · {esc(c["priceVenue"])} · {esc(c["priceDate"])}</span>
     </div>'''
     else:
@@ -1242,10 +1252,10 @@ def page(c, peers, updated, med=None):
     {summary_html(c, med, intro)}
     {stats_html(c) or f'<div class="sp-keys">{keyhtml}</div>'}
     {buyer_html(c, med)}
+    {whatif_html(c, med)}
     {report_html(c)}
     {history_html(c)}
     {analysis_html(c)}
-    {whatif_html(c, med)}
     <div class="modal-report">
 {figs}
       <div class="modal-grid modal-scores">{qual}{signals}</div>

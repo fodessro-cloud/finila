@@ -21,7 +21,7 @@ import fundamentals as fd   # noqa: E402
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/outlook.json"
 OUT = ROOT / "data/outlook.json"
-CACHE_VERSION = 2
+CACHE_VERSION = 3
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
@@ -161,6 +161,58 @@ def pick(text, year):
     return kept
 
 
+YTD_KEYS = {"revenue": fd.CONCEPTS["revenue"], "op_profit": fd.CONCEPTS["op_profit"], "net": fd.CONCEPTS["net"],
+            "cfo": fd.CONCEPTS.get("cfo", ["CashFlowsFromUsedInOperatingActivities"])}
+
+
+def year_to_date(xj):
+    """Figures of an interim report (half-year, 9 months, quarter): the longest period from the start of the
+    financial year to the report date, and the same period a year earlier, both from the same report."""
+    facts = list(xj.get("facts", {}).values())
+    if fd.fiscal_end(facts) is not None:
+        return None   # a full-year report
+    spans = {}
+    for fact in facts:
+        dims = fact.get("dimensions", {})
+        if set(dims) - {"concept", "entity", "period", "unit", "language"} or "/" not in dims.get("period", ""):
+            continue
+        prefix, _, name = dims.get("concept", "").partition(":")
+        if prefix != "ifrs-full":
+            continue
+        for key, names in YTD_KEYS.items():
+            if name not in names:
+                continue
+            start, stop = fd.parse_period(dims["period"])
+            days = (stop - start).days
+            if not 80 <= days <= 290:
+                continue
+            try:
+                v = float(fact["value"])
+            except (TypeError, ValueError):
+                continue
+            rank = names.index(name)
+            slot = spans.setdefault((start, stop), {})
+            if key not in slot or rank < slot[key][0]:
+                slot[key] = (rank, v, dims.get("unit", ""))
+    if not spans:
+        return None
+    # The current period: the newest end, the longest span with revenue or profit.
+    ends = sorted({stop for _, stop in spans}, reverse=True)
+    cur = max((k for k in spans if k[1] == ends[0] and ("revenue" in spans[k] or "net" in spans[k])),
+              key=lambda k: k[1] - k[0], default=None)
+    if not cur:
+        return None
+    start, stop = cur
+    prev = next((k for k in spans if abs((k[0] - start).days - (-365)) <= 7 and abs((k[1] - stop).days + 365) <= 7), None)
+    if not prev:
+        return None
+    unit = next((v[2] for v in spans[cur].values() if v[2].startswith("iso4217:")), "")
+    m = lambda d: {k: round(v[1] / 1e6, 1) for k, v in d.items()}
+    return {"start": start.isoformat(), "end": (stop - fd.timedelta(days=1)).isoformat(),
+            "months": round((stop - start).days / 30.4), "currency": unit.split(":")[-1],
+            "cur": m(spans[cur]), "prev": m(spans[prev])}
+
+
 def read_company(lei, cached):
     filings = fd.latest_annual(lei)
     if not filings:
@@ -177,7 +229,11 @@ def read_company(lei, cached):
     year = int(f["period_end"][:4])
     annual = f["period_end"][5:7] == "12" and "interim" not in (url or "").lower() and len(text) > 600000
     items = pick(text, year + 1 if annual else year)
-    return {"fxo_id": fid, "period": f["period_end"], "published": (f.get("date_added") or "")[:10],
+    ytd = None
+    if not annual and f.get("json_url"):
+        xj = fd.get(fd.BASE + f["json_url"])
+        ytd = year_to_date(xj) if xj else None
+    return {"fxo_id": fid, "ytd": ytd, "period": f["period_end"], "published": (f.get("date_added") or "")[:10],
             "source": fd.BASE + f["viewer_url"] if f.get("viewer_url") else fd.BASE + url, "items": items}
 
 
@@ -189,8 +245,8 @@ def main():
     if cache.get("_v") != CACHE_VERSION:
         cache = {"_v": CACHE_VERSION}
     today = date.today().isoformat()
-    week_ago = date.fromordinal(date.today().toordinal() - 7).isoformat()
-    todo = [l for l in leis if cache.get(l, {}).get("checked", "") <= week_ago]
+    # Every company once a day: one small API call each, and a report is downloaded only when it is new.
+    todo = [l for l in leis if cache.get(l, {}).get("checked", "") < today]
     size = {r["lei"]: r.get("revenueEur") or 0 for r in rows}
     todo.sort(key=lambda l: -size.get(l, 0))
     if os.environ.get("FINILA_LIMIT"):
@@ -215,8 +271,8 @@ def main():
                 CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(cache, separators=(",", ":"), ensure_ascii=False))
-    out = {l: {k: v[k] for k in ("period", "published", "source", "items")}
-           for l, v in cache.items() if l != "_v" and v.get("items")}
+    out = {l: {k: v.get(k) for k in ("period", "published", "source", "items", "ytd")}
+           for l, v in cache.items() if l != "_v" and (v.get("items") or v.get("ytd"))}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
     kinds = {}
     for v in out.values():

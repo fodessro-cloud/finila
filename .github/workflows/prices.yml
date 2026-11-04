@@ -52,8 +52,13 @@ jobs:
           git config user.email "finila-data-bot@users.noreply.github.com"
           git add data/prices-history.json data/prices-week.json data/prices-state.json data/prices.log js/prices.js js/company-prices.json
           git diff --cached --quiet || git commit -m "Update Xetra prices [data refresh]"
-          git pull --rebase -X theirs || true
-          git push
+          # GitHub sometimes answers 500 for a moment: try again instead of breaking the hourly chain.
+          for wait in 0 10 30 60 120; do
+            sleep $wait
+            git pull --rebase -X theirs || true
+            git push && exit 0
+          done
+          exit 1
       # Minute prices of the closed day or the day in progress (js/intraday/, not in git) exist only in this job, so they go up from here.
       - name: Upload intraday charts
         if: github.ref == 'refs/heads/main' && hashFiles('js/intraday/*.json') != ''
@@ -124,4 +129,9 @@ jobs:
           fi
           echo "Next: $what at $(date -u -d @$next '+%F %H:%M') UTC."
           sleep $(( next - now ))
-          gh workflow run "$what" --ref main
+          # A 502 from the GitHub API once stopped the chain for two hours (2026-11-04): retry for ~10 minutes.
+          for wait in 0 30 60 120 180 240; do
+            sleep $wait
+            gh workflow run "$what" --ref main && exit 0
+          done
+          exit 1

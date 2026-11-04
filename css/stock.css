@@ -153,3 +153,4 @@ html, body { height: auto; }
 .sp-q h3 small { font-weight: 400; color: var(--text2); margin-left: 6px; font-size: 12px; }
 .sp-q ul { margin: 0; padding-left: 18px; }
 .sp-q li { font-size: 13px; line-height: 1.5; margin: 4px 0; }
+.sp-q-date { font-size: 13px; margin: 4px 0 2px; padding: 6px 10px; background: var(--bg2, #f3f5f9); border-radius: 6px; }
