@@ -20,7 +20,7 @@ import outlook as ol   # noqa: E402  (sentence splitting and the outlook rules a
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / "data/cache/news.json"
 OUT = ROOT / "data/news.json"
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 DAYS = int(os.environ.get("FINILA_NEWS_DAYS", "14"))   # how far back each run looks
 KEEP_DAYS = 120                                         # how long an announcement stays on the page data
 MAX_NEWS = 8
@@ -63,8 +63,31 @@ def norm(name):
     s = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode().lower()
     s = re.sub(r"\(publ\)|\bp\.?l\.?c\.?\b|\ba/s\b|\bab\b|\basa\b|\boyj\b|\babp\b|\bhf\.?|\bp/f\b|\bse\b|\bn\.?v\.?\b|"
                r"\bs\.?a\.?\b|\bag\b|\bltd\.?\b|\blimited\b|\bcorporation\b|\bcorp\.?\b|\bgroup\b|\bholding\b|\binc\.?\b|"
-               r"\bpublic limited company\b|\baktiebolag\b|\bbank\b", " ", s)
+               r"\bpublic limited company\b|\baktiebolag\b|\baktieselskabet\b|\bbank\b|\bpankki\b|\bd/s\b|\bco\.?$", " ", s)
     return re.sub(r"[^a-z0-9]+", "", s)
+
+
+def matcher(by_name):
+    """Exact normalised name, else one unique company whose name starts or ends the other (UPM / UPM-Kymmene,
+    Tietoevry / Tieto, D/S Norden / NORDEN). Fuzzy matches are logged so they can be checked by eye."""
+    keys = sorted(by_name)
+    fuzzy, memo = {}, {}
+
+    def find(name):
+        a = norm(name)
+        if a in by_name:
+            return by_name[a]
+        if a in memo:
+            return memo[a]
+        hit = None
+        if len(a) >= 5:
+            c = [k for k in keys if len(k) >= 5 and (a.startswith(k) or k.startswith(a) or a.endswith(k) or k.endswith(a))]
+            if len(c) == 1:
+                hit = by_name[c[0]]
+                fuzzy[name] = c[0]
+        memo[a] = hit
+        return hit
+    return find, fuzzy
 
 
 def text_of(raw, ctype):
@@ -83,13 +106,29 @@ def text_of(raw, ctype):
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", src)))
 
 
+JUNK = (r"please call|investor relations|\+\d\d \d|visit (www|home)\.|press release|interim report|quarterly report|"
+        r"half[- ]year report|year[- ]end report|figures in parentheses|previously|estimated to|webcast|conference call")
+
+
+def split_release(text):
+    """Releases list key figures as bullets glued together by PDF extraction: cut at dashes used as bullets,
+    at opening quotes and after a prior-year figure in brackets followed by a new sentence."""
+    t = re.sub(r"\s[–•▪■]\s", ". ", text)
+    t = re.sub(r"\s[“\"]\s?(?=[A-Z])", ". ", t)
+    t = re.sub(r"(\(\s?-?[\d.,\s]+\)|\d%\)|\d\))\s+(?=[A-Z][a-z])", r"\1. ", t)
+    return t
+
+
 def quotes(text, year):
     """Results for the period and the company's own outlook, word for word."""
-    head = text[:15000]   # the summary at the top of a release: highlights, CEO comment, outlook
+    head = split_release(text[:15000])   # the summary at the top: highlights, CEO comment, outlook
     results, seen = [], set()
     for s in ol.sentences(head):
         low = s.lower()
-        if re.search(ol.NOISE, low) or not ol.english(low) or sum(ch.isdigit() for ch in s) > len(s) * 0.25:
+        if re.search(ol.NOISE, low) or re.search(JUNK, low) or not ol.english(low) or sum(ch.isdigit() for ch in s) > len(s) * 0.25:
+            continue
+        years = {int(y) for y in re.findall(r"\b(20\d\d)\b", s)}
+        if years and year not in years:   # a sentence only about earlier years is history, not this period
             continue
         if re.search(fr"\b({RESULT_LINE})", low) and re.search(fr"\b({RESULT_VERB})", low) and re.search(ol.NUMBER, s) \
                 and not re.search(fr"\b({ol.EXPECT})", low):
@@ -97,8 +136,18 @@ def quotes(text, year):
             if key not in seen:
                 seen.add(key)
                 results.append(s)
-    out = [i for i in ol.pick(text[:60000], year) if i["kind"] in ("outlook", "target", "backlog")]
-    return results[:5], out[:5]
+    results = results[:5]
+    out = []
+    for i in ol.pick(split_release(text[:60000]), year):
+        low = i["text"].lower()
+        if i["kind"] not in ("outlook", "target", "backlog") or re.search(r"please call|investor relations|interim report|press release", low):
+            continue
+        if re.search(r"previously expected|previous (estimate|guidance|outlook)", low) and not re.search(r"\b(now|rais|lower|updat|narrow|chang)", low):
+            continue   # the old guidance on its own
+        if i["kind"] == "backlog" and (i["text"] in results or not re.search(r"backlog|order book|orderbook|order stock", low)):
+            continue   # order intake is a result of the period; backlog means orders not yet delivered
+        out.append(i)
+    return results, out[:5]
 
 
 def nasdaq(since, today):
@@ -136,6 +185,8 @@ def oslo(since, today):
 
 
 def is_report(a):
+    if re.search(SKIP_HEAD + r"|to (present|publish|release)|will (present|publish|release)|ceo comments|comments on", a["title"], re.I):
+        return False
     return bool(re.search(REPORT_CAT, a["cat"], re.I) or re.search(REPORT_HEAD, a["title"], re.I))
 
 
@@ -161,7 +212,7 @@ def read_report(a):
     if r:
         best = text_of(*r)
     for u in a["att"][:2]:
-        if len(best) >= 3000:
+        if len(best) >= 8000:
             break
         r = get(u, as_json=False)
         if r:
@@ -180,6 +231,7 @@ def main():
             by_name.setdefault(k, r["lei"])
         if r.get("country") == "NO" and r.get("ticker"):
             by_sign[r["ticker"].upper()] = r["lei"]
+    find, fuzzy = matcher(by_name)
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
     if cache.get("_v") != CACHE_VERSION:
         cache = {"_v": CACHE_VERSION, "ann": {}}
@@ -189,7 +241,7 @@ def main():
     print(f"{len(fresh)} announcements since {since}", flush=True)
     unmatched = {}
     for a in fresh:
-        lei = by_sign.get((a.get("sign") or "").upper()) or by_name.get(norm(a["company"]))
+        lei = by_sign.get((a.get("sign") or "").upper()) or find(a["company"])
         if not lei:
             unmatched[a["company"]] = unmatched.get(a["company"], 0) + 1
             continue
@@ -199,6 +251,7 @@ def main():
         cache["ann"][a["id"]] = a
     print(f"matched {len({a.get('lei') for a in cache['ann'].values()})} companies; unmatched names (top): "
           f"{sorted(unmatched.items(), key=lambda x: -x[1])[:25]}", flush=True)
+    print("fuzzy name matches:", sorted(fuzzy.items()), flush=True)
     # Reports: read the newest per company once.
     newest = {}
     for a in cache["ann"].values():
