@@ -1,21 +1,2 @@
 1946 companies with ESEF reports, 60 to check
-  ! https://filings.xbrl.org/api/entities/BUCRF72VH5RBN7X3VL35/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800WFQ334R8UXUG83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/MINO79WLOO247M1IL051/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/LAXUQCHT4FH58LRZDY46/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500F7JLTX36OUI695/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/BSYCX13Y0NOTV14V9N85/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300DAQ1CVT6CXN342/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008M6MH9OZ6U2T68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800TB53ELEUKM7Q61/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800VGZAAJIKJ9Y484/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500A1YF1XUYYXS284/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300TTCXZOGZM2EY83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500Y6DUVHQD6OXN27/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299000EAMGGBEYP7J33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500UIC89GT3UL7L24/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800FKA5MF17RJKT63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300SOSI58J6VIW052/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300W9JLPW15XIFM52/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8R95QZMKZLJX5Q2XR704/filings?page[size]=100: HTTP Error 429: Too Many Requests
-history for 41 companies (38 with 5+ years); read 60 this run; 0 years dropped as unit errors, 5 reports in another currency skipped
+history for 60 companies (55 with 5+ years); read 60 this run; 0 years dropped as unit errors, 7 reports in another currency skipped
