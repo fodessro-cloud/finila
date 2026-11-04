@@ -352,8 +352,13 @@ def whatif_html(c, med):
         g_src = f'year 1 {g1_src} ({sign(g1)}%), then the sector median ({sign(g_sec)}%)'
     else:
         g, g_src = round(min(max(g1, -10), 30), 1), g1_src
-    m0, m_src = (round(sum(ms) / len(ms), 1), f'average of {len(ms)} years (results table)') if len(ms) >= 3 \
-        else (round(c['ebitdaMargin'], 1), 'last year')
+    # Margin: the latest year, which already holds the trend (Novo 52% -> 48%). Cyclical sectors (energy,
+    # materials) swing with prices, so their start is the average over the years shown (mid-cycle margin).
+    cyclical = (c.get('sector') or '') in ('Energy', 'Materials')
+    if cyclical and len(ms) >= 3:
+        m0, m_src = round(sum(ms) / len(ms), 1), f'average of {len(ms)} years, a cyclical sector (results table)'
+    else:
+        m0, m_src = round(c['ebitdaMargin'], 1), 'last year'
     x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
     x_src = f'median of {esc(med.get("label") or (c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
     if not is_num(x):
@@ -1352,7 +1357,7 @@ METHOD = [
         ('Not shown', 'For banks and insurers, and for vehicle groups with their own bank (their borrowings fund customer loans).'),
     ]),
     ('Scenarios', [
-        ('Calculator start', 'Revenue growth: year 1 from the company’s own revenue outlook (midpoint) when its report gives one, else its growth last year; years 2 and 3 the sector median growth; the slider starts at the average of the 3 years. EBITDA margin: the average over the results table. EV/EBITDA: the sector median. 3 years ahead.'),
+        ('Calculator start', 'Revenue growth: year 1 from the company’s own revenue outlook (midpoint) when its report gives one, else its growth last year; years 2 and 3 the sector median growth; the slider starts at the average of the 3 years. EBITDA margin: the latest year; for energy and materials companies, whose margins swing with prices, the average over the results table (mid-cycle). EV/EBITDA: the sector median. 3 years ahead.'),
         ('Three scenarios', 'Revenue grows for 3 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
         ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 3 years, EBITDA at today’s margin × the peer median multiple.'),
     ]),
