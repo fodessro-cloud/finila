@@ -3,13 +3,15 @@
   ! https://filings.xbrl.org/api/entities/213800WFQ334R8UXUG83/filings?page[size]=100: HTTP Error 429: Too Many Requests
   ! https://filings.xbrl.org/api/entities/MINO79WLOO247M1IL051/filings?page[size]=100: HTTP Error 429: Too Many Requests
   ! https://filings.xbrl.org/api/entities/95980020140005558665/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8SVCSVKSGDWMW2QHOH83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800TZHQRUSH1ESL13/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900X41C0BSLK67H70/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/549300D2K6PKKKXVNN73/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/724500K5PTPSST86UQ23/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/724500M1WJLFM9TYBS04/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800V2R9WMMZASKK57/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/549300SOSI58J6VIW052/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800EC7997ZBLZJH69/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800ZVIELEA55JMJ32/filings?page[size]=100: HTTP Error 429: Too Many Requests
   50 companies read
-  ! https://filings.xbrl.org/api/entities/549300V62YJ9HTLRI486/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500LCBOG12HXPYM84/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800LRO7NS5CYQMN21/filings?page[size]=100: HTTP Error 429: Too Many Requests
+revenue dimension combinations seen: [((), ''), (('tescoplc:GroupIncomeStatementAxis',), 'tescoplc:BeforeAdjustingItemsMember'), (('ifrs-full:CategoriesOfRelatedPartiesAxis',), 'ifrs-full:RelatedPartiesMember'), (('ifrs-full:SegmentConsolidationItemsAxis',), 'ifrs-full:EliminationOfIntersegmentAmountsMember'), (('jsainsburyplc:ConsolidatedIncomeStatementAxis',), 'jsainsburyplc:UnderlyingMember'), (('btplc:GroupIncomeStatementAxis',), 'btplc:BeforeSpecificItemsMember'), (('nggtf:ConsolidatedIncomeStatementAxis',), 'nggtf:BeforeExceptionalItemsAndRemeasurementsNettingMember'), (('ifrs-full:SegmentConsolidationItemsAxis', 'ifrs-full:SegmentsAxis'), 'abvolvo:IndustriverksamhetenMember')]
 descriptions for 36, revenue splits for 0 of 1946 companies; read 60 this run
 == Glencore PLC: leading integrated producer and marketer of natural resources, with worldwide activities in the production, refinement, processing, storage, transport and marketing of metals, minerals and energy products.
    {}
