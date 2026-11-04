@@ -155,5 +155,5 @@ html, body { height: auto; }
 .sp-q li { font-size: 13px; line-height: 1.5; margin: 4px 0; }
 .sp-q-date { font-size: 13px; margin: 4px 0 2px; padding: 6px 10px; background: var(--bg2, #f3f5f9); border-radius: 6px; }
 .sp-wi-shared { background: #FFF6E0; border: 1px solid #F0D38A; border-radius: 8px; padding: 8px 12px; font-size: 13px; margin: 0 0 10px; }
-.sp-wi-shared button, .sp-wi-share button { font: inherit; font-size: 13px; color: var(--blue); background: none; border: 1px solid currentColor; border-radius: 6px; padding: 3px 10px; cursor: pointer; margin-left: 6px; }
+.sp-wi-shared button, .sp-wi-share button { font: inherit; font-size: 13px; color: var(--blue, #1F6FEB); background: none; border: 1px solid currentColor; border-radius: 6px; padding: 3px 10px; cursor: pointer; margin-left: 6px; }
 .sp-wi-share { margin: 10px 0 0; } .sp-wi-share button { margin-left: 0; }

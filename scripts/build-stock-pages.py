@@ -996,14 +996,16 @@ def latest_report_html(c):
     if not r:
         return ''
     res = quote_unique([quote_clean(t) for t in r.get('results') or []])
-    out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if len(i['text']) <= 320])
     body = ''
     if res:
         body += '<div class="sp-q"><h3>Results <small>What the company reports for the period.</small></h3><ul>' + \
             ''.join(f'<li>“{esc(t)}”</li>' for t in res) + '</ul></div>'
-    if out:
-        body += '<div class="sp-q"><h3>Outlook <small>What the company expects, as stated in this report.</small></h3><ul>' + \
-            ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
+    for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
+                             ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
+                             ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):
+        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if i['kind'] == kind and len(i['text']) <= 320])
+        if out:
+            body += f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
     return (f'<div class="sp-latest"><p class="sp-q-date">Newest report: <b>{esc(r["title"])}</b>, published {esc(nice_date(r["date"]))} '
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the announcement</a></p>{body}</div>')
 
