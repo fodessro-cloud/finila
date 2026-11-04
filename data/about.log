@@ -1,40 +1,85 @@
 1946 companies with ESEF reports, 60 to check
+  ! https://filings.xbrl.org/api/entities/BUCRF72VH5RBN7X3VL35/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800WFQ334R8UXUG83/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/MINO79WLOO247M1IL051/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/95980020140005558665/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/8SVCSVKSGDWMW2QHOH83/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/959800TZHQRUSH1ESL13/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/529900X41C0BSLK67H70/filings?page[size]=100: HTTP Error 429: Too Many Requests
   50 companies read
+  ! https://filings.xbrl.org/api/entities/549300V62YJ9HTLRI486/filings?page[size]=100: HTTP Error 429: Too Many Requests
   ! https://filings.xbrl.org/api/entities/969500LCBOG12HXPYM84/filings?page[size]=100: HTTP Error 429: Too Many Requests
-descriptions for 36 of 1946 companies; read 60 this run
+  ! https://filings.xbrl.org/api/entities/213800LRO7NS5CYQMN21/filings?page[size]=100: HTTP Error 429: Too Many Requests
+descriptions for 36, revenue splits for 0 of 1946 companies; read 60 this run
 == Glencore PLC: leading integrated producer and marketer of natural resources, with worldwide activities in the production, refinement, processing, storage, transport and marketing of metals, minerals and energy products.
+   {}
 == BP P.L.C.: We operate at the heart of the global energy system, helping countries across the world with their energy needs and serving millions of customers every day. Our purpose Delivering energy to the world, today and tomorrow.
+   {}
 == Stellantis N.V.: Stellantis is engaged in the design, engineering, manufacturing, distribution and sale of automobiles and light commercial vehicles, engines, transmission systems, mobility services and financial services activities relating to dealer and customer financing as well as vehicle leasing and rental.
+   {}
 == Ahold: operation of retail food stores and e-commerce primarily in the United States and Europe
+   {}
 == Tesco PLC: The main activities of the Company and its subsidiaries (together, the Group) are those of retailing and related services.
+   {}
 == ENI S.P.A.: i repor table segment di Eni al 31 dicembr e 2025 sono stati definiti considerando i sett ori operativi che confluiscono nei tre r aggruppamenti, come segue: • Exploration & Production: attività di ricerca, sviluppo e produzione di petrolio, condensati e gas naturale.
+   {}
 == Airbus SE: The Company’s reportable segments are Airbus, Airbus Helicopters and Airbus Defence and Space
+   {}
 == Anheuser-Busch InBev: Our diverse portfolio of well over 400 beer brands includes global brands Budweiser®, Corona®, Stella Artois® and Michelob Ultra®; multi-country brands Beck’s®, Hoegaarden® and Leffe®; and local champions such as Aguila®, Antarctica®, Bud Light®, Brahma®, Cass®, Castle®, Castle Lite®, Cristal®, Harbin®, Jupiler®, Modelo Especial®, Quilmes®, Victoria®,
+   {}
 == Astrazeneca PLC: AstraZeneca’s pharmaceuticals business consists of the discovery and development of new products, which are then manufactured, marketed and sold.
+   {}
 == Rio Tinto plc: Rio Tinto’s business is finding, mining, and processing mineral resources. Major products includes iron ore, aluminium, copper and lithium. Activities span the world and are strongly represented in Australia and North America, with significant businesses in Asia, Europe, Africa and South America.
+   {}
 == AB Volvo: The Volvo Group drives prosperity through transport and infrastructure solutions, offering trucks, buses, construction equipment, power solutions for marine and industrial applications, financing and services that increase our customers’ uptime and productivity. Founded in 1927, the Volvo Group is committed to shaping the future landscape of sustainable transport and infrastructure solutions.
+   {}
 == Novo Nordisk A/S: Novo Nordisk is a leading global healthcare company, founded in 1923 and headquartered in Denmark.
+   {}
 == Compass Group: Our core focus is the provision of outsourced food services and targeted support services.
+   {}
 == Vodafone Group Public Limited Company: Core connectivity products and services in ﬁxed and mobile account for the majority of our revenue. However, our portfolio also includes high return growth areas that leverage and complement our core connectivity business, such as digital services, the Internet of Things (‘IoT’) and ﬁnancial services. We also market and sell through digital and physical channels.
+   {}
 == Sainsbury's: We have a real passion for innovation and good quality, affordable food is the foundation of all our Sainsbury’s own brand ranges. It’s food that’s well sourced, grown sustainably and offers great value. Now 25 years old, our premium Taste the Difference range is more popular than ever, with customers choosing it for exciting new flavours and the feeling of dining out at home.
+   {}
 == GSK PLC: GSK is a global biopharma group which prevents and treats disease with specialty medicines, vaccines and general medicines. GSK focuses on the science of the immune system and advanced technologies, investing in four core therapeutic areas: respiratory, immunology and inflammation; oncology; HIV; and infectious diseases.
+   {}
 == Imperial Brands: Our purpose is to forge a path to a healthier future for moments of relaxation and pleasure. Our vision is to build a strong challenger business powered by responsibility, focus and choice.
+   {}
 == Telefónica: services of fixed and wireless telephony, broadband, Internet, data traffic, Pay TV and other digital services
+   {}
 == Heineken International: HEINEKEN is primarily involv ed in the brewing and selling of beer and cider. Led by the Heineken ® brand, HEINEKEN has a range of more than 340 international, regional, local and speciality beers and ciders
+   {}
 == Heineken Holding: HEINEKEN is primarily involved in the brewing and selling of beer and cider. Led by the Heineken® brand, HEINEKEN has a range of more than 340 international, regional, local and speciality beers and ciders.
+   {}
 == Schouw & Co.: Abou t usSchouw&Co. is a listed c onglomerate of leading industrial businesses. W e are active owners focused on long-term investmen t s and on enabling grow th thr ou gh transf ormation.
+   {}
 == BAE Systems: The Group has five sectors which, together with HQ, make up its six reporting segments as defined by IFRS 8 Operating Segments. – Electronic Systems comprises the US- and UK-based electronics solutions business and the US-based SMS business, which have been aggregated together due to the similarities of the services offered.
+   {}
 == International Airlines Group: is a leading European airline group, formed to hold the interests of airline and ancillary operations
+   {}
 == DSV A/S: We connect our customers with the world and ensure flexible and efficient supply chains through storage and transport of goods by air, sea and road.
+   {}
 == ASML Holding: ASML is a leading supplier to the semiconductor industry. We provide chipmakers with hardware, software and services to mass produce the patterns of integrated circuits (microchips). Together with our partners, we drive the advancement of more affordable, more powerful and more energy-efficient microchips.
+   {}
 == Volvo Cars: Volvo Car Corporation and its subsidiaries, operates in the automo-tive industry with business relating to design, development, manu-facturing, marketing and sale of cars and thereto related services.
+   {}
 == British American Tobacco: These are our key brands in both the combustibles and Smokeless categories. This ensures focus and investment in the brands and categories that will underpin the Group’s future performance.
+   {}
 == Rolls-Royce: The Group’s three divisions are set out below.
+   {}
 == Diageo PLC: We sourceFrom smallholder farmers in Africa and Mexico, to multinational companies, we work with our suppliers to procure high-quality raw materials and services, with sustainability in mind. Where it is right for our business, we grow and source locally.2.
+   {}
 == OMV Aktiengesellschaft: an integrated, international oil, gas, and chemicals company with activities in the divisions Chemicals, Fuels and Feedstock, and Energy.
+   {}
 == BT Group: BT Group is a trusted connector of people, business and society. We build and run the country’s largest fixed network and best mobile network. We design, build, market, sell and support network access, connectivity and related products.
+   {}
 == Associated British Foods: Our purpose is to provide safe, nutritious and affordable food, and clothing that is great value for money. We take a long-term, patient approach to drive sustainable growth and cash generation across our portfolio of food and retail businesses to create value for all stakeholders.
+   {}
 == Lloyds Banking Group: Lloyds Banking Group provides a wide range of banking and financial services in the UK and in certain locations overseas.
+   {}
 == Randstad N.V.: activitiesRandstad specializes in solutions in the field of work and human resources services. Our services comprise temporary and permanent placements of talent. In addition, we offer recruitment process outsourcing services (RPO), managed services programs (MSP), payroll services and outplacement services.
+   {}
 == ING Group: ING Group is a global financial institution with a strong European base, offering a wide range of retail and wholesale banking services to customers.
+   {}
 == National Grid plc: National Grid’s principal activities involve the transmission and distribution of electricity in Great Britain and of electricity and gas in northeastern US.
+   {}
