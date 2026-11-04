@@ -19,7 +19,7 @@ import urllib.request
 
 MIN_PERIOD = "2024-01-01"
 CACHE = ROOT / "data/cache/universe.json"
-CACHE_VERSION = 4          # bump when metrics() changes, so every report is read again
+CACHE_VERSION = 5          # bump when metrics() changes, so every report is read again
 RETRY_EMPTY = 2            # bump when read_report() changes, so companies without figures are read again
 WIKIDATA_CACHE = ROOT / "data/cache/wikidata.json"
 # Shares with a European ISIN only: drops e.g. Toyota or Royal Bank of Canada, which file in London too.

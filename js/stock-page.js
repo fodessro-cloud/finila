@@ -39,6 +39,18 @@
   const weekday = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
   const day = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
+  // Trading hours of the venue in minutes of the day (UTC): Xetra 9:00-17:30, Börse Frankfurt 8:00-22:00 Frankfurt time.
+  function session() {
+    const [y, mo, d] = intra.date.split('-').map(Number);
+    const noon = new Date(Date.UTC(y, mo - 1, d, 12));
+    const berlinHour = +noon.toLocaleString('en-GB', { hour: '2-digit', hour12: false, timeZone: 'Europe/Berlin' });
+    const off = (berlinHour - 12) * 60;   // 60 in winter, 120 in summer
+    const [a, b] = /frankfurt/i.test(intra.venue || '') ? [8 * 60, 22 * 60] : [9 * 60, 17 * 60 + 30];
+    const bars = intra.bars;
+    // Never cut off a price: widen to the first and last bar if the venue traded outside these hours.
+    return [Math.min(a - off, bars[0][0]), Math.max(b - off, bars[bars.length - 1][0])];
+  }
+
   function draw(range) {
     if (range === 'w') {
       pts = intra.week.map(([d, m, p]) => [`${weekday(d)} ${clock(m, d)}`, p]);
@@ -56,16 +68,23 @@
       cap[0].textContent = 'Price since ' + day(pts[0][0]);
     }
     const vals = pts.map(p => p[1]), lo = Math.min(...vals), hi = Math.max(...vals), span = hi - lo || 1;
-    xy = vals.map((v, i) => [P + i * (W - 2 * P) / Math.max(1, vals.length - 1), P + (hi - v) * (H - 2 * P) / span]);
+    // 1D: the axis is the whole trading day, so the line ends where the day is now.
+    const sess = range === 'i0' ? session() : null;
+    const xAt = sess ? (m => P + Math.max(0, Math.min(1, (m - sess[0]) / (sess[1] - sess[0]))) * (W - 2 * P))
+      : null;
+    const dayBars = sess ? intra.bars : null;
+    xy = vals.map((v, i) => [sess ? xAt(dayBars[i][0]) : P + i * (W - 2 * P) / Math.max(1, vals.length - 1),
+      P + (hi - v) * (H - 2 * P) / span]);
     const pl = xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
     const chg = (vals[vals.length - 1] / vals[0] - 1) * 100, cls = chg >= 0 ? 'pos' : 'neg';
     line.setAttribute('points', pl); line.setAttribute('class', 'sp-chart-line ' + cls);
-    area.setAttribute('points', `${P},${H} ${pl} ${W - P},${H}`); area.setAttribute('class', 'sp-chart-area ' + cls);
+    area.setAttribute('points', `${xy[0][0].toFixed(1)},${H} ${pl} ${xy[xy.length - 1][0].toFixed(1)},${H}`); area.setAttribute('class', 'sp-chart-area ' + cls);
     cap[1].textContent = (chg >= 0 ? '+' : '') + fmt(chg, 2) + '%'; cap[1].className = cls;
     axis[0].textContent = pts[0][0].length === 10 ? day(pts[0][0]) : pts[0][0];
     axis[1].textContent = `low €${fmt(lo)} · high €${fmt(hi)}`;
     const last = pts[pts.length - 1][0];
     axis[2].textContent = last.length === 10 ? day(last) : last;
+    if (sess) { axis[0].textContent = clock(sess[0]); axis[2].textContent = clock(sess[1]); }
     fig.querySelectorAll('[data-range]').forEach(b => b.classList.toggle('active', b.dataset.range === range));
   }
 
@@ -92,7 +111,8 @@
   const tip = document.createElement('div'); tip.className = 'sp-chart-tip'; fig.appendChild(tip);
   svg.addEventListener('pointermove', e => {
     const r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * W;
-    const i = Math.max(0, Math.min(pts.length - 1, Math.round((x - P) / (W - 2 * P) * (pts.length - 1))));
+    let i = 0;
+    for (let k = 1; k < xy.length; k++) if (Math.abs(xy[k][0] - x) < Math.abs(xy[i][0] - x)) i = k;
     cursor.setAttribute('x1', xy[i][0]); cursor.setAttribute('x2', xy[i][0]); cursor.style.display = '';
     const when = pts[i][0].length === 10 ? day(pts[i][0]) : pts[i][0];
     tip.textContent = `${when} · €${fmt(pts[i][1])}`; tip.style.display = 'block';
@@ -100,4 +120,48 @@
   });
   svg.addEventListener('pointerleave', () => { cursor.style.display = 'none'; tip.style.display = 'none'; });
   draw(usable ? 'i0' : 'd0');
+})();
+
+// "What if the company grows?": the visitor's assumptions -> revenue, EBITDA, company value and price
+// per share after N years. Amounts in EUR millions, shares in millions. Choices go into the address
+// (?growth=6&margin=40&multiple=12&years=5) so a scenario can be shared.
+(function () {
+  const box = document.getElementById('whatif');
+  if (!box) return;
+  const d = JSON.parse(box.dataset.whatif);
+  const inp = k => box.querySelector(`[data-i="${k}"]`), out = k => box.querySelector(`[data-o="${k}"]`);
+  const keys = { g: 'growth', m: 'margin', x: 'multiple', y: 'years' };
+  Object.entries(keys).forEach(([k, q]) => {
+    const v = typeof urlParam === 'function' ? parseFloat(urlParam(q)) : NaN;
+    if (!isNaN(v)) inp(k).value = v;
+  });
+  const fmt = (v, dg = 1) => v.toLocaleString('en-GB', { minimumFractionDigits: dg, maximumFractionDigits: dg });
+  const money = v => Math.abs(v) >= 1000 ? '€' + fmt(v / 1000, 2) + 'B' : '€' + fmt(v, 0) + 'M';
+  function calc(write) {
+    const g = +inp('g').value, m = +inp('m').value, x = +inp('x').value, y = +inp('y').value;
+    out('g').textContent = (g >= 0 ? '+' : '') + fmt(g) + '%';
+    out('m').textContent = fmt(m) + '%';
+    out('x').textContent = fmt(x) + '×';
+    out('y').textContent = y;
+    const rev = d.rev * Math.pow(1 + g / 100, y), ebitda = rev * m / 100, ev = ebitda * x;
+    const pps = (ev - d.nd) / d.shares;
+    out('rev').textContent = money(rev);
+    out('ebitda').textContent = money(ebitda);
+    out('ev').textContent = money(ev);
+    if (pps <= 0) {
+      out('pps').textContent = '€0';
+      out('ret').textContent = 'debt would be larger than the company value';
+    } else {
+      out('pps').textContent = '€' + fmt(pps, 2);
+      const r = (Math.pow(pps / d.price, 1 / y) - 1) * 100, tot = (pps / d.price - 1) * 100;
+      out('ret').textContent = `${tot >= 0 ? '+' : ''}${fmt(tot, 0)}% vs today’s €${fmt(d.price, 2)} · ${r >= 0 ? '+' : ''}${fmt(r)}% a year`;
+      out('ret').className = r >= 0 ? 'pos' : 'neg';
+    }
+    if (write && typeof urlSet === 'function') {
+      const start = { g: d.g, m: d.m, x: d.x, y: 5 };
+      urlSet(Object.fromEntries(Object.entries(keys).map(([k, q]) => [q, +inp(k).value === start[k] ? null : inp(k).value])));
+    }
+  }
+  box.querySelectorAll('input[type=range]').forEach(i => i.addEventListener('input', () => calc(true)));
+  calc(false);
 })();

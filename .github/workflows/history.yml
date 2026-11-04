@@ -1,0 +1,48 @@
+name: Päťročná história firiem
+
+# Reads the last six annual reports (ESEF, filings.xbrl.org) of every company into data/history.json,
+# used by the company pages. Reports are cached, so after the first run only new reports are read.
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['scripts/data/history.py', '.github/workflows/history.yml']
+  schedule:
+    - cron: '15 3 * * 1'   # Mondays 03:15 UTC, before refresh-data and the page build
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Test: only this many of the largest companies (empty = all)'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: history
+  cancel-in-progress: false
+
+jobs:
+  history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read annual reports of the last six years
+        env:
+          FINILA_BUDGET_MIN: '320'
+          FINILA_LIMIT: ${{ inputs.limit || (github.event_name == 'push' && '60' || '') }}
+        run: |
+          set -o pipefail
+          python scripts/data/history.py 2>&1 | tee data/history.log || { echo "::error::history: $(tail -3 data/history.log | tr '\n' ' ')"; exit 1; }
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "finila-data-bot"
+          git config user.email "finila-data-bot@users.noreply.github.com"
+          git add data/history.json data/cache/history.json data/history.log
+          git diff --cached --quiet || git commit -m "Update five-year company history [data refresh]"
+          git pull --rebase -X theirs || true
+          git push
