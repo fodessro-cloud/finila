@@ -270,9 +270,12 @@ def summary_html(c, med, intro):
       <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
 
 
+HORIZON = 3   # years ahead in the scenarios and the calculator (Lub, 2026-11-04)
+
+
 def scenarios_html(c, med, g_past, x_med):
     """Three scenarios from real ranges (the company's own margins of the last years, the sector's spread of
-    multiples) and what today's price assumes. EUR millions, shares in millions, 5 years."""
+    multiples) and what today's price assumes. EUR millions, shares in millions, HORIZON years."""
     rev, nd, sh, price, m_now = c['revenueEur'], c['claimsEur'], c['shares'], c['price'], c['ebitdaMargin']
     years = c.get('years') or {}
     margins = [v['ebitda'] / v['revenue'] * 100 for v in years.values()
@@ -281,7 +284,7 @@ def scenarios_html(c, med, g_past, x_med):
     p25, p75 = med.get('evEbitdaP25'), med.get('evEbitdaP75')
     if not (is_num(p25) and is_num(p75)):
         return ''
-    n = 5
+    n = HORIZON
     val = lambda g, m, x: (rev * (1 + g / 100) ** n * m / 100 * x - nd) / sh
     g_sec = med.get('revenueGrowth') if is_num(med.get('revenueGrowth')) else 0
     rows = [('Weak', min(g_past, 0), lo_m, p25, 'no growth (or the past decline), the lowest margin of the last years, a multiple like the cheapest quarter of the sector'),
@@ -300,9 +303,9 @@ def scenarios_html(c, med, g_past, x_med):
     if is_num(need) and -30 < need < 60:
         past = f'; the last {c["cagrYears"]} years it grew {sign(c["revenueCagr"])}% a year' if is_num(c.get('revenueCagr')) else ''
         implied = (f'<p class="sp-wi-implied"><b>What today’s price assumes:</b> revenue {"growing" if need >= 0 else "shrinking"} {num(abs(need))}% a year '
-                   f'for 5 years at today’s margin, if the company is then valued at the sector median of {num(x_med)}× EBITDA{past}.</p>')
+                   f'for {n} years at today’s margin, if the company is then valued at the sector median of {num(x_med)}× EBITDA{past}.</p>')
     return f'''{implied}
-      <div class="sp-scroll"><table class="sp-table sp-scen"><tr><th>In 5 years</th><th>Growth a year</th><th>EBITDA margin</th><th>EV/EBITDA</th><th>Price per share</th><th>vs today €{num(price, 2)}</th></tr>{trs}</table></div>'''
+      <div class="sp-scroll"><table class="sp-table sp-scen"><tr><th>In {n} years</th><th>Growth a year</th><th>EBITDA margin</th><th>EV/EBITDA</th><th>Price per share</th><th>vs today €{num(price, 2)}</th></tr>{trs}</table></div>'''
 
 
 def whatif_html(c, med):
@@ -312,16 +315,26 @@ def whatif_html(c, med):
         return ''
     g_past = c.get('revenueCagr') if is_num(c.get('revenueCagr')) else c.get('revenueGrowth')
     g_past = round(min(max(g_past, -10), 30), 1) if is_num(g_past) else 0
-    # The sliders start at the middle scenario: the sector's typical growth, not the company's own best years.
-    g = round(min(max(med['revenueGrowth'], -10), 30), 1) if is_num(med.get('revenueGrowth')) else g_past
-    g_src = 'median growth of the sector last year' if is_num(med.get('revenueGrowth')) else 'the company’s past growth'
+    # The sliders start at the company's own record in the years-of-results table: its revenue growth a
+    # year (CAGR) and its average EBITDA margin over those years, 3 years ahead (Lub, 2026-11-04).
+    years = c.get('years') or {}
+    ms = [v['ebitda'] / v['revenue'] * 100 for v in years.values()
+          if is_num(v.get('ebitda')) and is_num(v.get('revenue')) and v['revenue'] > 0 and v['ebitda'] > 0]
+    if is_num(c.get('revenueCagr')):
+        g, g_src = g_past, f'average over {c.get("cagrYears")} years (results table)'
+    elif is_num(med.get('revenueGrowth')):
+        g, g_src = round(min(max(med['revenueGrowth'], -10), 30), 1), 'median growth of the sector last year'
+    else:
+        g, g_src = g_past, 'the company’s growth last year'
+    m0, m_src = (round(sum(ms) / len(ms), 1), f'average of {len(ms)} years (results table)') if len(ms) >= 3 \
+        else (round(c['ebitdaMargin'], 1), 'last year')
     x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
     x_src = f'median of {esc(med.get("label") or (c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
     if not is_num(x):
         return ''
     scen = scenarios_html(c, med, g_past, x)
     data = {'rev': round(c['revenueEur'], 1), 'nd': round(c['claimsEur'], 1), 'shares': c['shares'], 'price': c['price'],
-            'g': g, 'm': round(c['ebitdaMargin'], 1), 'x': round(x, 1)}
+            'g': g, 'm': m0, 'x': round(x, 1), 'y': HORIZON}
     return f'''<section class="sp-card sp-whatif" id="whatif" data-whatif='{json.dumps(data)}'>
       <h2>What could the share be worth?</h2>
       <p class="sp-sub">Three scenarios from real ranges: the company’s own margins of the last years and the spread of multiples in its sector.</p>
@@ -329,9 +342,9 @@ def whatif_html(c, med):
       <h3 class="sp-wi-h">Try your own</h3>
       <div class="sp-wi-inputs">
         <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%)</small></label>
-        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: last year ({num(data["m"])}%)</small></label>
+        <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: {m_src} ({num(data["m"])}%)</small></label>
         <label><span>EV / EBITDA at the end <b data-o="x"></b></span><input type="range" data-i="x" min="2" max="40" step="0.5" value="{data["x"]}"><small>Start: {x_src} ({num(x)}×)</small></label>
-        <label><span>Years <b data-o="y"></b></span><input type="range" data-i="y" min="1" max="10" step="1" value="5"><small>How far ahead</small></label>
+        <label><span>Years <b data-o="y"></b></span><input type="range" data-i="y" min="1" max="10" step="1" value="{HORIZON}"><small>Start: {HORIZON} years ahead</small></label>
       </div>
       <div class="sp-wi-out">
         <div><span>Revenue then</span><b data-o="rev"></b></div>
@@ -1313,8 +1326,9 @@ METHOD = [
         ('Not shown', 'For banks and insurers, and for vehicle groups with their own bank (their borrowings fund customer loans).'),
     ]),
     ('Scenarios', [
-        ('Three scenarios', 'Revenue grows for 5 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
-        ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 5 years, EBITDA at today’s margin × the peer median multiple.'),
+        ('Calculator start', 'Revenue growth a year and average EBITDA margin over the years of the results table (FY2021 onwards), the sector median EV/EBITDA, 3 years ahead.'),
+        ('Three scenarios', 'Revenue grows for 3 years at the stated rate, EBITDA = revenue × margin, company value = EBITDA × EV/EBITDA, minus today’s net debt, leases and minorities, divided by today’s shares. Weak: no growth, the lowest margin of the last years, the multiple of the cheapest quarter of peers. Middle: peer median growth of the last year, today’s margin, peer median multiple. Strong: the company’s own past growth, its best margin, the multiple of the dearest quarter of peers. Dividends, new shares and debt changes are not counted.'),
+        ('What today’s price assumes', 'The revenue growth a year needed for today’s enterprise value to equal, in 3 years, EBITDA at today’s margin × the peer median multiple.'),
     ]),
     ('Checks', [
         ('Unit and currency checks', 'A year whose revenue or assets are about 1,000× off the other years is left out (a report tagged in thousands). Years in another currency are left out. Ratios outside plausible ranges (e.g. P/S above 60) are not shown.'),

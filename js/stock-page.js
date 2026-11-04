@@ -160,7 +160,7 @@
       out('ret').className = r >= 0 ? 'pos' : 'neg';
     }
     if (write && typeof urlSet === 'function') {
-      const start = { g: d.g, m: d.m, x: d.x, y: 5 };
+      const start = { g: d.g, m: d.m, x: d.x, y: d.y || 3 };
       urlSet(Object.fromEntries(Object.entries(keys).map(([k, q]) => [q, +inp(k).value === start[k] ? null : inp(k).value])));
     }
   }
