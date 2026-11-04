@@ -28,20 +28,23 @@ fd.CONCEPTS.update({
     "interest":    ["FinanceCosts", "InterestExpense", "InterestExpenseOnBorrowings", "InterestPaidClassifiedAsOperatingActivities"],
     "pbt":         ["ProfitLossBeforeTax"],
     "tax":         ["IncomeTaxExpenseContinuingOperations"],
+    "minorities":  ["NoncontrollingInterests"],
+    "leases_c":    ["CurrentLeaseLiabilities"],
+    "leases_nc":   ["NoncurrentLeaseLiabilities"],
 })
-fd.INSTANT.update({"inventories", "receivables", "payables", "leases"})
+fd.INSTANT.update({"inventories", "receivables", "payables", "leases", "minorities", "leases_c", "leases_nc"})
 
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/history.json"
 OUT = ROOT / "data/history.json"
-CACHE_VERSION = 2          # bump when the figures read change, so every report is read again
+CACHE_VERSION = 3          # bump when the figures read change, so every report is read again
 YEARS = 6                  # newest report and the five before it
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
 WORKERS = 3
 START = time.time()
 FIELDS = ["revenue", "ebitda", "operatingProfit", "netIncome", "operatingCashFlow", "capex", "fcf", "dividendsPaid",
           "equity", "assets", "cash", "debt", "netDebt", "eps", "sharesTagged", "da", "inventories", "receivables",
-          "payables", "leases", "gross", "curAssets", "curLiab", "interest", "pbt", "tax"]
+          "payables", "leases", "minorities", "gross", "curAssets", "curLiab", "interest", "pbt", "tax"]
 
 
 _get = fd.get
@@ -75,9 +78,11 @@ def year_row(cur, prev):
         r["da"] = mil(abs(da))
     for k, name in (("inventories", "inventories"), ("receivables", "receivables"), ("payables", "payables"),
                     ("leases", "leases"), ("gross", "gross"), ("cur_assets", "curAssets"), ("cur_liab", "curLiab"),
-                    ("interest", "interest"), ("pbt", "pbt"), ("tax", "tax")):
+                    ("interest", "interest"), ("pbt", "pbt"), ("tax", "tax"), ("minorities", "minorities")):
         if cur.get(k) is not None:
             r[name] = mil(abs(cur[k])) if k == "interest" else mil(cur[k])
+    if "leases" not in r and (cur.get("leases_c") is not None or cur.get("leases_nc") is not None):
+        r["leases"] = mil(cur.get("leases_c", 0) + cur.get("leases_nc", 0))
     if cur.get("financial"):
         r["financial"] = True
     return r

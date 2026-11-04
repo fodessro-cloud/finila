@@ -154,14 +154,32 @@ def add_history_figures(rows):
         h = hist.get(c['lei'])
         if not h or c.get('origin') is not None or h['currency'] != c.get('currency'):
             continue
-        years = h['years']
+        years = {y: dict(v) for y, v in h['years'].items()}
+        # Share splits: an old report states EPS on the old share count (Novo Nordisk 2:1 in 2023).
+        # Where profit / EPS gives a share count about 2, 3, 4, 5, 10 or 20 times off the newest
+        # year, the old EPS is put on today's share basis, as companies restate it themselves.
+        ny = years[max(years)]
+        base = ny['netIncome'] / ny['eps'] if is_num(ny.get('netIncome')) and is_num(ny.get('eps')) and ny['eps'] and ny['netIncome'] * ny['eps'] > 0 else None
+        for y, v in years.items():
+            if base and is_num(v.get('netIncome')) and is_num(v.get('eps')) and v['eps'] and v['netIncome'] * v['eps'] > 0:
+                r = base / (v['netIncome'] / v['eps'])
+                for f in (2, 3, 4, 5, 8, 10, 20, 25, 50, 100):
+                    for ff in (f, 1 / f):
+                        if abs(r / ff - 1) < 0.06:
+                            v['eps'] = v['eps'] / ff
+                            v['epsSplit'] = round(ff, 3)
+                            if is_num(v.get('sharesTagged')):
+                                v['sharesTagged'] = v['sharesTagged'] * ff
         last = years.get((c.get('periodEnd') or '')[:4])
         if not last or last.get('end') != c.get('periodEnd'):
             last = None
         c['years'] = years
         ys = sorted(years)
-        first, newest = years[ys[0]], years[ys[-1]]
-        n = int(ys[-1]) - int(ys[0])
+        # Growth is measured from FY2021 when possible: 2020 was a covid year, a low base for most companies.
+        start = next((y for y in ys if y >= '2021'), ys[0]) if int(ys[-1]) - int(next((y for y in ys if y >= '2021'), ys[0])) >= 3 else ys[0]
+        first, newest = years[start], years[ys[-1]]
+        n = int(ys[-1]) - int(start)
+        c['cagrFrom'] = start
 
         def cagr(k):
             a, b = first.get(k), newest.get(k)
@@ -171,8 +189,9 @@ def add_history_figures(rows):
         sh = [years[y].get('sharesTagged') or (years[y]['netIncome'] / years[y]['eps']
               if is_num(years[y].get('netIncome')) and is_num(years[y].get('eps')) and abs(years[y]['eps']) > 1e-6
               and years[y]['netIncome'] * years[y]['eps'] > 0 else None) for y in ys]
-        if n >= 3 and is_num(sh[0]) and is_num(sh[-1]) and sh[0] > 0:
-            ch = (sh[-1] / sh[0] - 1) * 100
+        s0 = sh[ys.index(start)]
+        if n >= 3 and is_num(s0) and is_num(sh[-1]) and s0 > 0:
+            ch = (sh[-1] / s0 - 1) * 100
             if -60 < ch < 300:
                 c['sharesChange'] = ch
         div_years = 0
@@ -201,6 +220,10 @@ def add_history_figures(rows):
         cap = (c.get('equity') or 0) + (c.get('netDebt') or 0)
         if not c.get('financial') and is_num(op) and is_num(c.get('equity')) and c['equity'] > 0 and cap > 0:
             c['roic'] = op * (1 - rate) / cap * 100
+        if is_num(last.get('leases')) and last['leases'] > 0:
+            c['leases'] = last['leases']
+        if is_num(last.get('minorities')) and last['minorities'] > 0:
+            c['minorities'] = last['minorities']
         for k, base in (('bvps', 'equity'), ('fcfps', 'fcf')):
             shares = c.get('shares')
             if is_num(c.get(base)) and is_num(shares) and shares > 0:
@@ -214,7 +237,7 @@ RESTATED = '<sup title="Restated by the next annual report">R</sup>'
 def summary_html(c, med, intro):
     """In short: what a buyer would want to know first, in plain sentences built from the figures."""
     out = [intro]
-    sec = esc((c.get('sector') or '').lower())
+    sec = esc(med.get('label') or (c.get('sector') or '').lower())
     yrs = c.get('cagrYears')
     if is_num(c.get('revenueCagr')) and yrs and not c.get('financial'):
         r = c['revenueCagr']
@@ -233,9 +256,10 @@ def summary_html(c, med, intro):
     nd = c.get('netDebtToEbitda')
     bits = []
     if is_num(em) and is_num(mm) and not c.get('financial'):
-        bits.append(f'margins are {"above" if em > mm * 1.1 else "below" if em < mm * 0.9 else "close to"} the sector')
+        bits.append(f'the EBITDA margin of {num(em)}% is {"above" if em > mm * 1.1 else "below" if em < mm * 0.9 else "close to"} the peer median of {num(mm)}%')
     if is_num(nd) and not c.get('financial'):
-        bits.append('it has more cash than debt' if nd < 0 else f'debt is {"low" if nd < 1.5 else "moderate" if nd < 3 else "high"} ({num(nd, 1)}× EBITDA)')
+        pm = med.get('netDebtToEbitda')
+        bits.append('it has more cash than debt' if nd < 0 else f'net debt is {num(nd, 1)}× EBITDA' + (f' (peer median {num(pm, 1)}×)' if is_num(pm) else ''))
     if bits:
         s = ', '.join(bits)
         out.append(s[0].upper() + s[1:] + '.')
@@ -249,9 +273,44 @@ def summary_html(c, med, intro):
       <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
 
 
+def scenarios_html(c, med, g_past, x_med):
+    """Three scenarios from real ranges (the company's own margins of the last years, the sector's spread of
+    multiples) and what today's price assumes. EUR millions, shares in millions, 5 years."""
+    rev, nd, sh, price, m_now = c['revenueEur'], c['claimsEur'], c['shares'], c['price'], c['ebitdaMargin']
+    years = c.get('years') or {}
+    margins = [v['ebitda'] / v['revenue'] * 100 for v in years.values()
+               if is_num(v.get('ebitda')) and is_num(v.get('revenue')) and v['revenue'] > 0 and v['ebitda'] > 0]
+    lo_m, hi_m = (min(margins), max(margins)) if len(margins) >= 3 else (max(m_now - 3, 1), m_now)
+    p25, p75 = med.get('evEbitdaP25'), med.get('evEbitdaP75')
+    if not (is_num(p25) and is_num(p75)):
+        return ''
+    n = 5
+    val = lambda g, m, x: (rev * (1 + g / 100) ** n * m / 100 * x - nd) / sh
+    g_sec = med.get('revenueGrowth') if is_num(med.get('revenueGrowth')) else 0
+    rows = [('Weak', min(g_past, 0), lo_m, p25, 'no growth (or the past decline), the lowest margin of the last years, a multiple like the cheapest quarter of the sector'),
+            ('Middle', g_sec, m_now, x_med, 'growth like the typical company of the sector last year, today’s margin, the sector median multiple'),
+            ('Strong', max(g_past, g_sec), hi_m, p75, 'growth like the company’s own past, the best margin of the last years, a multiple like the dearest quarter of the sector')]
+    trs = ''
+    for name, g, m, x, what in rows:
+        v = val(g, m, x)
+        ch = f'<span class="{"pos" if v >= price else "neg"}">{sign((v / price - 1) * 100)}%</span>' if v > 0 else '<span class="neg">debt above value</span>'
+        trs += (f'<tr><td><b>{name}</b><small>{what}</small></td><td>{sign(g)}%</td><td>{num(m)}%</td><td>{num(x)}×</td>'
+                f'<td><b>{"€" + num(v, 2) if v > 0 else "€0"}</b></td><td>{ch}</td></tr>')
+    # What today's price assumes: growth needed for today's company value at the sector median multiple, today's margin.
+    ev_now = c['mcap'] + nd
+    need = ((ev_now / (rev * m_now / 100 * x_med)) ** (1 / n) - 1) * 100 if ev_now > 0 else None
+    implied = ''
+    if is_num(need) and -30 < need < 60:
+        past = f'; the last {c["cagrYears"]} years it grew {sign(c["revenueCagr"])}% a year' if is_num(c.get('revenueCagr')) else ''
+        implied = (f'<p class="sp-wi-implied"><b>What today’s price assumes:</b> revenue {"growing" if need >= 0 else "shrinking"} {num(abs(need))}% a year '
+                   f'for 5 years at today’s margin, if the company is then valued at the sector median of {num(x_med)}× EBITDA{past}.</p>')
+    return f'''{implied}
+      <div class="sp-scroll"><table class="sp-table sp-scen"><tr><th>In 5 years</th><th>Growth a year</th><th>EBITDA margin</th><th>EV/EBITDA</th><th>Price per share</th><th>vs today €{num(price, 2)}</th></tr>{trs}</table></div>'''
+
+
 def whatif_html(c, med):
     """What if the company grows: the visitor's own assumptions -> price per share. js/stock-page.js computes it."""
-    need = ('revenueEur', 'netDebtEur', 'mcap', 'price', 'shares', 'ebitdaMargin')
+    need = ('revenueEur', 'claimsEur', 'mcap', 'price', 'shares', 'ebitdaMargin')
     if c.get('financial') or not all(is_num(c.get(k)) for k in need) or c['revenueEur'] <= 0 or c['ebitdaMargin'] <= 0 or c['shares'] <= 0:
         return ''
     g = c.get('revenueCagr') if is_num(c.get('revenueCagr')) else c.get('revenueGrowth')
@@ -260,14 +319,17 @@ def whatif_html(c, med):
         g, g_src = 5, 'an example'
     g = round(min(max(g, -10), 30), 1)
     x = med.get('evEbitda') if is_num(med.get('evEbitda')) else c.get('evEbitda')
-    x_src = f'median of {esc((c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
+    x_src = f'median of {esc(med.get("label") or (c.get("sector") or "").lower())} companies' if is_num(med.get('evEbitda')) else 'today’s multiple'
     if not is_num(x):
         return ''
-    data = {'rev': round(c['revenueEur'], 1), 'nd': round(c['netDebtEur'], 1), 'shares': c['shares'], 'price': c['price'],
+    scen = scenarios_html(c, med, g, x)
+    data = {'rev': round(c['revenueEur'], 1), 'nd': round(c['claimsEur'], 1), 'shares': c['shares'], 'price': c['price'],
             'g': g, 'm': round(c['ebitdaMargin'], 1), 'x': round(x, 1)}
     return f'''<section class="sp-card sp-whatif" id="whatif" data-whatif='{json.dumps(data)}'>
-      <h2>What if the company grows?</h2>
-      <p class="sp-sub">Set your own assumptions; the page works out what the share would be worth. Start values are real figures from the report.</p>
+      <h2>What could the share be worth?</h2>
+      <p class="sp-sub">Three scenarios from real ranges: the company’s own margins of the last years and the spread of multiples in its sector.</p>
+      {scen}
+      <h3 class="sp-wi-h">Try your own</h3>
       <div class="sp-wi-inputs">
         <label><span>Revenue growth a year <b data-o="g"></b></span><input type="range" data-i="g" min="-10" max="30" step="0.5" value="{g}"><small>Start: {g_src} ({sign(g)}%)</small></label>
         <label><span>EBITDA margin <b data-o="m"></b></span><input type="range" data-i="m" min="1" max="70" step="0.5" value="{data["m"]}"><small>Start: last year ({num(data["m"])}%)</small></label>
@@ -280,7 +342,7 @@ def whatif_html(c, med):
         <div><span>Company value (EV)</span><b data-o="ev"></b></div>
         <div class="sp-wi-main"><span>Price per share</span><b data-o="pps"></b><small data-o="ret"></small></div>
       </div>
-      <p class="sp-sub sp-after">Price per share = company value minus today’s net debt (€{bn(c["netDebtEur"])}), divided by today’s {num(c["shares"], 1)}M shares; dividends not counted. A calculation from your assumptions, not a forecast or advice from FINILA.</p></section>'''
+      <p class="sp-sub sp-after">Price per share = company value minus today’s net debt, leases and minorities (€{bn(c["claimsEur"])}), divided by today’s {num(c["shares"], 1)}M shares; dividends not counted. A calculation from your assumptions, not a forecast or advice from FINILA.</p></section>'''
 
 
 def history_html(c):
@@ -367,11 +429,11 @@ def history_html(c):
     minis = ''.join(bars(l, k) for l, k in keys)
     tiles = []
     if is_num(c.get('revenueCagr')) and not c.get('financial'):
-        tiles.append(('Revenue growth a year', f'{sign(c["revenueCagr"])}%', f'FY {ys[0]}–{ys[-1]} (CAGR)'))
+        tiles.append(('Revenue growth a year', f'{sign(c["revenueCagr"])}%', f'FY {c["cagrFrom"]}–{ys[-1]} (CAGR)'))
     if is_num(c.get('epsCagr')):
-        tiles.append(('EPS growth a year', f'{sign(c["epsCagr"])}%', f'FY {ys[0]}–{ys[-1]} (CAGR)'))
+        tiles.append(('EPS growth a year', f'{sign(c["epsCagr"])}%', f'FY {c["cagrFrom"]}–{ys[-1]} (CAGR)'))
     if is_num(c.get('sharesChange')):
-        tiles.append(('Shares in issue', f'{sign(c["sharesChange"])}%', f'since FY {ys[0]}' + (' (dilution)' if c['sharesChange'] > 2 else ' (buybacks)' if c['sharesChange'] < -2 else '')))
+        tiles.append(('Shares in issue', f'{sign(c["sharesChange"])}%', f'since FY {c["cagrFrom"]}' + (' (dilution)' if c['sharesChange'] > 2 else ' (buybacks)' if c['sharesChange'] < -2 else '')))
     if c.get('divYears'):
         tiles.append(('Dividend paid', f'{c["divYears"]} of {c["yearsKnown"]} years', 'in a row, newest first'))
     tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
@@ -504,7 +566,12 @@ def add_valuation(c):
         return   # banks and insurers: debt is their raw material, EV multiples say nothing
     if is_num(c.get('netDebt')):
         c['netDebtEur'] = c['netDebt'] * fx
-        c['ev'] = mcap + c['netDebtEur']
+        # Enterprise value as analysts count it: shares + net debt + lease liabilities (IFRS 16: EBITDA is
+        # before lease costs) + minority interests (EBITDA includes 100% of subsidiaries).
+        c['leasesEur'] = (c.get('leases') or 0) * fx
+        c['minoritiesEur'] = (c.get('minorities') or 0) * fx
+        c['claimsEur'] = c['netDebtEur'] + c['leasesEur'] + c['minoritiesEur']
+        c['ev'] = mcap + c['claimsEur']
     ev = c.get('ev')
     if is_num(ev) and ev > 0:
         for key, base, hi in (('evEbitda', 'ebitda', 200), ('evEbit', 'operatingProfit', 300), ('evSales', 'revenue', 60)):
@@ -514,18 +581,37 @@ def add_valuation(c):
                     c[key] = m
 
 
-def sector_medians(rows):
-    """Median of each valuation figure per sector, only where at least 5 companies have it."""
+def peer_group(c, good_industries):
+    """Peers and medians come from the narrower industry (Wikidata, e.g. pharmaceutical industry) when it
+    has at least 8 priced companies, else from the sector (Healthcare mixes drug makers and hospitals)."""
+    ind = (c.get('industry') or '').split(', ')[0]
+    return ('i', ind) if ind in good_industries else ('s', c.get('sector')) if c.get('sector') else None
+
+
+def good_industries(rows):
+    n = defaultdict(int)
+    for c in rows:
+        ind = (c.get('industry') or '').split(', ')[0]
+        if ind and is_num(c.get('mcap')):
+            n[ind] += 1
+    return {k for k, v in n.items() if v >= 8}
+
+
+def sector_medians(rows, key=lambda c: ('s', c.get('sector')) if c.get('sector') else None):
+    """Median of each valuation figure per peer group, only where at least 5 companies have it."""
     out, by = {}, defaultdict(list)
     for c in rows:
-        if c.get('sector') and is_num(c.get('mcap')):
-            by[c['sector']].append(c)
+        k = key(c)
+        if k and is_num(c.get('mcap')):
+            by[k].append(c)
     for sec, cs in by.items():
-        m = {'n': len(cs)}
+        m = {'n': len(cs), 'label': sec[1].lower().replace(' industry', '')}
         for k in VAL_KEYS:
             v = sorted(c[k] for c in cs if is_num(c.get(k)))
             if len(v) >= 5:
                 m[k] = v[len(v) // 2] if len(v) % 2 else (v[len(v) // 2 - 1] + v[len(v) // 2]) / 2
+                if k == 'evEbitda' and len(v) >= 12:   # spread of the sector, for the scenarios
+                    m['evEbitdaP25'], m['evEbitdaP75'] = v[len(v) // 4], v[(3 * len(v)) // 4]
         out[sec] = m
     return out
 
@@ -608,14 +694,18 @@ def buyer_html(c, med):
     """If you bought the whole company: shares + net debt = enterprise value, and the price tags."""
     if not is_num(c.get('mcap')):
         return ''
-    sec = (c.get('sector') or '').lower()
+    sec = med.get('label') or (c.get('sector') or '').lower()
     rep = report_chip(c)
     ev = ''
     if is_num(c.get('ev')):
         nd = c['netDebtEur']
-        ev = (f'<div class="sp-ev"><div><span>All shares {chip("p")}</span><b>€{bn(c["mcap"])}</b></div><i>{"+" if nd >= 0 else "−"}</i>'
-              f'<div><span>{"Net debt" if nd >= 0 else "Net cash"} {rep}</span><b>€{bn(abs(nd))}</b></div><i>=</i>'
-              f'<div class="sp-ev-tot"><span>Enterprise value</span><b>€{bn(c["ev"])}</b></div></div>')
+        parts = f'<div><span>All shares {chip("p")}</span><b>€{bn(c["mcap"])}</b></div>'
+        parts += f'<i>{"+" if nd >= 0 else "−"}</i><div><span>{"Net debt" if nd >= 0 else "Net cash"} {rep}</span><b>€{bn(abs(nd))}</b></div>'
+        if c.get('leasesEur'):
+            parts += f'<i>+</i><div><span>Lease liabilities {rep}</span><b>€{bn(c["leasesEur"])}</b></div>'
+        if c.get('minoritiesEur'):
+            parts += f'<i>+</i><div><span>Minority interests {rep}</span><b>€{bn(c["minoritiesEur"])}</b></div>'
+        ev = f'<div class="sp-ev">{parts}<i>=</i><div class="sp-ev-tot"><span>Enterprise value</span><b>€{bn(c["ev"])}</b></div></div>'
     rows = [('EV / EBITDA', mult(c.get('evEbitda')), mult(med.get('evEbitda'))),
             ('EV / EBIT', mult(c.get('evEbit')), mult(med.get('evEbit'))),
             ('P/E', num(c.get('pe'), 1), num(med.get('pe'), 1)),
@@ -628,15 +718,15 @@ def buyer_html(c, med):
     if not rows:
         return ''
     trs = ''.join(f'<tr><td>{k}</td><td><b>{v}</b></td><td class="sp-med">{m}</td></tr>' for k, v, m in rows)
-    note = f'Sector median of {med["n"]} {esc(sec)} companies on FINILA. ' if med.get('n') else ''
+    note = f'Median of {med["n"]} {esc(sec)} companies on FINILA. ' if med.get('n') else ''
     if is_num(c.get('evEbitda')):
         note += f'A buyer of the whole firm would pay about {num(c["evEbitda"], 1)} years of this year’s EBITDA. '
     if c.get('financial'):
         note += 'Bank or insurer: enterprise value and EBITDA multiples are not shown, debt is part of the business. '
     return f'''<section class="sp-card" id="buyer"><h2>If you bought the whole company</h2>
-      <p class="sp-sub">What a buyer pays: all the shares at today’s price{"" if c.get("financial") else " plus the debt that comes with the company"} {chip("c")}</p>
+      <p class="sp-sub">What a buyer pays: all the shares at today’s price{"" if c.get("financial") else " plus the debt, leases and minority stakes that come with the company"} {chip("c")}</p>
       {ev}
-      <table class="sp-table"><tr><th>Price tag</th><th>{esc(c["name"])}</th><th>Sector median</th></tr>{trs}</table>
+      <table class="sp-table"><tr><th>Price tag</th><th>{esc(c["name"])}</th><th>Peer median</th></tr>{trs}</table>
       <p class="sp-sub sp-after">{note}</p></section>'''
 
 
@@ -648,7 +738,7 @@ def findings(c, med):
     """Plain-language observations FINILA draws from the figures: (good: True/False/None, what, what it means)."""
     f, cur = [], esc(c.get('currency') or '')
     g = lambda k: c.get(k) if is_num(c.get(k)) else None
-    sec = esc((c.get('sector') or 'its sector').lower())
+    sec = esc(med.get('label') or (c.get('sector') or 'its sector').lower())
     fin = c.get('financial')
     em, mm = g('ebitdaMargin'), med.get('ebitdaMargin')
     if em is not None and mm is not None and not fin and abs(em - mm) >= 5:
@@ -745,7 +835,7 @@ def peers_html(c, peers, med):
     body = ''.join(f'<tr><td><a href="/stock/{p["slug"]}">{esc(p["name"])}</a></td>{tds(p)}</tr>' for p in peers)
     medrow = (f'<tr class="sp-medrow"><td>Median of {med["n"]} companies</td><td></td>' +
               ''.join(f'<td>{fn(med)}</td>' for _, fn in cols[1:]) + '</tr>') if med.get('n') else ''
-    title = f'Versus other {esc(c["sector"].lower())} companies' if c.get('sector') else f'Other companies from {esc(COUNTRIES.get(c["country"], c["country"] or ""))}'
+    title = f'Versus other {esc(med["label"])} companies' if med.get('label') else f'Other companies from {esc(COUNTRIES.get(c["country"], c["country"] or ""))}'
     return f'''<section class="sp-card" id="peers"><h2>{title}</h2>
       <p class="sp-sub">Largest European companies of the sector, latest annual figures and prices {chip("r", "Reports")}{chip("p", "Prices")}{chip("c")}</p>
       <div class="sp-scroll"><table class="sp-table sp-peer-table"><tr><th>Company</th>{th}</tr>{me}{body}{medrow}</table></div></section>'''
@@ -1057,7 +1147,9 @@ def main():
     add_history_figures(rows)
     for c in rows:
         add_valuation(c)
-    medians = sector_medians(rows)
+    good = good_industries(rows)
+    group = lambda c: peer_group(c, good)
+    medians = sector_medians(rows, group)
     slugs = assign_slugs(rows, published_slugs())
     out = OUT / 'stock'
     out.mkdir(parents=True, exist_ok=True)
@@ -1065,14 +1157,14 @@ def main():
         old.unlink()
     by_sector = defaultdict(list)
     for c in rows:
-        by_sector[c.get('sector')].append(c)
+        by_sector[group(c)].append(c)
     for v in by_sector.values():
         v.sort(key=lambda c: -(c.get('mcap') or c.get('revenueEur') or 0))
     stamp = f'{updated}' + (f', prices of {price_day}' if price_day else '')
     for c in rows:
-        same = by_sector[c.get('sector')] if c.get('sector') else [p for p in rows if p['country'] == c['country']]
+        same = by_sector[group(c)] if group(c) else [p for p in rows if p['country'] == c['country']]
         peers = [p for p in same if p is not c][:8]
-        (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(c.get('sector'), {})), encoding='utf-8')
+        (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(group(c), {})), encoding='utf-8')
     (out / 'index.html').write_text(index_page(rows, updated), encoding='utf-8')
     (OUT / 'js').mkdir(exist_ok=True)
     (OUT / 'js' / 'stock-slugs.json').write_text(json.dumps(slugs, separators=(',', ':')), encoding='utf-8')

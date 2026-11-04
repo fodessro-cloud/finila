@@ -140,3 +140,6 @@ html, body { height: auto; }
 .sp-wi-out .sp-wi-main span { color: #C9D3E6; } .sp-wi-out .sp-wi-main b { color: #fff; font-size: 20px; }
 .sp-wi-out small { display: block; font-size: 11px; font-weight: 600; margin-top: 2px; }
 .sp-wi-out .sp-wi-main small.pos { color: #7FE0B0; } .sp-wi-out .sp-wi-main small.neg { color: #FF9C9C; }
+.sp-wi-h { font-size: 13px; color: var(--strong); margin: 16px 0 8px; }
+.sp-wi-implied { font-size: 13px; line-height: 1.5; background: #F2F6FE; border-left: 3px solid var(--accent2); padding: 8px 12px; margin: 0 0 12px; }
+.sp-scen td small { display: block; font-size: 10.5px; color: var(--text2); font-weight: 400; max-width: 320px; }
