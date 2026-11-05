@@ -60,9 +60,19 @@ def log(msg):
 def list_filings():
     """Newest-first candidate reports per LEI, with the issuer name and country."""
     by_lei, url, pages = {}, f"{BASE}/api/filings?include=entity&page[size]=500&sort=-period_end", 0
+    complete = True
     while url:
         data = get(url)
+        for wait in (90, 180, 300):
+            if data:
+                break
+            # filings.xbrl.org answers 429 Too Many Requests when busy: a listing cut short here dropped
+            # some 110 companies (Poste Italiane, Eiffage ...) from the site on 29-31 Oct 2026
+            log(f"  listing page {pages + 1} failed, trying again in {wait} s")
+            time.sleep(wait)
+            data = get(url)
         if not data:
+            complete = False
             break
         names = {e["id"]: e["attributes"] for e in data.get("included", []) if e["type"] == "entity"}
         oldest = None
@@ -85,8 +95,25 @@ def list_filings():
         url = (nxt if nxt.startswith("http") else BASE + nxt) if nxt else None
     for rec in by_lei.values():
         rec["filings"].sort(key=lambda a: (a["period_end"], a["processed"]), reverse=True)
-    log(f"{len(by_lei)} issuers with a report for {MIN_PERIOD[:4]} or later ({pages} pages)")
-    return by_lei
+    log(f"{len(by_lei)} issuers with a report for {MIN_PERIOD[:4]} or later ({pages} pages)"
+        + ("" if complete else ", LISTING CUT SHORT"))
+    return by_lei, complete
+
+
+def keep_cached(issuers, cache, listed):
+    """When the filings listing was cut short, the companies on the missing pages keep the report
+    already read (cache), so a busy filings.xbrl.org never makes them vanish from the site."""
+    n = 0
+    for lei, c in cache.items():
+        if lei in issuers or not c.get("row") or not c.get("fxo"):
+            continue
+        country = c.get("country") or (re.search(r"-ESEF-([A-Z]{2})-", c["fxo"]) or [None, None])[1]
+        name = c.get("name") or (listed.get(lei) or {}).get("name")
+        if not name:
+            continue
+        issuers[lei] = {"name": name, "country": country, "filings": [{"fxo_id": c["fxo"]}]}
+        n += 1
+    return n
 
 
 def read_report(lei, rec):
@@ -294,7 +321,8 @@ FIELDS = ["lei", "isin", "name", "country", "ticker", "exchange", "mic", "sector
 def add_shares(rows, listed):
     """Shares in issue from data/shares.json (German and Swiss companies have no reports on filings.xbrl.org,
     so without it they have no market value and drop off the maps). Adds the companies the file
-    names that are not on the list yet (Wikidata lists no ticker for them, Porsche has no FIRDS row)."""
+    names that are not on the list yet (Wikidata lists no ticker for them, Porsche has no FIRDS row,
+    Theon International has no Wikidata entry), on Xetra unless the row names its home exchange and MIC."""
     path = ROOT / "data/shares.json"
     if not path.exists():
         return 0
@@ -310,7 +338,8 @@ def add_shares(rows, listed):
                 continue
             l = listed.get(lei, {})
             r = {"lei": lei, "isin": isin, "name": k["name"], "country": isin[:2], "ticker": k.get("ticker"),
-                 "exchange": "Xetra", "mic": (l.get("mics") or ["XETR"])[0], "sector": k.get("sector"), "origin": "listing"}
+                 "exchange": k.get("exchange") or "Xetra", "mic": k.get("mic") or (l.get("mics") or ["XETR"])[0],
+                 "sector": k.get("sector"), "origin": "listing"}
             rows.append(r)
             have.add(lei)
         if r:
@@ -468,6 +497,30 @@ def one_company_per_isin(rows):
     return lost
 
 
+def revenue_line(rows, rates):
+    """Where a company's "Revenue" tag is not its real turnover (Adyen: gross revenue incl. interchange;
+    its net revenue is tagged as gross profit), take that year's line named in data/fixes.json
+    "revenueLine" from data/history.json, and the margins and revenue growth with it."""
+    fix = json.loads((ROOT / "data/fixes.json").read_text()).get("revenueLine", {})
+    hist_file = ROOT / "data/history.json"
+    hist = json.loads(hist_file.read_text()) if fix and hist_file.exists() else {}
+    pct = lambda a, b: None if a is None or not b else round(a / b * 100, 1)
+    n = 0
+    for r in rows:
+        f, h = fix.get(r["lei"]), hist.get(r["lei"], {}).get("years", {})
+        y = (r.get("periodEnd") or "")[:4]
+        if not f or not y or not (h.get(y) or {}).get(f["use"]):
+            continue
+        rev, prev = h[y][f["use"]], (h.get(str(int(y) - 1)) or {}).get(f["use"])
+        rate = rates.get(r.get("currency") or "")
+        r.update({"revenue": rev, "revenueEur": round(rev / rate, 1) if rate else r.get("revenueEur"),
+                  "ebitdaMargin": pct(r.get("ebitda"), rev), "operatingMargin": pct(r.get("operatingProfit"), rev),
+                  "netMargin": pct(r.get("netIncome"), rev), "fcfMargin": pct(r.get("fcf"), rev),
+                  "revenueGrowth": pct(rev - prev, prev) if prev else None})
+        n += 1
+    return n
+
+
 def apply_fixes(rows):
     """Hand-checked sector, name and ticker by ISIN (data/fixes.json) over what Wikidata and the
     name rules give (LVMH filed under Consumer Staples, Rolls-Royce under Energy), and companies left
@@ -488,9 +541,11 @@ def apply_fixes(rows):
 
 def main():
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
-    issuers = list_filings()
+    issuers, complete = list_filings()
     listed_file = ROOT / "data/listed.json"
     listed = json.loads(listed_file.read_text()) if listed_file.exists() else {}
+    if not complete:
+        log(f"::warning title=Filings listing cut short::kept the cached report for {keep_cached(issuers, cache, listed)} companies")
     todo = [(lei, rec) for lei, rec in issuers.items()
             if (cache.get(lei, {}).get("fxo") != rec["filings"][0]["fxo_id"] or cache[lei].get("v") != CACHE_VERSION
                 or (cache[lei].get("row") is None and cache[lei].get("retry") != RETRY_EMPTY))
@@ -505,7 +560,9 @@ def main():
             res = fut.result()
             if res is None:
                 continue
-            cache[futures[fut]] = {"fxo": res[0], "row": res[1], "v": CACHE_VERSION, "retry": RETRY_EMPTY}
+            rec = issuers[futures[fut]]
+            cache[futures[fut]] = {"fxo": res[0], "row": res[1], "v": CACHE_VERSION, "retry": RETRY_EMPTY,
+                                   "name": rec["name"], "country": rec["country"]}
             done += 1
             if done % 200 == 0:
                 log(f"  read {done} reports")
@@ -575,6 +632,7 @@ def main():
     log(f"sector found for {sum(via.values())} of {len(missing)} without a Wikidata industry: {via}")
     log("earnings per share moved by powers of ten for %d companies, dropped for %d (checked against the price)" % fix_eps_scale(rows, fx))
     log(f"shares in issue from the annual report for {shares_from_report(rows)} more companies")
+    log(f"revenue line set by hand for {revenue_line(rows, fx)} companies (data/fixes.json)")
     rows, fixed = apply_fixes(rows)
     log(f"shared ISINs taken from {one_company_per_isin(rows)} companies (kept by the larger one)")
     log(f"hand-checked fixes for {fixed} companies (data/fixes.json)")

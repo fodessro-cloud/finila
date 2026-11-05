@@ -511,5 +511,11 @@
    "sector": "Healthcare",
    "name": "Krka"
   }
+ },
+ "revenueLine": {
+  "724500973ODKK3IFQ447": {
+   "use": "gross",
+   "why": "Adyen tags gross revenue incl. interchange as Revenue (8,936 m for 2022, 1,863 m for 2023 on a new basis); its net revenue (684, 1,002, 1,330, 1,626, 1,996, 2,364 m for 2020-2025) is tagged GrossProfit"
+  }
  }
 }

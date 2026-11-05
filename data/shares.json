@@ -3881,6 +3881,256 @@
    "source": "https://stockanalysis.com/quote/lon/HWG/statistics/",
    "name": "Harworth Group",
    "ticker": "HWG"
+  },
+  "CY0200751713": {
+   "shares": 77590000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/ams/THEON/",
+   "name": "Theon International",
+   "ticker": "THEON",
+   "sector": "Industrials",
+   "exchange": "Euronext Amsterdam",
+   "mic": "XAMS"
+  },
+  "FR0000130452": {
+   "shares": 95080000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/FGR/",
+   "name": "Eiffage",
+   "ticker": "FGR",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "IE0004927939": {
+   "shares": 179600000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/ise/KRX/",
+   "name": "Kingspan Group",
+   "ticker": "KRX",
+   "sector": "Industrials",
+   "exchange": "Euronext Dublin",
+   "mic": "XMSM"
+  },
+  "IT0005495657": {
+   "shares": 1940000000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/SPM/",
+   "name": "Saipem",
+   "ticker": "SPM",
+   "sector": "Energy",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "HU0000123096": {
+   "shares": 182390000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bud/RICHTER/",
+   "name": "Gedeon Richter",
+   "ticker": "RICHTER",
+   "sector": "Healthcare",
+   "exchange": "Budapest Stock Exchange",
+   "mic": "XBUD"
+  },
+  "SE0009554454": {
+   "shares": 1768000000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/sto/SBB.B/",
+   "name": "SBB (Samhällsbyggnadsbolaget i Norden)",
+   "ticker": "SBB B",
+   "sector": "Real Estate",
+   "exchange": "Nasdaq Stockholm",
+   "mic": "XSTO"
+  },
+  "FR0000065484": {
+   "shares": 38020000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/LSS/",
+   "name": "Lectra",
+   "ticker": "LSS",
+   "sector": "Technology",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000035164": {
+   "shares": 80120000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/BEN/",
+   "name": "Bénéteau",
+   "ticker": "BEN",
+   "sector": "Consumer Discretionary",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "IT0004729759": {
+   "shares": 15140000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/SES/",
+   "name": "Sesa",
+   "ticker": "SES",
+   "sector": "Technology",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "IT0003188064": {
+   "shares": 61080000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/IF/",
+   "name": "Banca IFIS",
+   "ticker": "IF",
+   "sector": "Financials",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "FR0000064271": {
+   "shares": 12650000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/STF/",
+   "name": "STEF",
+   "ticker": "STF",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR001400SF56": {
+   "shares": 34630000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/LOUP/",
+   "name": "LDC",
+   "ticker": "LOUP",
+   "sector": "Consumer Staples",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000061129": {
+   "shares": 17360000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/BOI/",
+   "name": "Boiron",
+   "ticker": "BOI",
+   "sector": "Healthcare",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "BE0003823409": {
+   "shares": 44510000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/ebr/TUB/",
+   "name": "Financière de Tubize",
+   "ticker": "TUB",
+   "sector": "Financials",
+   "exchange": "Euronext Brussels",
+   "mic": "XBRU"
+  },
+  "NO0010816895": {
+   "shares": 103910000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/osl/OKEA/",
+   "name": "OKEA",
+   "ticker": "OKEA",
+   "sector": "Energy",
+   "exchange": "Oslo Børs",
+   "mic": "XOSL"
+  },
+  "SE0007158829": {
+   "shares": 94930000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/sto/COOR/",
+   "name": "Coor Service Management",
+   "ticker": "COOR",
+   "sector": "Industrials",
+   "exchange": "Nasdaq Stockholm",
+   "mic": "XSTO"
+  },
+  "FR0000032658": {
+   "shares": 22840000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/SDG/",
+   "name": "Synergie",
+   "ticker": "SDG",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "IT0003428445": {
+   "shares": 63350000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/MARR/",
+   "name": "MARR",
+   "ticker": "MARR",
+   "sector": "Consumer Staples",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "IT0003549422": {
+   "shares": 35330000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/SL/",
+   "name": "Sanlorenzo",
+   "ticker": "SL",
+   "sector": "Consumer Discretionary",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "IT0005054967": {
+   "shares": 268500000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/RWAY/",
+   "name": "Rai Way",
+   "ticker": "RWAY",
+   "sector": "Communication",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "IT0005610958": {
+   "shares": 189650000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/DOV/",
+   "name": "doValue",
+   "ticker": "DOV",
+   "sector": "Financials",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "FR0000050049": {
+   "shares": 62040000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/VIL/",
+   "name": "Viel & Cie",
+   "ticker": "VIL",
+   "sector": "Financials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000053027": {
+   "shares": 26540000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/AKW/",
+   "name": "Akwel",
+   "ticker": "AKW",
+   "sector": "Consumer Discretionary",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000066755": {
+   "shares": 29440000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/PIG/",
+   "name": "Haulotte Group",
+   "ticker": "PIG",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000031023": {
+   "shares": 7170000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/ELEC/",
+   "name": "Électricité de Strasbourg",
+   "ticker": "ELEC",
+   "sector": "Utilities",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
   }
  }
 }
