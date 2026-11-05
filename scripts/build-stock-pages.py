@@ -264,8 +264,9 @@ def summary_html(c, med, intro):
         s = ', '.join(bits)
         out.append(s[0].upper() + s[1:] + '.')
     if len(out) < 2:
-        return f'<p class="sp-intro">{intro}</p>'
+        return about_html(c) + f'<p class="sp-intro">{intro}</p>'
     return f'''<section class="sp-card sp-summary" id="summary"><h2>In short</h2>
+      {about_html(c)}
       <p>{" ".join(out)}</p>
       <p class="sp-sub sp-after">Written by FINILA from the annual report{"s" if yrs else ""} and today’s price {chip("c")}</p></section>'''
 
@@ -969,6 +970,64 @@ def add_report_quotes(rows):
             c['quotes'] = q
 
 
+def add_about(rows):
+    """data/about.json (scripts/data/about.py): what the company does, quoted from its annual report."""
+    try:
+        about = json.loads((SRC / 'data' / 'about.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return
+    for c in rows:
+        a = about.get(c['lei'])
+        if a and a.get('text'):
+            c['about'] = a
+
+
+def about_short(t, limit=170):
+    """The first sentence, at most about `limit` characters: a longer one is cut after a comma or 'and' with '…'
+    (the words stay the company's own; Lub, 2026-11-04: keep it short)."""
+    first = re.split(r'(?<=[a-z0-9\)][.])\s+(?=[A-Z])', t)[0]
+    if len(first) <= limit:
+        return first
+    cut = max(first.rfind(', ', 0, limit), first.rfind(' and ', 0, limit))
+    return first[:cut].rstrip(' ,') + '…' if cut > 60 else ''
+
+
+def about_clean(t):
+    """Line-break hyphens ("user-friend- ly"), glued sentences ("specialist.Through") and capital headings
+    ("OUR PURPOSE") the PDF-to-ESEF conversion leaves; a lost company name at the start becomes '…'."""
+    t = re.sub(r"(?<=[a-z])- (?=[a-z])", "", t)
+    t = re.sub(r"(?<=[a-z]{3})\.(?=[A-Z][a-z])", ". ", t)
+    t = re.sub(r"^(?:[A-Z]{2,}\s){1,4}(?=[A-Z][a-z])", "", t)
+    if re.match(r"['’]s\b", t):
+        t = "…" + t
+    return t.rstrip(" ,;")
+
+
+def about_html(c):
+    """What the company does (its own words) and where its revenue comes from (segments, products, regions)."""
+    a = c.get('about')
+    if not a:
+        return ''
+    full = about_clean(a['text']) if a.get('text') else ''
+    t = about_short(full) if full else ''
+    link = f' <a href="{esc(a["source"])}" target="_blank" rel="noopener">annual report {esc(a["period"][:4])}</a>' if a.get('source') else ''
+    more = ''
+    if t and len(full) > len(t) + 20:   # the whole paragraph from the report, opened on request
+        rest = full[len(t):].strip() if full.startswith(t) else full   # only what the first sentence did not say
+        more = f'<details class="sp-more"><summary>More</summary>“{esc(rest)}”</details>'
+    out = f'<div class="sp-about"><p><b>What it does:</b> “{esc(t)}” {chip("r")}{link}</p>{more}</div>' if t else ''
+    split = a.get('split') or {}
+    rows = []
+    for kind, name in (('segments', 'By business'), ('products', 'By product'), ('regions', 'By region')):
+        if kind == 'products' and split.get('segments'):
+            continue   # one business split is enough
+        if split.get(kind):
+            rows.append(f'<span class="sp-split"><b>{name}:</b> ' + ' · '.join(f'{esc(n)} {p}%' for n, p in split[kind]) + '</span>')
+    if rows:
+        out += (f'<p class="sp-about sp-rev">Revenue {a["period"][:4]}: ' + ' '.join(rows) + (f' {chip("r")}' if not t else '') + '</p>')
+    return out
+
+
 def add_news(rows):
     """data/news.json (scripts/data/news.py): official exchange announcements and the newest report."""
     try:
@@ -1538,6 +1597,7 @@ def main():
     add_history_figures(rows)
     add_report_quotes(rows)
     add_news(rows)
+    add_about(rows)
     for c in rows:
         if c.get('captive') and c.get('years'):
             c['years'] = {y: {k: v for k, v in r.items() if k not in ('netDebt', 'fcf', 'debt')} for y, r in c['years'].items()}

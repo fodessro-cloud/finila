@@ -26,11 +26,14 @@
   const fig = document.querySelector('.sp-chart');
   if (!fig) return;
   const daily = JSON.parse(fig.querySelector('.sp-hist').textContent);
-  const svg = fig.querySelector('svg'), line = svg.querySelector('polyline'), area = svg.querySelector('polygon');
+  const svg = fig.querySelector('svg');
+  svg.querySelectorAll('polyline, polygon').forEach(el => el.remove());   // the page's static line, redrawn below
+  const plot = document.createElementNS('http://www.w3.org/2000/svg', 'g'); svg.appendChild(plot);
+  const baseTag = document.createElement('span'); baseTag.className = 'sp-chart-basetag'; fig.appendChild(baseTag);
   const cap = fig.querySelectorAll('figcaption span'), axis = fig.querySelectorAll('.sp-chart-axis span');
   const W = 600, H = 150, P = 4;
   const fmt = (v, d = 2) => v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
-  let intra = null, pts = [], xy = [];
+  let intra = null, pts = [], xy = [], curBase = 0;
   try {
     const r = await fetch(`/js/intraday/${fig.dataset.isin}.json`, { cache: 'no-cache' });
     if (r.ok) intra = await r.json();
@@ -69,18 +72,37 @@
       if (pts.length < 2) pts = daily.slice(-2);
       cap[0].textContent = 'Price since ' + day(pts[0][0]);
     }
-    const vals = pts.map(p => p[1]), lo = Math.min(...vals), hi = Math.max(...vals), span = hi - lo || 1;
+    // Yahoo-style: the line is green above and red below a reference price, the previous close for the
+    // trading-day views and the first price of the period otherwise, drawn as a dashed line.
+    const vals = pts.map(p => p[1]);
+    let base = vals[0], baseLabel = 'Start';
+    if (range[0] === 'i' && intra) {
+      const prev = daily.filter(p => p[0] < intra.date);
+      if (prev.length) { base = prev[prev.length - 1][1]; baseLabel = 'Prev. close'; }
+    }
+    const lo = Math.min(base, ...vals), hi = Math.max(base, ...vals), span = hi - lo || 1;
     // 1D: the axis is the whole trading day, so the line ends where the day is now.
     const sess = range === 'i0' ? session() : null;
     const xAt = sess ? (m => P + Math.max(0, Math.min(1, (m - sess[0]) / (sess[1] - sess[0]))) * (W - 2 * P))
       : null;
     const dayBars = sess ? intra.bars : null;
-    xy = vals.map((v, i) => [sess ? xAt(dayBars[i][0]) : P + i * (W - 2 * P) / Math.max(1, vals.length - 1),
-      P + (hi - v) * (H - 2 * P) / span]);
+    const yAt = v => P + (hi - v) * (H - 2 * P) / span;
+    xy = vals.map((v, i) => [sess ? xAt(dayBars[i][0]) : P + i * (W - 2 * P) / Math.max(1, vals.length - 1), yAt(v)]);
     const pl = xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
-    const chg = (vals[vals.length - 1] / vals[0] - 1) * 100, cls = chg >= 0 ? 'pos' : 'neg';
-    line.setAttribute('points', pl); line.setAttribute('class', 'sp-chart-line ' + cls);
-    area.setAttribute('points', `${xy[0][0].toFixed(1)},${H} ${pl} ${xy[xy.length - 1][0].toFixed(1)},${H}`); area.setAttribute('class', 'sp-chart-area ' + cls);
+    const chg = (vals[vals.length - 1] / base - 1) * 100, cls = chg >= 0 ? 'pos' : 'neg';
+    const by = yAt(base).toFixed(1), x0 = xy[0][0].toFixed(1), x1 = xy[xy.length - 1][0].toFixed(1);
+    const poly = `${x0},${by} ${pl} ${x1},${by}`;
+    plot.innerHTML = `<defs><clipPath id="spUp"><rect x="0" y="0" width="${W}" height="${by}"/></clipPath>` +
+      `<clipPath id="spDn"><rect x="0" y="${by}" width="${W}" height="${H}"/></clipPath></defs>` +
+      `<polygon class="sp-chart-area pos" clip-path="url(#spUp)" points="${poly}"/>` +
+      `<polygon class="sp-chart-area neg" clip-path="url(#spDn)" points="${poly}"/>` +
+      `<line class="sp-chart-base" x1="0" x2="${W}" y1="${by}" y2="${by}"/>` +
+      `<polyline class="sp-chart-line pos" clip-path="url(#spUp)" points="${pl}"/>` +
+      `<polyline class="sp-chart-line neg" clip-path="url(#spDn)" points="${pl}"/>`;
+    baseTag.textContent = `${baseLabel} €${fmt(base)}`;
+    const sr = svg.getBoundingClientRect(), fr = fig.getBoundingClientRect();
+    baseTag.style.top = (sr.top - fr.top + by / H * sr.height - 7) + 'px';
+    curBase = base;
     cap[1].textContent = (chg >= 0 ? '+' : '') + fmt(chg, 2) + '%'; cap[1].className = cls;
     axis[0].textContent = pts[0][0].length === 10 ? day(pts[0][0]) : pts[0][0];
     axis[1].textContent = `low €${fmt(lo)} · high €${fmt(hi)}`;
@@ -117,7 +139,8 @@
     for (let k = 1; k < xy.length; k++) if (Math.abs(xy[k][0] - x) < Math.abs(xy[i][0] - x)) i = k;
     cursor.setAttribute('x1', xy[i][0]); cursor.setAttribute('x2', xy[i][0]); cursor.style.display = '';
     const when = pts[i][0].length === 10 ? day(pts[i][0]) : pts[i][0];
-    tip.textContent = `${when} · €${fmt(pts[i][1])}`; tip.style.display = 'block';
+    const d = (pts[i][1] / curBase - 1) * 100;
+    tip.textContent = `${when} · €${fmt(pts[i][1])} · ${d >= 0 ? '+' : ''}${fmt(d)}%`; tip.style.display = 'block';
     tip.style.left = Math.min(r.width - tip.offsetWidth, Math.max(0, xy[i][0] / W * r.width - tip.offsetWidth / 2)) + 'px';
   });
   svg.addEventListener('pointerleave', () => { cursor.style.display = 'none'; tip.style.display = 'none'; });

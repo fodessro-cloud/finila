@@ -52,6 +52,8 @@ html, body { height: auto; }
 .sp-chart-ranges button { font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text); cursor: pointer; }
 .sp-chart-ranges button.active { background: var(--accent2); border-color: var(--accent2); color: #fff; }
 .sp-chart svg { touch-action: pan-y; cursor: crosshair; }
+.sp-chart-base { stroke: var(--text2); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 4 4; opacity: .7; }
+.sp-chart-basetag { position: absolute; right: 6px; font-size: 10px; color: var(--text2); background: var(--bg2); padding: 0 4px; border-radius: 3px; pointer-events: none; }
 .sp-chart-cursor { stroke: var(--text2); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 3; }
 .sp-chart-tip { display: none; position: absolute; top: 58px; background: var(--strong); color: #fff; font-size: 11px; padding: 3px 7px; border-radius: 4px; white-space: nowrap; pointer-events: none; }
 .sp-events { margin-top: 20px; }
@@ -116,7 +118,15 @@ html, body { height: auto; }
 .sp-hist-table th a { color: inherit; }
 .sp-hist-table sup { color: var(--accent2); font-weight: 700; margin-left: 2px; }
 .sp-summary { border-left: 4px solid var(--accent2); }
-.sp-summary > p:first-of-type { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }
+.sp-summary > p:first-of-type, .sp-summary > .sp-about + p, .sp-summary > .sp-rev + p { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }
+.sp-about { margin: 0 0 10px; }
+.sp-about p { font-size: 14px; line-height: 1.6; color: var(--text); margin: 0; }
+.sp-more summary { cursor: pointer; color: var(--blue, #1F6FEB); font-size: 13px; }
+.sp-more { font-size: 14px; line-height: 1.6; color: var(--text); margin-top: 4px; }
+.sp-about a { font-size: 12px; }
+.sp-summary > p.sp-rev { font-size: 13px; color: var(--text2); }
+.sp-split { display: block; }
+.sp-split b { color: var(--text); font-weight: 600; }
 .sp-minis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 0 0 14px; }
 .sp-mini { margin: 0; background: var(--bg3); border-radius: 8px; padding: 8px 10px; }
 .sp-mini figcaption { display: flex; justify-content: space-between; font-size: 11px; color: var(--text2); margin-bottom: 4px; }
