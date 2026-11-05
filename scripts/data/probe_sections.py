@@ -55,7 +55,7 @@ def sections(blocks):
 cache = json.loads((ROOT / "data/cache/news.json").read_text())
 anns = [a for a in cache.get("ann", {}).values() if a.get("results") and a.get("src") == "Nasdaq Nordic"]
 anns.sort(key=lambda a: -a.get("chars", 0))
-picked = anns[:5] + [a for a in cache.get("ann", {}).values() if a.get("src") == "Oslo Børs" and a.get("results")][:3]
+picked = anns[:3]
 stats = {"html": 0, "pdf": 0, **{k: 0 for k in SECTIONS}}
 for a in picked:
     r = news.get(a["url"], as_json=False)
@@ -63,13 +63,10 @@ for a in picked:
     if not r:
         print("  (no page)"); continue
     raw = r[0].decode("utf-8", "replace")
-    for word in ("Outlook", "OUTLOOK", "Significant events", "Highlights", "HIGHLIGHTS"):
-        i = raw.find(word)
-        if i >= 0:
-            print(f"  RAW around {word!r}:", re.sub(r"\s+", " ", raw[max(0, i - 300):i + 500]))
-            break
-    else:
-        print("  RAW start:", re.sub(r"\s+", " ", raw[:1500]), "... len", len(raw))
+    body = re.sub(r"(?is)<(script|style|head)\b.*?</\1>", " ", raw)
+    i = body.lower().find("third quarter")
+    i = i if i > 0 else body.lower().find("<body")
+    print("  BODY:", re.sub(r"\s+", " ", body[i:i + 4000]))
     bl = blocks_of(*r)
     if bl is None:
         stats["pdf"] += 1; print("  (PDF: no headings)"); continue
