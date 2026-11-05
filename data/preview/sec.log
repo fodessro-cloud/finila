@@ -1,0 +1,7 @@
+Intel (SEC0000050863): 10-K years 2020, 2021, 2022, 2023, 2024, 2025; newest 2025-12-27: {'revenue': 52853.0, 'operatingProfit': -2214.0, 'netIncome': -267.0, 'eps': -0.06, 'fcf': -4949.0, 'netDebt': 32320.0, 'shares': 5315.0}
+  2020 {'revenue': 77867.0, 'gross': 43612.0, 'operatingProfit': 23678.0, 'netIncome': 20899.0, 'eps': 4.98, 'operatingCashFlow': 35384.0, 'capex': 14259.0, 'debt': 36401.0, 'cash': None, 'equity': 81038.0}
+  2021 {'revenue': 79024.0, 'gross': 43815.0, 'operatingProfit': 19456.0, 'netIncome': 19868.0, 'eps': 4.89, 'operatingCashFlow': 29991.0, 'capex': 18733.0, 'debt': 38101.0, 'cash': None, 'equity': 95391.0}
+  2022 {'revenue': 63054.0, 'gross': 26866.0, 'operatingProfit': 2334.0, 'netIncome': 8014.0, 'eps': 1.95, 'operatingCashFlow': 15433.0, 'capex': 24844.0, 'debt': 42051.0, 'cash': None, 'equity': 101423.0}
+  2023 {'revenue': 54228.0, 'gross': 21711.0, 'operatingProfit': 93.0, 'netIncome': 1689.0, 'eps': 0.4, 'operatingCashFlow': 11471.0, 'capex': 25750.0, 'debt': 49266.0, 'cash': None, 'equity': 105590.0}
+  2024 {'revenue': 53101.0, 'gross': 17345.0, 'operatingProfit': -11678.0, 'netIncome': -18756.0, 'eps': -4.38, 'operatingCashFlow': 8288.0, 'capex': 23944.0, 'debt': 50011.0, 'cash': None, 'equity': 99270.0}
+  2025 {'revenue': 52853.0, 'gross': 18375.0, 'operatingProfit': -2214.0, 'netIncome': -267.0, 'eps': -0.06, 'operatingCashFlow': 9697.0, 'capex': 14646.0, 'debt': 46585.0, 'cash': 14265.0, 'equity': 114281.0}
