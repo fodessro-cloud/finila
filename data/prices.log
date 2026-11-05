@@ -1,18 +1,20 @@
-Xetra 2026-11-05: read 55 new minute files, up to DETR-posttrade-2026-11-05T17_02.json.gz
-Börse Frankfurt 2026-11-05: read 55 new minute files, up to DFRA-posttrade-2026-11-05T17_02.json.gz
+Xetra 2026-11-05: 298 minute files waiting, reading the newest 70
+Xetra 2026-11-05: read 70 new minute files, up to DETR-posttrade-2026-11-05T22_00.json.gz
+Börse Frankfurt 2026-11-05: 298 minute files waiting, reading the newest 70
+Börse Frankfurt 2026-11-05: read 70 new minute files, up to DFRA-posttrade-2026-11-05T22_00.json.gz
 Intraday charts for 2026-11-05 (trading day in progress): 2190 shares
 Fundamentals issuers with a price: 2264 of 2862
 Prices for 74 of 77 stocks (closed day 2026-11-04, day in progress 2026-11-05)
   no trades on Xetra or Frankfurt: UNA@Netherlands, ROG@Switzerland, ULVR@UK
-  SAP@Germany          DE0007164600 Xetra            2026-11-05 17:01      215.8 trades  14901 change 0.58
+  SAP@Germany          DE0007164600 Xetra            2026-11-05 20:58     216.55 trades  14904 change 0.93
   SIE@Germany          DE0007236101 Xetra            2026-11-05 16:51     272.45 trades  12490 change -1.77
-  ALV@Germany          DE0008404005 Xetra            2026-11-05 16:56      464.4 trades   5952 change 1.26
+  ALV@Germany          DE0008404005 Xetra            2026-11-05 20:57      462.5 trades   5953 change 0.85
   BASF@Germany         DE000BASF111 Xetra            2026-11-05 16:58      56.02 trades   8956 change 3.4
   BMW@Germany          DE0005190003 Xetra            2026-11-05 16:36      61.34 trades   4470 change 0.85
   MBG@Germany          DE0007100000 Xetra            2026-11-05 16:57      42.66 trades  11761 change 0.53
-  DTE@Germany          DE0005557508 Xetra            2026-11-05 16:56      26.26 trades   7208 change -1.54
+  DTE@Germany          DE0005557508 Xetra            2026-11-05 20:58      26.27 trades   7209 change -1.5
   DBK@Germany          DE0005140008 Xetra            2026-11-05 16:52      32.56 trades  11266 change -0.35
-  BAYN@Germany         DE000BAY0017 Xetra            2026-11-05 17:01      55.66 trades   7893 change 2.85
+  BAYN@Germany         DE000BAY0017 Xetra            2026-11-05 20:54       55.5 trades   7894 change 2.55
   VOW3@Germany         DE0007664039 Xetra            2026-11-05 16:59      71.94 trades   3978 change 1.21
   IFX@Germany          DE0006231004 Xetra            2026-11-05 17:02      45.91 trades  48982 change -9.75
   ADS@Germany          DE000A1EWWW0 Xetra            2026-11-05 17:00     178.35 trades   6118 change 1.54
