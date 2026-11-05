@@ -1,0 +1,22 @@
+name: Test sekcie reportov
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['scripts/data/probe_sections.py', '.github/workflows/probe-sections.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install pypdf
+      - run: python scripts/data/probe_sections.py > data/probe-sections.log 2>&1 || true
+      - run: |
+          git config user.name "finila-data-bot"; git config user.email "finila-data-bot@users.noreply.github.com"
+          git add data/probe-sections.log; git commit -m "Test log: report sections [data refresh]" || exit 0
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
