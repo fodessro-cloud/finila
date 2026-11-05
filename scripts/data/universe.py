@@ -60,9 +60,19 @@ def log(msg):
 def list_filings():
     """Newest-first candidate reports per LEI, with the issuer name and country."""
     by_lei, url, pages = {}, f"{BASE}/api/filings?include=entity&page[size]=500&sort=-period_end", 0
+    complete = True
     while url:
         data = get(url)
+        for wait in (90, 180, 300):
+            if data:
+                break
+            # filings.xbrl.org answers 429 Too Many Requests when busy: a listing cut short here dropped
+            # some 110 companies (Poste Italiane, Eiffage ...) from the site on 29-31 Oct 2026
+            log(f"  listing page {pages + 1} failed, trying again in {wait} s")
+            time.sleep(wait)
+            data = get(url)
         if not data:
+            complete = False
             break
         names = {e["id"]: e["attributes"] for e in data.get("included", []) if e["type"] == "entity"}
         oldest = None
@@ -85,8 +95,25 @@ def list_filings():
         url = (nxt if nxt.startswith("http") else BASE + nxt) if nxt else None
     for rec in by_lei.values():
         rec["filings"].sort(key=lambda a: (a["period_end"], a["processed"]), reverse=True)
-    log(f"{len(by_lei)} issuers with a report for {MIN_PERIOD[:4]} or later ({pages} pages)")
-    return by_lei
+    log(f"{len(by_lei)} issuers with a report for {MIN_PERIOD[:4]} or later ({pages} pages)"
+        + ("" if complete else ", LISTING CUT SHORT"))
+    return by_lei, complete
+
+
+def keep_cached(issuers, cache, listed):
+    """When the filings listing was cut short, the companies on the missing pages keep the report
+    already read (cache), so a busy filings.xbrl.org never makes them vanish from the site."""
+    n = 0
+    for lei, c in cache.items():
+        if lei in issuers or not c.get("row") or not c.get("fxo"):
+            continue
+        country = c.get("country") or (re.search(r"-ESEF-([A-Z]{2})-", c["fxo"]) or [None, None])[1]
+        name = c.get("name") or (listed.get(lei) or {}).get("name")
+        if not name:
+            continue
+        issuers[lei] = {"name": name, "country": country, "filings": [{"fxo_id": c["fxo"]}]}
+        n += 1
+    return n
 
 
 def read_report(lei, rec):
@@ -490,9 +517,11 @@ def apply_fixes(rows):
 
 def main():
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
-    issuers = list_filings()
+    issuers, complete = list_filings()
     listed_file = ROOT / "data/listed.json"
     listed = json.loads(listed_file.read_text()) if listed_file.exists() else {}
+    if not complete:
+        log(f"::warning title=Filings listing cut short::kept the cached report for {keep_cached(issuers, cache, listed)} companies")
     todo = [(lei, rec) for lei, rec in issuers.items()
             if (cache.get(lei, {}).get("fxo") != rec["filings"][0]["fxo_id"] or cache[lei].get("v") != CACHE_VERSION
                 or (cache[lei].get("row") is None and cache[lei].get("retry") != RETRY_EMPTY))
@@ -507,7 +536,9 @@ def main():
             res = fut.result()
             if res is None:
                 continue
-            cache[futures[fut]] = {"fxo": res[0], "row": res[1], "v": CACHE_VERSION, "retry": RETRY_EMPTY}
+            rec = issuers[futures[fut]]
+            cache[futures[fut]] = {"fxo": res[0], "row": res[1], "v": CACHE_VERSION, "retry": RETRY_EMPTY,
+                                   "name": rec["name"], "country": rec["country"]}
             done += 1
             if done % 200 == 0:
                 log(f"  read {done} reports")
