@@ -1065,26 +1065,45 @@ def latest_report_html(c):
               None: ('Results', 'The release does not say which period these sentences cover: see the announcement.')}
     if n == 1:   # the first quarter is also the year so far
         labels['ytd'] = labels['q']
+    sec = r.get('sections') or {}
+    ul = lambda items: '<ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul>'
+    head = lambda title, sub='', extra='': f'<h3>{title}{extra} <small>{sub}</small></h3>'
+    # 1. How the quarter went: the company's own highlights, else the sentences with a figure (quarter first).
+    hl = quote_unique([quote_clean(t) for t in sec.get('highlights') or []])[:3]
+    rest = []
+    if not hl:
+        ordered = [x for x in res if x['period'] == 'q'] + [x for x in res if x['period'] is None] + [x for x in res if x['period'] == 'ytd']
+        allq = quote_unique([quote_clean(x['text']) for x in ordered])
+        hl, rest = allq[:3], allq[3:]
     body = ''
-    for per in ('q', 'ytd', None):
-        if n == 1 and per == 'ytd':
-            continue
-        items = quote_unique([quote_clean(x['text']) for x in res if x['period'] == per or (n == 1 and per == 'q' and x['period'] == 'ytd')])
-        if items:
-            title, sub = labels[per]
-            body += f'<div class="sp-q"><h3>{esc(title)} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in items) + '</ul></div>'
-    for kind, title, sub in (('outlook', 'Outlook', 'What the company expects, as stated in this report.'),
-                             ('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
+    if hl:
+        body += f'<div class="sp-q">{head("How the quarter went", "Key figures as the company states them.")}{ul(hl)}</div>'
+    # 2. What happened in the business: contracts, launches, acquisitions, approvals.
+    ev = quote_unique([quote_clean(t) for t in sec.get('events') or []])[:2]
+    if ev:
+        body += f'<div class="sp-q">{head("What happened in the business", "Orders, launches, deals and approvals from the report.")}{ul(ev)}</div>'
+    # 3. What the company expects, and whether it raised, lowered or confirmed it.
+    change = sec.get('change') or r.get('change')
+    tag = {'raised': ('pos', 'Raised'), 'lowered': ('neg', 'Lowered'), 'confirmed': ('neu', 'Confirmed'), 'updated': ('neu', 'Updated')}.get(change)
+    tag_html = f' <span class="sp-chg sp-chg-{tag[0]}">{tag[1]}</span>' if tag else ''
+    exp = [quote_clean(sec['outlook'])] if sec.get('outlook') else \
+        quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == 'outlook' and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])[:2]
+    if exp:
+        body += f'<div class="sp-q">{head("What the company expects", "Its outlook in this report" + (", compared with its previous one" if tag else "") + ".", tag_html)}{ul(exp)}</div>'
+    for kind, title, sub in (('target', 'Mid-term targets', 'Goals the company has set for the years ahead.'),
                              ('backlog', 'Order backlog', 'Orders signed and not yet delivered.')):
-        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])
+        out = quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])[:2]
         if out:
-            body += f'<div class="sp-q"><h3>{title} <small>{sub}</small></h3><ul>' + ''.join(f'<li>“{esc(t)}”</li>' for t in out) + '</ul></div>'
-    return (f'<div class="sp-latest"><p class="sp-q-date">Newest report: <b>{esc(r["title"])}</b>, published {esc(nice_date(r["date"]))} '
-            f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the announcement</a></p>{body}</div>')
-
+            body += f'<div class="sp-q">{head(title, sub)}{ul(out)}</div>'
+    if rest:
+        body += f'<details class="sp-more"><summary>More from the report</summary>{ul(rest)}</details>'
+    period = f'Q{n} {yr}' if n in (1, 2, 3) else (f'Full year {yr}' if n == 4 else '')
+    return (f'<div class="sp-latest"><p class="sp-q-date"><b>Latest report{": " + period if period else ""}</b> · {esc(r["title"])}, published {esc(nice_date(r["date"]))} '
+            f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the report</a></p>{body}</div>')
 
 INVEST_BACKLOG = r"\binvestments?\b(?! decisions?)"
-BROKEN = r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}|\b20\d \d\b|[a-z]20\d\d\b"
+BROKEN = (r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}|\b20\d \d\b|[a-z]20\d\d\b|"
+          r"(\b\w ){4,}|(?i:page \d+ of \d+|ceo comments|president and ceo|^business update)")
 
 
 def kind_of(i):
@@ -1131,11 +1150,12 @@ def topics(t):
 def report_html(c):
     q = c.get('quotes') or {'items': []}
     latest = latest_report_html(c)
-    # An outlook in the newest exchange report replaces the older report's outlook on the same lines
-    # (sales, profit, ...); older statements on other lines (e.g. capex) stay until the company updates them.
-    newer = set().union(*[topics(i['text']) for i in (c.get('latestReport') or {}).get('outlook') or [] if i['kind'] == 'outlook'])
-    if newer and (c['latestReport'].get('date') or '')[:10] > (q.get('period') or ''):
-        q = {**q, 'items': [i for i in q['items'] if not (i['kind'] == 'outlook' and topics(i['text']) and topics(i['text']) <= newer)]}
+    # Lub (2026-11-05): the outlook comes from the newest quarter. When the newest exchange report states an
+    # outlook, the older annual report's outlook lines are not shown; its other lines (targets, backlog) stay.
+    lr = c.get('latestReport') or {}
+    has_new = bool((lr.get('sections') or {}).get('outlook')) or any(i['kind'] == 'outlook' for i in lr.get('outlook') or [])
+    if has_new and (lr.get('date') or '')[:10] > (q.get('period') or ''):
+        q = {**q, 'items': [i for i in q['items'] if i['kind'] != 'outlook']}
     blocks = ''
     for kind, title, sub in REPORT_BLOCKS:
         items = quote_unique([quote_clean(i['text']) for i in q['items'] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])
