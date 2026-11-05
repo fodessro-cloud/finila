@@ -294,7 +294,8 @@ FIELDS = ["lei", "isin", "name", "country", "ticker", "exchange", "mic", "sector
 def add_shares(rows, listed):
     """Shares in issue from data/shares.json (German and Swiss companies have no reports on filings.xbrl.org,
     so without it they have no market value and drop off the maps). Adds the companies the file
-    names that are not on the list yet (Wikidata lists no ticker for them, Porsche has no FIRDS row)."""
+    names that are not on the list yet (Wikidata lists no ticker for them, Porsche has no FIRDS row,
+    Theon International has no Wikidata entry), on Xetra unless the row names its home exchange and MIC."""
     path = ROOT / "data/shares.json"
     if not path.exists():
         return 0
@@ -310,7 +311,8 @@ def add_shares(rows, listed):
                 continue
             l = listed.get(lei, {})
             r = {"lei": lei, "isin": isin, "name": k["name"], "country": isin[:2], "ticker": k.get("ticker"),
-                 "exchange": "Xetra", "mic": (l.get("mics") or ["XETR"])[0], "sector": k.get("sector"), "origin": "listing"}
+                 "exchange": k.get("exchange") or "Xetra", "mic": k.get("mic") or (l.get("mics") or ["XETR"])[0],
+                 "sector": k.get("sector"), "origin": "listing"}
             rows.append(r)
             have.add(lei)
         if r:
