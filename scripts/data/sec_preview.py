@@ -35,7 +35,8 @@ GAAP = {
     "dividends":  ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"],
     "equity":     ["StockholdersEquity"],
     "assets":     ["Assets"],
-    "cash":       ["CashAndCashEquivalentsAtCarryingValue"],
+    "cash":       ["CashAndCashEquivalentsAtCarryingValue", "CashAndDueFromBanks", "Cash",
+                   "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
     "debt_nc":    ["LongTermDebtNoncurrent"],
     "debt_c":     ["DebtCurrent", "LongTermDebtCurrent", "ShortTermBorrowings"],
     "eps":        ["EarningsPerShareBasic"],
@@ -81,10 +82,16 @@ def ecb_usd():
     return {c.get("currency"): float(c.get("rate")) for c in root.iter() if c.get("currency")}["USD"]
 
 
-def lei_of(name):
-    d = get("https://api.gleif.org/api/v1/lei-records?filter[entity.legalName]=" + urllib.request.quote(name))
-    recs = (d or {}).get("data") or []
-    return recs[0]["id"] if recs else None
+def lei_of(name, state):
+    """The LEI of the US legal entity with exactly this name (GLEIF), else None."""
+    want = name.upper().replace(" CORP", " CORPORATION").replace("CORPORATIONORATION", "CORPORATION").strip()
+    d = get("https://api.gleif.org/api/v1/lei-records?page[size]=50&filter[fulltext]=" + urllib.request.quote(name))
+    for rec in (d or {}).get("data") or []:
+        e = rec["attributes"]["entity"]
+        if e["legalName"]["name"].upper().replace(".", "").strip() == want and (e.get("jurisdiction") or "").startswith("US"):
+            return rec["id"]
+    print(f"  ! no LEI found for {name}", flush=True)
+    return None
 
 
 def year_values(facts, fy_end, accn):
@@ -150,7 +157,7 @@ def main():
         r, m = row_of(raw[newest], raw[ends[-2]] if len(ends) > 1 else {})
         cover = facts["facts"].get("dei", {}).get("EntityCommonStockSharesOutstanding", {}).get("units", {}).get("shares", [])
         shares = max(cover, key=lambda v: v["end"])["val"] / 1e6 if cover else m.get("sharesTagged")
-        lei = lei_of(subs.get("name") or co["name"]) or f"SEC{cik}"
+        lei = lei_of(subs.get("name") or co["name"], subs.get("stateOfIncorporation")) or f"SEC{cik}"
         row = {k: None for k in json.loads((ROOT / "js/companies.json").read_text())["fields"]}
         row.update({k: v for k, v in co.items() if k in row})
         row.update({k: m.get(k) for k in m if k in row})
@@ -161,6 +168,9 @@ def main():
         history[lei] = {"currency": "USD", "years": years}
         print(f"{co['name']} ({lei}): 10-K years {', '.join(years)}; newest {newest}:",
               {k: row[k] for k in ("revenue", "operatingProfit", "netIncome", "eps", "fcf", "netDebt", "shares")}, flush=True)
+        for end in ends:
+            missing = [k for k in GAAP if k not in raw[end]]
+            print(f"  {end} not stated: {', '.join(missing) or '-'}")
         for y, v in years.items():
             print(f"  {y}", {k: v.get(k) for k in ("revenue", "gross", "operatingProfit", "netIncome", "eps", "operatingCashFlow", "capex", "debt", "cash", "equity")})
     OUT.parent.mkdir(parents=True, exist_ok=True)
