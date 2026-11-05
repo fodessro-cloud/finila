@@ -16,23 +16,29 @@ SECTIONS = {
 }
 
 
+BLOCK = re.compile(r"(?i)<(/?)(h[1-6]|p|li|div|tr|td|ul|ol|table|br)\b[^>]*>")
+
+
 def blocks_of(raw, ctype):
-    """HTML -> list of (is_heading, text). Headings: h1-h6, or a paragraph that is only bold text and short."""
+    """HTML -> list of (is_heading, text, tag). The text between two block tags is one block; a heading is an
+    h1-h6, or a short block that is entirely bold or italic (<p><strong>Outlook</strong></p>)."""
     if b"%PDF" in raw[:1024] or "pdf" in (ctype or "").lower():
         return None
     src = raw.decode("utf-8", "replace")
     src = re.sub(r"(?is)<(script|style|head|nav|footer)\b.*?</\1>", " ", src)
-    out = []
-    for m in re.finditer(r"(?is)<(h[1-6]|p|li|div|td)\b[^>]*>(.*?)</\1>", src):
-        tag, inner = m.group(1).lower(), m.group(2)
-        if re.search(r"(?i)<(p|div|li|table)\b", inner):
-            continue   # a container: its children come separately
-        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", inner))).strip()
-        if not text:
-            continue
-        bold = re.fullmatch(r"(?is)\s*<(strong|b)\b[^>]*>.*?</\1>\s*:?\s*", inner) is not None
-        head = (tag.startswith("h") or bold) and len(text) < 90
-        out.append((head, text, tag))
+    out, last, tag = [], 0, ""
+    marks = list(BLOCK.finditer(src)) + [None]
+    for m in marks:
+        end = m.start() if m else len(src)
+        inner = src[last:end]
+        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", inner))).replace("\xa0", " ").strip()
+        if text and tag != "td":
+            styled = re.fullmatch(r"(?is)\s*(<(strong|b|em|i|span|u)\b[^>]*>\s*)+[^<]+(</(strong|b|em|i|span|u)>\s*)+:?\s*", inner) is not None \
+                and re.search(r"(?i)<(strong|b|em|i)\b", inner) is not None
+            head = (tag.startswith("h") or styled or text.isupper()) and len(text) < 90 and not text.endswith(".")
+            out.append((head, text, tag))
+        if m:
+            last, tag = m.end(), (m.group(2).lower() if not m.group(1) else "")
     return out
 
 
@@ -55,7 +61,7 @@ def sections(blocks):
 cache = json.loads((ROOT / "data/cache/news.json").read_text())
 anns = [a for a in cache.get("ann", {}).values() if a.get("results") and a.get("src") == "Nasdaq Nordic"]
 anns.sort(key=lambda a: -a.get("chars", 0))
-picked = anns[:3]
+picked = anns[:12] + [a for a in cache.get("ann", {}).values() if a.get("src") == "AMF France" and a.get("results")][:3]
 stats = {"html": 0, "pdf": 0, **{k: 0 for k in SECTIONS}}
 for a in picked:
     r = news.get(a["url"], as_json=False)
@@ -63,10 +69,6 @@ for a in picked:
     if not r:
         print("  (no page)"); continue
     raw = r[0].decode("utf-8", "replace")
-    body = re.sub(r"(?is)<(script|style|head)\b.*?</\1>", " ", raw)
-    i = body.lower().find("third quarter")
-    i = i if i > 0 else body.lower().find("<body")
-    print("  BODY:", re.sub(r"\s+", " ", body[i:i + 4000]))
     bl = blocks_of(*r)
     if bl is None:
         stats["pdf"] += 1; print("  (PDF: no headings)"); continue
