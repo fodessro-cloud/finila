@@ -1102,7 +1102,8 @@ def latest_report_html(c):
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the report</a></p>{body}</div>')
 
 INVEST_BACKLOG = r"\binvestments?\b(?! decisions?)"
-BROKEN = r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}|\b20\d \d\b|[a-z]20\d\d\b"
+BROKEN = (r"[a-z] -[a-z]|[a-z]- [a-z]|[a-z] - [a-z]|(?<![\w'’.])[b-hj-z] [a-z]{2,}|\b20\d \d\b|[a-z]20\d\d\b|"
+          r"(\b\w ){4,}|(?i:page \d+ of \d+|ceo comments|president and ceo|^business update)")
 
 
 def kind_of(i):
@@ -1149,11 +1150,12 @@ def topics(t):
 def report_html(c):
     q = c.get('quotes') or {'items': []}
     latest = latest_report_html(c)
-    # An outlook in the newest exchange report replaces the older report's outlook on the same lines
-    # (sales, profit, ...); older statements on other lines (e.g. capex) stay until the company updates them.
-    newer = set().union(*[topics(i['text']) for i in (c.get('latestReport') or {}).get('outlook') or [] if i['kind'] == 'outlook'])
-    if newer and (c['latestReport'].get('date') or '')[:10] > (q.get('period') or ''):
-        q = {**q, 'items': [i for i in q['items'] if not (i['kind'] == 'outlook' and topics(i['text']) and topics(i['text']) <= newer)]}
+    # Lub (2026-11-05): the outlook comes from the newest quarter. When the newest exchange report states an
+    # outlook, the older annual report's outlook lines are not shown; its other lines (targets, backlog) stay.
+    lr = c.get('latestReport') or {}
+    has_new = bool((lr.get('sections') or {}).get('outlook')) or any(i['kind'] == 'outlook' for i in lr.get('outlook') or [])
+    if has_new and (lr.get('date') or '')[:10] > (q.get('period') or ''):
+        q = {**q, 'items': [i for i in q['items'] if i['kind'] != 'outlook']}
     blocks = ''
     for kind, title, sub in REPORT_BLOCKS:
         items = quote_unique([quote_clean(i['text']) for i in q['items'] if kind_of(i) == kind and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])
