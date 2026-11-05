@@ -1,7 +1,7 @@
-2849 companies with figures, 200 without usable figures
-with ticker: 1104, with sector: 1792
-with F-score: 1897, F-score 8-9: 112, with dividend cover: 1128
-by country: GB 557, SE 352, FR 242, DE 195, IT 170, NO 154, PL 141, FI 131, DK 122, ES 121, NL 113, GR 104, BE 84, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 19, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
+2861 companies with figures, 200 without usable figures
+with ticker: 1116, with sector: 1804
+with F-score: 1897, F-score 8-9: 112, with dividend cover: 1137
+by country: GB 557, SE 353, FR 247, DE 195, IT 174, NO 155, PL 141, FI 131, DK 122, ES 121, NL 113, GR 104, BE 85, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 19, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
 Volkswagen                         DE VOW3     Consumer Discretionary 2025-12-31 rev€=321913.0 ebitda=25836.0 fcf=-290.0 roe=3.5 F=None None
