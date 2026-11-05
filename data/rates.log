@@ -1,12 +1,12 @@
 FAIL  ecb     HTTP Error 504: Gateway Time-out
 FAIL  eur12m  HTTP Error 504: Gateway Time-out
+FAIL  gov5y   HTTP Error 504: Gateway Time-out
 ok    eur1m    334 months from 1999-01, latest {'date': '2026-10', 'value': 2.436}
 ok    eur3m    334 months from 1999-01, latest {'date': '2026-10', 'value': 2.635}
 ok    eur6m    334 months from 1999-01, latest {'date': '2026-10', 'value': 2.975}
-ok    gov2y    267 months from 2004-09, latest {'date': '2026-11-03', 'value': 3.185}
-ok    gov5y    267 months from 2004-09, latest {'date': '2026-11-03', 'value': 3.5}
-ok    gov10y   267 months from 2004-09, latest {'date': '2026-11-03', 'value': 3.982}
-ok    aaa10y   267 months from 2004-09, latest {'date': '2026-11-03', 'value': 3.347}
+ok    gov2y    267 months from 2004-09, latest {'date': '2026-11-04', 'value': 3.168}
+ok    gov10y   267 months from 2004-09, latest {'date': '2026-11-04', 'value': 3.945}
+ok    aaa10y   267 months from 2004-09, latest {'date': '2026-11-04', 'value': 3.34}
 ok    corp     334 months from 1999-01, latest {'date': '2026-10', 'value': 4.55}
 ok    dep1y    321 months from 2000-01, latest {'date': '2026-09', 'value': 2.33}
-wrote js/rates.json (20 KB), failed: ['ecb', 'eur12m']
+wrote js/rates.json (20 KB), failed: ['ecb', 'eur12m', 'gov5y']
