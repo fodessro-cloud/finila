@@ -52,6 +52,8 @@ html, body { height: auto; }
 .sp-chart-ranges button { font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text); cursor: pointer; }
 .sp-chart-ranges button.active { background: var(--accent2); border-color: var(--accent2); color: #fff; }
 .sp-chart svg { touch-action: pan-y; cursor: crosshair; }
+.sp-chart-base { stroke: var(--text2); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 4 4; opacity: .7; }
+.sp-chart-basetag { position: absolute; right: 6px; font-size: 10px; color: var(--text2); background: var(--bg2); padding: 0 4px; border-radius: 3px; pointer-events: none; }
 .sp-chart-cursor { stroke: var(--text2); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 3; }
 .sp-chart-tip { display: none; position: absolute; top: 58px; background: var(--strong); color: #fff; font-size: 11px; padding: 3px 7px; border-radius: 4px; white-space: nowrap; pointer-events: none; }
 .sp-events { margin-top: 20px; }
