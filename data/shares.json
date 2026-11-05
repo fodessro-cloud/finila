@@ -3891,6 +3891,126 @@
    "sector": "Industrials",
    "exchange": "Euronext Amsterdam",
    "mic": "XAMS"
+  },
+  "FR0000130452": {
+   "shares": 95080000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/FGR/",
+   "name": "Eiffage",
+   "ticker": "FGR",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "IE0004927939": {
+   "shares": 179600000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/ise/KRX/",
+   "name": "Kingspan Group",
+   "ticker": "KRX",
+   "sector": "Industrials",
+   "exchange": "Euronext Dublin",
+   "mic": "XMSM"
+  },
+  "IT0005495657": {
+   "shares": 1940000000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/SPM/",
+   "name": "Saipem",
+   "ticker": "SPM",
+   "sector": "Energy",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "HU0000123096": {
+   "shares": 182390000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bud/RICHTER/",
+   "name": "Gedeon Richter",
+   "ticker": "RICHTER",
+   "sector": "Healthcare",
+   "exchange": "Budapest Stock Exchange",
+   "mic": "XBUD"
+  },
+  "SE0009554454": {
+   "shares": 1768000000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/sto/SBB.B/",
+   "name": "SBB (Samhällsbyggnadsbolaget i Norden)",
+   "ticker": "SBB B",
+   "sector": "Real Estate",
+   "exchange": "Nasdaq Stockholm",
+   "mic": "XSTO"
+  },
+  "FR0000065484": {
+   "shares": 38020000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/LSS/",
+   "name": "Lectra",
+   "ticker": "LSS",
+   "sector": "Technology",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000035164": {
+   "shares": 80120000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/BEN/",
+   "name": "Bénéteau",
+   "ticker": "BEN",
+   "sector": "Consumer Discretionary",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "IT0004729759": {
+   "shares": 15140000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/SES/",
+   "name": "Sesa",
+   "ticker": "SES",
+   "sector": "Technology",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "IT0003188064": {
+   "shares": 61080000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/bit/IF/",
+   "name": "Banca IFIS",
+   "ticker": "IF",
+   "sector": "Financials",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "FR0000064271": {
+   "shares": 12650000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/STF/",
+   "name": "STEF",
+   "ticker": "STF",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR001400SF56": {
+   "shares": 34630000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/LOUP/",
+   "name": "LDC",
+   "ticker": "LOUP",
+   "sector": "Consumer Staples",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000061129": {
+   "shares": 17360000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/epa/BOI/",
+   "name": "Boiron",
+   "ticker": "BOI",
+   "sector": "Healthcare",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
   }
  }
 }
