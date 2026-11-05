@@ -164,7 +164,12 @@ def company_isins():
         return set()
     data = json.loads(COMPANIES.read_text())
     i = data["fields"].index("isin")
-    return {r[i] for r in data["rows"] if r[i]}
+    out = {r[i] for r in data["rows"] if r[i]}
+    # US test companies (scripts/data/sec_preview.py): priced the same way, shown only on their own test page.
+    preview = ROOT / "data" / "preview" / "companies.json"
+    if preview.exists():
+        out |= {r["isin"] for r in json.loads(preview.read_text())["rows"] if r.get("isin")}
+    return out
 
 
 def quote(isin, a, day, final, history):

@@ -95,9 +95,17 @@ def load(name):
         return None
 
 
+# US test companies (scripts/data/sec_preview.py, Lub 2026-11-05): a page each from their SEC 10-K figures,
+# not public: noindex, out of the sitemap, the stock list, the slugs file and other companies' peers and medians.
+try:
+    PREVIEW = json.loads((SRC / 'data' / 'preview' / 'companies.json').read_text(encoding='utf-8'))
+except (OSError, ValueError):
+    PREVIEW = {}
+
+
 def companies():
     data = load('companies.json')
-    rows = [dict(zip(data['fields'], r)) for r in data['rows']]
+    rows = [dict(zip(data['fields'], r)) for r in data['rows']] + [dict(r, preview=True) for r in PREVIEW.get('rows', [])]
     prices = load('company-prices.json') or {'fields': [], 'rows': {}}
     pi = {f: i for i, f in enumerate(prices['fields'])}
     for c in rows:
@@ -150,6 +158,7 @@ def add_history_figures(rows):
         hist = json.loads((SRC / 'data' / 'history.json').read_text(encoding='utf-8'))
     except (OSError, ValueError):
         return
+    hist.update(PREVIEW.get('history') or {})
     for c in rows:
         h = hist.get(c['lei'])
         if not h or c.get('origin') is not None or h['currency'] != c.get('currency'):
@@ -490,7 +499,7 @@ def history_html(c):
     tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
     restated = any(years[y].get('restated') for y in ys)
     return f'''<section class="sp-card" id="history"><h2>{len(ys)} years of results</h2>
-      <p class="sp-sub">Each year from the company’s ESEF annual report; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
+      <p class="sp-sub">Each year from the company’s {"10-K annual report filed with the SEC" if c.get("sec") else "ESEF annual report"}; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
       {f'<div class="sp-tiles">{tiles_html}</div>' if tiles_html else ''}
       {f'<div class="sp-minis">{minis}</div>' if minis else ''}
       <div class="sp-scroll"><table class="sp-table sp-hist-table"><tr><th></th>{head_}</tr>{body}</table></div>
@@ -1344,7 +1353,8 @@ def page(c, peers, updated, med=None):
     hand = c.get('origin') == 'hand'
     if hand:
         link = f' · <a href="{esc(c["source"])}" target="_blank" rel="noopener">view figures</a>' if c.get('source') else ''
-    src = (f'Source: headline figures from Wikidata (CC0), the company has no ESEF report on filings.xbrl.org yet{link}' if wd
+    src = (f'Source: the company’s 10-K annual report filed with the US SEC (XBRL, data.sec.gov){link}' if c.get('sec')
+           else f'Source: headline figures from Wikidata (CC0), the company has no ESEF report on filings.xbrl.org yet{link}' if wd
            else f'Source: the company’s published annual accounts, entered by FINILA (no ESEF report on filings.xbrl.org){link}' if hand
            else f'Source: the company’s ESEF annual report via filings.xbrl.org{link}')
     fy = (c.get('periodEnd') or '')[:4]
@@ -1458,7 +1468,7 @@ def page(c, peers, updated, med=None):
         figs = ''
         signals = f'<p class="ins-note">{" · ".join(l for l in links if l.startswith("<a"))}</p>' if any(l.startswith('<a') for l in links) else ''
         qual = qual.replace('<div class="modal-section">', '<div class="modal-section sp-fscore">', 1)
-    if listed_only:   # no report figures yet: visitors can open it, search engines wait for the figures
+    if listed_only or c.get('preview'):   # no report figures yet / US test page: search engines keep out
         extra = '  <meta name="robots" content="noindex, follow">\n' + extra
     return head(title, desc, url, extra) + f'''
 <main class="sp-wrap">
@@ -1485,7 +1495,7 @@ def page(c, peers, updated, med=None):
       <div class="modal-report-src">{"" if listed_only else src + ". "}Prices: Deutsche Börse delayed data. Market value is estimated from net income / EPS. Figures are read automatically from the report; every year links to it as proof. Page updated {esc(updated)}.</div>
     </div>
     {whatif_html(c, med)}
-    <p class="sp-cta"><a class="btn btn-primary" href="/screener?lei={esc(c["lei"])}">Compare in the stock screener</a></p>
+    {"" if c.get("preview") else f'<p class="sp-cta"><a class="btn btn-primary" href="/screener?lei={esc(c["lei"])}">Compare in the stock screener</a></p>'}
   </article>
   {peers_html(c, peers, med)}
   {events_html(c)}
@@ -1625,8 +1635,12 @@ def main():
     # Peers and medians by sector. Wikidata's industry labels are too uneven to group by (Roche has none,
     # Alcon is "pharmaceutical industry"), so a finer split waits for a better classification.
     group = lambda c: ('s', c['sector']) if c.get('sector') else None
+    tests = [c for c in rows if c.get('preview')]
+    rows = [c for c in rows if not c.get('preview')]
     medians = sector_medians(rows, group)
     slugs = assign_slugs(rows, published_slugs())
+    for c in tests:
+        c['slug'] = re.sub(r'[^a-z0-9]+', '-', c['name'].lower()).strip('-') + '-us'
     out = OUT / 'stock'
     out.mkdir(parents=True, exist_ok=True)
     for old in out.glob('*.html'):
@@ -1641,6 +1655,10 @@ def main():
         same = by_sector[group(c)] if group(c) else [p for p in rows if p['country'] == c['country']]
         peers = [p for p in same if p is not c][:8]
         (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(group(c), {})), encoding='utf-8')
+    for c in tests:
+        peers = [p for p in by_sector[group(c)]][:8] if group(c) else []
+        (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(group(c), {})), encoding='utf-8')
+        print(f'Test page (not public): /stock/{c["slug"]}')
     (out / 'index.html').write_text(index_page(rows, updated), encoding='utf-8')
     (out / 'methodology.html').write_text(method_page(updated), encoding='utf-8')
     (OUT / 'js').mkdir(exist_ok=True)
