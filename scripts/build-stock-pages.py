@@ -1083,8 +1083,8 @@ def latest_report_html(c):
     if ev:
         body += f'<div class="sp-q">{head("What happened in the business", "Orders, launches, deals and approvals from the report.")}{ul(ev)}</div>'
     # 3. What the company expects, and whether it raised, lowered or confirmed it.
-    change = sec.get('change')
-    tag = {'raised': ('pos', 'Raised'), 'lowered': ('neg', 'Lowered'), 'confirmed': ('neu', 'Confirmed')}.get(change)
+    change = sec.get('change') or r.get('change')
+    tag = {'raised': ('pos', 'Raised'), 'lowered': ('neg', 'Lowered'), 'confirmed': ('neu', 'Confirmed'), 'updated': ('neu', 'Updated')}.get(change)
     tag_html = f' <span class="sp-chg sp-chg-{tag[0]}">{tag[1]}</span>' if tag else ''
     exp = [quote_clean(sec['outlook'])] if sec.get('outlook') else \
         quote_unique([quote_clean(i['text']) for i in r.get('outlook') or [] if kind_of(i) == 'outlook' and len(i['text']) <= 320 and not re.search(BROKEN, i['text'])])[:2]

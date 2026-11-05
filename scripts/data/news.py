@@ -387,6 +387,11 @@ NOT_COMMERCIAL = (r"\b(appoint|appointed|ceo|cfo|chief|board|annual general meet
                   r"own shares|dividend|interim report|webcast|resigned|step down|succeed|named winner|award(s|ed)? for|ranked)\b")
 
 
+SECTIONS_VERSION = 2
+OUTLOOK_JUNK = r"this (release|report) is a summary|is attached|available (at|on)|www\.|please refer|refer to|defined in|^\d+ "
+OUTLOOK_WORD = r"\b(expect|estimat|anticipat|forecast|guidance|outlook|target|project|will|aim|believ|plan|foresee|assum|predict)"
+
+
 def html_blocks(raw):
     """Report HTML -> [(is_heading, text)]. A heading is an h1-h6 or a short line that is all bold, italic or capitals."""
     src = raw.decode("utf-8", "replace") if isinstance(raw, bytes) else raw
@@ -457,28 +462,33 @@ def pick_sections(sec, year):
     out_txt = ""
     for x in sec["outlook"]:
         t = first_sentences(x, 420)
-        if t and len(t) > 40 and not re.search(BROKEN, t):
+        if t and len(t) > 40 and not re.search(BROKEN, t) and not re.search(OUTLOOK_JUNK, t, re.I) \
+                and re.search(OUTLOOK_WORD, t, re.I):
             out_txt = t
             break
     return {"highlights": hl[:3], "events": ev[:2], "outlook": out_txt,
-            "change": outlook_change((sec.get("outlook_head") or "") + " " + " ".join(sec["outlook"][:3]) + " " + " ".join(sec["highlights"]))}
+            "change": outlook_change(" ".join([sec.get("title") or "", sec.get("outlook_head") or ""] + sec["outlook"][:3] + sec["highlights"]))}
 
 
 def outlook_change(t):
-    """'lowered' / 'raised' / 'confirmed' only when the company says so about its outlook, guidance or expectations."""
+    """'lowered' / 'raised' / 'confirmed' / 'updated' only when the company says so about its outlook, guidance or
+    expectations (in the report title, the outlook heading or its text)."""
     low = t.lower()
-    obj = r"(outlook|guidance|forecast|expectations?|targets?|estimate)"
-    near = lambda verbs: re.search(fr"\b{verbs}\w*\W+(?:\w+\W+){{0,4}}{obj}\b|\b{obj}\W+(?:\w+\W+){{0,5}}{verbs}", low) or \
+    obj = r"(outlook|guidance|forecast|expectations?|targets?|estimate|ambition)"
+    near = lambda verbs: re.search(fr"\b(?:re)?{verbs}\w*\W+(?:\w+\W+){{0,5}}{obj}|\b{obj}\W+(?:\w+\W+){{0,6}}{verbs}", low) or \
         re.search(fr"\({verbs}\w*[,)]", low)
-    if near(r"(lowered|lowers|reduced|reduces|downgrad|cut|revised down|narrowed down)") or re.search(r"\(lower(ed)?[,)]", low):
+    if near(r"(lowered|lowers|reduced|reduces|downgrad|cuts? (its|our|the)|revised down|narrowed down|narrow\w* (towards|to) the lower)") \
+            or re.search(r"\(lower(ed)?[,)]|towards (the )?lower (end|half)", low):
         return "lowered"
-    if near(r"(raised|raises|upgrad|revised up|increas(ed|es) (its|our|the))") or re.search(r"\(rais(ed)?[,)]", low):
+    if near(r"(raised|raises|raising|upgrad|revised up|increas(ed|es|ing) (its|our|the))") \
+            or re.search(r"\(rais(ed)?[,)]|towards (the )?upper (end|half)|(improved|higher|upgraded) (outlook|guidance)", low):
         return "raised"
     if near(r"(unchanged|confirm|reiterat|maintain|remains? unchanged)") or \
             re.search(r"in line with (the )?previous(ly)? (communicat|guidance|outlook|announced)|as previously (communicated|announced)|\(unchanged[,)]", low):
         return "confirmed"
+    if near(r"(updated|updates|narrow|adjusted|adjusts|specified|specifies|revised|revises|changed|changes)"):
+        return "updated"
     return None
-
 
 
 def read_report(a):
@@ -552,8 +562,8 @@ def main():
             newest[a["lei"]] = a
     read = 0
     for lei, a in sorted(newest.items(), key=lambda x: x[1]["time"], reverse=True):
-        if "results" in a and "sections" in a:
-            continue   # read already (reports cached before sections existed are read once more)
+        if "results" in a and a.get("sv") == SECTIONS_VERSION:
+            continue   # read already (read once more when the section rules change)
         text = read_report(a)
         year = int(a["time"][:4]) if a["time"][:4].isdigit() else today.year
         a["chars"] = len(text)
@@ -561,10 +571,11 @@ def main():
         a["quarter"] = report_quarter(a["title"], text, a["time"])
         raw = a.pop("_html", None)
         try:
-            a["sections"] = pick_sections(html_sections(raw), year) if raw else None
+            a["sections"] = pick_sections({**html_sections(raw), "title": a["title"]}, year) if raw else None
         except Exception as e:   # a strange page must not stop the run
             print(f"  ! sections {a['id']}: {e}", flush=True)
             a["sections"] = None
+        a["sv"] = SECTIONS_VERSION
         read += 1
     cutoff = (today - timedelta(days=KEEP_DAYS)).isoformat()
     cache["ann"] = {k: v for k, v in cache["ann"].items() if v["time"][:10] >= cutoff}
@@ -583,7 +594,9 @@ def main():
         if is_report(a) and "report" not in o and "results" in a:
             o["report"] = {"date": a["time"][:16], "title": a["title"], "url": a["url"], "src": a["src"],
                            "results": a["results"], "outlook": a["outlook"],
-                           "quarter": a.get("quarter"), "sections": a.get("sections")}
+                           "quarter": a.get("quarter"), "sections": a.get("sections"),
+                           "change": (a.get("sections") or {}).get("change")
+                           or outlook_change(" ".join([a["title"]] + [o["text"] for o in a["outlook"]]))}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
     print(f"news for {len(out)} companies, {sum('report' in v for v in out.values())} with a report; read {read} reports this run", flush=True)
     names = {r["lei"]: r["name"] for r in rows}
