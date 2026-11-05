@@ -3881,6 +3881,16 @@
    "source": "https://stockanalysis.com/quote/lon/HWG/statistics/",
    "name": "Harworth Group",
    "ticker": "HWG"
+  },
+  "CY0200751713": {
+   "shares": 77590000,
+   "asOf": "2026-11-05",
+   "source": "https://stockanalysis.com/quote/ams/THEON/",
+   "name": "Theon International",
+   "ticker": "THEON",
+   "sector": "Industrials",
+   "exchange": "Euronext Amsterdam",
+   "mic": "XAMS"
   }
  }
 }

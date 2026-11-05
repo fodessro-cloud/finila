@@ -11840,6 +11840,25 @@
    "assets": 5354.6,
    "source": "https://filings.xbrl.org/9598005U8TZQ8Q64SC71/2025-12-31/ESEF/NL/1/afb-2025-12-31-1-en/reports/ixbrlviewer.html",
    "override": true
+  },
+  "CY0200751713": {
+   "name": "Theon International",
+   "currency": "EUR",
+   "periodEnd": "2025-12-31",
+   "revenue": 443.42,
+   "revenuePrev": 352.36,
+   "operatingProfit": 105.54,
+   "netIncome": 80.46,
+   "netIncomePrev": 67.42,
+   "eps": 1.15,
+   "da": 3.8,
+   "operatingCashFlow": 45.5,
+   "capex": 11.39,
+   "cash": 256.82,
+   "debt": 129.96,
+   "equity": 398.24,
+   "assets": 623.08,
+   "source": "https://stockanalysis.com/quote/ams/THEON/financials/"
   }
  }
 }
