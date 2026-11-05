@@ -45,6 +45,10 @@ fd.INSTANT.update({"inventories", "receivables", "payables", "leases", "minoriti
 ROOT = fd.ROOT
 CACHE = ROOT / "data/cache/history.json"
 OUT = ROOT / "data/history.json"
+# Companies whose "Revenue" tag is not their real turnover, by LEI (data/fixes.json "revenueLine"):
+# Adyen tags gross revenue incl. interchange (8.9 bn for 2022, then 1.9 bn from 2023) and shows net
+# revenue as gross profit, so net revenue is used for every year.
+REVENUE_LINE = {k: v["use"] for k, v in json.loads((ROOT / "data/fixes.json").read_text()).get("revenueLine", {}).items()}
 CACHE_VERSION = 4          # bump when the figures read change, so every report is read again
 YEARS = 6                  # newest report and the five before it
 BUDGET = float(os.environ.get("FINILA_BUDGET_MIN", "300")) * 60
@@ -213,6 +217,9 @@ def main():
         for y in [y for y, v in years.items() if v.get("fromNext")]:
             if years.get(str(int(y) + 1), {}).get("restated"):
                 del years[y]
+        for y in years.values() if REVENUE_LINE.get(lei) == "gross" else ():
+            if y.get("gross"):
+                y["revenue"] = y["gross"]
         years, bad = clean(years)
         dropped += len(bad)
         keep = sorted(years)[-YEARS:]

@@ -497,6 +497,30 @@ def one_company_per_isin(rows):
     return lost
 
 
+def revenue_line(rows, rates):
+    """Where a company's "Revenue" tag is not its real turnover (Adyen: gross revenue incl. interchange;
+    its net revenue is tagged as gross profit), take that year's line named in data/fixes.json
+    "revenueLine" from data/history.json, and the margins and revenue growth with it."""
+    fix = json.loads((ROOT / "data/fixes.json").read_text()).get("revenueLine", {})
+    hist_file = ROOT / "data/history.json"
+    hist = json.loads(hist_file.read_text()) if fix and hist_file.exists() else {}
+    pct = lambda a, b: None if a is None or not b else round(a / b * 100, 1)
+    n = 0
+    for r in rows:
+        f, h = fix.get(r["lei"]), hist.get(r["lei"], {}).get("years", {})
+        y = (r.get("periodEnd") or "")[:4]
+        if not f or not y or not (h.get(y) or {}).get(f["use"]):
+            continue
+        rev, prev = h[y][f["use"]], (h.get(str(int(y) - 1)) or {}).get(f["use"])
+        rate = rates.get(r.get("currency") or "")
+        r.update({"revenue": rev, "revenueEur": round(rev / rate, 1) if rate else r.get("revenueEur"),
+                  "ebitdaMargin": pct(r.get("ebitda"), rev), "operatingMargin": pct(r.get("operatingProfit"), rev),
+                  "netMargin": pct(r.get("netIncome"), rev), "fcfMargin": pct(r.get("fcf"), rev),
+                  "revenueGrowth": pct(rev - prev, prev) if prev else None})
+        n += 1
+    return n
+
+
 def apply_fixes(rows):
     """Hand-checked sector, name and ticker by ISIN (data/fixes.json) over what Wikidata and the
     name rules give (LVMH filed under Consumer Staples, Rolls-Royce under Energy), and companies left
@@ -608,6 +632,7 @@ def main():
     log(f"sector found for {sum(via.values())} of {len(missing)} without a Wikidata industry: {via}")
     log("earnings per share moved by powers of ten for %d companies, dropped for %d (checked against the price)" % fix_eps_scale(rows, fx))
     log(f"shares in issue from the annual report for {shares_from_report(rows)} more companies")
+    log(f"revenue line set by hand for {revenue_line(rows, fx)} companies (data/fixes.json)")
     rows, fixed = apply_fixes(rows)
     log(f"shared ISINs taken from {one_company_per_isin(rows)} companies (kept by the larger one)")
     log(f"hand-checked fixes for {fixed} companies (data/fixes.json)")
