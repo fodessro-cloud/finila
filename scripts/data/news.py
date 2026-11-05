@@ -387,7 +387,7 @@ NOT_COMMERCIAL = (r"\b(appoint|appointed|ceo|cfo|chief|board|annual general meet
                   r"own shares|dividend|interim report|webcast|resigned|step down|succeed|named winner|award(s|ed)? for|ranked)\b")
 
 
-SECTIONS_VERSION = 2
+SECTIONS_VERSION = 3
 OUTLOOK_JUNK = r"this (release|report) is a summary|is attached|available (at|on)|www\.|please refer|refer to|defined in|^\d+ "
 OUTLOOK_WORD = r"\b(expect|estimat|anticipat|forecast|guidance|outlook|target|project|will|aim|believ|plan|foresee|assum|predict)"
 
@@ -473,7 +473,9 @@ def pick_sections(sec, year):
 def outlook_change(t):
     """'lowered' / 'raised' / 'confirmed' / 'updated' only when the company says so about its outlook, guidance or
     expectations (in the report title, the outlook heading or its text)."""
-    low = t.lower()
+    # Sentence by sentence, leaving out sentences about a customer's or the market's forecasts.
+    low = " . ".join(x for x in re.split(r"(?<=[.!?;])\s+", t.lower())
+                     if not re.search(r"\b(customers?|clients?|consensus|analysts?|market forecasts?|imf|central bank)\b", x))
     obj = r"(outlook|guidance|forecast|expectations?|targets?|estimate|ambition)"
     near = lambda verbs: re.search(fr"\b(?:re)?{verbs}\w*\W+(?:\w+\W+){{0,5}}{obj}|\b{obj}\W+(?:\w+\W+){{0,6}}{verbs}", low) or \
         re.search(fr"\({verbs}\w*[,)]", low)
@@ -483,12 +485,26 @@ def outlook_change(t):
     if near(r"(raised|raises|raising|upgrad|revised up|increas(ed|es|ing) (its|our|the))") \
             or re.search(r"\(rais(ed)?[,)]|towards (the )?upper (end|half)|(improved|higher|upgraded) (outlook|guidance)", low):
         return "raised"
-    if near(r"(unchanged|confirm|reiterat|maintain|remains? unchanged)") or \
+    if near(r"(unchanged|confirm|affirm|reaffirm|reiterat|maintain|remains? unchanged)") or \
             re.search(r"in line with (the )?previous(ly)? (communicat|guidance|outlook|announced)|as previously (communicated|announced)|\(unchanged[,)]", low):
         return "confirmed"
-    if near(r"(updated|updates|narrow|adjusted|adjusts|specified|specifies|revised|revises|changed|changes)"):
+    if near(r"(updated|updates|narrow|specified|specifies|revised|revises)"):
         return "updated"
     return None
+
+
+def report_change(a):
+    """The title says it best; else a raise or cut found in the outlook section or the outlook quotes; else confirmed / updated."""
+    found = [outlook_change(a["title"]), (a.get("sections") or {}).get("change"),
+             outlook_change(" ".join(o["text"] for o in a.get("outlook") or []))]
+    if found[0]:
+        return found[0]
+    strong = {c for c in found[1:] if c in ("raised", "lowered")}
+    if len(strong) == 1:
+        return strong.pop()
+    if strong:
+        return None   # both said somewhere (e.g. one line raised, another lowered): no chip
+    return found[1] or found[2]
 
 
 def read_report(a):
@@ -595,8 +611,7 @@ def main():
             o["report"] = {"date": a["time"][:16], "title": a["title"], "url": a["url"], "src": a["src"],
                            "results": a["results"], "outlook": a["outlook"],
                            "quarter": a.get("quarter"), "sections": a.get("sections"),
-                           "change": (a.get("sections") or {}).get("change")
-                           or outlook_change(" ".join([a["title"]] + [o["text"] for o in a["outlook"]]))}
+                           "change": report_change(a)}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
     print(f"news for {len(out)} companies, {sum('report' in v for v in out.values())} with a report; read {read} reports this run", flush=True)
     names = {r["lei"]: r["name"] for r in rows}
