@@ -1,7 +1,4 @@
-1946 companies with ESEF reports, 1946 to check
-  ! https://filings.xbrl.org/api/entities/BUCRF72VH5RBN7X3VL35/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800WFQ334R8UXUG83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/MINO79WLOO247M1IL051/filings?page[size]=100: HTTP Error 429: Too Many Requests
+2051 companies with ESEF reports, 2051 to check
   50 companies read
   100 companies read
   150 companies read
@@ -30,17 +27,42 @@
   1300 companies read
   1350 companies read
   1400 companies read
+  ! https://filings.xbrl.org/api/entities/549300ZUNJ5HNG264Q34/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/984500DB3D0E9BCE1C41/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/984500EABB1DC7902E40/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800VLRSTIWREFKQ73/filings?page[size]=100: HTTP Error 429: Too Many Requests
   1450 companies read
+  ! https://filings.xbrl.org/api/entities/213800GFTYPUAFKIRK95/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800OR6IIJPG98AG39/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/549300B8BGP6YLHH0K80/filings?page[size]=100: HTTP Error 429: Too Many Requests
   1500 companies read
   1550 companies read
   1600 companies read
   1650 companies read
   1700 companies read
+  ! https://filings.xbrl.org/api/entities/213800AF85VEZMDMF931/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800AJ3TY3OJCQQC53/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/213800AOOAQA5XQDEA89/filings?page[size]=100: HTTP Error 429: Too Many Requests
   1750 companies read
+  ! https://filings.xbrl.org/api/entities/213800QBPS3L89U9TZ44/filings?page[size]=100: HTTP Error 429: Too Many Requests
   1800 companies read
+  ! https://filings.xbrl.org/api/entities/213800XKDG12NQG8VC53/filings?page[size]=100: HTTP Error 429: Too Many Requests
   1850 companies read
+  ! https://filings.xbrl.org/api/entities/5493001FIOIXOKMHG857/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/5493001IZXU12M8NYV95/filings?page[size]=100: HTTP Error 429: Too Many Requests
   1900 companies read
-outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059, 'backlog': 418}; read 1946 this run
+  ! https://filings.xbrl.org/api/entities/549300KD3XGX3754UW61/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/549300KGI78MKHO38N42/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  1950 companies read
+  ! https://filings.xbrl.org/api/entities/635400C8EK6DRI12LJ39/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/635400CSEBJAYPUUFC95/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/635400DTNHVYGZODKQ93/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/74780000M0GHQ1VXJU20/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/74780000V0GH8Q3K5K76/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/81560025690EF8540635/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  2000 companies read
+  2050 companies read
+outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090, 'backlog': 434}; read 2051 this run
 
 == Shell PLC (2025-12-31)
   [outlook] The fourth quarter 2025 dividend of $ 0.372 per ordinary share will be paid on March 30, 2026 , to shareholders on the register at February 20, 2026 , and represents an increase of 4% compared with the third quarter 2025 dividend.
@@ -175,7 +197,7 @@ outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059,
   [event] In July 2025, we launched our industry leading ‘Just Ask Once’ customer care promise for Vodafone customers.
   [event] In April 2026, we launched our ‘5G Slicing’ proposition for business customers, delivering enhanced and dependable mobile connectivity with guaranteed performance for enterprises, as a part of our strategy to further monetise our network differentiation.
 
-== J Sainsbury (2026-02-28)
+== Sainsbury's (2026-02-28)
   [target] More than 2,500 farms will be backed by long-term contracts, representing over £5billion of committed investment over the lifespan of these agreements, securing 3.1 million tonnes ofhomegrown fresh food.
   [outlook] In the year ahead, we expect to open around ten new supermarkets and at least 20 new convenience stores, adding around 0.5 per cent to sales growth in 2026/27.
   [outlook] We are increasingly well placed to capitalise on the strong forecast growth of Retail Media in the UK through the high-returning investments we are making in our capabilities, and we remain ahead of plan to deliver at least £100 million of incremental profit over the three years to March 2027.
@@ -213,11 +235,6 @@ outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059,
   [event] An interactive training module was launched in 2024 for all colleagues, with a 90% completion rate to date.
   [event] His deep and wide-ranging career in FMCG and challenger businesses has given insight and direction to Imperial’s performance and formation of the new strategy launched in March 2025.
 
-== Heineken Holding (2025-12-31)
-  [outlook] The final dividend of €1.16 per share will be payable to shareholders as of 6 May 2025 .
-  [outlook] If approved, the final dividend of € 1.16 will be paid on 5 May 2026, as an interim dividend of €0.74 per share was paid on 7 August 2025.
-  [event] Their feedback contributed to the updated Brew a Better World 2030 strategy, launched in December 2025, by helping HEINEKEN identify and prioritise the most important environmental, social and responsible business.
-
 == Heineken International (2025-12-31)
   [outlook] For 2025, a total cash dividend of €1.90 per share, a 2.2% increase to last year (2024: €1.86), for an expected aggregate amount of €1,046 million will be proposed to the Annual General Meeting on 23 April 2026.
   [outlook] If approved, a final dividend of €1.16 per share will be paid on 5 May 2026, as an interim dividend of €0.74 per share was paid on 7 August 2025.
@@ -228,6 +245,11 @@ outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059,
   [event] We launched the ‘Together We Thrive’ handshakes initiative in 2024 to address the challenges of hybrid working and promote collaborative thinking by creating space for teams to define their shared purpose, principles and ways of working.
   [event] Two cohorts are launched each year, with 34 graduates joining in March 2025 and another 36 in September, bringing the total to 70 graduates in 2025.
   [event] In 2025, we launched a new Global GenAI Lab in Singapore, in partnership with AI Singapore, to develop high-impact GenAI solutions with clear business value and scalability.
+
+== Heineken Holding (2025-12-31)
+  [outlook] The final dividend of €1.16 per share will be payable to shareholders as of 6 May 2025 .
+  [outlook] If approved, the final dividend of € 1.16 will be paid on 5 May 2026, as an interim dividend of €0.74 per share was paid on 7 August 2025.
+  [event] Their feedback contributed to the updated Brew a Better World 2030 strategy, launched in December 2025, by helping HEINEKEN identify and prioritise the most important environmental, social and responsible business.
 
 == Schouw & Co. (2026-06-30)
   [outlook] Based on the expected closing at 1 September 2026, Spectre will add DKK 300–400 million to re venue in 2026, while no material impact is expected on EBITDA as the Purch ase Price A llocation and other acquisi- tion related costs will offset profits from or dinar y activities.
@@ -246,6 +268,8 @@ outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059,
   [event] It was especially pleasing for our Space & Mission Systems business, which we acquired in 2024, to secure a $1.2bn (£0.9bn) US Space Systems Command contract for the Resilient Missile Warning & Tracking – Medium Earth Orbit Epoch 2 programme.
   [event] The significant increase in 2024 primarily reflected the $5.5bn (£4.4bn) acquisition of Ball Aerospace, which was funded through debt finance and existing cash reserves.
   [event] In 2025 , we launched an additional pilot programme with Unmind, allowing employees to access virtual counselling via a network of qualified counsellors.
+
+== DSV A/S (2026-06-30)
 
 == ASML Holding (2025-12-31)
   [backlog] Our backlog currently stands at a healthy level of €38.8 billion .
@@ -375,12 +399,3 @@ outlook quotes for 812 companies {'target': 265, 'event': 2303, 'outlook': 1059,
 
 == Naturgy Energy Group SA (2025-12-31)
   [outlook] Los objetivos y ponderaciones son los siguientes: ▪ Objetivos financieros pondera un 65% ▪ Ebitda 2026 comunicado como guidance al mercado al inicio de 2026.
-
-== Galp Energia, SGPS, S.A. (2025-12-31)
-  [outlook] Start‑up is expected by the end of 2026, with a total estimated investment of approximately €400 m, with Galp acting as the operator.
-  [outlook] Start‑up is expected in the second half of 2026, with a total estimated investment of approximately €250 m.
-  [event] Completion of the sale of Area 4 upstream assets in Mozambique Following the agreement signed in 2024 with ADNOC (through XRG P.J.S.C.) for the sale of the upstream assets in Area 4, Mozambique, Galp completed the transaction in the first quarter of 2025, having received a first payment of c.$881 m.
-  [event] In line with such guidelines, the Board of Directors will propose to the 2026 AGM the distribution of a €0.64 dividend per share, related to 2025, and has launched a €250 m share buyback program, aimed at capital reduction, to be executed during 2026.
-  [event] During the first quarter of 2025, Galp completed the divestment of its 10% interest in Area 4, offshore Mozambique.
-  [event] Additionally, in 2024, Petrobras launched the “Tupi + Valor” programme, to identify and develop new value-enhancing opportunities in the Tupi and Iracema fields.
-  [event] The e‑learning course on Unconscious Bias was also launched in 2025 as planned.
