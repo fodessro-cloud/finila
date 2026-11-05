@@ -30,6 +30,8 @@ GAAP = {
     "op_profit":  ["OperatingIncomeLoss"],
     "net":        ["NetIncomeLoss"],
     "da":         ["DepreciationDepletionAndAmortization", "DepreciationAmortizationAndAccretionNet"],
+    "dep_ppe":    ["Depreciation", "DepreciationNonproduction"],
+    "amort":      ["AmortizationOfIntangibleAssets"],
     "cfo":        ["NetCashProvidedByUsedInOperatingActivities"],
     "capex_ppe":  ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
     "dividends":  ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"],
@@ -47,7 +49,7 @@ GAAP = {
     "inventories": ["InventoryNet"],
     "receivables": ["AccountsReceivableNetCurrent"],
     "payables":   ["AccountsPayableCurrent"],
-    "leases":     ["OperatingLeaseLiability"],
+    "leases":     ["OperatingLeaseLiability", "OperatingLeaseLiabilityNoncurrent"],
     "interest":   ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt"],
     "pbt":        ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
                    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"],
@@ -85,8 +87,10 @@ def ecb_usd():
 def lei_of(name, state):
     """The LEI of the US legal entity with exactly this name (GLEIF), else None."""
     want = name.upper().replace(" CORP", " CORPORATION").replace("CORPORATIONORATION", "CORPORATION").strip()
-    d = get("https://api.gleif.org/api/v1/lei-records?page[size]=50&filter[fulltext]=" + urllib.request.quote(name))
-    for rec in (d or {}).get("data") or []:
+    recs = []
+    for q in (f"filter[entity.legalName]={urllib.request.quote(want)}", f"page[size]=50&filter[fulltext]={urllib.request.quote(want)}"):
+        recs += (get("https://api.gleif.org/api/v1/lei-records?" + q) or {}).get("data") or []
+    for rec in recs:
         e = rec["attributes"]["entity"]
         if e["legalName"]["name"].upper().replace(".", "").strip() == want and (e.get("jurisdiction") or "").startswith("US"):
             return rec["id"]
@@ -117,8 +121,11 @@ def row_of(cur, prev):
     r = {k: m.get(k) for k in ("revenue", "ebitda", "operatingProfit", "netIncome", "operatingCashFlow", "capex", "fcf",
                                "dividendsPaid", "equity", "assets", "cash", "debt", "netDebt", "eps", "sharesTagged")
          if m.get(k) is not None}
-    if cur.get("da") is not None:
-        r["da"] = mil(abs(cur["da"]))
+    da = cur.get("da")
+    if da is None and ("dep_ppe" in cur or "amort" in cur):
+        da = abs(cur.get("dep_ppe", 0)) + abs(cur.get("amort", 0))
+    if da is not None:
+        r["da"] = mil(abs(da))
     for k, name in (("inventories", "inventories"), ("receivables", "receivables"), ("payables", "payables"),
                     ("leases", "leases"), ("gross", "gross"), ("cur_assets", "curAssets"), ("cur_liab", "curLiab"),
                     ("interest", "interest"), ("pbt", "pbt"), ("tax", "tax"), ("minorities", "minorities"),
