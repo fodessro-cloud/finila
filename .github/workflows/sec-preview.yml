@@ -1,0 +1,41 @@
+name: Test pages for US companies (SEC)
+
+# Reads the 10-K annual figures of the US test companies (scripts/data/sec_preview.py) from data.sec.gov
+# into data/preview/companies.json. The pages are built with the others but stay out of the sitemap and search.
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['scripts/data/sec_preview.py', '.github/workflows/sec-preview.yml']
+  schedule:
+    - cron: '30 3 * * 2'   # Tuesdays 03:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sec-preview
+  cancel-in-progress: false
+
+jobs:
+  sec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read 10-K figures from the SEC
+        run: |
+          set -o pipefail
+          python scripts/data/sec_preview.py 2>&1 | tee data/preview/sec.log || { mkdir -p data/preview; echo "::error::sec: $(tail -3 data/preview/sec.log | tr '\n' ' ')"; exit 1; }
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "finila-data-bot"
+          git config user.email "finila-data-bot@users.noreply.github.com"
+          git add data/preview/
+          git diff --cached --quiet || git commit -m "Update US test companies from the SEC [data refresh]"
+          git pull --rebase -X theirs || true
+          git push
