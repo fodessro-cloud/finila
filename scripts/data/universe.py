@@ -311,7 +311,7 @@ def tidy(name):
     return " ".join(w if len(w) <= 3 and w.isalpha() else w.title() for w in name.split())
 
 
-FIELDS = ["lei", "isin", "name", "country", "ticker", "exchange", "mic", "sector", "group", "industry", "currency", "periodEnd",
+FIELDS = ["lei", "isin", "name", "country", "ticker", "exchange", "mic", "sector", "group", "subindustry", "industry", "currency", "periodEnd",
           "revenueEur", "revenue", "ebitda", "operatingProfit", "netIncome", "operatingCashFlow", "capex", "fcf",
           "dividendsPaid", "equity", "assets", "cash", "debt", "netDebt", "eps", "roe", "ebitdaMargin",
           "operatingMargin", "netMargin", "fcfMargin", "netDebtToEbitda", "revenueGrowth", "netIncomeGrowth",
@@ -552,9 +552,12 @@ def apply_groups(rows):
         code = g["rows"].get(r.get("isin") or "")
         if code in g["groups"]:
             r["sector"], r["group"] = g["groups"][code]["sector"], g["groups"][code]["name"]
+            sub = g.get("industryRows", {}).get(r["isin"])
+            r["subindustry"] = g["industries"][sub]["name"] if sub in g.get("industries", {}) else None
             n += 1
         else:
             r.setdefault("group", None)
+            r.setdefault("subindustry", None)
     return n
 
 

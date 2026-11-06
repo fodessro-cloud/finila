@@ -1,5 +1,5 @@
 {
- "note": "Hand-checked industry group per company (ISIN), following the 11 sectors and industry groups of the GICS standard (MSCI, S&P). The group decides the sector. Checked 2026-11-06 from the company's own description, name and Wikidata industry; '?' = not sure, left without a group. New companies: add a row here.",
+ "note": "Hand-checked industry group per company (ISIN), following the 11 sectors and industry groups of the GICS standard (MSCI, S&P). The group decides the sector. Checked 2026-11-06 from the company's own description, name and Wikidata industry; '?' = not sure, left without a group. New companies: add a row here. industryRows: a finer industry inside a group (so far Transportation & logistics), used to put the closest competitors first.",
  "groups": {
   "EN": {
    "sector": "Energy",
@@ -2756,5 +2756,97 @@
   "SK1120007994": "SV",
   "SK1120009461": "FS",
   "SK1120010287": "SV"
+ },
+ "industries": {
+  "LG": {
+   "group": "TR",
+   "name": "Logistics & postal"
+  },
+  "AL": {
+   "group": "TR",
+   "name": "Airlines"
+  },
+  "MR": {
+   "group": "TR",
+   "name": "Shipping"
+  },
+  "RR": {
+   "group": "TR",
+   "name": "Road & rail"
+  },
+  "TI": {
+   "group": "TR",
+   "name": "Airports, ports & toll roads"
+  }
+ },
+ "industryRows": {
+  "AT00000VIE62": "TI",
+  "AT0000APOST4": "LG",
+  "BE0974268972": "LG",
+  "CH0025238863": "LG",
+  "DE0005552004": "LG",
+  "DE0005773303": "TI",
+  "DE0007231326": "RR",
+  "DE0008232125": "AL",
+  "DE000A0S8488": "TI",
+  "DE000HLAG475": "MR",
+  "DK0010201102": "TI",
+  "DK0010244508": "MR",
+  "DK0060079531": "LG",
+  "DK0060083210": "MR",
+  "DK0060655629": "MR",
+  "DK0060817898": "RR",
+  "DK0061141215": "LG",
+  "EE3100021635": "TI",
+  "ES0105046017": "TI",
+  "ES0177542018": "AL",
+  "FI0009005250": "MR",
+  "FI0009900187": "LG",
+  "FI4000567029": "AL",
+  "FI4000592159": "LG",
+  "FR0000064271": "LG",
+  "FR0010340141": "TI",
+  "FR0010533075": "TI",
+  "FR0010929125": "LG",
+  "FR001400J770": "AL",
+  "GB0000600931": "MR",
+  "GB0002018363": "MR",
+  "GB0003452173": "RR",
+  "GB0006215205": "RR",
+  "GB00B7KR2P84": "AL",
+  "GG00C0G4QJ50": "MR",
+  "GRS144003001": "MR",
+  "GRS337003008": "RR",
+  "GRS427003009": "TI",
+  "GRS495003006": "AL",
+  "HU0000120720": "RR",
+  "IE00BLP58571": "MR",
+  "IE00BYTBXV33": "AL",
+  "IS0000013464": "AL",
+  "IS0000019800": "MR",
+  "IT0000214293": "TI",
+  "IT0001006128": "TI",
+  "IT0005176406": "TI",
+  "JE00BN574F90": "AL",
+  "LU1618151879": "LG",
+  "LU2290522684": "LG",
+  "MT0000250101": "TI",
+  "MT0000390105": "LG",
+  "NL0009739416": "LG",
+  "NO0003399909": "MR",
+  "NO0010196140": "AL",
+  "NO0010571680": "MR",
+  "NO0010571698": "MR",
+  "NO0010791353": "MR",
+  "NO0010833262": "MR",
+  "NO0011082075": "MR",
+  "NO0012885252": "AL",
+  "NO0013256180": "MR",
+  "PLODRTS00017": "LG",
+  "PLPKPCR00011": "RR",
+  "PTCTT0AM0001": "LG",
+  "SE0000119299": "LG",
+  "SE0010441139": "RR",
+  "SI0031101346": "TI"
  }
 }
