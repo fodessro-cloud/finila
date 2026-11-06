@@ -216,3 +216,17 @@ h1, h2, h3, p { margin: 0; }
 .h-footer-side { display: flex; flex-direction: column; align-items: flex-end; gap: 21px; }
 .h-footer-contact { margin: 0; line-height: 1.55; }
 @media (max-width: 700px) { .h-footer-side { align-items: flex-start; } }
+
+/* Market Radar block on the homepage */
+.h-radar-sum { font-size: 17px; color: var(--text); margin-bottom: 10px; }
+.h-radar-sum .t-red { color: var(--down); } .h-radar-sum .t-amber { color: var(--amber); } .h-radar-sum .t-green { color: var(--up); }
+.h-radar-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; margin-bottom: 14px; }
+.h-radar-bar i { display: block; }
+.h-radar-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+.h-radar-list a { display: grid; grid-template-columns: 18px 1fr auto; align-items: baseline; padding: 10px 12px; border-radius: 8px; background: var(--bg); color: var(--text); text-decoration: none; }
+.h-radar-list a:hover { background: var(--bg-alt); }
+.h-radar-list .q { font-weight: 600; }
+.h-radar-list .v { font-family: var(--mono); white-space: nowrap; padding-left: 12px; }
+.h-radar-list .a { grid-column: 2 / 4; font-size: 14px; color: var(--muted); margin-top: 2px; }
+.h-radar-more { display: inline-block; margin-top: 12px; font-weight: 600; }
+@media (max-width: 760px) { .h-radar-list { grid-template-columns: 1fr; } }
