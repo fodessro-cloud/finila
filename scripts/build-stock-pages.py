@@ -180,9 +180,11 @@ def add_history_figures(rows):
         # that year joins the official years from the ESEF reports (Lub 2026-11-06: same page as Novo).
         py = (c.get('periodEnd') or '')[:4]
         if c.get('origin') == 'hand' and py and py not in years and py > max(years):
-            years[py] = {k: c[k] for k in ('revenue', 'ebitda', 'operatingProfit', 'netIncome', 'operatingCashFlow', 'capex', 'fcf',
-                                           'dividendsPaid', 'equity', 'assets', 'cash', 'debt', 'netDebt', 'eps') if is_num(c.get(k))}
-            years[py].update(end=c['periodEnd'], source=c.get('source'))
+            # Only lines defined the same way everywhere: debt, cash and EBITDA are drawn differently by
+            # data sites than in the report (LVMH: net debt 2.5bn in ESEF 2024, 23bn with leases by hand).
+            years[py] = {k: c[k] for k in ('revenue', 'operatingProfit', 'netIncome', 'operatingCashFlow',
+                                           'dividendsPaid', 'equity', 'assets', 'eps') if is_num(c.get(k))}
+            years[py].update(end=c['periodEnd'], source=c.get('source'), hand=True)
         # Share splits: an old report states EPS on the old share count (Novo Nordisk 2:1 in 2023).
         # Where profit / EPS gives a share count about 2, 3, 4, 5, 10 or 20 times off the newest
         # year, the old EPS is put on today's share basis, as companies restate it themselves.
@@ -499,8 +501,11 @@ def history_html(c):
             y0 = base - bh if v >= 0 else base
             cls = 'sp-bar-neg' if v < 0 else 'sp-bar-last' if i == len(vals) - 1 else ''
             rects += f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="2" class="{cls}"><title>FY {ys[i]}: {amt(v)}</title></rect>'
-        last = next((v for v in reversed(vals) if is_num(v)), None)
-        return (f'<figure class="sp-mini"><figcaption><span>{label}</span><b>{amt(last)}</b></figcaption>'
+        li = next((i for i in range(len(vals) - 1, -1, -1) if is_num(vals[i])), None)
+        last = vals[li] if li is not None else None
+        # The newest value shown is labelled with its year when the newest year lacks this line.
+        when = f' <small>FY {ys[li]}</small>' if li is not None and li != len(vals) - 1 else ''
+        return (f'<figure class="sp-mini"><figcaption><span>{label}</span><b>{amt(last)}{when}</b></figcaption>'
                 f'<svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="{label}, FY {ys[0]} to {ys[-1]}">{rects}</svg>'
                 f'<div class="sp-mini-axis"><span>FY {ys[0]}</span><span>FY {ys[-1]}</span></div></figure>')
     keys = [('Net income', 'netIncome'), ('Equity', 'equity'), ('Dividends paid', 'dividendsPaid')] if c.get('financial') else \
@@ -518,7 +523,7 @@ def history_html(c):
     tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
     restated = any(years[y].get('restated') for y in ys)
     return f'''<section class="sp-card" id="history"><h2>{len(ys)} years of results</h2>
-      <p class="sp-sub">Each year from the company’s {"10-K annual report filed with the SEC" if c.get("sec") else "ESEF annual report"}; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
+      <p class="sp-sub">Each year from the company’s {"10-K annual report filed with the SEC" if c.get("sec") else "annual report filed with the SEC (10-K or 20-F)" if all("sec.gov" in (v.get("source") or "") for v in c["years"].values() if not v.get("hand")) else "ESEF annual report"}{"; FY " + ", FY ".join(y for y, v in sorted(c["years"].items()) if v.get("hand")) + " copied by hand from its published accounts, as ESEF does not have it yet" if any(v.get("hand") for v in c["years"].values()) else ""}; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
       {f'<div class="sp-tiles">{tiles_html}</div>' if tiles_html else ''}
       {f'<div class="sp-minis">{minis}</div>' if minis else ''}
       <div class="sp-scroll"><table class="sp-table sp-hist-table"><tr><th></th>{head_}</tr>{body}</table></div>
