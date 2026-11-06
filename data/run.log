@@ -185,8 +185,9 @@ shares in issue from the annual report for 2005 more companies
 revenue line set by hand for 1 companies (data/fixes.json)
 shared ISINs taken from 0 companies (kept by the larger one)
 hand-checked fixes for 141 companies (data/fixes.json)
+industry group (and sector) from data/groups.json for 2657 of 2873 companies
 2873 companies with figures, 200 without usable figures
-with ticker: 1128, with sector: 1816
+with ticker: 1128, with sector: 2774
 with F-score: 1897, F-score 8-9: 112, with dividend cover: 1144
 by country: GB 557, SE 354, FR 254, DE 195, IT 175, NO 156, PL 141, FI 131, ES 122, DK 122, NL 113, GR 104, BE 86, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 19, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
 
