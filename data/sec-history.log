@@ -1,0 +1,60 @@
+741 companies without ESEF history, 44 with the same name on the SEC list
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0000946770.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0000946770.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0000946770.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001136808.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001136808.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001136808.json: HTTP Error 404: Not Found
+  Accenture = Accenture plc (CIK 1467373): 2023, 2024, 2025, 2026
+  Chubb = Chubb Ltd (CIK 896159): 2020, 2021, 2022, 2023, 2024, 2025
+  Novartis = NOVARTIS AG (CIK 1114448): 2020, 2021, 2022, 2023, 2024, 2025
+  UBS = UBS Group AG (CIK 1610520): 2020, 2021, 2022, 2023, 2024, 2025
+  UBS = UBS AG (CIK 1114446): 2025
+  SAP = SAP SE (CIK 1000184): 2020, 2021, 2022, 2023, 2024, 2025
+  Linde = LINDE PLC (CIK 1707925): 2020, 2021, 2022, 2023, 2024, 2025
+  Eaton = Eaton Corp plc (CIK 1551182): 2020, 2021, 2022, 2023, 2024, 2025
+  Fresenius Medical Care = Fresenius Medical Care AG (CIK 1333141): 2020, 2021, 2022, 2023, 2024, 2025
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001069336.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001069336.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001069336.json: HTTP Error 404: Not Found
+  Aon = Aon plc (CIK 315293): 2020, 2021, 2022, 2023, 2024, 2025
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001107457.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001107457.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001107457.json: HTTP Error 404: Not Found
+  Tenaris = TENARIS SA (CIK 1190723): 2020, 2021, 2022, 2023, 2024, 2025
+  Alcon = ALCON INC (CIK 1167379): 2020, 2021, 2022, 2023, 2024, 2025
+  TechnipFMC = TechnipFMC plc (CIK 1681459): 2020, 2021, 2022, 2023, 2024, 2025
+  AngloGold Ashanti = AngloGold Ashanti PLC (CIK 1973832): 2023, 2024, 2025
+  Dole = Dole plc (CIK 1857475): 2021, 2022, 2023, 2024, 2025
+  Constellium = CONSTELLIUM SE (CIK 1563411): 2024, 2025
+  Garmin = GARMIN LTD (CIK 1121788): 2020, 2021, 2022, 2023, 2024, 2025
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001311307.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001311307.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001311307.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001002788.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001002788.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001002788.json: HTTP Error 404: Not Found
+  Perrigo = PERRIGO Co plc (CIK 1585364): 2020, 2021, 2022, 2023, 2024, 2025
+  Allegion = Allegion plc (CIK 1579241): 2020, 2021, 2022, 2023, 2024, 2025
+  Transocean = Transocean Ltd. (CIK 1451505): 2020, 2021, 2022, 2023, 2024, 2025
+  Cimpress = CIMPRESS plc (CIK 1262976): 2021, 2022, 2023, 2024, 2025, 2026
+  Genmab A/S = GENMAB A/S (CIK 1434265): 2025
+  On Holding = On Holding AG (CIK 1858985): 2021, 2022, 2023, 2024, 2025
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001705969.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001705969.json: HTTP Error 404: Not Found
+  ! https://data.sec.gov/api/xbrl/companyfacts/CIK0001705969.json: HTTP Error 404: Not Found
+  Brightstar Lottery = Brightstar Lottery PLC (CIK 1619762): 2020, 2021, 2022, 2023, 2024, 2025
+  Argo Blockchain PLC = Argo Blockchain Plc (CIK 1841675): 2023, 2024
+  Innate Pharma = Innate Pharma SA (CIK 1598599): 2020, 2021, 2022, 2023, 2024, 2025
+  CRISPR Therapeutics = CRISPR Therapeutics AG (CIK 1674416): 2020, 2021, 2022, 2023, 2024, 2025
+  Oculis Holding AG = Oculis Holding AG (CIK 1953530): 2022, 2023, 2024, 2025
+  dropped ABB (ABB LTD): no SEC year 2025 to compare
+  dropped Ryanair (RYANAIR HOLDINGS PLC): no SEC year 2026 to compare
+  dropped Flutter Entertainment (Flutter Entertainment plc): no SEC year 2025 to compare
+  dropped Amdocs (AMDOCS LTD): no SEC year 2025 to compare
+  dropped CMB.TECH (CMB.TECH NV): no SEC year 2025 to compare
+  dropped Evotec (Evotec SE): no SEC year 2025 to compare
+  dropped Agora (Agora, Inc.): no PLN figures
+  dropped Materialise NV (MATERIALISE NV): no SEC year 2025 to compare
+  dropped Wise PLC (Wise Group plc): no GIP figures
+wrote 27 companies to data/sec-history.json
