@@ -1,9 +1,11 @@
 """Market Radar: warning signs for the US stock market on one page, each with a traffic light.
 
 Free sources, fetched once a day:
-  FRED (St. Louis Fed)  yield curve, high-yield spread, Sahm rule, VIX, S&P 500, M2, Fed balance sheet,
-                        bank reserves, ECB balance sheet, corporate equities and GDP (Buffett indicator)
-  multpl.com            Shiller CAPE by month (Robert Shiller's data)
+  FRED (St. Louis Fed)  yield curve, Sahm rule, Chicago Fed financial conditions, St. Louis Fed financial
+                        stress, M2, Fed balance sheet, bank reserves, ECB balance sheet, corporate equities and
+                        GDP (Buffett indicator). Only series of public bodies: index data owned by S&P, Cboe or
+                        ICE may not be republished without their permission (Lub, 2026-11-06).
+  shillerdata.com       Shiller CAPE by month (Robert Shiller's own data file)
 Indicators without a free daily source (forward P/E, earnings revisions, margin debt, breadth,
 equal weight vs cap weight) come from data/radar-manual.json, with the date they were last checked.
 
@@ -11,7 +13,7 @@ Writes js/radar.json: every indicator with its value, date, light (green/amber/r
 monthly history for its chart, plus the election cycle table. A source that fails keeps the values
 from the previous run, so the page never goes blank.
 """
-import csv, io, json, re, statistics, sys, urllib.request
+import csv, html, io, json, re, statistics, sys, urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -85,15 +87,30 @@ def yoy(obs):
     return out
 
 
-def multpl_cape():
-    """Shiller CAPE by month from multpl.com's table: [(YYYY-MM-01, value)] oldest first."""
-    page = fetch("https://www.multpl.com/shiller-pe/table/by-month")
-    rows = re.findall(r"<td>\s*([A-Z][a-z]{2} \d{1,2}, \d{4})\s*</td>\s*<td>\s*(?:&#x2002;|<abbr[^>]*>[^<]*</abbr>|\s)*([\d.]+)", page)
+def shiller_cape():
+    """Shiller CAPE by month from Robert Shiller's own data file (ie_data.xls on shillerdata.com):
+    [(YYYY-MM-01, value)] oldest first."""
+    import xlrd   # pip install xlrd (the workflow installs it)
+    page = fetch("https://shillerdata.com/")
+    link = re.search(r'href="([^"]+ie_data\.xls[^"]*)"', page)
+    if not link:
+        raise RuntimeError("shillerdata.com: no ie_data.xls link")
+    url = html.unescape(link.group(1))
+    url = ("https:" + url) if url.startswith("//") else url
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
+        book = xlrd.open_workbook(file_contents=r.read())
+    sh = book.sheet_by_name("Data")
+    head = next(i for i in range(30) if "CAPE" in [str(c.value).strip() for c in sh.row(i)])
+    col = [str(c.value).strip() for c in sh.row(head)].index("CAPE")
     out = []
-    for d, v in rows:
-        out.append((datetime.strptime(d, "%b %d, %Y").date().isoformat(), float(v)))
+    for i in range(head + 1, sh.nrows):
+        d, v = sh.cell_value(i, 0), sh.cell_value(i, col)
+        if isinstance(d, float) and isinstance(v, float) and v > 0:
+            y, m = int(d), int(round((d - int(d)) * 100))
+            if 1 <= m <= 12:
+                out.append((f"{y}-{m:02d}-01", v))
     if len(out) < 100:
-        raise RuntimeError(f"multpl: only {len(out)} rows")
+        raise RuntimeError(f"shiller: only {len(out)} rows")
     return sorted(out)
 
 
@@ -105,16 +122,16 @@ def last(obs):
 # "down": lower is worse. Limits are a simplification from history, not official rules.
 DEFS = [
     {"id": "shiller-cape", "group": "valuation", "name": "Shiller P/E (CAPE)", "short": "Shiller CAPE",
-     "direction": "up", "amber": 25, "red": 30, "fmt": "x1", "source": "Robert Shiller via multpl.com",
+     "direction": "up", "amber": 25, "red": 30, "fmt": "x1", "source": "Robert Shiller, Yale (shillerdata.com)",
      "rule": "Amber above 25, red above 30. Long-run median about 16.",
      "about": ["The cyclically adjusted price-to-earnings ratio divides the S&P 500 by the average of the last ten years of inflation-adjusted earnings. Averaging a decade smooths out booms and recessions, so the ratio shows how expensive stocks are against what companies normally earn.",
                "A high CAPE has never told you when a fall will come. In 1996 it was already about 28 and the market rose for four more years. What it does predict well is the return of the next ten years: from a CAPE near 40, history points to low single-digit yearly returns rather than the long-run 10%.",
                "Peaks: 32.6 in September 1929, 44.2 in December 1999, 38.6 in late 2021. Lows: about 5 in 1920 and 1932, 6.6 in 1982."]},
     {"id": "buffett-indicator", "group": "valuation", "name": "Buffett indicator", "short": "Buffett indicator",
-     "direction": "up", "fmt": "pct0", "source": "Federal Reserve Z.1 (NCBEILQ027S), BEA GDP, S&P 500 via FRED",
+     "direction": "up", "fmt": "pct0", "source": "Federal Reserve Z.1 (NCBEILQ027S), BEA GDP via FRED",
      "rule": "Amber above 1.4 times its long-run median, red above its March 2000 peak.",
      "about": ["The total value of US companies' shares divided by the size of the US economy (GDP). Warren Buffett called it in 2001 probably the best single measure of where valuations stand at any given moment.",
-               "Here it uses the Federal Reserve's quarterly figure for the market value of US non-financial companies' shares. Between quarters, the latest value is moved with the S&P 500, so it changes every trading day.",
+               "Here it uses the Federal Reserve's quarterly figure for the market value of US non-financial companies' shares, so it changes once a quarter, about ten weeks after the quarter ends.",
                "The limits come from the series itself: amber when it is 40% above its median since 1950, red when it is above the level of the dot-com peak in early 2000."]},
     {"id": "forward-pe", "group": "valuation", "name": "S&P 500 forward P/E", "short": "Forward P/E",
      "direction": "up", "amber": 20, "red": 22, "fmt": "x1", "manual": True, "source": "FactSet Earnings Insight",
@@ -142,25 +159,16 @@ DEFS = [
      "rule": "Amber below 0, red below −3%.",
      "about": ["How much analysts changed their estimate of S&P 500 earnings per share for the current quarter since it began. Normally estimates fall a few per cent during a quarter.",
                "Estimates that rise mean companies are doing better than expected. Broad cuts mean an expensive market loses the earnings that hold its price up."]},
-    {"id": "high-yield-spread", "group": "credit", "name": "High-yield bond spread", "short": "High-yield spread",
-     "direction": "up", "amber": 4, "red": 5, "fmt": "pct2", "fred": "BAMLH0A0HYM2", "source": "ICE BofA US High Yield Index OAS via FRED (BAMLH0A0HYM2)",
-     "rule": "Amber above 4%, red above 5%.",
-     "about": ["How much more interest risky (junk-rated) US companies pay on their bonds than the US government. Lenders ask for more when they fear defaults.",
-               "Spreads below 4% mean credit flows freely. Before the 2008 crisis spreads began to widen in 2007, months before stocks peaked; in 2008 they passed 20%."]},
-    {"id": "high-yield-spread-rise", "group": "credit", "name": "High-yield spread rise from its 1-year low", "short": "Spread rise",
-     "direction": "up", "amber": 0.75, "red": 1.5, "fmt": "pp2", "source": "ICE BofA US High Yield Index OAS via FRED (BAMLH0A0HYM2)",
-     "rule": "Amber from +0.75, red from +1.5 percentage points.",
-     "about": ["The current high-yield spread minus its lowest point of the past twelve months. A fast rise from a low level is often the first crack, even while the spread still looks low."]},
+    {"id": "financial-conditions", "group": "credit", "name": "Chicago Fed financial conditions index", "short": "Financial conditions",
+     "direction": "up", "amber": -0.3, "red": 0, "fmt": "n2", "fred": "NFCI", "source": "Federal Reserve Bank of Chicago, NFCI via FRED (NFCI)",
+     "rule": "Amber above −0.3, red above 0 (tighter than average).",
+     "about": ["The Chicago Fed's weekly index of US financial conditions, built from 105 measures of money markets, debt and equity markets and bank lending. Zero is the average since 1971; positive values mean credit and funding are tighter than usual.",
+               "It rose above zero in 2000, 2007–09 and March 2020, each time together with a large fall in stocks. Readings well below zero mean money flows easily."]},
     {"id": "margin-debt", "group": "credit", "name": "Margin debt, year-on-year", "short": "Margin debt",
      "direction": "up", "amber": 25, "red": 50, "fmt": "pct0s", "manual": True, "source": "FINRA margin statistics",
      "rule": "Amber above +25%, red above +50% a year.",
      "about": ["Money investors borrowed from brokers to buy stocks, as reported monthly by FINRA. Leverage pushes prices up on the way up and forces selling on the way down.",
                "Year-on-year growth of 50% or more came near the tops of 2000, 2007 and 2021."]},
-    {"id": "sp500-trend", "group": "market", "name": "S&P 500 against its 200-day average", "short": "S&P 500 trend",
-     "direction": "down", "amber": 0, "red": -5, "fmt": "pct1s", "source": "S&P 500 via FRED (SP500)",
-     "rule": "Amber below the average, red more than 5% below.",
-     "about": ["How far the S&P 500 is above or below its average price of the last 200 trading days, the most watched trend line in markets.",
-               "Most large bear markets were confirmed by the index falling below it and staying there. The signal comes late and is sometimes false, but it rarely misses a long fall."]},
     {"id": "market-breadth", "group": "market", "name": "S&P 500 stocks above their 200-day average", "short": "Market breadth",
      "direction": "down", "amber": 50, "red": 40, "fmt": "pct1", "manual": True, "source": "thetrading.tools",
      "rule": "Amber below 50%, red below 40%.",
@@ -169,11 +177,11 @@ DEFS = [
      "direction": "down", "amber": -5, "red": -10, "fmt": "pct1s", "manual": True, "source": "S&P 500 Equal Weight vs S&P 500, thetrading.tools",
      "rule": "Amber below −5%, red below −10%.",
      "about": ["The return of the equal-weight S&P 500 (every company counts the same) minus the normal index (big companies count more) over three years. A large negative gap means a handful of giants did most of the work, which leaves the index exposed if they stumble."]},
-    {"id": "vix", "group": "market", "name": "VIX fear index", "short": "VIX",
-     "direction": "up", "amber": 20, "red": 30, "fmt": "n1", "fred": "VIXCLS", "source": "Cboe via FRED (VIXCLS)",
-     "rule": "Amber above 20, red above 30. Long-run median about 17.",
-     "about": ["The swings options traders expect in the S&P 500 over the next 30 days, in per cent a year. It jumps when markets fall.",
-               "Above 30 markets are in stress. A very low VIX near 12 can also mean complacency before a shock."]},
+    {"id": "financial-stress", "group": "market", "name": "St. Louis Fed financial stress index", "short": "Financial stress",
+     "direction": "up", "amber": 0, "red": 1, "fmt": "n2", "fred": "STLFSI4", "source": "Federal Reserve Bank of St. Louis (STLFSI4)",
+     "rule": "Amber above 0 (more stress than average), red above 1.",
+     "about": ["The St. Louis Fed's weekly measure of stress in financial markets, from 18 series: interest rates, yield spreads and expected volatility of stocks and bonds. Zero is normal; each point is one standard deviation above it.",
+               "It reached about 5 in March 2020 and above 9 in late 2008. Values below zero mean calm markets."]},
     {"id": "fed-balance-sheet", "group": "liquidity", "name": "Fed balance sheet, year-on-year", "short": "Fed balance sheet",
      "direction": "down", "amber": 0, "red": -5, "fmt": "pct1s", "fred": "WALCL", "source": "Federal Reserve H.4.1 via FRED (WALCL)",
      "rule": "Amber when shrinking, red when shrinking more than 5% a year.",
@@ -207,48 +215,20 @@ def compute(d, cache):
     """Fills value, date and history of one indicator from its source."""
     i = d["id"]
     if i == "shiller-cape":
-        obs = multpl_cape()
+        obs = shiller_cape()
         v = last(obs)
         return v[1], v[0], [[k[:7], val] for k, val in obs if k[:4] >= "1900"]
     if i == "buffett-indicator":
-        eq, gdp, spx = cache("NCBEILQ027S"), cache("GDP"), cache("SP500", "2015-01-01")
+        eq, gdp = cache("NCBEILQ027S"), cache("GDP")
         g = dict(gdp)
         ratio = [(dd, e / 1000 / g[dd] * 100) for dd, e in eq if dd in g and g[dd]]
         vals = [v for dd, v in ratio if dd >= "1950"]
         d["amber"] = round(statistics.median(vals) * 1.4)
         d["red"] = round(max(v for dd, v in ratio if "1999-10" <= dd <= "2000-04"))
         qd, qv = ratio[-1]
-        # The quarter's value is for its first day; move it with the S&P 500 since the quarter's end.
-        qend = (datetime.strptime(qd, "%Y-%m-%d").date() + timedelta(days=92)).replace(day=1) - timedelta(days=1)
-        base = [v for dd, v in spx if dd <= qend.isoformat()]
-        sd, sv = last(spx)
-        v = qv * sv / base[-1] if base else qv
         hist = [[dd[:7], round(x, 1)] for dd, x in ratio if dd >= "1950"]
-        d["note"] = f"Quarterly figure {qv:.0f}% for {qd[:7]}, moved with the S&P 500 to {sd}."
-        return v, sd, hist
-    if i == "high-yield-spread-rise":
-        obs = cache("BAMLH0A0HYM2")
-        ld = datetime.strptime(obs[-1][0], "%Y-%m-%d").date()
-        yr = [v for dd, v in obs if dd >= (ld - timedelta(days=365)).isoformat()]
-        lo = min(yr)
-        lo_date = next(dd for dd, v in obs if v == lo and dd >= (ld - timedelta(days=365)).isoformat())
-        d["note"] = f"1-year low {lo:.2f}% on {lo_date}."
-        # History: spread minus its running 1-year low, month ends.
-        hist, dates = [], [datetime.strptime(x, "%Y-%m-%d").date() for x, _ in obs]
-        for k, (dd, v) in enumerate(obs):
-            if k + 1 < len(obs) and obs[k + 1][0][:7] == dd[:7]:
-                continue
-            win = [obs[j][1] for j in range(k, -1, -1) if (dates[k] - dates[j]).days <= 365]
-            hist.append([dd[:7], round(v - min(win), 3)])
-        return obs[-1][1] - lo, obs[-1][0], hist
-    if i == "sp500-trend":
-        obs = cache("SP500", "2015-01-01")
-        out = []
-        for k in range(199, len(obs)):
-            avg = sum(v for _, v in obs[k - 199:k + 1]) / 200
-            out.append((obs[k][0], (obs[k][1] / avg - 1) * 100))
-        d["note"] = f"S&P 500 at {obs[-1][1]:,.0f}."
-        return out[-1][1], out[-1][0], monthly(out, "2016-01")
+        d["note"] = f"Quarterly figure for the quarter starting {qd[:7]}."
+        return qv, qd, hist
     obs = cache(d["fred"])
     if i in ("fed-balance-sheet", "ecb-balance-sheet", "m2-money-supply"):
         lv = obs[-1][1]

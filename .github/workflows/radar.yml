@@ -1,13 +1,13 @@
 name: Market Radar (denne)
 
-# Downloads the Market Radar indicators (FRED, multpl.com) every weekday morning into js/radar.json.
+# Downloads the Market Radar indicators (FRED, Robert Shiller's data) every weekday morning into js/radar.json.
 # On main it also uploads the data file and the indicator pages (/radar/<name>) to finila.com;
 # the /radar page itself is published only by deploy-finila.yml.
 on:
   schedule:
     - cron: '15 6 * * 1-6'   # 06:15 UTC, after US data of the previous day is out
   push:
-    branches: [claude/market-radar]
+    branches: [claude/market-radar, claude/project-thread-z7m788]
     paths: ['scripts/data/radar.py', 'data/radar-manual.json', '.github/workflows/radar.yml']
   workflow_dispatch:
 
@@ -30,6 +30,7 @@ jobs:
       - name: Download indicators
         run: |
           set -o pipefail
+          pip install -q xlrd==2.0.1
           mkdir -p data
           python scripts/data/radar.py 2>&1 | tee data/radar.log || { echo "::error::radar: $(grep FAIL data/radar.log | head -5 | tr '\n' ' ')"; exit 1; }
           grep FAIL data/radar.log | while read -r l; do echo "::warning::$l"; done || true

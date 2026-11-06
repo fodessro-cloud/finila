@@ -243,8 +243,8 @@ def main():
     <div class="h-card i-method">
       <h2>Sources</h2>
       <ul>
-        <li>FRED, Federal Reserve Bank of St. Louis: Treasury yields, ICE BofA high-yield spread, Sahm rule, VIX, S&amp;P 500, M2, Fed and ECB balance sheets, bank reserves, Fed Z.1 equities and GDP.</li>
-        <li>Robert Shiller's data via multpl.com: cyclically adjusted P/E.</li>
+        <li>FRED, Federal Reserve Bank of St. Louis: Treasury yields, Sahm rule, St. Louis Fed financial stress index, Chicago Fed financial conditions index, M2, Fed and ECB balance sheets, bank reserves, Fed Z.1 equities and GDP.</li>
+        <li>Robert Shiller's own data (Yale, shillerdata.com): cyclically adjusted P/E, monthly.</li>
         <li>Checked by hand: forward P/E and earnings estimates (FactSet), margin debt (FINRA), breadth and equal weight.</li>
       </ul>
       {f'<p class="h-note">Not updated today, last known value shown: {esc(", ".join(data["failed"]))}.</p>' if data.get("failed") else ''}
@@ -253,7 +253,7 @@ def main():
     lights = f'{c["red"]} red, {c["amber"]} amber, {c["green"]} green'
     (OUT / 'radar.html').write_text(page(
         'Market Radar — stock market warning signs today | FINILA',
-        f'Is the stock market heading for a fall? {len(inds)} warning signs with traffic lights, updated daily: Shiller CAPE, Buffett indicator, yield curve, Sahm rule, credit spreads, VIX, Fed balance sheet. Today: {lights}.',
+        f'Is the stock market heading for a fall? {len(inds)} warning signs with traffic lights, updated daily: Shiller CAPE, Buffett indicator, yield curve, Sahm rule, financial stress, Fed balance sheet. Today: {lights}.',
         'radar', body, head, foot))
 
     # One page per indicator
