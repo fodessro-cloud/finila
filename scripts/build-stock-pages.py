@@ -1277,9 +1277,9 @@ HEADER = '''<header class="fh">
       <a href="/groups">Groups</a>
       <a href="/insiders">Insiders</a>
       <a href="/shorts">Shorts</a>
+      <a href="/radar">Radar</a>
       <a href="/property">Property</a>
       <a href="/rates">Rates</a>
-      <a href="/radar">Radar</a>
       <a href="/assets">Assets</a>
       <a href="/archiv/">Archive</a>
     </nav>
