@@ -1,80 +1,80 @@
-Xetra 2026-11-06: read 52 new minute files, up to DETR-posttrade-2026-11-06T12_30.json.gz
-Börse Frankfurt 2026-11-06: read 52 new minute files, up to DFRA-posttrade-2026-11-06T12_30.json.gz
-Intraday charts for 2026-11-06 (trading day in progress): 2250 shares
+Xetra 2026-11-06: read 52 new minute files, up to DETR-posttrade-2026-11-06T13_22.json.gz
+Börse Frankfurt 2026-11-06: read 53 new minute files, up to DFRA-posttrade-2026-11-06T13_23.json.gz
+Intraday charts for 2026-11-06 (trading day in progress): 2251 shares
 Fundamentals issuers with a price: 2264 of 2862
 Prices for 74 of 77 stocks (closed day 2026-11-05, day in progress 2026-11-06)
   no trades on Xetra or Frankfurt: UNA@Netherlands, ROG@Switzerland, ULVR@UK
-  SAP@Germany          DE0007164600 Xetra            2026-11-06 12:30     210.15 trades   4784 change -2.96
-  SIE@Germany          DE0007236101 Xetra            2026-11-06 12:30     265.65 trades   5320 change -1.94
-  ALV@Germany          DE0008404005 Xetra            2026-11-06 12:30      447.9 trades   4054 change -3.16
-  BASF@Germany         DE000BASF111 Xetra            2026-11-06 12:30       54.2 trades   2858 change -2.32
-  BMW@Germany          DE0005190003 Xetra            2026-11-06 12:30       59.7 trades   1683 change -2.13
-  MBG@Germany          DE0007100000 Xetra            2026-11-06 12:30     41.595 trades   4220 change -2.62
-  DTE@Germany          DE0005557508 Xetra            2026-11-06 12:30      25.65 trades   2422 change -2.36
-  DBK@Germany          DE0005140008 Xetra            2026-11-06 12:30     31.645 trades   4333 change -2.57
-  BAYN@Germany         DE000BAY0017 Xetra            2026-11-06 12:30      54.24 trades   3280 change -2.27
-  VOW3@Germany         DE0007664039 Xetra            2026-11-06 12:30      70.08 trades   1305 change -2.01
-  IFX@Germany          DE0006231004 Xetra            2026-11-06 12:30      46.83 trades  13256 change 2.83
-  ADS@Germany          DE000A1EWWW0 Xetra            2026-11-06 12:30      174.1 trades   2012 change -2.33
-  MUV2@Germany         DE0008430026 Xetra            2026-11-06 12:30      570.2 trades   2500 change -3.45
-  HEN3@Germany         DE0006048432 Xetra            2026-11-06 12:30      82.16 trades    746 change -1.39
-  RWE@Germany          DE0007037129 Xetra            2026-11-06 12:29      57.34 trades   1215 change 0.77
-  CON@Germany          DE0005439004 Xetra            2026-11-06 12:30      70.14 trades    967 change -0.31
-  MC@France            FR0000121014 Xetra            2026-11-06 12:28      403.4 trades    130 change -2.92
-  TTE@France           FR0000120271 Xetra            2026-11-06 12:24      78.72 trades     95 change -2.19
-  OR@France            FR0000120321 Xetra            2026-11-06 12:24      445.5 trades     19 change -1.6
-  AIR@France           NL0000235190 Xetra            2026-11-06 12:30     196.44 trades   1856 change -0.77
-  BNP@France           FR0000131104 Xetra            2026-11-06 12:17      91.48 trades     33 change -0.58
-  SAN@France           FR0000120578 Xetra            2026-11-06 12:30      82.22 trades     43 change -1.67
-  CS@France            FR0000120628 Xetra            2026-11-06 12:17      44.69 trades     92 change -1.52
-  RMS@France           FR0000052292 Xetra            2026-11-06 12:27     1352.5 trades     21 change -1.85
-  KER@France           FR0000121485 Xetra            2026-11-06 12:17     184.54 trades     11 change -3.28
-  DG@France            FR0000125486 Xetra            2026-11-06 12:23     110.75 trades     42 change -1.99
+  SAP@Germany          DE0007164600 Xetra            2026-11-06 13:22     209.85 trades   5358 change -3.09
+  SIE@Germany          DE0007236101 Xetra            2026-11-06 13:22      265.3 trades   6022 change -2.07
+  ALV@Germany          DE0008404005 Xetra            2026-11-06 13:22      447.5 trades   4578 change -3.24
+  BASF@Germany         DE000BASF111 Xetra            2026-11-06 13:22      54.06 trades   3071 change -2.58
+  BMW@Germany          DE0005190003 Xetra            2026-11-06 13:22      59.62 trades   1804 change -2.26
+  MBG@Germany          DE0007100000 Xetra            2026-11-06 13:22     41.625 trades   4756 change -2.55
+  DTE@Germany          DE0005557508 Xetra            2026-11-06 13:22      25.64 trades   2745 change -2.4
+  DBK@Germany          DE0005140008 Xetra            2026-11-06 13:22     31.685 trades   4776 change -2.45
+  BAYN@Germany         DE000BAY0017 Xetra            2026-11-06 13:22      54.42 trades   3759 change -1.95
+  VOW3@Germany         DE0007664039 Xetra            2026-11-06 13:22      70.12 trades   1459 change -1.96
+  IFX@Germany          DE0006231004 Xetra            2026-11-06 13:22     46.525 trades  15925 change 2.16
+  ADS@Germany          DE000A1EWWW0 Xetra            2026-11-06 13:22     174.25 trades   2151 change -2.24
+  MUV2@Germany         DE0008430026 Xetra            2026-11-06 13:22      570.0 trades   2746 change -3.49
+  HEN3@Germany         DE0006048432 Xetra            2026-11-06 13:22      82.46 trades    861 change -1.03
+  RWE@Germany          DE0007037129 Xetra            2026-11-06 13:22      57.22 trades   1376 change 0.56
+  CON@Germany          DE0005439004 Xetra            2026-11-06 13:22       69.8 trades   1076 change -0.8
+  MC@France            FR0000121014 Xetra            2026-11-06 13:19      402.9 trades    151 change -3.04
+  TTE@France           FR0000120271 Xetra            2026-11-06 13:06      78.88 trades     99 change -1.99
+  OR@France            FR0000120321 Xetra            2026-11-06 12:39      445.5 trades     20 change -1.6
+  AIR@France           NL0000235190 Xetra            2026-11-06 13:22     196.62 trades   2243 change -0.68
+  BNP@France           FR0000131104 Xetra            2026-11-06 13:18      91.55 trades     35 change -0.5
+  SAN@France           FR0000120578 Xetra            2026-11-06 13:21      82.35 trades     47 change -1.52
+  CS@France            FR0000120628 Xetra            2026-11-06 13:20      44.73 trades     96 change -1.43
+  RMS@France           FR0000052292 Xetra            2026-11-06 12:39     1349.5 trades     22 change -2.07
+  KER@France           FR0000121485 Xetra            2026-11-06 12:43     184.14 trades     13 change -3.49
+  DG@France            FR0000125486 Xetra            2026-11-06 13:13     110.55 trades     46 change -2.17
   CAP@France           FR0000125338 Börse Frankfurt  2026-11-06 11:17      125.4 trades      2 change -3.87
   RI@France            FR0000120693 Xetra            2026-11-06 12:17       70.3 trades      8 change -1.82
-  ORA@France           FR0000133308 Xetra            2026-11-06 12:17       15.0 trades     12 change -2.28
-  ASML@Netherlands     NL0010273215 Xetra            2026-11-06 12:30     1301.0 trades    647 change 5.58
-  SHEL@Netherlands     GB00BP6MXD84 Xetra            2026-11-06 12:23      44.31 trades    179 change -1.59
-  INGA@Netherlands     NL0011821202 Xetra            2026-11-06 12:27     28.695 trades    151 change -1.61
+  ORA@France           FR0000133308 Xetra            2026-11-06 13:01      14.95 trades     14 change -2.61
+  ASML@Netherlands     NL0010273215 Xetra            2026-11-06 13:20     1295.4 trades    690 change 5.13
+  SHEL@Netherlands     GB00BP6MXD84 Xetra            2026-11-06 13:22     44.325 trades    203 change -1.55
+  INGA@Netherlands     NL0011821202 Xetra            2026-11-06 13:20      28.68 trades    179 change -1.66
   HEIA@Netherlands     NL0000009165 Xetra            2026-11-06 12:17      82.24 trades      5 change -2.51
-  PHIA@Netherlands     NL0000009538 Xetra            2026-11-06 12:17      26.64 trades     45 change -3.23
-  STLAM@Netherlands    NL00150001Q9 Xetra            2026-11-06 12:27      3.941 trades     70 change -0.86
-  NESN@Switzerland     CH0038863350 Xetra            2026-11-06 12:17      92.82 trades     21 change -1.93
+  PHIA@Netherlands     NL0000009538 Xetra            2026-11-06 13:06      26.66 trades     48 change -3.16
+  STLAM@Netherlands    NL00150001Q9 Xetra            2026-11-06 13:22      3.936 trades     87 change -0.98
+  NESN@Switzerland     CH0038863350 Xetra            2026-11-06 12:54      92.78 trades     22 change -1.98
   NOVN@Switzerland     CH0012005267 Xetra            2026-11-06 12:23     143.24 trades     17 change -2.39
   ABBN@Switzerland     CH0012221716 Xetra            2026-11-06 12:28      73.46 trades     20 change 0.66
   ZURN@Switzerland     CH0011075394 Börse Frankfurt  2026-11-06 11:33      685.0 trades      3 change -2.92
-  UBSG@Switzerland     CH0244767585 Xetra            2026-11-06 12:17      43.22 trades      9 change -0.94
+  UBSG@Switzerland     CH0244767585 Xetra            2026-11-06 12:51      43.23 trades     10 change -0.92
   GIVN@Switzerland     CH0010645932 Xetra            2026-11-06 12:17     4396.0 trades      2 change -1.66
   AZN@UK               GB0009895292 Börse Frankfurt  2026-11-06 12:24     162.85 trades      7 change -3.35
-  HSBA@UK              GB0005405286 Xetra            2026-11-06 12:17     15.498 trades    106 change -1.16
-  BP@UK                GB0007980591 Xetra            2026-11-06 12:28      6.645 trades    534 change -2.06
+  HSBA@UK              GB0005405286 Xetra            2026-11-06 13:12     15.508 trades    112 change -1.1
+  BP@UK                GB0007980591 Xetra            2026-11-06 13:21      6.632 trades    686 change -2.25
   GLEN@UK              JE00B4T3BW64 Börse Frankfurt  2026-11-06 11:38       5.87 trades      5 change -1.01
-  RIO@UK               GB0007188757 Xetra            2026-11-06 12:26      74.32 trades    211 change -0.24
-  GSK@UK               GB00BN7SWP63 Xetra            2026-11-06 12:17      21.99 trades     41 change -2.91
-  DGE@UK               GB0002374006 Xetra            2026-11-06 12:27     21.985 trades     78 change -0.97
-  BARC@UK              GB0031348658 Xetra            2026-11-06 12:24      5.032 trades    136 change -1.78
-  LLOY@UK              GB0008706128 Xetra            2026-11-06 12:30     1.1485 trades    505 change -1.84
-  ITX@Spain            ES0148396007 Xetra            2026-11-06 12:21      57.62 trades      8 change -4.25
-  IBE@Spain            ES0144580Y14 Xetra            2026-11-06 12:17      22.62 trades     47 change -1.78
-  SAN@Spain            ES0113900J37 Xetra            2026-11-06 12:17     10.586 trades     57 change -1.32
-  BBVA@Spain           ES0113211835 Xetra            2026-11-06 12:17      22.76 trades      9 change -0.61
-  TEF@Spain            ES0178430E18 Xetra            2026-11-06 12:17      3.347 trades     25 change -2.9
-  ENEL@Italy           IT0003128367 Xetra            2026-11-06 12:26      9.611 trades     55 change -1.16
-  ENI@Italy            IT0003132476 Xetra            2026-11-06 12:29     24.925 trades     39 change -0.86
-  RACE@Italy           NL0011585146 Xetra            2026-11-06 12:28     369.45 trades     70 change -1.57
-  UCG@Italy            IT0005239360 Xetra            2026-11-06 12:26      76.76 trades     49 change -0.57
-  ISP@Italy            IT0000072618 Xetra            2026-11-06 12:26        6.2 trades     54 change -0.19
+  RIO@UK               GB0007188757 Xetra            2026-11-06 13:16       74.4 trades    223 change -0.13
+  GSK@UK               GB00BN7SWP63 Xetra            2026-11-06 13:20      22.05 trades     43 change -2.65
+  DGE@UK               GB0002374006 Xetra            2026-11-06 13:12     22.045 trades    102 change -0.7
+  BARC@UK              GB0031348658 Xetra            2026-11-06 13:07      5.029 trades    144 change -1.83
+  LLOY@UK              GB0008706128 Xetra            2026-11-06 13:12      1.147 trades    671 change -1.97
+  ITX@Spain            ES0148396007 Xetra            2026-11-06 13:14       57.7 trades      9 change -4.12
+  IBE@Spain            ES0144580Y14 Xetra            2026-11-06 13:11      22.54 trades     53 change -2.13
+  SAN@Spain            ES0113900J37 Xetra            2026-11-06 13:18       10.6 trades     62 change -1.19
+  BBVA@Spain           ES0113211835 Xetra            2026-11-06 13:19      22.79 trades     11 change -0.48
+  TEF@Spain            ES0178430E18 Xetra            2026-11-06 12:57      3.338 trades     28 change -3.16
+  ENEL@Italy           IT0003128367 Xetra            2026-11-06 13:07      9.578 trades     60 change -1.5
+  ENI@Italy            IT0003132476 Xetra            2026-11-06 13:00     24.855 trades     41 change -1.13
+  RACE@Italy           NL0011585146 Xetra            2026-11-06 13:17     370.25 trades     81 change -1.36
+  UCG@Italy            IT0005239360 Xetra            2026-11-06 13:12      76.42 trades     50 change -1.01
+  ISP@Italy            IT0000072618 Xetra            2026-11-06 13:20      6.184 trades     59 change -0.45
   ATCO@Sweden          SE0017486889 Xetra            2026-11-06 12:17      16.63 trades      2 change -2.95
   VOLV@Sweden          SE0000115446 Xetra            2026-11-06 12:17       28.4 trades      1 change -2.04
-  ERICB@Sweden         SE0000108656 Xetra            2026-11-06 12:17      9.346 trades      2 change 0.82
+  ERICB@Sweden         SE0000108656 Xetra            2026-11-06 13:22      9.332 trades      3 change 0.67
   HMB@Sweden           SE0000106270 Xetra            2026-11-06 12:17     15.955 trades      2 change -2.39
-  NOVO@Denmark         DK0062498333 Xetra            2026-11-06 12:26      35.93 trades    340 change 0.49
+  NOVO@Denmark         DK0062498333 Xetra            2026-11-06 13:21     35.985 trades    490 change 0.64
   MAERSK@Denmark       DK0010244508 Xetra            2026-11-06 12:17     2773.0 trades      5 change 0.25
-  NOKIA@Finland        FI0009000681 Xetra            2026-11-06 12:30      7.096 trades    542 change 4.38
-  UCB@Belgium          BE0003739530 Xetra            2026-11-06 12:17      281.1 trades      8 change -3.53
+  NOKIA@Finland        FI0009000681 Xetra            2026-11-06 13:18      7.034 trades    622 change 3.47
+  UCB@Belgium          BE0003739530 Xetra            2026-11-06 13:18      282.8 trades      9 change -2.95
   ABI@Belgium          BE0974293251 Xetra            2026-11-06 12:17      74.74 trades      9 change -1.24
   CRH@Ireland          IE0001827041 Börse Frankfurt  2026-11-06 11:09      85.64 trades      3 change -2.48
   EQNR@Norway          NO0010096985 Börse Frankfurt  2026-11-06 10:48      37.65 trades      5 change -1.47
-  OMV@Austria          AT0000743059 Xetra            2026-11-06 12:30       71.2 trades     67 change -1.18
+  OMV@Austria          AT0000743059 Xetra            2026-11-06 13:20      70.85 trades     79 change -1.67
   EDP@Portugal         PTEDP0AM0009 Börse Frankfurt  2026-11-06 09:35      4.916 trades      4 change -1.68
-  PKN@Poland           PLPKN0000018 Börse Frankfurt  2026-11-06 11:52      30.35 trades     17 change -4.86
+  PKN@Poland           PLPKN0000018 Börse Frankfurt  2026-11-06 12:54      30.05 trades     18 change -5.8
