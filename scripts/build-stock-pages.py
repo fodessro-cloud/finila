@@ -1629,6 +1629,45 @@ CAPTIVE_FINANCE = {
 }
 
 
+# Where an official filing lives: ESEF reports (filings.xbrl.org), SEC filings, or a company's own report link set by hand.
+OFFICIAL = ('filings.xbrl.org', 'sec.gov')
+COVER = [('price', 'Price', lambda c: is_num(c.get('price'))),
+         ('mcap', 'Market value', lambda c: is_num(c.get('mcap'))),
+         ('sector', 'Sector', lambda c: bool(c.get('sector'))),
+         ('figures', 'Annual figures', lambda c: is_num(c.get('revenue')) or is_num(c.get('netIncome'))),
+         ('official', 'Figures from an official report', lambda c: any(d in (c.get('source') or '') for d in OFFICIAL)),
+         ('history', '3+ years of history', lambda c: len(c.get('years') or {}) >= 3),
+         ('about', 'What the company does', lambda c: bool(c.get('about'))),
+         ('outlook', 'Outlook from a report', lambda c: bool(c.get('quotes') or (c.get('latestReport') or {}).get('outlook'))),
+         ('report', 'Newest quarterly report', lambda c: bool(c.get('latestReport'))),
+         ('news', 'Company announcements', lambda c: bool(c.get('news')))]
+
+
+def coverage(rows):
+    """Which parts of the company page template each company fills (Lub 2026-11-06: check regularly
+    that every page has what it should). Writes data/page-coverage.json and data/page-coverage.md."""
+    pub = [c for c in rows if c.get('origin') != 'listing']
+    per = {c['lei']: [k for k, _, f in COVER if not f(c)] for c in pub}
+    by_c = defaultdict(list)
+    for c in pub:
+        by_c[c['country']].append(c)
+    pct = lambda cs, f: round(100 * sum(1 for c in cs if f(c)) / len(cs)) if cs else 0
+    lines = [f'# Company page coverage, {date.today().isoformat()}', '',
+             f'{len(pub)} public company pages. Share of pages that show each part of the template.', '',
+             '| Country | Pages | ' + ' | '.join(n for _, n, _ in COVER) + ' |', '|' + '---|' * (len(COVER) + 2)]
+    for ctry, cs in sorted(by_c.items(), key=lambda x: -len(x[1])) + [('All', pub)]:
+        lines.append(f'| {ctry} | {len(cs)} | ' + ' | '.join(f'{pct(cs, f)}%' for _, _, f in COVER) + ' |')
+    big = sorted(pub, key=lambda c: -(c.get('mcap') or c.get('revenueEur') or 0))[:300]
+    gaps = [c for c in big if set(per[c['lei']]) & {'price', 'mcap', 'sector', 'figures', 'official', 'history', 'about'}]
+    lines += ['', '## Largest companies with gaps (top 300 by size)', '']
+    lines += [f'- {c["name"]} ({c["country"]}): missing ' + ', '.join(n for k, n, _ in COVER if k in per[c['lei']]) for c in gaps[:80]]
+    (SRC / 'data').mkdir(exist_ok=True)
+    (SRC / 'data' / 'page-coverage.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    (SRC / 'data' / 'page-coverage.json').write_text(json.dumps({'updated': date.today().isoformat(), 'missing': per},
+                                                               separators=(',', ':')), encoding='utf-8')
+    print(f'Coverage: {pct(pub, COVER[5][2])}% of pages with history, {len(gaps)} of the 300 largest have gaps (data/page-coverage.md).')
+
+
 def main():
     updated, price_day, rows = companies()
     for c in rows:
@@ -1688,6 +1727,7 @@ def main():
     (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
                                      ''.join(f'  <url><loc>{esc(u)}</loc><lastmod>{today}</lastmod></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     print(f'Built {len(rows)} company pages in {out}, sitemap with {len(urls)} addresses.')
+    coverage(rows)
 
 
 if __name__ == '__main__':
