@@ -100,7 +100,46 @@ def card(r, link=True):
     </{tag}>'''
 
 
-def line_chart(hist, amber, red, label):
+# Recessions (Lub, 2026-11-06: show where the trouble was historically). US: NBER business cycle dates
+# (nber.org/research/business-cycle-dating), peak month to trough month. Euro area: CEPR Euro Area Business Cycle
+# Dating Committee (cepr.org), peak quarter to trough quarter, as months.
+RECESSIONS = {
+    'us': [('1902-09', '1904-08'), ('1907-05', '1908-06'), ('1910-01', '1912-01'), ('1913-01', '1914-12'), ('1918-08', '1919-03'),
+           ('1920-01', '1921-07'), ('1923-05', '1924-07'), ('1926-10', '1927-11'), ('1929-08', '1933-03'), ('1937-05', '1938-06'),
+           ('1945-02', '1945-10'), ('1948-11', '1949-10'), ('1953-07', '1954-05'), ('1957-08', '1958-04'), ('1960-04', '1961-02'),
+           ('1969-12', '1970-11'), ('1973-11', '1975-03'), ('1980-01', '1980-07'), ('1981-07', '1982-11'), ('1990-07', '1991-03'),
+           ('2001-03', '2001-11'), ('2007-12', '2009-06'), ('2020-02', '2020-04')],
+    'euro': [('1974-07', '1975-03'), ('1980-01', '1982-09'), ('1992-01', '1993-09'), ('2008-01', '2009-06'), ('2011-07', '2013-03'),
+             ('2019-10', '2020-06')],
+}
+REC_FILL = {'us': '#E3E7EE', 'euro': '#ECE4FB'}
+REC_NAME = {'us': 'US recession (NBER)', 'euro': 'Euro area recession (CEPR)'}
+EURO_IDS = {'ecb-balance-sheet'}
+
+
+def regions_of(r):
+    return ['euro'] if r['group'] == 'europe' or r['id'] in EURO_IDS else ['us']
+
+
+def rec_bands(regions, X, x0, x1, top, bottom):
+    """Shaded recession bands behind a chart; overlapping US and euro bands stay visible (multiply-like opacity)."""
+    out = []
+    for reg in regions:
+        for a, b in RECESSIONS[reg]:
+            t0 = int(a[:4]) + (int(a[5:7]) - 1) / 12
+            t1 = int(b[:4]) + int(b[5:7]) / 12
+            t0, t1 = max(t0, x0), min(t1, x1)
+            if t1 > t0:
+                op = '0.7' if len(regions) > 1 else '1'
+                out.append(f'<rect x="{X(t0):.1f}" y="{top}" width="{X(t1) - X(t0):.1f}" height="{bottom - top}" fill="{REC_FILL[reg]}" opacity="{op}"><title>{REC_NAME[reg]}: {a} to {b}</title></rect>')
+    return out
+
+
+def rec_legend(regions):
+    return ''.join(f'<span><i class="rd-sw" style="background:{REC_FILL[g]}"></i>{REC_NAME[g]}</span>' for g in regions)
+
+
+def line_chart(hist, amber, red, label, regions=('us',)):
     """Inline SVG line chart of [[YYYY-MM, value]] with the amber and red limits as dashed lines."""
     pts = [(int(m[:4]) + (int(m[5:7]) - 1) / 12, v) for m, v in hist if v is not None]
     if len(pts) < 3:
@@ -121,6 +160,7 @@ def line_chart(hist, amber, red, label):
             step *= f
             break
     out = [f'<svg class="rd-chart" viewBox="0 0 {W} {H}" role="img" aria-label="{esc(label)}">']
+    out += rec_bands(regions, X, x0, x1, T, H - B)
     v = (lo // step + 1) * step
     while v < hi:
         out.append(f'<line x1="{L}" x2="{W - R}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="#DCE2EC"/>'
@@ -147,7 +187,7 @@ MONEY = [('fed-balance-sheet', 'Fed balance sheet, $', '#1F6FEB', 'levels'), ('e
          ('bank-reserves', 'Bank reserves at the Fed, $', '#0E9FB3', 'history')]
 
 
-def money_chart(by_id, start='2008-01'):
+def money_chart(by_id, start='2003-01'):
     """Fed and ECB balance sheets and US bank reserves in trillions on one chart (Lub, 2026-11-06:
     the three FRED series WALCL, ECBASSETSW and WRESBAL he follows)."""
     series = [(i, lab, col, [(int(m[:4]) + (int(m[5:7]) - 1) / 12, v) for m, v in by_id[i].get(key) or [] if m >= start and v is not None])
@@ -162,6 +202,7 @@ def money_chart(by_id, start='2008-01'):
     X = lambda t: L + (t - x0) / (x1 - x0) * (W - L - R)
     Y = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
     out = [f'<svg class="rd-chart" viewBox="0 0 {W} {H}" role="img" aria-label="Fed and ECB balance sheets and US bank reserves in trillions">']
+    out += rec_bands(['us', 'euro'], X, x0, x1, T, H - B)
     v = 0
     while v < hi:
         out.append(f'<line x1="{L}" x2="{W - R}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="#DCE2EC"/>'
@@ -180,9 +221,9 @@ def money_chart(by_id, start='2008-01'):
                      for i, lab, col, ps in series)
     return f'''<div class="h-card rd-money">
       <h3>Money in the system: Fed and ECB balance sheets and bank reserves</h3>
-      <div class="rd-legend">{legend}</div>
+      <div class="rd-legend">{legend}{rec_legend(['us', 'euro'])}</div>
       {''.join(out)}
-      <p class="h-note">Trillions of dollars (Fed, bank reserves) and euros (ECB), month-end values since 2008. Sources: Federal Reserve H.4.1 (WALCL, WRESBAL) and European Central Bank (ECBASSETSW), via FRED.</p>
+      <p class="h-note">Trillions of dollars (Fed, bank reserves) and euros (ECB), month-end values since 2003. Sources: Federal Reserve H.4.1 (WALCL, WRESBAL) and European Central Bank (ECBASSETSW), via FRED. Recession dates: NBER (US) and CEPR (euro area).</p>
     </div>'''
 
 
@@ -306,12 +347,12 @@ def main():
     for r in inds:
         group = next(g for g in data['groups'] if g[0] == r['group'])
         related = ''.join(f'<a href="/radar/{esc(o["id"])}">{esc(o["short"])}</a>' for o in by_group[r['group']] if o['id'] != r['id'])
-        chart = line_chart(r.get('history') or [], r['amber'], r['red'], f'{r["name"]} over time')
+        chart = line_chart(r.get('history') or [], r['amber'], r['red'], f'{r["name"]} over time', regions_of(r))
         chart_html = f'''  <section class="h-section">
     <div class="h-card">
-      <div class="rd-legend"><span><i class="rd-sw" style="background:{BLUE}"></i>{esc(r["short"])}</span><span><i class="rd-sw" style="background:{COLOR["amber"]}"></i>Amber limit</span><span><i class="rd-sw" style="background:{COLOR["red"]}"></i>Red limit</span></div>
+      <div class="rd-legend"><span><i class="rd-sw" style="background:{BLUE}"></i>{esc(r["short"])}</span><span><i class="rd-sw" style="background:{COLOR["amber"]}"></i>Amber limit</span><span><i class="rd-sw" style="background:{COLOR["red"]}"></i>Red limit</span>{rec_legend(regions_of(r))}</div>
       {chart}
-      <p class="h-note">Month-end values. Source: {esc(r["source"])}.</p>
+      <p class="h-note">Month-end values. Source: {esc(r["source"])}. Shaded: {"euro area recessions dated by CEPR" if regions_of(r) == ["euro"] else "US recessions dated by NBER"}.</p>
     </div>
   </section>''' if chart else ''
         about = ''.join(f'<p>{esc(p)}</p>' for p in r.get('about', []))
