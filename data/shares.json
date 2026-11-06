@@ -4131,6 +4131,126 @@
    "sector": "Utilities",
    "exchange": "Euronext Paris",
    "mic": "XPAR"
+  },
+  "FR0004040608": {
+   "shares": 59440000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/ABCA/",
+   "name": "ABC arbitrage",
+   "ticker": "ABCA",
+   "sector": "Financials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0000120669": {
+   "shares": 12850000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/NAE/",
+   "name": "North Atlantic Energies",
+   "ticker": "NAE",
+   "sector": "Energy",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0011665280": {
+   "shares": 44300000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/FGA/",
+   "name": "Figeac Aéro",
+   "ticker": "FGA",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "ES0167733015": {
+   "shares": 81960000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/bme/ORY/",
+   "name": "Oryzon Genomics",
+   "ticker": "ORY",
+   "sector": "Healthcare",
+   "exchange": "Bolsa de Madrid",
+   "mic": "XMAD"
+  },
+  "SE0015961222": {
+   "shares": 25100000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/sto/PACT/",
+   "name": "Proact IT Group",
+   "ticker": "PACT",
+   "sector": "Technology",
+   "exchange": "Nasdaq Stockholm",
+   "mic": "XSTO"
+  },
+  "FR0000062234": {
+   "shares": 4210000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/ODET/",
+   "name": "Compagnie de l'Odet",
+   "ticker": "ODET",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "NO0010397581": {
+   "shares": 76780000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/osl/PARB/",
+   "name": "Pareto Bank",
+   "ticker": "PARB",
+   "sector": "Financials",
+   "exchange": "Oslo Børs",
+   "mic": "XOSL"
+  },
+  "FR0013295789": {
+   "shares": 21680000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/TFF/",
+   "name": "TFF Group",
+   "ticker": "TFF",
+   "sector": "Materials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "FR0004155000": {
+   "shares": 92210000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/SFPI/",
+   "name": "Groupe SFPI",
+   "ticker": "SFPI",
+   "sector": "Industrials",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
+  },
+  "BE0003839561": {
+   "shares": 12440000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/ebr/VAN/",
+   "name": "Van de Velde",
+   "ticker": "VAN",
+   "sector": "Consumer Discretionary",
+   "exchange": "Euronext Brussels",
+   "mic": "XBRU"
+  },
+  "IT0001454435": {
+   "shares": 12590000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/bit/TXT/",
+   "name": "TXT e-solutions",
+   "ticker": "TXT",
+   "sector": "Technology",
+   "exchange": "Borsa Italiana",
+   "mic": "MTAA"
+  },
+  "FR0000066607": {
+   "shares": 4700000,
+   "asOf": "2026-11-06",
+   "source": "https://stockanalysis.com/quote/epa/LACR/",
+   "name": "Lacroix Group",
+   "ticker": "LACR",
+   "sector": "Technology",
+   "exchange": "Euronext Paris",
+   "mic": "XPAR"
   }
  }
 }
