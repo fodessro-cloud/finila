@@ -1,0 +1,8 @@
+{
+  "_readme": "Market Radar indicators without a free daily source. Update value, date and note by hand (or let Claude do it); scripts/data/radar.py reads them every day.",
+  "forward-pe": {"value": 18.7, "date": "2026-10-30", "note": "FactSet, 30 Oct 2026: 5-year average 19.8, 10-year average 19.1."},
+  "earnings-revisions": {"value": 1.4, "date": "2026-10-29", "note": "Q4 2026 EPS estimate rose from $93.49 to $94.79 since 30 Sep. Q3 earnings growth 30.2%."},
+  "margin-debt": {"value": 31, "date": "2026-09-30", "note": "$1.48 trillion in September 2026, just below June's record $1.50 trillion."},
+  "market-breadth": {"value": 66.4, "date": "2026-11-04", "note": "72.1% of S&P 500 stocks are above their 50-day average."},
+  "equal-weight-gap": {"value": -8.1, "date": "2026-11-05", "note": "Over one year the equal-weight index is 7.6% ahead; over five years 12.7% behind."}
+}

@@ -1,0 +1,69 @@
+name: Market Radar (denne)
+
+# Downloads the Market Radar indicators (FRED, multpl.com) every weekday morning into js/radar.json.
+# On main it also uploads the data file and the indicator pages (/radar/<name>) to finila.com;
+# the /radar page itself is published only by deploy-finila.yml.
+on:
+  schedule:
+    - cron: '15 6 * * 1-6'   # 06:15 UTC, after US data of the previous day is out
+  push:
+    branches: [claude/market-radar]
+    paths: ['scripts/data/radar.py', 'data/radar-manual.json', '.github/workflows/radar.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download indicators
+        run: |
+          set -o pipefail
+          mkdir -p data
+          python scripts/data/radar.py 2>&1 | tee data/radar.log || { echo "::error::radar: $(grep FAIL data/radar.log | head -5 | tr '\n' ' ')"; exit 1; }
+          grep FAIL data/radar.log | while read -r l; do echo "::warning::$l"; done || true
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "finila-data-bot"
+          git config user.email "finila-data-bot@users.noreply.github.com"
+          git add data/radar.log js/radar.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Update Market Radar [data refresh]"
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
+
+  upload:
+    needs: radar
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Same lock as deploy-finila.yml, so a data upload never overlaps a site deploy.
+    concurrency:
+      group: finila-webglobe
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Upload data file and indicator pages to finila.com
+        env:
+          FTP_SERVER: ${{ vars.FTP_SERVER || 'sftp://ftp.finila.com:222' }}
+          FTP_USERNAME: ${{ vars.FTP_USERNAME || 'finila.com' }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ vars.FTP_DIR || '/' }}
+        run: |
+          scripts/upload-data.sh
+          scripts/upload-radar-pages.sh
