@@ -223,21 +223,27 @@ function renderRates(r) {
   document.getElementById('rates-bonds').innerHTML = ['gov2y', 'gov5y', 'gov10y', 'aaa10y', 'corp'].map(li).join('');
 }
 
-// ── Market Radar (js/radar.json) ─
+// ── Market Radar (js/radar.json): plain questions with a one-line answer each (Lub 2026-11-06: make it understandable)
+const RADAR_KEY = [
+  ['shiller-cape', 'Are US stocks expensive?', {red: 'Very expensive against ten years of profits (long-run median about 16).', amber: 'Expensive against ten years of profits.', green: 'Priced near their long-run normal.'}],
+  ['yield-curve-10y-3m', 'Do bonds warn of a US recession?', {red: 'The yield curve is inverted, which came before most past recessions.', amber: 'The yield curve is close to inverting.', green: 'No: long rates are above short rates, as normal.'}],
+  ['sahm-rule', 'Is US unemployment rising?', {red: 'Yes, fast enough to signal a recession.', amber: 'It is starting to rise.', green: 'No, it is stable.'}],
+  ['financial-stress', 'Stress in US financial markets', {red: 'High, as in past crises.', amber: 'Above average.', green: 'Calm, below average.'}],
+  ['euro-stress-ciss', 'Stress in euro area markets', {red: 'High, as in past crises.', amber: 'Above average.', green: 'Calm.'}],
+  ['fed-balance-sheet', 'Is the Fed taking money out?', {red: 'Yes, fast: its balance sheet shrinks more than 5% a year.', amber: 'Yes, its balance sheet is shrinking.', green: 'No, its balance sheet is not shrinking.'}],
+];
 function renderRadar(r) {
   const box = document.getElementById('radar');
   if (!r || !r.indicators || !r.indicators.length) { box.hidden = true; return; }
-  const dot = c => `<i class="h-dot h-dot-${c}" aria-hidden="true"></i>`;
-  const li = x => `<li><span>${dot(x.light)}<a href="/radar/${esc(x.id)}">${esc(x.short)}</a></span><span class="v">${esc(x.display)}</span></li>`;
-  const c = r.counts || {};
-  document.getElementById('radar-count').textContent = `${r.indicators.length} signals: ${c.red || 0} red, ${c.amber || 0} amber, ${c.green || 0} green`;
-  const warn = r.indicators.filter(x => x.light === 'red').concat(r.indicators.filter(x => x.light === 'amber'));
-  const shown = new Set(warn.slice(0, 6).map(x => x.id));
-  document.getElementById('radar-warn').innerHTML = warn.slice(0, 6).map(li).join('') || '<li><span>All indicators are green.</span></li>';
+  const c = r.counts || {}, n = r.indicators.length;
+  document.getElementById('radar-sum').innerHTML = `Today <b class="t-red">${c.red || 0} red</b>, <b class="t-amber">${c.amber || 0} amber</b> and <b class="t-green">${c.green || 0} green</b> of ${n} market signals.`;
+  document.getElementById('radar-bar').innerHTML = ['red', 'amber', 'green'].map(k => `<i class="h-dot-${k}" style="flex:${c[k] || 0}"></i>`).join('');
   const by = Object.fromEntries(r.indicators.map(x => [x.id, x]));
-  // The main signals not already listed as warnings, so no line appears twice.
-  document.getElementById('radar-key').innerHTML = ['shiller-cape', 'yield-curve-10y-3m', 'sahm-rule', 'euro-stress-ciss', 'financial-stress', 'euro-yield-curve',
-    'fed-balance-sheet', 'ecb-balance-sheet', 'forward-pe', 'financial-conditions'].filter(k => by[k] && !shown.has(k)).slice(0, 6).map(k => li(by[k])).join('');
+  document.getElementById('radar-key').innerHTML = RADAR_KEY.filter(([id]) => by[id]).map(([id, q, say]) => {
+    const x = by[id];
+    return `<li><a href="/radar/${esc(id)}"><i class="h-dot h-dot-${x.light}" aria-hidden="true"></i><span class="q">${esc(q)}</span>` +
+      `<span class="v">${esc(x.display)}</span><span class="a">${esc(say[x.light] || '')}</span></a></li>`;
+  }).join('');
 }
 
 // ── Search: opens the company in the screener ─────
