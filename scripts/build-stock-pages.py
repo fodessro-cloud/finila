@@ -18,7 +18,7 @@ import sys
 import time
 import unicodedata
 import urllib.request
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -1223,7 +1223,7 @@ def peers_html(c, peers, med):
               ''.join(f'<td>{fn(med)}</td>' for _, fn in cols[1:]) + '</tr>') if med.get('n') else ''
     title = f'Versus other European {esc(med["label"])} companies' if med.get('label') else f'Other companies from {esc(COUNTRIES.get(c["country"], c["country"] or ""))}'
     return f'''<section class="sp-card" id="peers"><h2>{title}</h2>
-      <p class="sp-sub">Largest European companies of the sector, latest annual figures and prices {chip("r", "Reports")}{chip("p", "Prices")}{chip("c")}</p>
+      <p class="sp-sub">Largest European companies of the same industry group (closest industry first), latest annual figures and prices {chip("r", "Reports")}{chip("p", "Prices")}{chip("c")}</p>
       <div class="sp-scroll"><table class="sp-table sp-peer-table"><tr><th>Company</th>{th}</tr>{me}{body}{medrow}</table></div></section>'''
 
 
@@ -1483,7 +1483,7 @@ def page(c, peers, updated, med=None):
     <div class="modal-header">
       <div>
         <h1 class="sp-title">{esc(c["name"])} {f'<span class="modal-name">{esc(c["ticker"])}{" · " + esc(c["exchange"]) if c.get("exchange") else ""}</span>' if c.get("ticker") else ""}</h1>
-        <div class="modal-meta">{esc(country)}{" · " + esc(c["sector"]) if c.get("sector") else ""}{" · " + esc(c["industry"]) if c.get("industry") else ""} · ISIN {esc(c["isin"])} · LEI {esc(c["lei"])}</div>
+        <div class="modal-meta">{esc(country)}{" · " + esc(c["sector"]) if c.get("sector") else ""}{" · " + esc(" · ".join(x for x in (c.get("group"), c.get("subindustry")) if x) or c["industry"]) if c.get("group") or c.get("industry") else ""} · ISIN {esc(c["isin"])} · LEI {esc(c["lei"])}</div>
       </div>
     </div>
     {price}
@@ -1538,7 +1538,7 @@ METHOD = [
         ('Growth a year (CAGR)', 'Compound annual growth from FY2021 (2020 was a covid year) to the latest year; from the first year available when fewer years exist.'),
         ('PEG (past growth)', 'P/E / EPS growth a year over the same years. Uses past growth, not analysts’ forecasts.'),
         ('EPS history', 'Earnings per share of older years are put on today’s share basis after share splits, as companies restate them.'),
-        ('Peer median', 'Median of the companies of the same industry on FINILA (Wikidata industry, at least 8 priced companies), else of the same sector; at least 5 values.'),
+        ('Peer median', 'Median of the companies of the same industry group on FINILA (GICS-style groups checked by hand, such as Transportation & logistics, when the group has at least 8 companies), else of the same sector; at least 5 values.'),
         ('Quality score', 'Piotroski F-score: nine tests of this year’s report against last year’s; shown as passed / tests possible.'),
     ]),
     ('Analysis', [
@@ -1638,9 +1638,11 @@ def main():
         if c.get('captive') and c.get('years'):
             c['years'] = {y: {k: v for k, v in r.items() if k not in ('netDebt', 'fcf', 'debt')} for y, r in c['years'].items()}
         add_valuation(c)
-    # Peers and medians by sector. Wikidata's industry labels are too uneven to group by (Roche has none,
-    # Alcon is "pharmaceutical industry"), so a finer split waits for a better classification.
-    group = lambda c: ('s', c['sector']) if c.get('sector') else None
+    # Peers and medians by industry group (data/groups.json, GICS-style: bpost next to PostNL and
+    # Österreichische Post, not Siemens), by sector where the group has fewer than 8 companies.
+    in_group = Counter(c.get('group') for c in rows if not c.get('preview'))
+    group = lambda c: (('g', c['group']) if c.get('group') and in_group[c['group']] >= 8
+                       else ('s', c['sector']) if c.get('sector') else None)
     tests = [c for c in rows if c.get('preview')]
     rows = [c for c in rows if not c.get('preview')]
     medians = sector_medians(rows, group)
@@ -1659,6 +1661,8 @@ def main():
     stamp = f'{updated}' + (f', prices of {price_day}' if price_day else '')
     for c in rows:
         same = by_sector[group(c)] if group(c) else [p for p in rows if p['country'] == c['country']]
+        # the same finer industry first (bpost: PostNL, Österreichische Post before airlines and airports)
+        same = sorted(same, key=lambda p: not (c.get('subindustry') and p.get('subindustry') == c['subindustry']))
         peers = [p for p in same if p is not c][:8]
         (out / f'{c["slug"]}.html').write_text(page(c, peers, stamp, medians.get(group(c), {})), encoding='utf-8')
     for c in tests:
