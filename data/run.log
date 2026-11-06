@@ -79,6 +79,7 @@ PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQR
 
 matched 58 / 77
   ! https://filings.xbrl.org/api/entities/7LTWFZYICNSX8D621K86/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
 SAP@Germany no usable annual report (0 filings)
 SIE@Germany no usable annual report (0 filings)
 ALV@Germany no usable annual report (0 filings)
@@ -101,8 +102,7 @@ BNP@France     2025-12-31 EUR rev=None ebitda=None net=12225.0 fcf=None roe=9.7 
 SAN@France     2025-12-31 EUR rev=43626.0 ebitda=8120.0 net=7813.0 fcf=7212.0 roe=10.9 nd/ebitda=0.81
         missing ['ebitda', 'fcf']; tagged: ['axa:CapitalGainNetOfTaxRelatedToTheDisposalOfAxaIM', 'axa:CashFlowsRelatedToOperatingActivitiesNotIncludedInTheProfitBeforeTax', 'axa:NetAmortizationExpenses', 'axa:NetChangeInOperatingReceivablesAndPayables', 'axa:OtherOperatingIncomeAndExpenseIncludingIntangibleImpairment', 'axa:PaidinCapital', 'axa:PurchaseOfTangibleAndIntangibleAssets', 'axa:RealizedCapitalGainsOrLossesOnEquityInstrumentsWithoutRecyclingInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:InsuranceRevenue', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfInvestmentProperty', 'ifrs-full:RepaymentsOfRegulatoryCapitalEquity', 'ifrs-full:Revenue']
 CS@France      2025-12-31 EUR rev=91139.0 ebitda=None net=9797.0 fcf=None roe=20.8 nd/ebitda=None
-        missing ['ebitda']; tagged: ['hermes:DepreciationOfFixedAssetsRightOfUseAssetsAndImpairmentLosses', 'hermes:RecurringOperatingIncome', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OtherOperatingIncomeExpense', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfFinancialAssetsMeasuredAtAmortisedCostClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets', 'ifrs-full:Revenue']
-RMS@France     2025-12-31 EUR rev=16002.0 ebitda=None net=4524.0 fcf=4213.0 roe=24.0 nd/ebitda=None
+RMS@France no usable annual report (0 filings)
 KER@France     2023-12-31 EUR rev=19566.0 ebitda=6466.0 net=2983.0 fcf=1848.0 roe=19.6 nd/ebitda=0.94
         missing ['fcf']; tagged: ['VINCI:CapitalIncreasesAndReductionsOfSubsidiariesSubscribedByThirdParties', 'VINCI:Revenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'VINCI:Revenuefromcontractswithcustomersotherthanrevenuefromconcessionsubsidiariesderivedfromworkcarriedoutbynongroupcompanies', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:CashFlowsFromUsedInOperationsBeforeChangesInWorkingCapital', 'ifrs-full:FinanceCostsPaidClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:IssuedCapital', 'ifrs-full:OperatingExpense', 'ifrs-full:OtherInflowsOutflowsOfCashClassifiedAsOperatingActivities', 'ifrs-full:OtherRevenue', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:ReductionOfIssuedCapital', 'ifrs-full:RevenueFromContractsWithCustomers']
 DG@France      2025-12-31 EUR rev=75372.0 ebitda=13570.0 net=4903.0 fcf=None roe=15.9 nd/ebitda=-0.77
@@ -164,7 +164,7 @@ EQNR@Norway    2025-12-31 USD rev=106462.0 ebitda=37670.0 net=5043.0 fcf=5977.0 
 OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.3 nd/ebitda=None
 PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
 
-49 companies with real fundamentals
+48 companies with real fundamentals
 ESMA FULINS_E_20261031_01of02.zip: 16442 new issuers
 ESMA FULINS_E_20261031_02of02.zip: 0 new issuers
 FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
@@ -176,36 +176,36 @@ FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
 read 36 reports this run
 4908 listed companies with an LEI on Wikidata
 18586 issuers with listed shares (FIRDS); 2331 of them file reports here
-shares in issue for 551 companies (data/shares.json)
-annual figures by hand for 613 companies (data/financials.json)
-Wikidata by ISIN/LEI: labels for 1714 of 3830 keys
+shares in issue for 563 companies (data/shares.json)
+annual figures by hand for 625 companies (data/financials.json)
+Wikidata by ISIN/LEI: labels for 1715 of 3830 keys
 sector found for 777 of 1915 without a Wikidata industry: {'wikidata': 352, 'bank': 70, 'name': 355}
 earnings per share moved by powers of ten for 38 companies, dropped for 10 (checked against the price)
 shares in issue from the annual report for 2005 more companies
 revenue line set by hand for 1 companies (data/fixes.json)
 shared ISINs taken from 0 companies (kept by the larger one)
 hand-checked fixes for 141 companies (data/fixes.json)
-2861 companies with figures, 200 without usable figures
-with ticker: 1116, with sector: 1804
-with F-score: 1897, F-score 8-9: 112, with dividend cover: 1137
-by country: GB 557, SE 353, FR 247, DE 195, IT 174, NO 155, PL 141, FI 131, DK 122, ES 121, NL 113, GR 104, BE 85, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 19, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
+2873 companies with figures, 200 without usable figures
+with ticker: 1128, with sector: 1816
+with F-score: 1897, F-score 8-9: 112, with dividend cover: 1144
+by country: GB 557, SE 354, FR 254, DE 195, IT 175, NO 156, PL 141, FI 131, ES 122, DK 122, NL 113, GR 104, BE 86, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 19, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
 Volkswagen                         DE VOW3     Consumer Discretionary 2025-12-31 rev€=321913.0 ebitda=25836.0 fcf=-290.0 roe=3.5 F=None None
-Shell PLC                          GB SHEL     Energy                 2025-12-31 rev€=237781.5 ebitda=None fcf=21948.0 roe=10.2 F=5 1111001-0
-Glencore PLC                       GB GLEN     Materials              2025-12-31 rev€=220540.8 ebitda=None fcf=-290.0 roe=0.9 F=6 1111101-0
-TotalEnergies SE                   FR TTE      Energy                 2025-12-31 rev€=179255.2 ebitda=None fcf=10390.0 roe=11.4 F=4 1101001-0
-BP P.L.C.                          GB BP       Energy                 2025-12-31 rev€=171551.1 ebitda=30464.0 fcf=11272.0 roe=0.1 F=6 1101011-1
+Shell PLC                          GB SHEL     Energy                 2025-12-31 rev€=239038.1 ebitda=None fcf=21948.0 roe=10.2 F=5 1111001-0
+Glencore PLC                       GB GLEN     Materials              2025-12-31 rev€=221706.2 ebitda=None fcf=-290.0 roe=0.9 F=6 1111101-0
+TotalEnergies SE                   FR TTE      Energy                 2025-12-31 rev€=180202.4 ebitda=None fcf=10390.0 roe=11.4 F=4 1101001-0
+BP P.L.C.                          GB BP       Energy                 2025-12-31 rev€=172457.7 ebitda=30464.0 fcf=11272.0 roe=0.1 F=6 1101011-1
 Stellantis N.V.                    NL STLAM    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
 BMW                                DE BMW      Consumer Discretionary 2025-12-31 rev€=133453.0 ebitda=16651.0 fcf=-2735.0 roe=7.6 F=None None
 Mercedes-Benz Group                DE MBG      Consumer Discretionary 2025-12-31 rev€=132214.0 ebitda=11778.0 fcf=12524.0 roe=5.5 F=None None
 Deutsche Telekom                   DE DTE      Communication          2025-12-31 rev€=121816.0 ebitda=47389.0 fcf=28313.0 roe=15.5 F=None None
 Allianz                            DE ALV      Financials             2025-12-31 rev€=113174.0 ebitda=None fcf=None roe=16.9 F=None None
-Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=97913.9 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
-Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=94852.1 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
+Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=98310.2 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
+Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=95353.3 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
 Ahold                              NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
 AXA                                FR CS       Financials             2025-12-31 rev€=91139.0 ebitda=None fcf=None roe=20.8 F=None None
-Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=88391.1 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
+Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=88367.8 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
 Carrefour Group                    FR CA       Consumer Staples       2025-12-31 rev€=84025.0 ebitda=None fcf=None roe=2.9 F=6 110110101
 DHL Group                          DE DHL      Industrials            2025-12-31 rev€=83433.0 ebitda=10139.0 fcf=6324.0 roe=15.8 F=None None
 ENI S.P.A.                         IT ENI      Energy                 2025-12-31 rev€=82151.0 ebitda=12359.0 fcf=4101.0 roe=5.4 F=5 11110-1-0
@@ -218,16 +218,16 @@ Vinci                              FR DG       Industrials            2025-12-31
 Airbus SE                          NL AIR      Industrials            2025-12-31 rev€=73420.0 ebitda=None fcf=None roe=20.0 F=None None
 Uniper                             DE UN01     Utilities              2025-12-31 rev€=72793.0 ebitda=1442.0 fcf=-1588.0 roe=11.8 F=None None
 Engie                              FR ENGI     Utilities              2025-12-31 rev€=71944.0 ebitda=13683.0 fcf=-8743.0 roe=11.6 F=4 1010001-1
-Roche                              CH ROG      Healthcare             2025-12-31 rev€=69015.3 ebitda=24344.0 fcf=15104.0 roe=38.1 F=None None
-Accenture                          IE ACN      Technology             2026-08-31 rev€=66093.2 ebitda=13419.0 fcf=11620.25 roe=26.5 F=None None
-Zurich Insurance                   CH ZURN     Financials             2025-12-31 rev€=65113.2 ebitda=None fcf=None roe=23.8 F=None None
+Roche                              CH ROG      Healthcare             2025-12-31 rev€=69294.5 ebitda=24344.0 fcf=15104.0 roe=38.1 F=None None
+Accenture                          IE ACN      Technology             2026-08-31 rev€=66442.5 ebitda=13419.0 fcf=11620.25 roe=26.5 F=None None
+Zurich Insurance                   CH ZURN     Financials             2025-12-31 rev€=65457.2 ebitda=None fcf=None roe=23.8 F=None None
 Munich Re                          DE MUV2     Financials             2025-12-31 rev€=62313.0 ebitda=None fcf=None roe=18.4 F=None None
-Orlen                              PL PKN      Energy                 2025-12-31 rev€=61022.3 ebitda=39144.0 fcf=20536.0 roe=1.8 F=None None
+Orlen                              PL PKN      Energy                 2025-12-31 rev€=60973.7 ebitda=39144.0 fcf=20536.0 roe=1.8 F=None None
 BASF                               DE BAS      Materials              2025-12-31 rev€=59657.0 ebitda=6053.0 fcf=1343.0 roe=4.9 F=None None
 Renault                            FR RNO      Consumer Discretionary 2025-12-31 rev€=57922.0 ebitda=-3628.0 fcf=-705.0 roe=-52.6 F=4 0101-01-1
 Assicurazioni Generali             IT G        Financials             2025-12-31 rev€=57803.0 ebitda=None fcf=None roe=13.0 F=None None
 Bouygues                           FR EN       Industrials            2025-12-31 rev€=56877.0 ebitda=5291.0 fcf=3592.0 roe=8.7 F=5 11011-1-0
-ArcelorMittal                      LU MT       Materials              2025-12-31 rev€=54661.4 ebitda=4612.0 fcf=471.0 roe=5.8 F=6 111100110
+ArcelorMittal                      LU MT       Materials              2025-12-31 rev€=54950.3 ebitda=4612.0 fcf=471.0 roe=5.8 F=6 111100110
 Repsol SA                          ES REP      Energy                 2025-12-31 rev€=54421.0 ebitda=5148.0 fcf=1619.0 roe=6.9 F=7 1111-11-1
-Chubb                              CH CB       Financials             2025-12-31 rev€=53122.8 ebitda=None fcf=None roe=14.0 F=None None
-Anheuser-Busch InBev               BE ABI      Consumer Staples       2025-12-31 rev€=52851.0 ebitda=21057.0 fcf=11227.0 roe=7.8 F=8 111111110
+Chubb                              CH CB       Financials             2025-12-31 rev€=53403.5 ebitda=None fcf=None roe=14.0 F=None None
+Anheuser-Busch InBev               BE ABI      Consumer Staples       2025-12-31 rev€=53130.3 ebitda=21057.0 fcf=11227.0 roe=7.8 F=8 111111110
