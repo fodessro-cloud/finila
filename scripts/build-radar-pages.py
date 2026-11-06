@@ -205,8 +205,8 @@ def main():
     reds = [r['short'] for r in inds if r.get('light') == 'red']
     body = f'''  <section class="i-intro">
     <div class="h-eyebrow">MARKET RADAR</div>
-    <h1>Is the stock market heading for a fall?</h1>
-    <p>{len(inds)} warning signs for the US stock market, each with a traffic light: valuation, recession signals, credit, market breadth and central bank liquidity. Red means an indicator is past a level that came before trouble in the past. No indicator tells you when a fall will come.</p>
+    <h1>Stock market signals today</h1>
+    <p>{len(inds)} indicators of where the US stock market stands in its cycle, each with a traffic light: valuation, recession signals, credit, market breadth and central bank liquidity. Red means an indicator is past a level that came before trouble in the past. No indicator tells you when the market will turn.</p>
     <span class="i-updated">Updated {nice_date(upd)}</span>
   </section>
 
@@ -252,8 +252,8 @@ def main():
   </section>'''
     lights = f'{c["red"]} red, {c["amber"]} amber, {c["green"]} green'
     (OUT / 'radar.html').write_text(page(
-        'Market Radar — stock market warning signs today | FINILA',
-        f'Is the stock market heading for a fall? {len(inds)} warning signs with traffic lights, updated daily: Shiller CAPE, Buffett indicator, yield curve, Sahm rule, financial stress, Fed balance sheet. Today: {lights}.',
+        'Market Radar: stock market indicators today | FINILA',
+        f'Where does the stock market stand? {len(inds)} indicators with traffic lights, updated daily: Shiller CAPE, Buffett indicator, yield curve, Sahm rule, financial stress, Fed balance sheet. Today: {lights}.',
         'radar', body, head, foot))
 
     # One page per indicator
