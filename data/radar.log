@@ -4,14 +4,19 @@ OK   forward-pe: 18.7× (2026-10-30) green
 OK   yield-curve-10y-2y: +0.38 pp (2026-11-05) amber
 OK   yield-curve-10y-3m: +0.67 pp (2026-11-05) green
 OK   sahm-rule: 0.00 (2026-10-01) green
+OK   jobless-claims: 0% (2026-10-31) green
 OK   earnings-revisions: +1.4% (2026-10-29) green
 OK   financial-conditions: -0.46 (2026-10-30) green
+OK   bank-lending-standards: +2% (2026-10-01) green
 OK   margin-debt: +31% (2026-09-30) amber
 OK   market-breadth: 66.4% (2026-11-04) green
 OK   equal-weight-gap: −8.1% (2026-11-05) amber
 OK   financial-stress: -0.52 (2026-10-30) green
+OK   euro-stress-ciss: 0.01 (2026-11-04) green
+OK   euro-yield-curve: +0.34 pp (2026-11-05) amber
+OK   euro-bank-lending: +9% (2026-10-01) green
 OK   fed-balance-sheet: +2.4% (2026-11-04) green
 OK   bank-reserves: $2.93T (2026-11-04) amber
 OK   ecb-balance-sheet: −4.0% (2026-10-30) amber
 OK   m2-money-supply: +5.7% (2026-09-01) green
-wrote js/radar.json (125 KB), {'red': 2, 'amber': 5, 'green': 9}, failed: none
+wrote js/radar.json (153 KB), {'red': 2, 'amber': 6, 'green': 13}, failed: none
