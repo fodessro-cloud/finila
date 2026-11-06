@@ -311,7 +311,7 @@ def tidy(name):
     return " ".join(w if len(w) <= 3 and w.isalpha() else w.title() for w in name.split())
 
 
-FIELDS = ["lei", "isin", "name", "country", "ticker", "exchange", "mic", "sector", "industry", "currency", "periodEnd",
+FIELDS = ["lei", "isin", "name", "country", "ticker", "exchange", "mic", "sector", "group", "industry", "currency", "periodEnd",
           "revenueEur", "revenue", "ebitda", "operatingProfit", "netIncome", "operatingCashFlow", "capex", "fcf",
           "dividendsPaid", "equity", "assets", "cash", "debt", "netDebt", "eps", "roe", "ebitdaMargin",
           "operatingMargin", "netMargin", "fcfMargin", "netDebtToEbitda", "revenueGrowth", "netIncomeGrowth",
@@ -539,6 +539,25 @@ def apply_fixes(rows):
     return rows, n
 
 
+def apply_groups(rows):
+    """Hand-checked industry group per ISIN (data/groups.json, GICS-style: bpost is Industrials >
+    Transportation & logistics). The group decides the sector, over the Wikidata keyword guess that put
+    Whitbread under Healthcare ("hospitality" matched "hospital"). Returns how many rows got a group."""
+    path = ROOT / "data/groups.json"
+    if not path.exists():
+        return 0
+    g = json.loads(path.read_text())
+    n = 0
+    for r in rows:
+        code = g["rows"].get(r.get("isin") or "")
+        if code in g["groups"]:
+            r["sector"], r["group"] = g["groups"][code]["sector"], g["groups"][code]["name"]
+            n += 1
+        else:
+            r.setdefault("group", None)
+    return n
+
+
 def main():
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
     issuers, complete = list_filings()
@@ -636,6 +655,7 @@ def main():
     rows, fixed = apply_fixes(rows)
     log(f"shared ISINs taken from {one_company_per_isin(rows)} companies (kept by the larger one)")
     log(f"hand-checked fixes for {fixed} companies (data/fixes.json)")
+    log(f"industry group (and sector) from data/groups.json for {apply_groups(rows)} of {len(rows)} companies")
     rows.sort(key=lambda r: -(r.get("revenueEur") or 0))
     out = {"updated": date.today().isoformat(), "fields": FIELDS,
            "rows": [[r.get(k) for k in FIELDS] for r in rows]}
