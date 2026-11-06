@@ -164,7 +164,9 @@ def read_company(lei, cached):
 def main():
     comp = json.loads((ROOT / "js/companies.json").read_text())
     rows = [dict(zip(comp["fields"], r)) for r in comp["rows"]]
-    leis = sorted({r["lei"] for r in rows if r.get("origin") is None and "filings.xbrl.org" in (r.get("source") or "")})
+    # Also companies whose newest year was copied by hand: their ESEF reports are still read.
+    leis = sorted({r["lei"] for r in rows if (r.get("origin") is None and "filings.xbrl.org" in (r.get("source") or "")) or
+                   (r.get("origin") == "hand" and len(r.get("lei") or "") == 20)})
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
     if cache.get("_v") != CACHE_VERSION:
         cache = {"_v": CACHE_VERSION}

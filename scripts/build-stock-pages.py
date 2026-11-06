@@ -987,7 +987,8 @@ def add_report_quotes(rows):
         return
     for c in rows:
         q = quotes.get(c['lei'])
-        if q and q.get('items'):
+        # An outlook from a report older than the page's figures is out of date (hand-copied newer year).
+        if q and q.get('items') and (q.get('period') or '') >= (c.get('periodEnd') or ''):
             c['quotes'] = q
 
 
