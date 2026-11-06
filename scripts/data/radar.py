@@ -100,8 +100,16 @@ def shiller_cape():
     with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
         book = xlrd.open_workbook(file_contents=r.read())
     sh = book.sheet_by_name("Data")
-    head = next(i for i in range(30) if "CAPE" in [str(c.value).strip() for c in sh.row(i)])
-    col = [str(c.value).strip() for c in sh.row(head)].index("CAPE")
+    # The file has several ratio columns (CAPE, TR CAPE, excess CAPE yield...) and its header rows move:
+    # take the column whose values match the known CAPE peaks (44.2 in Dec 1999, 32.6 in Sep 1929).
+    rows = {round(sh.cell_value(i, 0), 2): i for i in range(sh.nrows) if isinstance(sh.cell_value(i, 0), float)}
+    def near(c, d, want):
+        v = sh.cell_value(rows[d], c) if d in rows else None
+        return isinstance(v, float) and abs(v - want) < 1.0
+    col = next((c for c in range(1, sh.ncols) if near(c, 1999.12, 44.2) and near(c, 1929.09, 32.6)), None)
+    if col is None:
+        raise RuntimeError("shiller: no column matches the known CAPE peaks")
+    head = min(rows.values()) - 1
     out = []
     for i in range(head + 1, sh.nrows):
         d, v = sh.cell_value(i, 0), sh.cell_value(i, col)
