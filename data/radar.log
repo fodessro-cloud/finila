@@ -1,4 +1,4 @@
-OK   shiller-cape: 0.0× (2026-10-01) green
+OK   shiller-cape: 40.7× (2026-10-01) red
 OK   buffett-indicator: 255% (2026-04-01) red
 OK   forward-pe: 18.7× (2026-10-30) green
 OK   yield-curve-10y-2y: +0.38 pp (2026-11-05) amber
@@ -14,4 +14,4 @@ OK   fed-balance-sheet: +2.4% (2026-11-04) green
 OK   bank-reserves: $2.93T (2026-11-04) amber
 OK   ecb-balance-sheet: −4.0% (2026-10-30) amber
 OK   m2-money-supply: +5.7% (2026-09-01) green
-wrote js/radar.json (127 KB), {'red': 1, 'amber': 5, 'green': 10}, failed: none
+wrote js/radar.json (125 KB), {'red': 2, 'amber': 5, 'green': 9}, failed: none
