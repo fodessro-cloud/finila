@@ -209,6 +209,8 @@ h1, h2, h3, p { margin: 0; }
 .h-data .h-list li { padding: 9px 12px; display: flex; justify-content: space-between; gap: 12px; }
 .h-data .h-list li span { margin: 0; }
 .h-data .h-list .v { font-family: var(--mono); color: var(--text); white-space: nowrap; }
+.h-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+.h-dot-red { background: var(--down); } .h-dot-amber { background: var(--amber); } .h-dot-green { background: var(--up); }
 .h-bar .val small { display: block; font-size: 12px; color: var(--muted); }
 .h-footer-nav .h-li { vertical-align: -3px; margin-right: 6px; }
 .h-footer-side { display: flex; flex-direction: column; align-items: flex-end; gap: 21px; }

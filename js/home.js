@@ -223,6 +223,23 @@ function renderRates(r) {
   document.getElementById('rates-bonds').innerHTML = ['gov2y', 'gov5y', 'gov10y', 'aaa10y', 'corp'].map(li).join('');
 }
 
+// ── Market Radar (js/radar.json) ─
+function renderRadar(r) {
+  const box = document.getElementById('radar');
+  if (!r || !r.indicators || !r.indicators.length) { box.hidden = true; return; }
+  const dot = c => `<i class="h-dot h-dot-${c}" aria-hidden="true"></i>`;
+  const li = x => `<li><span>${dot(x.light)}<a href="/radar/${esc(x.id)}">${esc(x.name)}</a></span><span class="v">${esc(x.display)}</span></li>`;
+  const c = r.counts || {};
+  document.getElementById('radar-count').textContent = `US stock market: ${c.red || 0} red, ${c.amber || 0} amber, ${c.green || 0} green of ${r.indicators.length}`;
+  const warn = r.indicators.filter(x => x.light === 'red').concat(r.indicators.filter(x => x.light === 'amber'));
+  const shown = new Set(warn.slice(0, 6).map(x => x.id));
+  document.getElementById('radar-warn').innerHTML = warn.slice(0, 6).map(li).join('') || '<li><span>All indicators are green.</span></li>';
+  const by = Object.fromEntries(r.indicators.map(x => [x.id, x]));
+  // The main signals not already listed as warnings, so no line appears twice.
+  document.getElementById('radar-key').innerHTML = ['shiller-cape', 'yield-curve-10y-3m', 'sahm-rule', 'financial-stress', 'financial-conditions',
+    'forward-pe', 'earnings-revisions', 'fed-balance-sheet', 'm2-money-supply'].filter(k => by[k] && !shown.has(k)).slice(0, 6).map(k => li(by[k])).join('');
+}
+
 // ── Search: opens the company in the screener ─────
 function setupSearch() {
   document.getElementById('stock-list').innerHTML = COS.filter(c => isNum(c.mcap)).sort((a, b) => b.mcap - a.mcap)
@@ -237,8 +254,8 @@ function setupSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const [cos, prices, inv, ins, sh, slugs, housing, rates] = await Promise.all(
-    ['js/companies.json', 'js/company-prices.json', 'js/invest.json', 'js/insiders-home.json', 'js/shorts.json', 'js/stock-slugs.json', 'js/housing.json', 'js/rates.json'].map(load));
+  const [cos, prices, inv, ins, sh, slugs, housing, rates, radar] = await Promise.all(
+    ['js/companies.json', 'js/company-prices.json', 'js/invest.json', 'js/insiders-home.json', 'js/shorts.json', 'js/stock-slugs.json', 'js/housing.json', 'js/rates.json', 'js/radar.json'].map(load));
   SLUGS = slugs || {};
   COS = cos ? buildCompanies(cos, prices) : [];
   INV = inv;
@@ -250,6 +267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderData(ins, sh);
   renderProperty(housing);
   renderRates(rates);
+  renderRadar(radar);
   setupSearch();
   document.querySelectorAll('#periods button').forEach(b => b.addEventListener('click', () => renderCompare(Number(b.dataset.years))));
   document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click', () => renderMovers(b.dataset.tab)));
