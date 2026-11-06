@@ -108,6 +108,9 @@ def main():
         if not a and not (years.get(y) or {}).get("netIncome"):
             dropped.append(f"{r['name']} ({sec_name}): no SEC year {y} to compare")
             continue
+        if len(out.get(r["lei"], {}).get("years", {})) >= len(years):
+            dropped.append(f"{r['name']} ({sec_name}): another SEC filer of the same name has more years")
+            continue
         out[r["lei"]] = {"currency": cur, "cik": cik, "secName": sec_name, "years": years}
         print(f"  {r['name']} = {sec_name} (CIK {cik}): {', '.join(years)}", flush=True)
     for d in dropped:
