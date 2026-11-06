@@ -1,9 +1,18 @@
-AMF France: 1196 filings, 767 kept
-CNMV Spain: 16 notices
-5384 announcements since 2026-10-22
-matched 719 companies; unmatched names (top): [('Nykredit Realkredit A/S', 26), ('Sveriges Riksbank', 23), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 19), ('PPI Public Property Invest AB', 18), ('Dataproces Group A/S', 17), ('Jyske Realkredit A/S', 15), ('Loihde Oyj', 15), ('Physitrack PLC', 15), ('Realfiction Holding AB', 14), ('Inderes Oyj', 14), ('Kuntarahoitus Oyj.', 13), ('Besqab AB(publ)', 13), ('White Pearl Technology Group AB', 12), ('Lánamál ríkisins', 12), ('Minesto AB', 11), ('Betolar Oyj', 11), ('Realkredit Danmark A/S', 11), ('Totalkredit A/S', 11), ('Alzinova AB', 11), ('Netum Group Oyj', 11), ('AI Revenue Assistant Software Stockholm AB', 11), ('Klaria Pharma Holding AB', 10), ('Calviks AB (publ)', 10), ('Endomines Finland Oyj', 10)]
-filler-word name matches: [('Ambea AB', 'Ambea AB ( publ )'), ('DNO ASA', 'DNO International'), ('Entra ASA', 'Entra Eiendom'), ('Ericsson, Telefonab. L M', 'Ericsson'), ('H. Lundbeck A/S', 'Lundbeck'), ('Kinnevik, Investment AB', 'Kinnevik AB'), ('Latour, Investmentab.', 'Investment AB Latour'), ('Lindab AB', 'Lindab International AB'), ('Moberg Pharma AB', 'Moberg Pharma (Sweden)'), ('Modern Times Group MTG AB', 'Modern Times Group'), ('Moreld ASA', 'Moreld AS'), ('Mutares SE & CO KGaA', 'Mutares'), ('Roblon A/S', 'Roblon Aktieselskab'), ('Senzime AB', 'Senzime AB (publ.)'), ('UPM-Kymmene Oyj', 'UPM'), ('WindowMaster International A/S', 'WindowMaster')]
-news for 719 companies, 579 with a report; read 13 reports this run
+AMF France: 1125 filings, 734 kept
+CNMV Spain: 26 notices
+5361 announcements since 2026-10-23
+matched 743 companies; unmatched names (top): [('Sveriges Riksbank', 24), ('Nykredit Realkredit A/S', 22), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 19), ('Dataproces Group A/S', 17), ('PPI Public Property Invest AB', 17), ('Inderes Oyj', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Realfiction Holding AB', 14), ('Lánamál ríkisins', 13), ('Kuntarahoitus Oyj.', 13), ('Besqab AB(publ)', 13), ('AI Revenue Assistant Software Stockholm AB', 12), ('White Pearl Technology Group AB', 12), ('Loihde Oyj', 12), ('Klaria Pharma Holding AB', 11), ('Calviks AB (publ)', 11), ('Minesto AB', 11), ('Betolar Oyj', 11), ('Realkredit Danmark A/S', 11), ('Totalkredit A/S', 11), ('Gigasun AB', 10), ('Endomines Finland Oyj', 10), ('Kambi Group Plc', 10)]
+filler-word name matches: [('Ambea AB', 'Ambea AB ( publ )'), ('DNO ASA', 'DNO International'), ('Entra ASA', 'Entra Eiendom'), ('Ericsson, Telefonab. L M', 'Ericsson'), ('H. Lundbeck A/S', 'Lundbeck'), ('Kinnevik, Investment AB', 'Kinnevik AB'), ('Latour, Investmentab.', 'Investment AB Latour'), ('Lindab AB', 'Lindab International AB'), ('Moberg Pharma AB', 'Moberg Pharma (Sweden)'), ('Modern Times Group MTG AB', 'Modern Times Group'), ('Moreld ASA', 'Moreld AS'), ('Roblon A/S', 'Roblon Aktieselskab'), ('Senzime AB', 'Senzime AB (publ.)'), ('UPM-Kymmene Oyj', 'UPM'), ('WindowMaster International A/S', 'WindowMaster')]
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/BUNECW+EtelkaLightPro', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 32, '/FontDescriptor': IndirectObject(7064, 0, 138072627497584), '/LastChar': 169, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [286, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256, 277, 256, 427, 622, 622, 622, 622, 0, 0, 622, 622, 622, 0, 256, 0, 0, 0, 0, 0, 932, 668, 689, 602, 703, 610, 571, 0, 0, 273, 440, 0, 546, 869, 730, 759, 650, 0, 675, 624, 568, 738, 0, 0, 648, 607, 0, 0, 0, 0, 0, 0, 0, 542, 572, 466, 572, 546, 355, 572, 554, 217, 0, 478, 222, 860, 554, 585, 572, 0, 343, 504, 393, 554, 509, 813, 0, 509, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 544, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 873]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/DKKLES+EtelkaMediumPro', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 32, '/FontDescriptor': IndirectObject(7066, 0, 138072627497584), '/LastChar': 84, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [266, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 626, 0, 626, 626, 0, 0, 626, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 620, 0, 0, 0, 308, 0, 0, 0, 916, 774, 770, 673, 783, 706, 0, 609]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 7, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(84, 0, 138072626211792), '/LastChar': 31, '/Widths': [710, 606, 282, 701, 694, 674, 673, 935, 250, 623, 493, 267, 453, 560, 788, 578, 844, 556, 576, 630, 549, 247, 422, 578, 709]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 16, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(100, 0, 138072626211792), '/LastChar': 31, '/Widths': [694, 674, 673, 935, 578, 630, 547, 709, 422, 844, 578, 578, 576, 556, 267, 549]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 1, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(107, 0, 138072626211792), '/LastChar': 127, '/Widths': [431, 601, 969, 623, 521, 799, 694, 673, 247, 600, 560, 623, 267, 493, 617, 250, 600, 415, 623, 674, 547, 630, 408, 576, 578, 549, 422, 578, 578, 556, 709, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 453]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 17, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(109, 0, 138072626211792), '/LastChar': 31, '/Widths': [578, 630, 709, 422, 844, 578, 578, 576, 556, 267, 549, 694, 674, 673, 935]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 1, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(122, 0, 138072626211792), '/LastChar': 129, '/Widths': [844, 630, 422, 709, 549, 623, 594, 674, 556, 819, 664, 969, 408, 408, 578, 576, 623, 512, 250, 560, 957, 710, 600, 453, 415, 601, 788, 267, 673, 606, 701, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 529, 0, 493]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 1, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(124, 0, 138072626211792), '/LastChar': 31, '/Widths': [556, 594, 600, 844, 512, 250, 606, 422, 549, 453, 600, 623, 250, 521, 560, 799, 969, 408, 709, 547, 408, 578, 578, 267, 493, 957, 623, 617, 601, 415, 664]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/FirstChar': 1, '/Subtype': '/Type1', '/BaseFont': '/QQMAHM+MarkOT', '/FontDescriptor': IndirectObject(82, 0, 138072626211792), '/Type': '/Font', '/Encoding': IndirectObject(138, 0, 138072626211792), '/LastChar': 173, '/Widths': [601, 623, 703, 957, 600, 664, 453, 431, 594, 935, 578, 527, 617, 674, 969, 408, 578, 408, 630, 422, 521, 415, 560, 493, 267, 250, 512, 623, 600, 250, 646, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 549, 576, 709, 282, 247, 853, 844, 0, 0, 0, 0, 0, 0, 0, 676, 0, 578, 765, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 819, 0, 0, 547, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 606]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+news for 743 companies, 602 with a report; read 25 reports this run
 
 == TotalEnergies SE | 2026-10-29 06:45 | Quarterly financial reporting / Third quarter financial report | chars 29079
   quarter 3
@@ -84,6 +93,16 @@ news for 719 companies, 579 with a report; read 13 reports this run
 == L'Oréal | 2026-10-22 16:00 | Sales at 30 September 2026 | chars 20981
   quarter 3
 
+== Sanofi | 2026-10-30 05:30 | Press Release: Q3 2026: double-digit growth in sales and business EPS FY 2026: guidance upgraded | chars 41916
+  quarter 3
+  [result None] Dupixent sales increased by 34.8% to €5.7 billion, above €5 billion per quarter for the second time.
+  [result q] In Q3 2026, sales were €14,444 million and increased by 14.3%.
+  [result ytd] In YTD 2026, sales were €36,550 million and increased by 15.2%.
+  [result None] The growth was driven by Immunology (Dupixent and Kevzara), pharma launches, and insulins with vaccines decreasing by 6.8% from lower influenza and Beyfortus sales partly offset by newly acquired Heplisav-B.
+  [result None] The ratio of BOI to net sales was 37.4% and increased by 1.7pp (37.6% at actual exchange rates, up by 1.9pp).
+  [result None] The ratio of BOI to net sales was 31.9% and increased by 1.6pp (32.0% at actual exchange rates, up by 1.7pp).
+  [outlook] Q3 2026: double-digit growth in sales and business EPS FY 2026: guidance upgraded October 30, 2026 Q3 sales growth of 14.3% at CER1 and business earnings per share (EPS)2 of €3.55.
+
 == AB Volvo | 2026-10-23 07:23 | Volvo Group - the third quarter 2026 | chars 36919
   quarter 3
   [result q] In Q3 2026, net sales increased by 8% and amounted to SEK 119.5 billion (110.7).
@@ -96,16 +115,6 @@ news for 719 companies, 579 with a report; read 13 reports this run
   [outlook] In Q4 2026, the forecasted net impact on operating income from U.S. tariffs of a negative SEK 0.7 billion is expected to be fully offset by a positive impact from refunds related to Section 232 MHDVP.
   [outlook] The net of capitalization and amortization of research and development expenses is expected to have a positive impact on operating income of approximately SEK 4.0 billion for the full year 2026.
   [backlog] Order books for 2027 were opened at the beginning of September.
-
-== Sanofi | 2026-10-30 05:30 | Press Release: Q3 2026: double-digit growth in sales and business EPS FY 2026: guidance upgraded | chars 41916
-  quarter 3
-  [result None] Dupixent sales increased by 34.8% to €5.7 billion, above €5 billion per quarter for the second time.
-  [result q] In Q3 2026, sales were €14,444 million and increased by 14.3%.
-  [result ytd] In YTD 2026, sales were €36,550 million and increased by 15.2%.
-  [result None] The growth was driven by Immunology (Dupixent and Kevzara), pharma launches, and insulins with vaccines decreasing by 6.8% from lower influenza and Beyfortus sales partly offset by newly acquired Heplisav-B.
-  [result None] The ratio of BOI to net sales was 37.4% and increased by 1.7pp (37.6% at actual exchange rates, up by 1.9pp).
-  [result None] The ratio of BOI to net sales was 31.9% and increased by 1.6pp (32.0% at actual exchange rates, up by 1.7pp).
-  [outlook] Q3 2026: double-digit growth in sales and business EPS FY 2026: guidance upgraded October 30, 2026 Q3 sales growth of 14.3% at CER1 and business earnings per share (EPS)2 of €3.55.
 
 == Novo Nordisk A/S | 2026-11-04 07:30 | Novo raises full-year outlook on continued GLP-1 momentum, with third-quarter adjusted operating profit increasing 27% at CER to DKK 31,720 million | chars 39761
   quarter 3
@@ -129,6 +138,18 @@ news for 719 companies, 579 with a report; read 13 reports this run
   [result q] The performance in Poland was particularly strong with convergent ARPO up +5.0% yoy, while quarterly revenue increased +7.9%.
   [result q] TOTEM’s revenue was €173 million in the third quarter, down -2.9%.
   [outlook] These strong results confirm our ambition to deliver “stable +” EBITDAaL in 2026. 5 Spain In millions of euros 3Q 2026 change comparable basis change historical basis 4M 2026 change comparable basis change historical basis Revenue 1,910 3.5 % - 2,558 3.1 %.
+
+== Schouw & Co. | 2026-11-06 08:03 | Interim report - third quarter of 2026 | chars 23269
+  quarter 3
+  [result q] Revenue increased by 16% to DKK 10,646 million in Q3 2026 from DKK 9,195 million in Q3 2025.
+  [result ytd] For the first nine months of 2026, revenue increased by 6% to DKK 27,310 million from DKK 25,648 million in the same period of 2025.
+  [result q] EBITDA increased by 37% to DKK 1,199 million in Q3 2026 from DKK 878 million in Q3 2025.
+  [result ytd] EBITDA for the first nine months of 2026 increased by 22% to DKK 2,618 million from DKK 2,149 million in the same period of 2025.
+  [result q] Supported by stronger operating performance across the portfolio and lower net financial expenses, profit before tax increased by 69% to DKK 881 million in Q3 2026 from DKK 522 million in Q3 2025.
+  [result ytd] For the first nine months of 2026, profit before tax amounted to DKK 1,612 million, representing an increase of 55% from DKK 1,043 million in the same period of 2025.
+  <highlights> DKK 10.6bn revenue – a 16% increase
+  <highlights> DKK 1,199m EBITDA – a 37% increase
+  <highlights> DKK 966m cash flow from operations – an 8% increase
 
 == DSV A/S | 2026-10-21 07:31 | DSV, 1175 - INTERIM FINANCIAL REPORT Q3 2026 | chars 8265
   quarter 3
@@ -261,16 +282,3 @@ news for 719 companies, 579 with a report; read 13 reports this run
   [backlog] Backlog at end-September 2026 above USD3bn, up +42% vs end 2025 and representing 3.4 months of sales United States:.
   [outlook] In Asia, sales in China and India grew by +19.4% and +15.1% respectively, supported by industrial automation activity, mainly in manufacturing, logistics and electronics/robotics 5/13 Outlook Rexel is raising its full-year 2026 guidance for the second time this year, on the back of its acceleration in sales.
   [target] Free cash flow conversion2 above 65% (unchanged) Reminder of Rexel's key medium-term ambitions:.
-
-== Neste Oyj | 2026-10-29 08:00 | Neste's interim report for January-September 2026 | chars 11251
-  quarter 3
-  [result q] The Group’s comparable EBITDA for the third quarter reached EUR 1,555 (531) million, driven by Renewable Products sales volumes combined with strong renewables sales margins and exceptionally strong middle distillate markets.
-  [result None] In Oil Products, comparable EBITDA was EUR 504 (232) million, with a total refining margin of USD 48.2 (15.5)/bbl, driven by exceptionally wide middle distillate cracks.
-  [result q] I also wish our employees and contractors in Singapore and Rotterdam safe maintenance shutdowns.” The Group's third quarter 2026 results Neste's revenue in the third quarter totaled EUR 6,551 (4,534) million.
-  [result None] Group EBITDA was EUR 1,581 (447) million, impacted by inventory valuation gains of EUR 187 (losses -23) million, while changes in the fair value of open commodity and currency derivatives were EUR -159 (-58) million.
-  [result ytd] The Group's January–September 2026 results Neste's revenue in the first nine months totaled EUR 17,701 (14,062) million.
-  [result None] Group EBITDA was EUR 3,627 (893) million, impacted by inventory valuation gains of EUR 241 (losses -90) million and changes in the fair value of open commodity and currency derivatives totaling EUR -226 (-66) million.
-  <highlights> ● Comparable EBITDA totaled EUR 1,555 (531) million
-  <highlights> ● EBITDA totaled EUR 1,581 (447) million
-  <highlights> ● Renewable Products' comparable sales margin was USD 1,068 (480)/ton
-  <outlook None> Oil Products' sales volumes in 2026 are expected to be lower than in 2025​ due to the planned maintenance turnaround.
