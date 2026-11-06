@@ -48,3 +48,6 @@ a.rd-card:hover { border-color: var(--blue); border-left-color: var(--c); color:
   .rd-hero .rd-val { font-size: 34px; }
   .rd-count b { font-size: 28px; }
 }
+
+.rd-money { margin-top: 12px; }
+.rd-money h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }

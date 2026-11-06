@@ -15,7 +15,7 @@ SRC = Path(sys.argv[1] if len(sys.argv) > 1 else '.')
 OUT = Path(sys.argv[2] if len(sys.argv) > 2 else 'build')
 SITE = 'https://www.finila.com'
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-MONTHLY = {'sahm-rule', 'm2-money-supply', 'margin-debt'}
+MONTHLY = {'sahm-rule', 'm2-money-supply', 'margin-debt', 'shiller-cape', 'bank-lending-standards', 'euro-bank-lending'}
 LIGHT = {'red': 'Red', 'amber': 'Amber', 'green': 'Green'}
 COLOR = {'red': '#D23B3B', 'amber': '#B97A0A', 'green': '#0F8A57'}
 BLUE = '#1F6FEB'
@@ -143,6 +143,51 @@ def line_chart(hist, amber, red, label):
     return ''.join(out)
 
 
+MONEY = [('fed-balance-sheet', 'Fed balance sheet', '#1F6FEB'), ('ecb-balance-sheet', 'ECB balance sheet', '#7C3AED'),
+         ('m2-money-supply', 'US money supply M2', '#0E9FB3')]
+
+
+def money_chart(by_id, start='2008-01'):
+    """Fed and ECB balance sheets and M2, year-on-year, on one chart (Lub, 2026-11-06)."""
+    series = [(lab, col, [(int(m[:4]) + (int(m[5:7]) - 1) / 12, v) for m, v in by_id[i]['history'] if m >= start and v is not None])
+              for i, lab, col in MONEY if i in by_id and by_id[i].get('history')]
+    series = [x for x in series if len(x[2]) > 3]
+    if len(series) < 2:
+        return ''
+    W, H, L, R, T, B = 760, 320, 52, 16, 16, 30
+    allp = [p for _, _, ps in series for p in ps]
+    x0, x1 = min(t for t, _ in allp), max(t for t, _ in allp) + 1 / 12
+    lo, hi = min(min(v for _, v in allp), 0), max(v for _, v in allp)
+    pad = (hi - lo) * 0.06
+    lo, hi = lo - pad, hi + pad
+    X = lambda t: L + (t - x0) / (x1 - x0) * (W - L - R)
+    Y = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
+    step = next(st for st in (5, 10, 20, 25, 50) if (hi - lo) / st <= 7)
+    out = [f'<svg class="rd-chart" viewBox="0 0 {W} {H}" role="img" aria-label="Fed and ECB balance sheets and M2, change on a year earlier">']
+    v = (lo // step + 1) * step
+    while v < hi:
+        out.append(f'<line x1="{L}" x2="{W - R}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="{"#8A94A6" if v == 0 else "#DCE2EC"}"/>'
+                   f'<text x="{L - 6}" y="{Y(v) + 4:.1f}" text-anchor="end">{v:+g}%</text>')
+        v += step
+    y = int(x0 // 2 + 1) * 2
+    while y < x1:
+        out.append(f'<text x="{X(y):.1f}" y="{H - 8}" text-anchor="middle">{y}</text>')
+        y += 2
+    for lab, col, ps in series:
+        d = ' '.join(f'{"M" if k == 0 else "L"}{X(t):.1f},{Y(v):.1f}' for k, (t, v) in enumerate(ps))
+        out.append(f'<path d="{d}" fill="none" stroke="{col}" stroke-width="2" stroke-linejoin="round"/>')
+        out.append(f'<circle cx="{X(ps[-1][0]):.1f}" cy="{Y(ps[-1][1]):.1f}" r="4" fill="{col}"/>')
+    out.append('</svg>')
+    legend = ''.join(f'<span><i class="rd-sw" style="background:{col}"></i>{esc(lab)} {esc(by_id[i]["display"])}</span>'
+                     for i, lab, col in MONEY if i in by_id)
+    return f'''<div class="h-card rd-money">
+      <h3>Money in the system: Fed, ECB and M2 together</h3>
+      <div class="rd-legend">{legend}</div>
+      {''.join(out)}
+      <p class="h-note">Change on a year earlier, month-end values since 2008. Sources: Federal Reserve H.4.1 and H.6, European Central Bank, via FRED.</p>
+    </div>'''
+
+
 def cycle_chart(cycle):
     W, H, L, R, T, B = 760, 320, 44, 8, 30, 52
     mx = max(20, max(max(c['average'], c['actual'] or 0) for c in cycle))
@@ -188,6 +233,7 @@ def main():
     head, foot = shell(rates)
     inds = data['indicators']
     by_group = {g[0]: [r for r in inds if r['group'] == g[0]] for g in data['groups']}
+    by_id = {r['id']: r for r in inds}
     c = data['counts']
     upd = data['updated'][:10]
     (OUT / 'radar-pages').mkdir(parents=True, exist_ok=True)
@@ -196,17 +242,19 @@ def main():
     groups_html = []
     for gid, gname, gtext in data['groups']:
         cards = '\n'.join(card(r) for r in by_group[gid])
+        extra = money_chart(by_id) if gid == 'liquidity' else ''
         groups_html.append(f'''  <section class="h-section" id="{gid}">
     <div class="rd-group-head"><h2>{esc(gname)}</h2><p>{esc(gtext)}</p></div>
     <div class="rd-grid">
 {cards}
     </div>
+    {extra}
   </section>''')
     reds = [r['short'] for r in inds if r.get('light') == 'red']
     body = f'''  <section class="i-intro">
     <div class="h-eyebrow">MARKET RADAR</div>
     <h1>Stock market signals today</h1>
-    <p>{len(inds)} indicators of where the US stock market stands in its cycle, each with a traffic light: valuation, recession signals, credit, market breadth and central bank liquidity. Red means an indicator is past a level that came before trouble in the past. No indicator tells you when the market will turn.</p>
+    <p>{len(inds)} indicators of where the stock market stands in its cycle, each with a traffic light: valuation, recession signals, credit, market breadth, the euro area and central bank liquidity. Red means an indicator is past a level that came before trouble in the past. No indicator tells you when the market will turn.</p>
     <span class="i-updated">Updated {nice_date(upd)}</span>
   </section>
 
@@ -279,6 +327,7 @@ def main():
   </section>
 
 {chart_html}
+{f'  <section class="h-section">{money_chart(by_id)}</section>' if r['id'] in [m[0] for m in MONEY] else ''}
 
   <section class="h-section">
     <div class="rd-group-head"><h2>What it measures</h2></div>

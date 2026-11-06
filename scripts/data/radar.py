@@ -5,6 +5,7 @@ Free sources, fetched once a day:
                         stress, M2, Fed balance sheet, bank reserves, ECB balance sheet, corporate equities and
                         GDP (Buffett indicator). Only series of public bodies: index data owned by S&P, Cboe or
                         ICE may not be republished without their permission (Lub, 2026-11-06).
+  ECB data portal       euro area systemic stress (CISS), yield curve and bank lending survey
   shillerdata.com       Shiller CAPE by month (Robert Shiller's own data file)
 Indicators without a free daily source (forward P/E, earnings revisions, margin debt, breadth,
 equal weight vs cap weight) come from data/radar-manual.json, with the date they were last checked.
@@ -29,6 +30,7 @@ GROUPS = [
     ["economy", "Economy and earnings", "Recession signals. Most big stock market falls came together with a recession."],
     ["credit", "Credit and leverage", "When lending dries up or there is too much debt in the market, falls tend to be sharper."],
     ["market", "Market and sentiment", "Whether the whole market carries the rise or only a few stocks, and how fearful investors are."],
+    ["europe", "Euro area", "The same signals for Europe from the ECB. US signals usually move first, but European stocks fall with them; these show whether the stress reaches Europe."],
     ["liquidity", "Liquidity", "How much money central banks put into the system. Shrinking balance sheets and falling reserves drain the fuel for markets."],
 ]
 
@@ -63,6 +65,30 @@ def fred(sid, start="1950-01-01"):
     if not out:
         raise RuntimeError(f"{sid}: no observations")
     return out
+
+
+ECB = "https://data-api.ecb.europa.eu/service/data/"
+
+
+def ecb(key, start="1999-01-01"):
+    """[(date string, value)] from the ECB data portal (public data), e.g. CISS/D.U2.Z0Z.4F.EC.SS_CIN.IDX.
+    Monthly and quarterly periods (2026-10, 2026-Q3) become the period's first day."""
+    rows = list(csv.DictReader(io.StringIO(fetch(f"{ECB}{key}?format=csvdata&startPeriod={start[:7]}"))))
+    out = []
+    for r in rows:
+        t, v = r.get("TIME_PERIOD", ""), r.get("OBS_VALUE", "")
+        try:
+            val = float(v)
+        except ValueError:
+            continue
+        if re.fullmatch(r"\d{4}-Q[1-4]", t):
+            t = f"{t[:4]}-{(int(t[-1]) - 1) * 3 + 1:02d}-01"
+        elif re.fullmatch(r"\d{4}-\d{2}", t):
+            t += "-01"
+        out.append((t[:10], val))
+    if not out:
+        raise RuntimeError(f"ECB {key}: no observations")
+    return sorted(out)
 
 
 def monthly(obs, start=HIST_FROM):
@@ -140,7 +166,8 @@ DEFS = [
      "rule": "Amber above 1.4 times its long-run median, red above its March 2000 peak.",
      "about": ["The total value of US companies' shares divided by the size of the US economy (GDP). Warren Buffett called it in 2001 probably the best single measure of where valuations stand at any given moment.",
                "Here it uses the Federal Reserve's quarterly figure for the market value of US non-financial companies' shares, so it changes once a quarter, about ten weeks after the quarter ends.",
-               "The limits come from the series itself: amber when it is 40% above its median since 1950, red when it is above the level of the dot-com peak in early 2000."]},
+               "The limits come from the series itself: amber when it is 40% above its median since 1950, red when it is above the level of the dot-com peak in early 2000.",
+               "A weaker signal than it looks: US companies earn more and more abroad, outside US GDP, so the ratio has drifted up for decades and has been red almost all the time since 2014."]},
     {"id": "forward-pe", "group": "valuation", "name": "S&P 500 forward P/E", "short": "Forward P/E",
      "direction": "up", "amber": 20, "red": 22, "fmt": "x1", "manual": True, "source": "FactSet Earnings Insight",
      "rule": "Amber above 20, red above 22. 10-year average about 19.",
@@ -162,6 +189,11 @@ DEFS = [
      "rule": "Amber from 0.3, red from 0.5, the recession signal.",
      "about": ["Created by economist Claudia Sahm: the three-month average of the unemployment rate minus its lowest three-month average of the previous twelve months.",
                "When it reaches 0.5 percentage points, the US has been in a recession in every case since 1970, usually already at its start. It briefly reached 0.5 in August 2024 without a recession following, so it is a strong signal, not a certainty."]},
+    {"id": "jobless-claims", "group": "economy", "name": "Jobless claims, rise from the 1-year low", "short": "Jobless claims",
+     "direction": "up", "amber": 15, "red": 25, "fmt": "pct0s", "fred": "IC4WSA", "source": "US Department of Labor via FRED (IC4WSA)",
+     "rule": "Amber when the 4-week average is 15% above its 1-year low, red at 25%.",
+     "about": ["New claims for unemployment benefit in the US, as a 4-week average, against their lowest level of the past year. It is the fastest official reading of the job market, published every Thursday.",
+               "Layoffs come before recessions: claims rose 20–30% from their low before the recessions of 2001 and 2008. A rise that fades, as in 2022–23, gives a false alarm, so it counts most together with the yield curve and the Sahm rule."]},
     {"id": "earnings-revisions", "group": "economy", "name": "Change in next-quarter earnings estimate", "short": "Earnings revisions",
      "direction": "down", "amber": 0, "red": -3, "fmt": "pct1s", "manual": True, "source": "FactSet Earnings Insight",
      "rule": "Amber below 0, red below −3%.",
@@ -172,6 +204,11 @@ DEFS = [
      "rule": "Amber above −0.3, red above 0 (tighter than average).",
      "about": ["The Chicago Fed's weekly index of US financial conditions, built from 105 measures of money markets, debt and equity markets and bank lending. Zero is the average since 1971; positive values mean credit and funding are tighter than usual.",
                "It rose above zero in 2000, 2007–09 and March 2020, each time together with a large fall in stocks. Readings well below zero mean money flows easily."]},
+    {"id": "bank-lending-standards", "group": "credit", "name": "Banks tightening business loans", "short": "Lending standards",
+     "direction": "up", "amber": 10, "red": 30, "fmt": "pct0s", "fred": "DRTSCILM", "source": "Federal Reserve Senior Loan Officer Survey via FRED (DRTSCILM)",
+     "rule": "Amber above +10%, red above +30% of banks (net) tightening.",
+     "about": ["The share of US banks that made their rules for loans to companies stricter in the last three months, minus the share that eased them (Federal Reserve survey of loan officers, quarterly).",
+               "Net tightening above about 30% came before or with every US recession since 1990: 1990, 2001, 2008 and 2020. When banks lend less, companies invest and hire less a few quarters later."]},
     {"id": "margin-debt", "group": "credit", "name": "Margin debt, year-on-year", "short": "Margin debt",
      "direction": "up", "amber": 25, "red": 50, "fmt": "pct0s", "manual": True, "source": "FINRA margin statistics",
      "rule": "Amber above +25%, red above +50% a year.",
@@ -190,11 +227,27 @@ DEFS = [
      "rule": "Amber above 0 (more stress than average), red above 1.",
      "about": ["The St. Louis Fed's weekly measure of stress in financial markets, from 18 series: interest rates, yield spreads and expected volatility of stocks and bonds. Zero is normal; each point is one standard deviation above it.",
                "It reached about 5 in March 2020 and above 9 in late 2008. Values below zero mean calm markets."]},
+    {"id": "euro-stress-ciss", "group": "europe", "name": "ECB systemic stress index (CISS)", "short": "Euro stress (CISS)",
+     "direction": "up", "amber": 0.2, "red": 0.35, "fmt": "n2", "ecb": "CISS/D.U2.Z0Z.4F.EC.SS_CIN.IDX", "source": "European Central Bank, CISS",
+     "rule": "Amber above 0.2, red above 0.35 (scale 0 to 1).",
+     "about": ["The ECB's composite indicator of systemic stress in the euro area: money markets, bonds, stocks, currencies and banks in one daily number from 0 (calm) to 1 (crisis).",
+               "It reached about 0.8 in late 2008, 0.6 in the euro crisis of 2011–12, 0.4 in March 2020 and 0.35 in 2022. Values below 0.1 mean calm markets."]},
+    {"id": "euro-yield-curve", "group": "europe", "name": "Euro area yield curve 10y − 2y", "short": "Euro curve",
+     "direction": "down", "amber": 0.5, "red": 0, "fmt": "pp2", "source": "European Central Bank, AAA government bond yield curve",
+     "rule": "Red below 0 (inverted), amber from 0 to +0.5.",
+     "about": ["The 10-year yield minus the 2-year yield of the best-rated euro area government bonds (ECB yield curve). Like the US curve, an inversion means markets expect the ECB to cut rates because the economy will weaken.",
+               "It inverted in 2022–24, the first long inversion since the euro started; the euro area economy stagnated in 2023 without a deep recession."]},
+    {"id": "euro-bank-lending", "group": "europe", "name": "Euro area banks tightening business loans", "short": "Euro lending",
+     "direction": "up", "amber": 10, "red": 25, "fmt": "pct0s", "ecb": "BLS/Q.U2.ALL.O.E.Z.B3.ST.S.WFNET", "source": "European Central Bank, Bank Lending Survey",
+     "rule": "Amber above +10%, red above +25% of banks (net) tightening.",
+     "about": ["The ECB's quarterly survey of about 150 euro area banks: the share that tightened their credit standards for loans to companies minus the share that eased them.",
+               "Net tightening of 25% or more came with the recessions of 2008–09 and 2011–13 and in 2022–23."]},
     {"id": "fed-balance-sheet", "group": "liquidity", "name": "Fed balance sheet, year-on-year", "short": "Fed balance sheet",
      "direction": "down", "amber": 0, "red": -5, "fmt": "pct1s", "fred": "WALCL", "source": "Federal Reserve H.4.1 via FRED (WALCL)",
      "rule": "Amber when shrinking, red when shrinking more than 5% a year.",
      "about": ["Total assets of the Federal Reserve. When the Fed buys bonds (quantitative easing) it creates money; when it lets them run off (quantitative tightening) it takes money out.",
-               "The balance sheet peaked at almost $9 trillion in April 2022 and shrank under QT until the Fed stopped in late 2025."]},
+               "The balance sheet peaked at almost $9 trillion in April 2022 and shrank under QT until the Fed stopped in late 2025.",
+               "Popular with traders, but a weaker signal than the yield curve or credit: stocks rose through most of the 2022–25 shrinking."]},
     {"id": "bank-reserves", "group": "liquidity", "name": "Bank reserves at the Fed", "short": "Bank reserves",
      "direction": "down", "amber": 3.0, "red": 2.7, "fmt": "usdT", "fred": "WRESBAL", "source": "Federal Reserve H.4.1 via FRED (WRESBAL)",
      "rule": "Amber below $3.0 trillion, red below $2.7 trillion.",
@@ -208,6 +261,7 @@ DEFS = [
      "direction": "down", "amber": 2, "red": 0, "fmt": "pct1s", "fred": "M2SL", "source": "Federal Reserve H.6 via FRED (M2SL)",
      "rule": "Red when money shrinks, amber below +2% a year.",
      "about": ["Cash, bank deposits and money market funds held by the public in the US. Money that grows faster than the economy tends to end up in asset prices.",
+               "Watched by many investors, but the statistical link to stock returns is weak; treat it as background rather than a timing signal.",
                "In 2022–23 M2 fell for the first time since the 1930s, together with a bear market in stocks and bonds."]},
 ]
 
@@ -237,6 +291,26 @@ def compute(d, cache):
         hist = [[dd[:7], round(x, 1)] for dd, x in ratio if dd >= "1950"]
         d["note"] = f"Quarterly figure for the quarter starting {qd[:7]}."
         return qv, qd, hist
+    if i == "jobless-claims":
+        obs = cache("IC4WSA", "1967-01-01")
+        dates = [datetime.strptime(x, "%Y-%m-%d").date() for x, _ in obs]
+        out = []
+        for k, (dd, v) in enumerate(obs):
+            win = [obs[j][1] for j in range(k, -1, -1) if (dates[k] - dates[j]).days <= 365]
+            if len(win) >= 40:
+                out.append((dd, (v / min(win) - 1) * 100))
+        d["note"] = f"4-week average {obs[-1][1] / 1000:.0f} thousand a week."
+        return out[-1][1], out[-1][0], monthly(out)
+    if i == "euro-yield-curve":
+        y10 = dict(ecb("YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y", "2004-09-01"))
+        y2 = ecb("YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_2Y", "2004-09-01")
+        obs = [(dd, y10[dd] - v) for dd, v in y2 if dd in y10]
+        d["note"] = f"10-year {y10[obs[-1][0]]:.2f}%, 2-year {dict(y2)[obs[-1][0]]:.2f}%."
+        return obs[-1][1], obs[-1][0], monthly(obs, "2004-09")
+    if d.get("ecb"):
+        obs = ecb(d["ecb"])
+        v = last(obs)
+        return v[1], v[0], monthly(obs, "1999-01")
     obs = cache(d["fred"])
     if i in ("fed-balance-sheet", "ecb-balance-sheet", "m2-money-supply"):
         lv = obs[-1][1]
