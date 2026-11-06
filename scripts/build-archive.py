@@ -72,6 +72,7 @@ PAGE = """<!DOCTYPE html>
       <a href="/shorts">Shorts</a>
       <a href="/property">Property</a>
       <a href="/rates">Rates</a>
+      <a href="/radar">Radar</a>
       <a href="/assets">Assets</a>
       <a href="/archiv/" aria-current="page">Archive</a>
     </nav>

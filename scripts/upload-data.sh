@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Uploads only FINILA's data files (insiders, shorts, invest, rates, companies, fundamentals, prices, housing) to the live site's js/ folder.
+# Uploads only FINILA's data files (insiders, shorts, invest, rates, companies, fundamentals, prices, housing, radar) to the live site's js/ folder.
 # Pages, styles and scripts are published only by deploy-finila.yml. Never deletes anything.
 # Needs FTP_SERVER, FTP_USERNAME, FTP_PASSWORD; optional FTP_DIR (default /).
 set -euo pipefail
@@ -8,7 +8,7 @@ for v in FTP_SERVER FTP_USERNAME FTP_PASSWORD; do
 done
 FTP_DIR="${FTP_DIR:-/}"
 files=()
-for f in js/insiders.json js/insiders-home.json js/shorts.json js/invest.json js/rates.json js/companies.json js/fundamentals.js js/prices.js js/company-prices.json js/housing.json js/housing-levels.json; do [ -f "$f" ] && files+=("$f"); done
+for f in js/insiders.json js/insiders-home.json js/shorts.json js/invest.json js/rates.json js/companies.json js/fundamentals.js js/prices.js js/company-prices.json js/housing.json js/housing-levels.json js/radar.json; do [ -f "$f" ] && files+=("$f"); done
 [ ${#files[@]} -gt 0 ] || { echo "No data files to upload."; exit 0; }
 cmds="cd '$FTP_DIR' && cd js"
 # SFTP cannot rename onto an existing file: upload to .tmp, then swap it in (the old file is gone only for a moment).

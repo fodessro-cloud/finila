@@ -27,6 +27,11 @@ SRC = Path(sys.argv[1] if len(sys.argv) > 1 else '.')
 OUT = Path(sys.argv[2] if len(sys.argv) > 2 else SRC)
 # Pages listed in the sitemap besides the company pages.
 PAGES = ['', 'screener', 'map', 'groups', 'insiders', 'shorts', 'property', 'rates', 'assets', 'stock/', 'stock/methodology']
+# Market Radar: the overview, the election cycle and one page per indicator in js/radar.json.
+try:
+    PAGES += ['radar', 'radar/election-cycle'] + ['radar/' + r['id'] for r in json.loads((SRC / 'js' / 'radar.json').read_text())['indicators']]
+except (OSError, ValueError, KeyError):
+    pass
 
 COUNTRIES = {
     'AT': 'Austria', 'BE': 'Belgium', 'BG': 'Bulgaria', 'CH': 'Switzerland', 'CY': 'Cyprus', 'CZ': 'Czechia',
@@ -1274,6 +1279,7 @@ HEADER = '''<header class="fh">
       <a href="/shorts">Shorts</a>
       <a href="/property">Property</a>
       <a href="/rates">Rates</a>
+      <a href="/radar">Radar</a>
       <a href="/assets">Assets</a>
       <a href="/archiv/">Archive</a>
     </nav>

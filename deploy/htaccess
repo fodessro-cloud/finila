@@ -57,6 +57,14 @@ RewriteCond %{THE_REQUEST} \s/+property-pages/[a-z0-9-]+\.html[\s?]
 RewriteRule ^property-pages/([a-z0-9-]+)\.html$ /property/$1 [R=301,L]
 RewriteRule ^property/([a-z0-9-]+)$ property-pages/$1.html [L]
 
+# Market Radar: /radar is built as radar.html, /radar/shiller-cape shows radar-pages/shiller-cape.html.
+RewriteCond %{THE_REQUEST} \s/+radar\.html[\s?]
+RewriteRule ^radar\.html$ /radar [R=301,L]
+RewriteRule ^radar/?$ radar.html [L]
+RewriteCond %{THE_REQUEST} \s/+radar-pages/[a-z0-9-]+\.html[\s?]
+RewriteRule ^radar-pages/([a-z0-9-]+)\.html$ /radar/$1 [R=301,L]
+RewriteRule ^radar/([a-z0-9-]+)$ radar-pages/$1.html [L]
+
 # Links inside the archive point to /archiv/...: send visitors to the original
 # address instead (/archiv/blog/index.html -> /blog/). Images, scripts and the
 # archive's own home page (/archiv/) stay where they are.
