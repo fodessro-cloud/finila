@@ -9,7 +9,6 @@
   Chubb = Chubb Ltd (CIK 896159): 2020, 2021, 2022, 2023, 2024, 2025
   Novartis = NOVARTIS AG (CIK 1114448): 2020, 2021, 2022, 2023, 2024, 2025
   UBS = UBS Group AG (CIK 1610520): 2020, 2021, 2022, 2023, 2024, 2025
-  UBS = UBS AG (CIK 1114446): 2025
   SAP = SAP SE (CIK 1000184): 2020, 2021, 2022, 2023, 2024, 2025
   Linde = LINDE PLC (CIK 1707925): 2020, 2021, 2022, 2023, 2024, 2025
   Eaton = Eaton Corp plc (CIK 1551182): 2020, 2021, 2022, 2023, 2024, 2025
@@ -48,6 +47,7 @@
   Innate Pharma = Innate Pharma SA (CIK 1598599): 2020, 2021, 2022, 2023, 2024, 2025
   CRISPR Therapeutics = CRISPR Therapeutics AG (CIK 1674416): 2020, 2021, 2022, 2023, 2024, 2025
   Oculis Holding AG = Oculis Holding AG (CIK 1953530): 2022, 2023, 2024, 2025
+  dropped UBS (UBS AG): another SEC filer of the same name has more years
   dropped ABB (ABB LTD): no SEC year 2025 to compare
   dropped Ryanair (RYANAIR HOLDINGS PLC): no SEC year 2026 to compare
   dropped Flutter Entertainment (Flutter Entertainment plc): no SEC year 2025 to compare
