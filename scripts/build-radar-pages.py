@@ -176,7 +176,7 @@ def money_chart(by_id, start='2008-01'):
         out.append(f'<path d="{d}" fill="none" stroke="{col}" stroke-width="2" stroke-linejoin="round"/>')
         out.append(f'<circle cx="{X(ps[-1][0]):.1f}" cy="{Y(ps[-1][1]):.1f}" r="4" fill="{col}"/>')
     out.append('</svg>')
-    legend = ''.join(f'<span><i class="rd-sw" style="background:{col}"></i>{esc(lab)}{ps[-1][1]:.2f}T</span>'.replace(', $', ' $').replace(', €', ' €')
+    legend = ''.join(f'<a href="/radar/{i}"><i class="rd-sw" style="background:{col}"></i>{esc(lab)}{ps[-1][1]:.2f}T</a>'.replace(', $', ' $').replace(', €', ' €')
                      for i, lab, col, ps in series)
     return f'''<div class="h-card rd-money">
       <h3>Money in the system: Fed and ECB balance sheets and bank reserves</h3>

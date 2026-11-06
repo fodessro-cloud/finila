@@ -34,7 +34,7 @@ a.rd-card:hover { border-color: var(--blue); border-left-color: var(--c); color:
 .rd-chart text { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; fill: var(--muted); }
 .rd-chart .lbl { fill: var(--text); font-weight: 600; }
 .rd-legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-.rd-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.rd-legend span, .rd-legend a { display: inline-flex; align-items: center; gap: 6px; }
 .rd-sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
 
 .rd-hero { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
