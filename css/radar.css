@@ -49,5 +49,7 @@ a.rd-card:hover { border-color: var(--blue); border-left-color: var(--c); color:
   .rd-count b { font-size: 28px; }
 }
 
-.rd-money { margin-top: 12px; }
+.rd-money { margin: 12px 0; }
 .rd-money h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.rd-group-head h2 a, .rd-money h3 a { color: inherit; text-decoration: none; }
+.rd-group-head h2 a:hover, .rd-money h3 a:hover { color: var(--blue, #1F6FEB); text-decoration: underline; }

@@ -187,7 +187,7 @@ MONEY = [('fed-balance-sheet', 'Fed balance sheet, $', '#1F6FEB', 'levels'), ('e
          ('bank-reserves', 'Bank reserves at the Fed, $', '#0E9FB3', 'history')]
 
 
-def money_chart(by_id, start='2003-01'):
+def money_chart(by_id, start='2003-01', link=True):
     """Fed and ECB balance sheets and US bank reserves in trillions on one chart (Lub, 2026-11-06:
     the three FRED series WALCL, ECBASSETSW and WRESBAL he follows)."""
     series = [(i, lab, col, [(int(m[:4]) + (int(m[5:7]) - 1) / 12, v) for m, v in by_id[i].get(key) or [] if m >= start and v is not None])
@@ -220,7 +220,7 @@ def money_chart(by_id, start='2003-01'):
     legend = ''.join(f'<a href="/radar/{i}"><i class="rd-sw" style="background:{col}"></i>{esc(lab)}{ps[-1][1]:.2f}T</a>'.replace(', $', ' $').replace(', €', ' €')
                      for i, lab, col, ps in series)
     return f'''<div class="h-card rd-money">
-      <h3>Money in the system: Fed and ECB balance sheets and bank reserves</h3>
+      <h3>{'Fed and ECB balance sheets and bank reserves' if not link else '<a href="/radar/money-in-the-system">Money in the system: Fed and ECB balance sheets and bank reserves</a>'}</h3>
       <div class="rd-legend">{legend}{rec_legend(['us', 'euro'])}</div>
       {''.join(out)}
       <p class="h-note">Trillions of dollars (Fed, bank reserves) and euros (ECB), month-end values since 2003. Sources: Federal Reserve H.4.1 (WALCL, WRESBAL) and European Central Bank (ECBASSETSW), via FRED. Recession dates: NBER (US) and CEPR (euro area).</p>
@@ -284,10 +284,10 @@ def main():
         extra = money_chart(by_id) if gid == 'liquidity' else ''
         groups_html.append(f'''  <section class="h-section" id="{gid}">
     <div class="rd-group-head"><h2>{esc(gname)}</h2><p>{esc(gtext)}</p></div>
+    {extra}
     <div class="rd-grid">
 {cards}
     </div>
-    {extra}
   </section>''')
     reds = [r['short'] for r in inds if r.get('light') == 'red']
     body = f'''  <section class="i-intro">
@@ -309,7 +309,7 @@ def main():
 {chr(10).join(groups_html)}
 
   <section class="h-section" id="election-cycle">
-    <div class="rd-group-head"><h2>US election cycle</h2><p>S&amp;P 500 return from November to November by phase between elections. <a href="/radar/election-cycle">More on the election cycle</a></p></div>
+    <div class="rd-group-head"><h2><a href="/radar/election-cycle">US election cycle</a></h2><p>S&amp;P 500 return from November to November by phase between elections. <a href="/radar/election-cycle">History and where we are now</a></p></div>
     <div class="h-card">
       <div class="rd-legend"><span><i class="rd-sw" style="background:#A9B6CC"></i>Average since 1950</span><span><i class="rd-sw" style="background:{BLUE}"></i>Actual</span><span><i class="rd-sw" style="background:{COLOR["amber"]}"></i>We are here</span></div>
       {cycle_chart(data["cycle"])}
@@ -405,7 +405,51 @@ def main():
         'US election cycle and the stock market: where we are now | FINILA',
         'S&P 500 returns by phase of the US presidential cycle since 1950, with the actual results of 2024–2026. The post-midterm year has been the strongest; we are in it now.',
         'radar/election-cycle', body, head, foot))
-    print(f'Built radar.html and {len(inds) + 1} radar pages in {OUT}.')
+    # Money in the system (Lub, 2026-11-06: the three-curve chart as its own page)
+    def peak(i, key):
+        ps = [(m, v) for m, v in by_id[i].get(key) or [] if v is not None]
+        return max(ps, key=lambda x: x[1]) if ps else None
+    rows = []
+    for i, lab, col, key in MONEY:
+        if i not in by_id:
+            continue
+        ps = [x for x in by_id[i].get(key) or [] if x[1] is not None]
+        if not ps:
+            continue
+        pk, cur = peak(i, key), ps[-1]
+        cy = '€' if '€' in lab else '$'
+        rows.append(f'<li><span><i class="rd-sw" style="background:{col}"></i> <a href="/radar/{i}">{esc(lab.split(",")[0])}</a></span>'
+                    f'<span class="v">{cy}{cur[1]:.2f}T now · peak {cy}{pk[1]:.2f}T in {nice_date(pk[0] + "-01", True)}</span></li>')
+    body = f'''  <section class="i-intro">
+    <a class="rd-back" href="/radar#liquidity">← Market Radar · Liquidity</a>
+    <h1>Money in the system: Fed and ECB balance sheets and bank reserves</h1>
+    <p>How much money the two largest central banks have put into the financial system since 2003. When the Federal Reserve and the European Central Bank buy bonds, their balance sheets grow and banks hold more reserves; when they let bonds run off, the money drains out again. Shaded bands mark recessions in the US and the euro area.</p>
+    <span class="i-updated">Updated {nice_date(upd)}</span>
+  </section>
+  <section class="h-section">{money_chart(by_id, link=False)}</section>
+  <section class="h-section">
+    <div class="h-card h-data">
+      <div class="h-card-head"><h2>Today and at the peak</h2></div>
+      <ul class="h-list">{''.join(rows)}</ul>
+      <p class="h-note">Month-end values in trillions. Each line opens the indicator with its traffic light and year-on-year change.</p>
+    </div>
+  </section>
+  <section class="h-section">
+    <div class="rd-group-head"><h2>What to look for</h2></div>
+    <div class="rd-about">
+      <p>Before 2008 both balance sheets were below one trillion and US banks held almost no reserves at the Fed. Each crisis since then, 2008, the euro crisis of 2011–12 and 2020, brought a jump as the central banks bought bonds and lent to banks.</p>
+      <p>Rising balance sheets have tended to go with rising markets, and shrinking ones with tighter conditions, as in 2018 and 2022. The link is loose: the amount of money tells you about the backdrop, not when prices will turn.</p>
+      <p>Bank reserves show how much spare cash the US banking system holds. When they fell fast in 2019, short-term funding markets seized up and the Fed had to step in.</p>
+    </div>
+  </section>
+  <section class="h-section">
+    <div class="rd-related"><a href="/radar/fed-balance-sheet">Fed balance sheet</a><a href="/radar/ecb-balance-sheet">ECB balance sheet</a><a href="/radar/bank-reserves">Bank reserves</a><a href="/radar/m2-money-supply">M2 money supply</a><a href="/radar">All indicators</a></div>
+  </section>'''
+    (OUT / 'radar-pages' / 'money-in-the-system.html').write_text(page(
+        'Money in the system: Fed and ECB balance sheets, bank reserves chart | FINILA',
+        'Fed balance sheet (WALCL), ECB balance sheet and US bank reserves (WRESBAL) on one chart since 2003, in trillions, with recessions marked. Updated every weekday.',
+        'radar/money-in-the-system', body, head, foot))
+    print(f'Built radar.html and {len(inds) + 2} radar pages in {OUT}.')
 
 
 if __name__ == '__main__':

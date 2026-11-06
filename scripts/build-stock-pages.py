@@ -29,7 +29,7 @@ OUT = Path(sys.argv[2] if len(sys.argv) > 2 else SRC)
 PAGES = ['', 'screener', 'map', 'groups', 'insiders', 'shorts', 'property', 'rates', 'assets', 'stock/', 'stock/methodology']
 # Market Radar: the overview, the election cycle and one page per indicator in js/radar.json.
 try:
-    PAGES += ['radar', 'radar/election-cycle'] + ['radar/' + r['id'] for r in json.loads((SRC / 'js' / 'radar.json').read_text())['indicators']]
+    PAGES += ['radar', 'radar/election-cycle', 'radar/money-in-the-system'] + ['radar/' + r['id'] for r in json.loads((SRC / 'js' / 'radar.json').read_text())['indicators']]
 except (OSError, ValueError, KeyError):
     pass
 
