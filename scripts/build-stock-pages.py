@@ -166,9 +166,16 @@ def add_history_figures(rows):
     hist.update(PREVIEW.get('history') or {})
     for c in rows:
         h = hist.get(c['lei'])
-        if not h or c.get('origin') is not None or h['currency'] != c.get('currency'):
+        if not h or c.get('origin') not in (None, 'hand') or h['currency'] != c.get('currency'):
             continue
         years = {y: dict(v) for y, v in h['years'].items()}
+        # Figures copied by hand from a newer annual report than the ESEF archive has (LVMH, bpost ...):
+        # that year joins the official years from the ESEF reports (Lub 2026-11-06: same page as Novo).
+        py = (c.get('periodEnd') or '')[:4]
+        if c.get('origin') == 'hand' and py and py not in years and py > max(years):
+            years[py] = {k: c[k] for k in ('revenue', 'ebitda', 'operatingProfit', 'netIncome', 'operatingCashFlow', 'capex', 'fcf',
+                                           'dividendsPaid', 'equity', 'assets', 'cash', 'debt', 'netDebt', 'eps') if is_num(c.get(k))}
+            years[py].update(end=c['periodEnd'], source=c.get('source'))
         # Share splits: an old report states EPS on the old share count (Novo Nordisk 2:1 in 2023).
         # Where profit / EPS gives a share count about 2, 3, 4, 5, 10 or 20 times off the newest
         # year, the old EPS is put on today's share basis, as companies restate it themselves.
