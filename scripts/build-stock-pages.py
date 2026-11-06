@@ -164,6 +164,13 @@ def add_history_figures(rows):
     except (OSError, ValueError):
         return
     hist.update(PREVIEW.get('history') or {})
+    # Companies without ESEF reports that file 10-K / 20-F reports with the SEC (scripts/data/sec_history.py).
+    try:
+        for lei, h in json.loads((SRC / 'data' / 'sec-history.json').read_text(encoding='utf-8')).items():
+            if len((hist.get(lei) or {}).get('years', {})) < len(h['years']):
+                hist[lei] = h
+    except (OSError, ValueError):
+        pass
     for c in rows:
         h = hist.get(c['lei'])
         if not h or c.get('origin') not in (None, 'hand') or h['currency'] != c.get('currency'):
@@ -1635,7 +1642,7 @@ COVER = [('price', 'Price', lambda c: is_num(c.get('price'))),
          ('mcap', 'Market value', lambda c: is_num(c.get('mcap'))),
          ('sector', 'Sector', lambda c: bool(c.get('sector'))),
          ('figures', 'Annual figures', lambda c: is_num(c.get('revenue')) or is_num(c.get('netIncome'))),
-         ('official', 'Figures from an official report', lambda c: any(d in (c.get('source') or '') for d in OFFICIAL)),
+         ('official', 'Figures from an official report', lambda c: any(d in (c.get('source') or '') or d in ((c.get('years') or {}).get(max(c.get('years') or {'': 0}), {}).get('source') or '') for d in OFFICIAL)),
          ('history', '3+ years of history', lambda c: len(c.get('years') or {}) >= 3),
          ('about', 'What the company does', lambda c: bool(c.get('about'))),
          ('outlook', 'Outlook from a report', lambda c: bool(c.get('quotes') or (c.get('latestReport') or {}).get('outlook'))),
