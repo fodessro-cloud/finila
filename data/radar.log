@@ -19,4 +19,4 @@ OK   fed-balance-sheet: +2.4% (2026-11-04) green
 OK   bank-reserves: $2.93T (2026-11-04) amber
 OK   ecb-balance-sheet: −4.0% (2026-10-30) amber
 OK   m2-money-supply: +5.7% (2026-09-01) green
-wrote js/radar.json (153 KB), {'red': 2, 'amber': 6, 'green': 13}, failed: none
+wrote js/radar.json (163 KB), {'red': 2, 'amber': 6, 'green': 13}, failed: none
