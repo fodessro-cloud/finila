@@ -45,7 +45,8 @@ jobs:
 
   upload:
     needs: radar
-    if: github.ref == 'refs/heads/main'
+    # Off until Lub approves the Radar launch (2026-11-06); remove the RADAR_LIVE check then.
+    if: github.ref == 'refs/heads/main' && vars.RADAR_LIVE == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     # Same lock as deploy-finila.yml, so a data upload never overlaps a site deploy.
