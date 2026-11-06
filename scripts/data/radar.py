@@ -314,6 +314,9 @@ def compute(d, cache):
     obs = cache(d["fred"])
     if i in ("fed-balance-sheet", "ecb-balance-sheet", "m2-money-supply"):
         lv = obs[-1][1]
+        if i in ("fed-balance-sheet", "ecb-balance-sheet"):
+            # Levels in trillions for the combined money chart (Fed, ECB, bank reserves; Lub 2026-11-06).
+            d["levels"] = [[k, round(v / 1e6, 3)] for k, v in monthly(obs, "2003-01")]
         if i == "fed-balance-sheet":
             d["note"] = f"Total assets ${lv / 1e6:.2f} trillion."
         elif i == "ecb-balance-sheet":
@@ -370,6 +373,8 @@ def main():
                        amber=d["amber"], red=d["red"], light=light(d, v))
             if d.get("note"):
                 row["note"] = d["note"]
+            if d.get("levels"):
+                row["levels"] = d["levels"]
             print(f"OK   {d['id']}: {row['display']} ({dt}) {row['light']}")
         except Exception as e:
             failed.append(d["id"])
