@@ -180,8 +180,8 @@ shares in issue for 551 companies (data/shares.json)
 annual figures by hand for 613 companies (data/financials.json)
 Wikidata by ISIN/LEI: labels for 1714 of 3830 keys
 sector found for 777 of 1915 without a Wikidata industry: {'wikidata': 352, 'bank': 70, 'name': 355}
-earnings per share moved by powers of ten for 37 companies, dropped for 10 (checked against the price)
-shares in issue from the annual report for 2004 more companies
+earnings per share moved by powers of ten for 38 companies, dropped for 10 (checked against the price)
+shares in issue from the annual report for 2005 more companies
 revenue line set by hand for 1 companies (data/fixes.json)
 shared ISINs taken from 0 companies (kept by the larger one)
 hand-checked fixes for 141 companies (data/fixes.json)
@@ -203,7 +203,7 @@ Deutsche Telekom                   DE DTE      Communication          2025-12-31
 Allianz                            DE ALV      Financials             2025-12-31 rev€=113174.0 ebitda=None fcf=None roe=16.9 F=None None
 Nestlé                             CH NESN     Consumer Staples       2025-12-31 rev€=97913.9 ebitda=17304.0 fcf=11377.0 roe=27.5 F=None None
 Equinor ASA                        NO EQNR     Energy                 2025-12-31 rev€=94852.1 ebitda=37670.0 fcf=5977.0 roe=12.5 F=5 11010-1-1
-Ahold Delhaize                     NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
+Ahold                              NL AD       Consumer Staples       2025-12-28 rev€=92352.0 ebitda=7275.0 fcf=4425.0 roe=15.9 F=7 111110101
 AXA                                FR CS       Financials             2025-12-31 rev€=91139.0 ebitda=None fcf=None roe=20.8 F=None None
 Tesco PLC                          GB TSCO     Consumer Staples       2026-02-28 rev€=88391.1 ebitda=4880.0 fcf=2240.0 roe=15.6 F=5 11-1-011-
 Carrefour Group                    FR CA       Consumer Staples       2025-12-31 rev€=84025.0 ebitda=None fcf=None roe=2.9 F=6 110110101
