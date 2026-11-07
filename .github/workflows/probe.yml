@@ -15,11 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: STORI (FSMA, Belgium)
+      - name: STORI script (FSMA, Belgium)
         run: |
           UA='FINILA data refresh (finila.com)'
-          for u in https://www.fsma.be/en/stori https://www.fsma.be/robots.txt; do
-            echo "=== $u"; curl -sSL -A "$UA" -m 60 -D - "$u" -o page.html | grep -i '^HTTP\|^location' || true
-            grep -oiE '(href|src|action)="[^"]+"' page.html | grep -viE '\.(css|png|svg|gif|ico|woff2?)|/sites/default/files/(css|js)' | sort -u | head -150
-            [ "${u##*.}" = txt ] && cat page.html
-          done
+          curl -sSL -A "$UA" -m 60 https://www.fsma.be/modules/custom/fsma_tools/modules/js/fsma_stori.js -o s.js
+          wc -c s.js
+          echo "=== URLs / endpoints"
+          grep -oE '["'"'"'`][^"'"'"'` ]*(/api/|/stori|json|ajax|/en/|/fr/|/nl/|https?://)[^"'"'"'` ]*["'"'"'`]' s.js | sort -u | head -80
+          echo "=== fetch/axios calls"
+          grep -oE '(fetch|axios[.a-z]*|\$http[.a-z]*|XMLHttpRequest|open)\([^)]{0,200}\)' s.js | head -40
+          echo "=== head"
+          head -c 6000 s.js
