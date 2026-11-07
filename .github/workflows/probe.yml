@@ -15,20 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: STORI API (FSMA, Belgium)
+      - name: bpost 3Q26 release text (FSMA STORI)
         run: |
-          UA='FINILA data refresh (finila.com)'
-          curl -sSL -A "$UA" -m 60 https://www.fsma.be/en/stori -o p.html
-          API=$(grep -oE '"vueToolsApi":"[^"]+"' p.html | head -1 | cut -d'"' -f4 | sed 's#\\/#/#g')
-          echo "API=$API"
-          B="$API/api/v1/en/stori"
-          curl -sS -A "$UA" -m 60 "$B/document-type" -o types.json; echo "=== types"; head -c 4000 types.json; echo
-          sleep 30
-          curl -sS -A "$UA" -m 60 "$B/companies/abbreviated-name" -o comp.json; echo "=== companies"; wc -c comp.json; python3 -c "
-          import json; d=json.load(open('comp.json')); print(len(d)); print(d[:3]); print([c for c in d if 'post' in json.dumps(c).lower()])"
-          sleep 30
-          ID=$(python3 -c "
-          import json; d=json.load(open('comp.json')); print(next((c.get('companyId') or c.get('id')) for c in d if 'bpost' in json.dumps(c).lower()))")
-          echo "bpost id=$ID"
-          curl -sS -A "$UA" -m 60 -H 'Content-Type: application/json' -H 'Origin: https://www.fsma.be' -H 'Referer: https://www.fsma.be/en/stori' -d "{\"startRowIndex\":0,\"pageSize\":15,\"sortDirection\":\"Descending\",\"companyId\":\"$ID\"}" "$B/result" -o res.json
-          echo "=== result"; python3 -c "import json;d=json.load(open('res.json'));print(d.get('resultCount'));print(json.dumps(d.get('storiResultItems',[])[:6],indent=1)[:9000])" || head -c 1500 res.json
+          pip install -q pypdf
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 120 'https://webapi.fsma.be/api/v1/en/stori/download?fileDataId=473b78cf-ca3a-4786-b1dd-8c7eb96a67b4' -o r.pdf
+          python3 -c "
+          from pypdf import PdfReader
+          r = PdfReader('r.pdf'); print(len(r.pages), 'pages')
+          for i, p in enumerate(r.pages[:14]):
+              print('=== page', i + 1); print(p.extract_text())"
