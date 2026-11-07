@@ -154,7 +154,10 @@ def clean(years):
 def main():
     comp = json.loads((ROOT / "js/companies.json").read_text())
     rows = [dict(zip(comp["fields"], r)) for r in comp["rows"]]
-    leis = sorted({r["lei"] for r in rows if r.get("origin") is None and r.get("source", "") and "filings.xbrl.org" in (r.get("source") or "")})
+    # Also the companies whose newest year was copied by hand (filings.xbrl.org lags behind for them):
+    # their older years still come from the official ESEF reports.
+    leis = sorted({r["lei"] for r in rows if (r.get("origin") is None and "filings.xbrl.org" in (r.get("source") or "")) or
+                   (r.get("origin") == "hand" and len(r.get("lei") or "") == 20)})
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
     if cache.get("_v") != CACHE_VERSION:
         cache = {"_v": CACHE_VERSION}

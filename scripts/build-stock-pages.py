@@ -164,11 +164,27 @@ def add_history_figures(rows):
     except (OSError, ValueError):
         return
     hist.update(PREVIEW.get('history') or {})
+    # Companies without ESEF reports that file 10-K / 20-F reports with the SEC (scripts/data/sec_history.py).
+    try:
+        for lei, h in json.loads((SRC / 'data' / 'sec-history.json').read_text(encoding='utf-8')).items():
+            if len((hist.get(lei) or {}).get('years', {})) < len(h['years']):
+                hist[lei] = h
+    except (OSError, ValueError):
+        pass
     for c in rows:
         h = hist.get(c['lei'])
-        if not h or c.get('origin') is not None or h['currency'] != c.get('currency'):
+        if not h or c.get('origin') not in (None, 'hand') or h['currency'] != c.get('currency'):
             continue
         years = {y: dict(v) for y, v in h['years'].items()}
+        # Figures copied by hand from a newer annual report than the ESEF archive has (LVMH, bpost ...):
+        # that year joins the official years from the ESEF reports (Lub 2026-11-06: same page as Novo).
+        py = (c.get('periodEnd') or '')[:4]
+        if c.get('origin') == 'hand' and py and py not in years and py > max(years):
+            # Only lines defined the same way everywhere: debt, cash and EBITDA are drawn differently by
+            # data sites than in the report (LVMH: net debt 2.5bn in ESEF 2024, 23bn with leases by hand).
+            years[py] = {k: c[k] for k in ('revenue', 'operatingProfit', 'netIncome', 'operatingCashFlow',
+                                           'dividendsPaid', 'equity', 'assets', 'eps') if is_num(c.get(k))}
+            years[py].update(end=c['periodEnd'], source=c.get('source'), hand=True)
         # Share splits: an old report states EPS on the old share count (Novo Nordisk 2:1 in 2023).
         # Where profit / EPS gives a share count about 2, 3, 4, 5, 10 or 20 times off the newest
         # year, the old EPS is put on today's share basis, as companies restate it themselves.
@@ -485,8 +501,11 @@ def history_html(c):
             y0 = base - bh if v >= 0 else base
             cls = 'sp-bar-neg' if v < 0 else 'sp-bar-last' if i == len(vals) - 1 else ''
             rects += f'<rect x="{x:.1f}" y="{y0:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="2" class="{cls}"><title>FY {ys[i]}: {amt(v)}</title></rect>'
-        last = next((v for v in reversed(vals) if is_num(v)), None)
-        return (f'<figure class="sp-mini"><figcaption><span>{label}</span><b>{amt(last)}</b></figcaption>'
+        li = next((i for i in range(len(vals) - 1, -1, -1) if is_num(vals[i])), None)
+        last = vals[li] if li is not None else None
+        # The newest value shown is labelled with its year when the newest year lacks this line.
+        when = f' <small>FY {ys[li]}</small>' if li is not None and li != len(vals) - 1 else ''
+        return (f'<figure class="sp-mini"><figcaption><span>{label}</span><b>{amt(last)}{when}</b></figcaption>'
                 f'<svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="{label}, FY {ys[0]} to {ys[-1]}">{rects}</svg>'
                 f'<div class="sp-mini-axis"><span>FY {ys[0]}</span><span>FY {ys[-1]}</span></div></figure>')
     keys = [('Net income', 'netIncome'), ('Equity', 'equity'), ('Dividends paid', 'dividendsPaid')] if c.get('financial') else \
@@ -504,7 +523,7 @@ def history_html(c):
     tiles_html = ''.join(f'<div><span>{a}</span><b>{b}</b><small>{d}</small></div>' for a, b, d in tiles)
     restated = any(years[y].get('restated') for y in ys)
     return f'''<section class="sp-card" id="history"><h2>{len(ys)} years of results</h2>
-      <p class="sp-sub">Each year from the company’s {"10-K annual report filed with the SEC" if c.get("sec") else "ESEF annual report"}; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
+      <p class="sp-sub">Each year from the company’s {"10-K annual report filed with the SEC" if c.get("sec") else "annual report filed with the SEC (10-K or 20-F)" if all("sec.gov" in (v.get("source") or "") for v in c["years"].values() if not v.get("hand")) else "ESEF annual report"}{"; FY " + ", FY ".join(y for y, v in sorted(c["years"].items()) if v.get("hand")) + " copied by hand from its published accounts, as ESEF does not have it yet" if any(v.get("hand") for v in c["years"].values()) else ""}; click a year to open it {chip("r", "Reports")}. Amounts in {unit}; small figures: change on the year before.</p>
       {f'<div class="sp-tiles">{tiles_html}</div>' if tiles_html else ''}
       {f'<div class="sp-minis">{minis}</div>' if minis else ''}
       <div class="sp-scroll"><table class="sp-table sp-hist-table"><tr><th></th>{head_}</tr>{body}</table></div>
@@ -980,7 +999,8 @@ def add_report_quotes(rows):
         return
     for c in rows:
         q = quotes.get(c['lei'])
-        if q and q.get('items'):
+        # An outlook from a report older than the page's figures is out of date (hand-copied newer year).
+        if q and q.get('items') and (q.get('period') or '') >= (c.get('periodEnd') or ''):
             c['quotes'] = q
 
 
@@ -1621,6 +1641,45 @@ CAPTIVE_FINANCE = {
 }
 
 
+# Where an official filing lives: ESEF reports (filings.xbrl.org), SEC filings, or a company's own report link set by hand.
+OFFICIAL = ('filings.xbrl.org', 'sec.gov')
+COVER = [('price', 'Price', lambda c: is_num(c.get('price'))),
+         ('mcap', 'Market value', lambda c: is_num(c.get('mcap'))),
+         ('sector', 'Sector', lambda c: bool(c.get('sector'))),
+         ('figures', 'Annual figures', lambda c: is_num(c.get('revenue')) or is_num(c.get('netIncome'))),
+         ('official', 'Figures from an official report', lambda c: any(d in (c.get('source') or '') or d in ((c.get('years') or {}).get(max(c.get('years') or {'': 0}), {}).get('source') or '') for d in OFFICIAL)),
+         ('history', '3+ years of history', lambda c: len(c.get('years') or {}) >= 3),
+         ('about', 'What the company does', lambda c: bool(c.get('about'))),
+         ('outlook', 'Outlook from a report', lambda c: bool(c.get('quotes') or (c.get('latestReport') or {}).get('outlook'))),
+         ('report', 'Newest quarterly report', lambda c: bool(c.get('latestReport'))),
+         ('news', 'Company announcements', lambda c: bool(c.get('news')))]
+
+
+def coverage(rows):
+    """Which parts of the company page template each company fills (Lub 2026-11-06: check regularly
+    that every page has what it should). Writes data/page-coverage.json and data/page-coverage.md."""
+    pub = [c for c in rows if c.get('origin') != 'listing']
+    per = {c['lei']: [k for k, _, f in COVER if not f(c)] for c in pub}
+    by_c = defaultdict(list)
+    for c in pub:
+        by_c[c['country']].append(c)
+    pct = lambda cs, f: round(100 * sum(1 for c in cs if f(c)) / len(cs)) if cs else 0
+    lines = [f'# Company page coverage, {date.today().isoformat()}', '',
+             f'{len(pub)} public company pages. Share of pages that show each part of the template.', '',
+             '| Country | Pages | ' + ' | '.join(n for _, n, _ in COVER) + ' |', '|' + '---|' * (len(COVER) + 2)]
+    for ctry, cs in sorted(by_c.items(), key=lambda x: -len(x[1])) + [('All', pub)]:
+        lines.append(f'| {ctry} | {len(cs)} | ' + ' | '.join(f'{pct(cs, f)}%' for _, _, f in COVER) + ' |')
+    big = sorted(pub, key=lambda c: -(c.get('mcap') or c.get('revenueEur') or 0))[:300]
+    gaps = [c for c in big if set(per[c['lei']]) & {'price', 'mcap', 'sector', 'figures', 'official', 'history', 'about'}]
+    lines += ['', '## Largest companies with gaps (top 300 by size)', '']
+    lines += [f'- {c["name"]} ({c["country"]}): missing ' + ', '.join(n for k, n, _ in COVER if k in per[c['lei']]) for c in gaps[:80]]
+    (SRC / 'data').mkdir(exist_ok=True)
+    (SRC / 'data' / 'page-coverage.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    (SRC / 'data' / 'page-coverage.json').write_text(json.dumps({'updated': date.today().isoformat(), 'missing': per},
+                                                               separators=(',', ':')), encoding='utf-8')
+    print(f'Coverage: {pct(pub, COVER[5][2])}% of pages with history, {len(gaps)} of the 300 largest have gaps (data/page-coverage.md).')
+
+
 def main():
     updated, price_day, rows = companies()
     for c in rows:
@@ -1684,6 +1743,7 @@ def main():
     (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
                                      ''.join(f'  <url><loc>{esc(u)}</loc><lastmod>{today}</lastmod></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
     print(f'Built {len(rows)} company pages in {out}, sitemap with {len(urls)} addresses.')
+    coverage(rows)
 
 
 if __name__ == '__main__':

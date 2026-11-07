@@ -1,607 +1,122 @@
-2051 companies with ESEF reports, 2051 to check
-  ! https://filings.xbrl.org/api/entities/LAXUQCHT4FH58LRZDY46/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/MINO79WLOO247M1IL051/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500F7JLTX36OUI695/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300E9PC51EN656011/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900JI1GG6F7RKVI53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HGV012CNC8JD22/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/259400A8SZP10GB5IB19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300EEJH4FEPDBBR25/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500K5PTPSST86UQ23/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800FKA5MF17RJKT63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500UIC89GT3UL7L24/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300SOSI58J6VIW052/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  50 companies read
-  ! https://filings.xbrl.org/api/entities/549300W9JLPW15XIFM52/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900FNDVTQJOVVPZ19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8R95QZMKZLJX5Q2XR704/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493009GY1X8GQ66AM14/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/96950032TUYMW11FB530/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138003319Y7NM75FG53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300UINV5RINHGMG07/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900CLC3WDMGI9VH80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9598000ANNAL42UJ7X28/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300YECS8HKCIMMB67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300ZWF2ZJDD9EOR96/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  100 companies read
-  ! https://filings.xbrl.org/api/entities/549300Y3HHZB1ZGFPJ93/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800YUBJMZYR1SNG35/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299001O0WJQYB5GYZ19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138001E12GWLLDQQF16/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300XSXUZ1I19DB105/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299008ZUAXN43LVZF54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/KGCEPHLVVKVRZYO1T647/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9695004GI61FHFFNRG61/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500XYIJUGXAA5QD70/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/7437000ZP669LKUTZ738/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9695000EHMS84KKP2785/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800YPC42DYBKVPF97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299006UDSEJCTTEJS30/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300DV5KJ23OKVTW34/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493001EZOOA66PTBR68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  150 companies read
-  ! https://filings.xbrl.org/api/entities/635400RXXHHYT1JTSZ26/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800HSSNXWRKBK4N60/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300IM1QSBY4SLPM26/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800UK7ZRLY2K1X530/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300PZS8G8RG6RVZ52/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600A0C9AFC1F2A709/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800JEZBUPZKWJGF49/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300YPSNTXR4ZHSR98/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300UCKT2UK88AG251/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500LYSYS0E800SQ95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300CAAOUTT4QDOZ16/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500TEM53I0U077B74/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300072P3J1X8NZO35/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930063C6K2TNFL6H10/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900ZNZDQL6OWQH623/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  200 companies read
-  ! https://filings.xbrl.org/api/entities/5493009YRUJJDCFF0R80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300WJFW6ILNI4TA80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005308793/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800XM8WOFLY6VPC92/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800JY7VJFS2OOX355/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800D9O7FUQDH83V62/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500UX71LCE8MAY492/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300NBN0URT3RA3Y54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800XKAB9VNAVN9425/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005491250/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800QGNIWTXFMENJ24/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299007OWYZ6I1E46843/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  250 companies read
-  ! https://filings.xbrl.org/api/entities/549300EF0CDEQZBMA096/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900T6WNZXD2R3JW38/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300FPFPQPKI3PJV37/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300CJMQNCA0U4TS33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800DIFN7NR7B97A50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493007050SJVMXN6L29/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900NN7SOJ5QG82X67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500U1DQN70VMJ9P45/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300ZQH0FIF1P0MX67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300IEUH2FEM2Y6B51/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXINVS13/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300LDZLPU51XOSK43/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800KGF4EFNUQKAT69/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300PZZEUVH08H4G75/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800RPBXRETY4A4C59/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  300 companies read
-  ! https://filings.xbrl.org/api/entities/529900MTJPDPE4MHJ122/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493006R4KC2OI5D3470/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXJ2JK50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800XY16PAWG2PAD14/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800VDC1BKJEZ8PV53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800SB6EOB8SSK9W63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXJ9HK73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800NW6DLQT89M3240/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138005RN5XYLTF8G138/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900UPX0OEHTKB9Y44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493006G5O9JP185PU76/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/894500L53AVOFQK7T710/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  350 companies read
-  ! https://filings.xbrl.org/api/entities/724500OUE3PCA809DZ79/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800NS2XXVRYS7WP40/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138002W9Q21PF751R30/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800U7P9GOIRKCTB34/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXGDBK67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900BPSFZS6O3A9R04/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9695008SHP3XTT9QCM25/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493006GFBLNB3Y0Y789/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/259400T6ZDQIMDBGDN42/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800LM1RW3PKJ4A296/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008K14474WPKZ244/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/ZYXJDNVM2JI3VBM8G556/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800MR6DRHCJIV8113/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800S8OBDOZMCMUW34/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800HU63CWV5J8YK95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  400 companies read
-  ! https://filings.xbrl.org/api/entities/635400XINPMOREM6Y125/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800B3ZUTDOZYVJB41/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400XJGDRCVHCKH516/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HNGOW85KIOH584/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500UR00DF63I0VH67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900D69KFL8IAP8Q63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138004WCNBFJEEOXV26/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900JY9ZBGUXGRKQ86/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/52990080SH3454F0QE68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300UWB1AIR85BM957/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800IBJPW3SE2RA350/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/74370029VAHCXDR7B745/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300EW2KM4KROKQV31/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/7245000R8GNBSDTSZ396/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8156001A772766DCAA71/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  450 companies read
-  ! https://filings.xbrl.org/api/entities/529900M13GM4VSTE6W80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300MN30TBRLYN3465/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493004BCIKYU1YL3H63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900EBHTYGLA6PGP77/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300E0O2PB52T65X22/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/636700G5993BBAFDYD02/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/0TMBS544NMO7GLCE7H90/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299002PSXXMVHB26433/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600B5D89DAB660021/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930044O54BK617EP80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493006MN6OH67U2YI74/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800WG8RSE45I3MF22/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  500 companies read
-  ! https://filings.xbrl.org/api/entities/549300GTDOPCSETABE37/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700DOHLQIENKTC391/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300AEVNZRHYI5HV24/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800SNEJL2ZM642D98/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700YQIO8Y4L4WKR40/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900V9DJVZE2LVED66/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138003SPYWGAITNFY17/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700XJC24THUPK0S03/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500UL634GFV1KYF10/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800PKIJBZ2EDTKC88/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005684765/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2549003YWC1DW6LALB09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/96950034TTGHHKKEN547/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299003KG4JS99TRML67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900BIDQN2AOKV6N08/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  550 companies read
-  ! https://filings.xbrl.org/api/entities/54930085MH6IRQ1JP227/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138001H6FCSZBP26351/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138006BSHJVCD9SR489/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493005OLOCYXGTC7E83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300FQ2ILBH7DJ6I45/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900G4A1IKOKC22K56/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/81560066183FE361C071/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9695001J8OSOVX4TP939/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800Q6RP3ZJ2CZR962/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005225955/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138003A3ISGQZBOWI83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900IIODYNYAZ2ID26/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900FSU45YYVLKB451/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2221003G8BRH3CPABK72/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900J8VSH14TP5VD23/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  600 companies read
-  ! https://filings.xbrl.org/api/entities/5067007NW6550481FH64/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800FQZ6YAVHJPVE12/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300NCMRGIBJYUOE57/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300XHHOGBOERKU333/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400DPX6WP2KKDOA83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/6488UNV33KXZ9498L870/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300G0TJCT3K15ZG14/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008S5FL78ITZRN66/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500FULTKJYIRIAT87/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600CD933CB2F89862/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300GU5OHTR1T5IY68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700Y8QWC1FT6R0F34/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  650 companies read
-  ! https://filings.xbrl.org/api/entities/9695002FT7GGI3CKKJ14/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ESPH77GHBUH556/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900SGCREUZCZ7P020/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299008W2A69WX355710/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300QPTTHTI8KCH937/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300IUR8Q7Y44KBL02/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300CSLHPO6Y1AZN37/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493003UDPENPUQBJH65/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800LAQZXPRIZUEH50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HOEUKTVLRKQQ57/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/7437000IQJS6ZC1FR041/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299000DUMZ99SBBX121/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493002TF62S16D67T17/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493006GUPIIWUHPXP78/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300S5CCFESE4C6Y07/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  700 companies read
-  ! https://filings.xbrl.org/api/entities/549300OBIOEC0J5XEB68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXH5VC37/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800JFY96QF028V484/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900H9GYEOPOXFNN04/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXHCTC69/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138001VSY1B4U9JLM82/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800Z611RK76NEVF32/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900PG9O7YFYX5UM88/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/52990007AXNSS4PNX352/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXG9GO07/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600115DA6E507AE33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/222100KIY63U7PV8N251/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  750 companies read
-  ! https://filings.xbrl.org/api/entities/815600FE9E92D9D6C309/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800FXZQY7U3P1G969/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800JMZDORXCMKFW06/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/81560012F663E89E7085/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXJGFK95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800U9A54VQJ5P2J41/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800TJGBW5VFHQEV54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930070F55O6PDFDF97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900N7I4DSM16GF659/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800U93SZC44VXN635/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300X0C14ZL28N1L09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380025AWPR781CY104/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  800 companies read
-  ! https://filings.xbrl.org/api/entities/549300UWBMWYM7YQRF97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300ZG20XRKSRKZ238/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800CQXEA3W1YWXZ31/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900MZ8Y3QGPDF6815/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138001JXGCFKBXYB828/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700IE9NQGF9YZAI97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300E24LG2Z7KCFQ23/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/64884I31A8TH8GCM0203/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300O1V2ZWY6W9GZ14/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800XRFXQ1KEWACW80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300EWC06TYV07XE53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800C7ACOFMRCQQW76/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600F231566A38BC43/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9695004ANBJMIMZEYY03/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HUR75YN61F4108/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  850 companies read
-  ! https://filings.xbrl.org/api/entities/815600DFC29A91FF0C71/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700UJUT6FWHBXPR69/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380064K7N2W7FD6434/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8156007833AB49068789/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900CD7HSJ1CZS7089/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500ZPQQLG72TQND21/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500JZSD8O83SPU920/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800413RZM6IS8GM09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800BBUUWVDH9YI827/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXH53K17/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300O7SBDSNG4IB582/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300TMC6BYESPQ7W85/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900QI445M00DK4407/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/25490002T5TRM5T6US82/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300TD8XXBS8J3TF85/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  900 companies read
-  ! https://filings.xbrl.org/api/entities/96950023L46VUM1L8555/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930038JVQ3CMTEO084/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493006164JBW2E60O73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138006LKVGN16PTVA73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700JMXCC11CRJCS71/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900LVB0R279MUX376/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493000YR2B83SILCJ50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800BBFZK4W4P98U76/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ZKS5B1M3YXVV76/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138007CEIRKZMNI2979/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300AVDXS5RAHMDK92/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005204809/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  950 companies read
-  ! https://filings.xbrl.org/api/entities/549300DL001YAEQZA069/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/96950036OIHAEGNGJ871/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800CR1BA43ZK65T94/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400ETHWP1EKJMDO16/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008FABJXP4HUOK53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/984500F5FB0E4FEBED17/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300QOHUWQMD9G3757/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800WGA3YSJC1YOH73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300ZH4K23FNK8LI26/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800GZ4965BPRA1L87/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/222100DCZBOWV5DZ8372/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500SFK53FPNM68L95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500V8D4IPLZ5TWT46/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493003TBEWGBIEG1X97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800DH741LZWIJXP78/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1000 companies read
-  ! https://filings.xbrl.org/api/entities/959800M75M81U0Y2UX24/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700EIG9TDB5QNZS09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/81560096E0DA76818C96/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300P7312749LJS754/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900C08RCMXVZYFY97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300KM8QVF7WR40664/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800LOQ5NSWNWXNH64/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493004UROJFQSP6RC85/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980078NDTDLTDH6130/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800QWKZ45ZQC2AV58/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800T4VM5VR3C7S706/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380056PDNOTWERG107/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1050 companies read
-  ! https://filings.xbrl.org/api/entities/213800PO787VGL2S3704/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/7437004GENTTQHMNQ407/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800RDLQSVI1IFPZ11/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700V3I7CLI3DJ8L62/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800WGUAJ7RBWZRY77/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXIEMG82/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700F6CLX8JMYDEP21/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800S1GVQNXQ15K851/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HBZGNQOTYZPJ54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/7437002ULTBOWQQOXL69/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500356FAUM2X41Q59/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800NNT42FFIZB1T09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800B6P256B5XN8D32/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300ZH65CJBOHR2X44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700JIW1LAUZDH9012/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1100 companies read
-  ! https://filings.xbrl.org/api/entities/8156005E235E751B6662/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300YU7003VHQV3J57/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300Y0OI2WVUNHLC33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500QLFWTRHA3K0440/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700G00629V99PE435/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800JPIP5BZKFOHK40/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800WNI4X4LCFHV831/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300EMZ2B768S85S50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493004DM8FGIY6QKF37/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800A357TKB2TD9U78/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930082SM8KO7LCER77/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493003RPM8YGS44WV97/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005772356/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500A4R8HLXMZQDT80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/636700CG8F631WFEUG14/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1150 companies read
-  ! https://filings.xbrl.org/api/entities/549300G5JY05P4PLS906/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800HKRFK8PNUNV581/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800BFLX55D42JQM05/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/222100KIDRQ6NNVYUH61/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300OBCTAOBEEVN513/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800CGP4AKXSLWWS08/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800HHEE9W4TZA8627/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138003MVCWU16PEDX59/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700ZKOMTB7X00OW54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXGQFS44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700OD4QRWKZ4ODC98/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138006E39QX7XV6PP21/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800KCP1IDX51ZHE47/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/747800V0634Q77II6N67/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500N24EZ7HPKJIV79/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1200 companies read
-  ! https://filings.xbrl.org/api/entities/549300TYFVYGS0JFWM28/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/74370016PW2V4W02LX91/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800PFUQT4HHFYZJ63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8156005DBE6CA468DD09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300MYLGD0VKNGTJ47/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300TY1ZF7FQEF0552/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300BPGCCN3ETPQD32/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/9676000V0KP4AUXNSZ66/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600D581F8552C4F54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300JCAQFRMWSL7M59/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXG3AG53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900MTLT34HRR1LT15/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1250 companies read
-  ! https://filings.xbrl.org/api/entities/213800RWZMK3ARHMUN52/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600D3D12A6EAC9004/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300DDKLXYLLO4N524/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300VNTTR22XK8DM54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500FYLNRXCJ348W66/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800KA972GUP1B6I78/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400S8ULWD83POUJ40/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800HTIKPQV98RA653/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800O3Z6ZSDBAKG321/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/391200WHND7OZEFNNL77/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/7245009QH646WM76PR25/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/315700YHFON9RJOPCK19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900RB20XIQK6NOQ50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600B52696027B9056/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800HBGZWHX69PE419/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1300 companies read
-  ! https://filings.xbrl.org/api/entities/549300MLJ046XFQNVH42/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300DYEHYCGPBE2016/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800IQHG9H6OHKI983/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/984500AEEH2D2AK42C11/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900CPC3UZMJ3DTN75/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300WMZQS7HLNYQB09/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/097900BGMP0000061061/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HI1JEY110HXM08/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900IUBZBZ0HXFJ114/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXJOX483/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/6488IGA378IE710UU959/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493008GYHJL9PWTC395/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1350 companies read
-  ! https://filings.xbrl.org/api/entities/549300UH2JD85PIJOK89/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/636700F2ZNFEE1S05195/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8156009F95C37526C483/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493008RTPUAOFW3SX33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXFK0040/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500YT2CGGAD8YNM04/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008663P5FHPGZV74/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXG8OW35/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/48510000P2S3LHJPX414/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500UDH342QLTE1M42/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380051TUVZ3KYK5G44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300PSDFYO1ZBFO413/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1400 companies read
-  ! https://filings.xbrl.org/api/entities/549300HR2P6D0PNRI535/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXFQY092/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800RYE59K9CKR4497/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300ZUNJ5HNG264Q34/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/984500DB3D0E9BCE1C41/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/984500E0A1C4DLBA3878/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300XO4L9XNOCFCZ84/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300Q8B2D2AE8GCW21/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/48510000B3IAQZ9WMI43/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ATZVDWWKJ8NI47/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/48510069AVGK9P61AL54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900MBH2PPLPLX3782/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700YGE1GQ2DNT5T52/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800RCPA4USH4RFB78/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900E1K2W6SBYF8W02/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1450 companies read
-  ! https://filings.xbrl.org/api/entities/549300P2OB7L255PF765/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/636700WDI7YVR5F6V241/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800QFUT9HM23TCH84/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/743700GSL41H2DXZY963/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXHGO849/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600EE82868C20A274/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800A53AOVH3FCGG44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493004YMVUQ9Z7JGZ50/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300WY6GDD7BBLLN45/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800GFTYPUAFKIRK95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300B8BGP6YLHH0K80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800OR6IIJPG98AG39/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1500 companies read
-  ! https://filings.xbrl.org/api/entities/213800CEKQI53PNR8169/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/95980020140005821826/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380071RDS9FUSVJ373/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300S5UFTTWALAFE19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138003J1IUF4RSQ4K72/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800JYQQ2XERWAWQ19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299006ETW1JYNUWJC79/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493002UZIVLMZ8H6757/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXI7OG55/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900D1PHII0FANVY07/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380028AUYWGMYXQA57/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900N708O043JCCO23/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500E5WW4731JJ4G46/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300H3W4IIDNIV6I38/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800Q5DGH7949VXP44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1550 companies read
-  ! https://filings.xbrl.org/api/entities/54930064FHDVK3N8U251/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800H2TUTRESH2BF91/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900QG5FX1GX610F96/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300DGJB24U1VKHC98/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800A9E3DB29NTMU72/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300365FORUXLUWL17/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800F8DEE555Q88R46/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900UKQHWYZJD22017/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXIMC884/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493004YF5D7Z612Z822/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300JUGBT2EH17X827/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/894500N14T2GUDX0FL66/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300WZEEMSSMZ1MP04/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138006G2GQXN273W598/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300RZCKGWRUBPMY22/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1600 companies read
-  ! https://filings.xbrl.org/api/entities/984500EA44B5J4A96367/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/6354002DAQXPJIZGYH13/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500RTYSRSTZAJCG72/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8156002CEF151B2FAE86/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800LVPDNO2Z9T9I39/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493005UBN5S7Y6ROI22/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8945004QWJYYQF6V7Z56/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800RBGXH4RKC5NF02/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HXIG611R7YBT33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800TYYFXKYF3V2A23/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138006PQV9F72H17783/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900WSOSCVTSE4F530/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1650 companies read
-  ! https://filings.xbrl.org/api/entities/2138007PZJFATXWUTS29/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300NK4AB8OUEX1F54/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500ZL79KYH9PTYP78/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300BXVB4XRM8WSC73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299000AUE9M1W13ZQ36/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800GE3FA4C52C1N05/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800JSIBTMDYPPKQ68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800Q5L7DJW9MNP897/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800T424TYEZ5PLE75/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380057G5WL3YANMJ18/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800VQO9FUG4PZMP73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ZY2C2TI2C5WQ61/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600BACF507EC30687/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500PDJW8N0FSGGK69/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500YEQRY2T8Z7W336/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1700 companies read
-  ! https://filings.xbrl.org/api/entities/2138002SS843EUABKP94/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380031LQE8CU8NU843/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/21380037Q91HU97WZX58/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138005O9XJIJN4JPN90/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138005PH7OJRCRPUD88/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138005QFXYHJM551U45/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008L93GYU5GN6179/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008LJU6WFQWOXJ73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/2138008NSD1X1XFUK750/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800AOOAQA5XQDEA89/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800AX3FHPMJL4IJ53/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800BNN7UN97NVP509/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800DBQIB6VBNU5C64/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800E8UQS1KA32YD39/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800EDIKU4Z4I1R529/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1750 companies read
-  ! https://filings.xbrl.org/api/entities/213800HR3R4WFICYFN46/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800HVOFXRXVEGDN62/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800HZ69B3QHCUGX36/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800KFNMVI8PDZX472/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800KY94NQYH4IZU83/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800L6X88MIYPVR714/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800MWOA6W221PI432/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800MYKAWRRE9C9U05/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800NFARY38KGRAH47/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800QBPS3L89U9TZ44/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800QQF8O18CMJPW43/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800QFQIHO7KG2P786/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1800 companies read
-  ! https://filings.xbrl.org/api/entities/213800U66STYS4VQZH68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800UDP142E67X9X28/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800USNX47LQFQQN20/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ZBKL9BHSL2K459/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ZLZVEPOS7YID88/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/213800ZJ9F2EA3Q24K05/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900P4SISIWOR9RH34/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900D88MYGZ7JD5P39/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/254900QIETDP1T932G86/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5299004NWV90GIWSWQ04/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/52990071WX2UW1WNHC16/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900B9P29R8W03IX88/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900Q2C3I7VCILLG45/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900RWC8ZYB066JF16/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/529900UGOPJNE0MU9N79/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1850 companies read
-  ! https://filings.xbrl.org/api/entities/5493000FHOCPRAERG577/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493000GMVR38VUO5D39/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493001BABFV7P27OW30/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930038LU8RDPFFVJ57/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300423T3ZCEZ1PP02/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/54930047C4A74IBXR037/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493007SJLLCTM6J6M37/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493007QXMCG0WPKFC96/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5493008FE9JCTSEEPD19/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300BV85TFYXK2Y635/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300CM6KSG2GY3HV62/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300D8G4NKLRIKBX73/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300GLLHHE80RQ2Y24/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300H8ZDTNCZ8PPJ25/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300HHFBWZRKC7RW84/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1900 companies read
-  ! https://filings.xbrl.org/api/entities/549300JK7HFOCP0U8K85/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300JNP3LA8FWLU630/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300KD3XGX3754UW61/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300P5VT8OMA17TJ33/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300PHFI20T3WJRO63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300P8N0P6KDGTJ206/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300T1EREIRH8ICX03/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300TK038P6EV4YU51/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300TJBPSNZ3DO6B42/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300W2PCC9TKJTB657/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300VWDGUX0WMJ1T79/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300WR4XOEI43K6S68/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  1950 companies read
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXFJ8876/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXFOMO31/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/5967007LIEEXZXFWCG26/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400CSEBJAYPUUFC95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400DTNHVYGZODKQ93/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/635400KNUVGJX3I1S518/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500NQKTWBNN3HIO61/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500JXEXUGEATP5L52/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/724500OHYNDT9OY6Q215/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/8156004B244AA70DE787/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600522538355AE429/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/815600A029117B20DD63/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  2000 companies read
-  ! https://filings.xbrl.org/api/entities/959800JRKSZ6YZD4EL80/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/959800K5R280DP2B5694/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/967600GFEYNJK2W4G048/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500D8TMNB184OJU95/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500EQZGSVHQZQE212/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500GFIL2Z81YKUM35/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500QZJBA9R36U9J48/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500TJ5KRTCJQWXH05/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/969500SHQITWXSIS7N89/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/J48C8PCSJVUBR8KCW529/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/JU1U6S0DG9YLT7N8ZV32/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/K8MS7FD7N5Z2WQ51AZ71/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/SI5RG2M0WQQLZCXKRM20/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/U4LOSYZ7YG4W3S5F2G91/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/RRAN7P32P0W0YY4XQW79/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  2050 companies read
-outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090, 'backlog': 434}; read 2051 this run
+2676 companies with ESEF reports, 60 to check
+  ! https://filings.xbrl.org/api/entities/YEH5ZCD6E441RHVHD759/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/KY37LUS27QQX7BB93L28/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/8ER8GIG7CSMVD8VUFE78/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/YEH5ZCD6E441RHVHD759/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/KY37LUS27QQX7BB93L28/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/8ER8GIG7CSMVD8VUFE78/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/YEH5ZCD6E441RHVHD759/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/KY37LUS27QQX7BB93L28/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/8ER8GIG7CSMVD8VUFE78/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/YEH5ZCD6E441RHVHD759/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/KY37LUS27QQX7BB93L28/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/8ER8GIG7CSMVD8VUFE78/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/YEH5ZCD6E441RHVHD759/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/KY37LUS27QQX7BB93L28/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/8ER8GIG7CSMVD8VUFE78/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/969500WESYQMQ1F2C272/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/IOG4E947OATN0KJYSD45/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/WOCMU6HCI0OJWNPRZS33/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/969500WESYQMQ1F2C272/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/Q9MAIUP40P25UFBFG033/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/549300U41AUUVOAAOB37/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/Q9MAIUP40P25UFBFG033/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300U41AUUVOAAOB37/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/969500WESYQMQ1F2C272/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/Q9MAIUP40P25UFBFG033/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300U41AUUVOAAOB37/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/969500WESYQMQ1F2C272/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/Q9MAIUP40P25UFBFG033/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300U41AUUVOAAOB37/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/969500WESYQMQ1F2C272/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000EWHDSR3MZWH98/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/Q9MAIUP40P25UFBFG033/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300U41AUUVOAAOB37/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000EWHDSR3MZWH98/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/529900QVNRBND50TXP03/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/E0JAN6VLUDI1HITHT809/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QVNRBND50TXP03/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000EWHDSR3MZWH98/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/E0JAN6VLUDI1HITHT809/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QVNRBND50TXP03/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/E0JAN6VLUDI1HITHT809/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000EWHDSR3MZWH98/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QVNRBND50TXP03/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/E0JAN6VLUDI1HITHT809/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000EWHDSR3MZWH98/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493007HIVTX6SY6XD66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QVNRBND50TXP03/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493007HIVTX6SY6XD66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PW78JIYOUBSR24/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/E0JAN6VLUDI1HITHT809/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300SZJ9VS8SGXAN81/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PW78JIYOUBSR24/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493007HIVTX6SY6XD66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300SZJ9VS8SGXAN81/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PW78JIYOUBSR24/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300SZJ9VS8SGXAN81/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493007HIVTX6SY6XD66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PW78JIYOUBSR24/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300SZJ9VS8SGXAN81/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493007HIVTX6SY6XD66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299005CHJZ14D4FDJ62/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PW78JIYOUBSR24/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PS9YW3YY29F326/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299005CHJZ14D4FDJ62/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300SZJ9VS8SGXAN81/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900EWEX125AULXI58/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PS9YW3YY29F326/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299005CHJZ14D4FDJ62/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900EWEX125AULXI58/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PS9YW3YY29F326/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900EWEX125AULXI58/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299005CHJZ14D4FDJ62/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PS9YW3YY29F326/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900EWEX125AULXI58/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299005CHJZ14D4FDJ62/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900JSFZ4TS59HKD79/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900PS9YW3YY29F326/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900JSFZ4TS59HKD79/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900EWEX125AULXI58/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300UDG16DOYUPR330/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299003QR1WT0EF88V51/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300UDG16DOYUPR330/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900JSFZ4TS59HKD79/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299003QR1WT0EF88V51/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300UDG16DOYUPR330/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299003QR1WT0EF88V51/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900JSFZ4TS59HKD79/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300UDG16DOYUPR330/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299003QR1WT0EF88V51/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900JSFZ4TS59HKD79/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000LKVGOO9PELI61/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300UDG16DOYUPR330/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000LKVGOO9PELI61/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5299003QR1WT0EF88V51/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/BN6WCCZ8OVP3ITUUVN49/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/529900Q0YED3805QXQ66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/BN6WCCZ8OVP3ITUUVN49/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000LKVGOO9PELI61/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900Q0YED3805QXQ66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/BN6WCCZ8OVP3ITUUVN49/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900Q0YED3805QXQ66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000LKVGOO9PELI61/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/BN6WCCZ8OVP3ITUUVN49/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900Q0YED3805QXQ66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/5493000LKVGOO9PELI61/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300VDIGTMXUNT7H71/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/BN6WCCZ8OVP3ITUUVN49/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900Q0YED3805QXQ66/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300VDIGTMXUNT7H71/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QBVWXMWANH7H45/filings?page[size]=100: HTTP Error 429: Too Many Requests
+  ! https://filings.xbrl.org/api/entities/529900QBVWXMWANH7H45/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300VDIGTMXUNT7H71/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QBVWXMWANH7H45/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300VDIGTMXUNT7H71/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QBVWXMWANH7H45/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/549300VDIGTMXUNT7H71/filings?page[size]=100: HTTP Error 404: NOT FOUND
+  ! https://filings.xbrl.org/api/entities/529900QBVWXMWANH7H45/filings?page[size]=100: HTTP Error 404: NOT FOUND
+outlook quotes for 866 companies {'target': 272, 'event': 2429, 'outlook': 1100, 'backlog': 435}; read 19 this run
 
 == Shell PLC (2025-12-31)
   [outlook] The fourth quarter 2025 dividend of $ 0.372 per ordinary share will be paid on March 30, 2026 , to shareholders on the register at February 20, 2026 , and represents an increase of 4% compared with the third quarter 2025 dividend.
@@ -641,7 +156,7 @@ outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090,
   [event] Developing existing partnerships, in November 2025, Stellantis and Contemporary Amperex Technology Co., Limited (“CATL”) announced an agreement to invest up to €4.1 billion to form a joint venture to build a large- scale lithium iron phosphate (“LFP”) battery plant in Zaragoza, Spain.
   [event] FIAT also led the pickup truck market in Brazil, with the Fiat Strada, Toro, and Titano, launched earlier this year (together represent an aggregate of 42.1 percent market share in the segment).
 
-== Ahold Delhaize (2025-12-28)
+== Ahold (2025-12-28)
   [outlook] In 2026, Ahold Delhaize aims to achieve above-market sales growth, maintain industry- leading underlying margins of around 4 %, generate at least €2.3 billion in free cash flow, and realize mid- to high-single-digit underlying EPS growth at constant exchange rates.
   [outlook] If approved by the General Meeting of Shareholders, a final dividend of €0.73 per share will be paid on April 23, 2026.
   [outlook] Maintaining healthy margins in 2026 In 2026, we expect to deliver a margin of around 4%, in line with our guidance for 2025 to 2028.
@@ -676,6 +191,18 @@ outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090,
   [event] In this context, Airbus launched a dedicated Software Factory in Friedrichshafen in Q1 2024.
   [event] In 2024, Space Digital successfully launched a hosted payload on EUTELSAT 36D to provide Ultra High Frequency (UHF) military communications to European Ministries of Defence.
   [event] Korea Tech Hub launched on 18 November 2025 focusing on: electrification, lightweight composites, and Defence and Space technologies.
+
+== ArcelorMittal (2024-12-31)
+  [outlook] The $0.5 billion investment will be completed in two phases: commissioning and ramp-up of the annealing and coating line in the first half of 2025, followed by APL and REV startup in the second half of 2025.
+  [outlook] Additional buybacks under the outstanding buyback program announced in May 2023 will be allocated to the 2025 capital return (with a minimum of 50% of post-dividend free cash flow as per the policy).
+  [outlook] The Company expects 100% of these unsatisfied performance obligations as of December 31, 2024 to be recognized as revenue during 2025 as the Company’s contracts have an original expected duration of one year or less.
+  [outlook] The AMSA and AMKR value in use models anticipate higher sales volumes in 2025 as compared to 2024 ( 1.4 million tonnes for the year ended December 31, 2024) and in 2026 as compared to 2024 ( 1.5 million tonnes for the year ended December 31, 2024 ), respectively, followed by a relative stability thereafter.
+  [event] This marks the second acquisition of Italpannelli businesses by ArcelorMittal, following the purchase of Italpannelli Germany near Trier in March 2023.
+  [event] On August 6, 2024, ArcelorMittal completed the acquisition of 65,243,206 shares, representing approximately 28.4% non-controlling equity interest in Vallourec, for €14.64 per share from Funds managed by Apollo Global Management, Inc., for a total consideration of € 960 million ($1,048 million).
+  [event] The Company launched several new projects in 2024 for OEMs, after the initial success of MPI Door-Ring concepts in the U.S. and China with both legacy and newcomer OEMs.
+  [event] In 2024, the Company launched a global advertisement campaign to promote MPI "The Power of Less".
+  [event] The program was launched in 2023 with the participation of more than 120 participants, and the roadmap for the industrialization of hydrogen as a productive vector in the energy transition was presented.
+  [event] On August 6, 2024, the Company acquired a 28.4% interest in the associate Vallourec who owns and operates the Pau Branco mine in Brazil.
 
 == Anheuser-Busch InBev (2025-12-31)
   [target] RELIABLE COMPOUNDING GROWTH 2025 marks four years since we introduced our 3-pillar strategy and medium-term outlook to deliver organic EBITDA growth of between 4-8%..
@@ -736,7 +263,7 @@ outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090,
   [event] In July 2025, we launched our industry leading ‘Just Ask Once’ customer care promise for Vodafone customers.
   [event] In April 2026, we launched our ‘5G Slicing’ proposition for business customers, delivering enhanced and dependable mobile connectivity with guaranteed performance for enterprises, as a part of our strategy to further monetise our network differentiation.
 
-== Sainsbury's (2026-02-28)
+== J Sainsbury (2026-02-28)
   [target] More than 2,500 farms will be backed by long-term contracts, representing over £5billion of committed investment over the lifespan of these agreements, securing 3.1 million tonnes ofhomegrown fresh food.
   [outlook] In the year ahead, we expect to open around ten new supermarkets and at least 20 new convenience stores, adding around 0.5 per cent to sales growth in 2026/27.
   [outlook] We are increasingly well placed to capitalise on the strong forecast growth of Retail Media in the UK through the high-returning investments we are making in our capabilities, and we remain ahead of plan to deliver at least £100 million of incremental profit over the three years to March 2027.
@@ -808,6 +335,16 @@ outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090,
   [event] The significant increase in 2024 primarily reflected the $5.5bn (£4.4bn) acquisition of Ball Aerospace, which was funded through debt finance and existing cash reserves.
   [event] In 2025 , we launched an additional pilot programme with Unmind, allowing employees to access virtual counselling via a network of qualified counsellors.
 
+== CRH (2022-12-31)
+  [backlog] Paving and construction revenues were 25% ahead of 2021 due to a strong order book and good project execution.
+  [outlook] The final dividend, if approved at the forthcoming AGM of shareholders to be held on 27 April 2023 , will be paid on 4 May 2023 to shareholders on the Register of Members as at the close of business on 17 March 2023 and will bring the full-year dividend for 2022 to $1.27.
+  [event] The largest acquisition in 2022 was in our Building Products Division where the Group completed its acquisition of Barrette, North America’s leading provider of residential fencing and railing solutions, for $ 1.9 billion.
+  [event] The largest of these in 2021 was the acquisition of Angel Brother Enterprises, an asphalt paving and infrastructure solutions business in Texas.
+  [event] During 2021 Americas Materials completed eight acquisitions in the US and Canada for a total spend of $ 0.7 billion, the largest of which was the acquisition of Angel Brothers Enterprises, an asphalt paving and infrastructure solutions business in Texas.
+  [event] Strong commercial discipline delivered higher prices across all divisions, 14% ahead of 2021 , which offset raw materials and energy cost inflation.
+  [event] Europe North Sales in Europe North (Finland, Germany and Switzerland) were in line with 2021 driven mainly by price increases which offset lower volumes, and a strong performance in our lime business.
+  [event] Price increases largely offset weaker volumes; however, operating profit was impacted by high energy and transportation costs which resulted in operating profit significantly below 2021 .
+
 == DSV A/S (2026-06-30)
 
 == ASML Holding (2025-12-31)
@@ -860,6 +397,16 @@ outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090,
   [event] Ahead of the FIFA World Cup this year, we launched “The Best Move: Celebrate Responsibly” across Latin America and the Caribbean, using the reach of the tournament and our brands to encourage simple moderation habits and responsible celebration.
   [event] In November 2025, Diageo GB launched Fancy That!, an educational campaign aimed at improving consumer understanding of alcohol units and supporting moderation.
   [event] FIFA World Cup: During the 2026 FIFA World Cup, Diageo launched ' The Best Move: Celebrate Responsibly' a cross Latin and North America.
+
+== TUI (2023-09-30)
+  [outlook] For financial year 2024, we expect TUI Group’s revenue to increase by at least 10 % year-on-year.
+  [outlook] For financial year 2024, we expect TUI Group’s underlying EBIT to improve by at least 25 % year-on-year.
+  [outlook] Expected development of Group financial position € million 2023 2024 Net capex and investments 493.7 around € 475 – 525 m * Net debt 2,106.2 slight decrease * Excluding capital increase Peptoni S.
+  [outlook] NET CAPEX AND INVESTMENTS For financial year 2024, we expect net capex and investments in a range of € 475 m to € 525 m.
+  [outlook] Despite this, air passenger traffic rebounded significantly in 2022, and has continued its recovery in 2023, with global revenue expected to reach 90 % of 2019 ( IATA, Global Outlook for Air Transport, June2023).
+  [event] The price increases observed in the year under review had no relevant impact on customer demand.
+  [event] Our Live Happy campaign, which launched at the end of 2021, has performed well across all markets and segments (based on quantitative testing comparing our campaign to external benchmarks).
+  [event] As a first step, the TUI City Express was launched for city connections to Prague in July2023, while the TUI Ski Express will connect the Netherlands and Germa ny with the skiing regions in Austria from December 2023.
 
 == BT Group (2026-03-31)
   [outlook] Remaining performance obligations Revenue expected to be recognised in future periods for performance obligations that are not complete (or are partially complete) as at 31 March 2026 is £11,834m ( FY25 : £13,249m ).
@@ -914,27 +461,3 @@ outlook quotes for 863 companies {'target': 272, 'event': 2414, 'outlook': 1090,
 
 == Valeo (2025-12-31)
   [outlook] (1) Pour l’année 2026, la cible pour le taux de ROCE est à partir de 15,8 % et la guidance pour l’EBIT est à partir de 4,7 % .
-
-== Coca-Cola Europacific Partners PLC (2025-12-31)
-  [event] We launched a number of campaigns across our markets in 2025, celebrating the people behind every bottle we make, and showcasing our local business model.
-  [event] Refer to Note 4 of the 2024 consolidated financial statements for further details about the acquisition of CCBPI.
-  [event] Revenue per unit case in Europe increased by 3.6% in 2025, on a comparable and FX neutral basis, reflecting positive headline price increases and promotional optimisation alongside favourable mix and the impact of sugar tax in France.
-  [event] These initiatives resulted in total restructuring charges of €8 million within reported cost of sales and €97 million within reported operating expenses for the year ended 31 December 2025.
-  [event] Restructuring charges of €10 million and €254 million were recognised within reported cost of sales and reported operating expenses, respectively, for the year ended 31 December 2024, related principally to various productivity initiatives.
-  [event] The Committee reviewed the Group’s restructuring expense of €105 million as well as the restructuring provision balance of €135 million as at 31 December 2025, and continued to agree that it does not contain significant uncertainty.
-
-== Marks AND Spencer Group P.L.C. (2026-03-28)
-  [target] This year M&S capital expenditure will increase to c.£650m-£750m, with approximately two-thirds targeting the long-term growth opportunity in Food.
-  [outlook] STRATEGIC PROGRESS CONTINUED In 2026/27, M&S capital expenditure net of disposals will be c.£650-£750m in line with previous forecasts, with approximately £150m on maintenance investment and the balance on growth and cost out spend.
-  [outlook] Anticipated 2026/27 capital expenditure: 2026/27 £m Total maintenance £150m Property £200m Supply chain £200m Digital & Technology £140m Other £20m Total growth & cost out £560m M&S capital expenditure £710m Property disposals (£40m) Lichfield investment £70m M&S capital expenditure £740m
-  [outlook] There will be a period of economic recession in 2026/27, resulting in a reduction in sales growth of 3.0 – 5.0% across all three business units compared to the budget and three-year plan.
-  [outlook] This final dividend of c.£62.0m (last year: £52.4m) will be paid on 10 July 2026 to shareholders whose names are on the Register of Members at the close of business on 5 June 2026.
-  [event] In Food this year we launched a Nutrient Dense range, developed by M&S chefs and nutritionists, to help customers get more fibre, vitamins and minerals even when eating smaller portions.
-  [event] This year, we launched several initiatives to make shopping at M&S easier and more rewarding, while also rolling out technology to better support our colleagues.
-  [event] In April 2026, we launched a transformed Sparks loyalty programme hosted on the M&S app, with enhanced data and personalisation at the heart.
-  [event] One idea was our gluten-free Made Without Colin, which launched in January 2026 after more than 25 suggestions from colleagues across the UK.
-  [event] Made Well workshops: In November 2025 we launched our Made Well product workshops, inviting key suppliers to London for a five-day learning week.
-  [event] How M&S engages International partner Pulse survey: In February 2026 we launched a ‘Pulse’ feedback survey for our International partners.
-
-== Naturgy Energy Group SA (2025-12-31)
-  [outlook] Los objetivos y ponderaciones son los siguientes: ▪ Objetivos financieros pondera un 65% ▪ Ebitda 2026 comunicado como guidance al mercado al inicio de 2026.
