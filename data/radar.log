@@ -1,18 +1,18 @@
 OK   shiller-cape: 40.7× (2026-10-01) red
 OK   buffett-indicator: 255% (2026-04-01) red
-OK   forward-pe: 18.7× (2026-10-30) green
-OK   yield-curve-10y-2y: +0.38 pp (2026-11-05) amber
-OK   yield-curve-10y-3m: +0.67 pp (2026-11-05) green
+OK   forward-pe: 17.7× (2026-11-06) green
+OK   yield-curve-10y-2y: +0.35 pp (2026-11-06) amber
+OK   yield-curve-10y-3m: +0.67 pp (2026-11-06) green
 OK   sahm-rule: 0.00 (2026-10-01) green
 OK   jobless-claims: 0% (2026-10-31) green
 OK   earnings-revisions: +1.4% (2026-10-29) green
 OK   financial-conditions: -0.46 (2026-10-30) green
 OK   bank-lending-standards: +2% (2026-10-01) green
 OK   margin-debt: +31% (2026-09-30) amber
-OK   market-breadth: 66.4% (2026-11-04) green
+OK   market-breadth: 58.3% (2026-11-05) green
 OK   equal-weight-gap: −8.1% (2026-11-05) amber
 OK   financial-stress: -0.52 (2026-10-30) green
-OK   euro-stress-ciss: 0.01 (2026-11-04) green
+OK   euro-stress-ciss: 0.01 (2026-11-05) green
 OK   euro-yield-curve: +0.34 pp (2026-11-05) amber
 OK   euro-bank-lending: +9% (2026-10-01) green
 OK   fed-balance-sheet: +2.4% (2026-11-04) green

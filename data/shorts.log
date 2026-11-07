@@ -1,6 +1,6 @@
-NL: 0 events, 72 current positions, latest 2026-11-04
+NL: 0 events, 73 current positions, latest 2026-11-05
 IT: 25599 events, 121 current positions, latest 2026-11-05
 ::warning::shorts SE: HTTP Error 404: Not Found
-NO: 11193 events, 93 current positions, latest 2026-11-05
+NO: 11173 events, 93 current positions, latest 2026-11-05
 UK: 20447 events, 320 current positions, latest 2026-11-05
-wrote shorts.json: 855 positions, failed: ['SE']
+wrote shorts.json: 856 positions, failed: ['SE']
