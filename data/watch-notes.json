@@ -1,0 +1,7 @@
+{
+  "_about": "Short explanations FINILA adds under a company's own 'What to watch' quote, when the report uses a term readers cannot know. Keyed by LEI; 'match' is a word in the quote; 'source' must be an official page.",
+  "5493008AAX0BESN9WN06": [
+    {"match": "679", "text": "The “679” accounts are the Belgian federal government’s bank accounts (numbers starting with 679), run by bpost for many years. The state moved them to BNP Paribas Fortis in December 2025.",
+     "source": "https://finance.belgium.be/en/news/federal-government-accounts-transferred-bnp-paribas-fortis", "sourceName": "Belgian Federal Public Service Finance"}
+  ]
+}
