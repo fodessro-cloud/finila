@@ -80,7 +80,6 @@ PKN     Poland       PKN ORLEN SA                     [ORLEN] -> 259400VVMM70CQR
 matched 58 / 77
   ! https://filings.xbrl.org/api/entities/7LTWFZYICNSX8D621K86/filings?page[size]=100: HTTP Error 429: Too Many Requests
   ! https://filings.xbrl.org/api/entities/969500Y4IJGHJE2MTJ13/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/549300MKFYEKVRWML317/filings?page[size]=100: HTTP Error 429: Too Many Requests
 SAP@Germany no usable annual report (0 filings)
 SIE@Germany no usable annual report (0 filings)
 ALV@Germany no usable annual report (0 filings)
@@ -120,7 +119,7 @@ INGA@Netherlands 2025-12-31 EUR rev=23035.0 ebitda=None net=6327.0 fcf=None roe=
 HEIA@Netherlands 2025-12-31 EUR rev=34257.0 ebitda=6015.0 net=952.0 fcf=2610.0 roe=11.0 nd/ebitda=2.4
         missing ['fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivitiesContinuingOperations', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:InterestPaidClassifiedAsOperatingActivities', 'ifrs-full:InterestReceivedClassifiedAsOperatingActivities', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:RevenueFromContractsWithCustomers', 'phia:DividendsReceivedFromInvestmentsInAssociatesClassifiedAsOperatingActivities', 'phia:NetCapitalExpenditures']
 PHIA@Netherlands 2025-12-31 EUR rev=17834.0 ebitda=2549.0 net=895.0 fcf=None roe=8.2 nd/ebitda=1.62
-UNA@Netherlands no usable annual report (0 filings)
+UNA@Netherlands 2025-12-31 EUR rev=50503.0 ebitda=10390.0 net=9469.0 fcf=6759.0 roe=61.0 nd/ebitda=None
         missing ['fcf']; tagged: ['ifrs-full:AdjustmentsForDepreciationAndAmortisationExpense', 'ifrs-full:AdjustmentsForDepreciationAndAmortisationExpenseAndImpairmentLossReversalOfImpairmentLossRecognisedInProfitOrLoss', 'ifrs-full:CashFlowsFromUsedInOperatingActivities', 'ifrs-full:DividendsReceivedClassifiedAsOperatingActivities', 'ifrs-full:IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 'ifrs-full:IncreaseDecreaseInWorkingCapital', 'ifrs-full:ProfitLossFromOperatingActivities', 'ifrs-full:PurchaseOfTreasuryShares', 'ifrs-full:Revenue', 'stellantis:CashFlowsUsedInObtainingControlOfSubsidiariesOrOtherBusinessesAndPurchaseOfInterestAccountedForUsingEquityMethodClassifiedAsInvestingActivities', 'stellantis:ProceedsPaymentsFromSalePurchaseOfTreasuryShares']
 STLAM@Netherlands 2025-12-31 EUR rev=153508.0 ebitda=-19273.0 net=-22368.0 fcf=None roe=-41.8 nd/ebitda=None
 AZN@UK         2025-12-31 USD rev=58739.0 ebitda=19476.0 net=10225.0 fcf=8670.0 roe=21.0 nd/ebitda=0.98
@@ -165,34 +164,32 @@ EQNR@Norway    2025-12-31 USD rev=106462.0 ebitda=37670.0 net=5043.0 fcf=5977.0 
 OMV@Austria    2025-12-31 EUR rev=24308.0 ebitda=None net=1520.0 fcf=None roe=9.3 nd/ebitda=None
 PKN@Poland     2023-12-31 PLN rev=372767.0 ebitda=42256.0 net=20680.0 fcf=5727.0 roe=13.6 nd/ebitda=-0.06
 
-47 companies with real fundamentals
-ESMA FULINS_E_20261031_01of02.zip: 16442 new issuers
-ESMA FULINS_E_20261031_02of02.zip: 0 new issuers
-FCA FULINS_E_20261031_01of01.zip: 2144 new issuers
-18586 issuers with listed shares
+48 companies with real fundamentals
+ESMA FULINS_E_20261107_01of02.zip: 16492 new issuers
+ESMA FULINS_E_20261107_02of02.zip: 0 new issuers
+FCA FULINS_E_20261107_01of01.zip: 2135 new issuers
+18627 issuers with listed shares
   ! https://filings.xbrl.org/api/filings?include=entity&page%5Bsize%5D=500&sort=-period_end&page%5Bnumber%5D=11: HTTP Error 429: Too Many Requests
   listing page 11 failed, trying again in 90 s
 4045 issuers with a report for 2024 or later (16 pages)
-36 reports to read, 4009 cached
-  ! https://filings.xbrl.org/api/entities/549300NFX18SRZHNT751/filings?page[size]=100: HTTP Error 429: Too Many Requests
-  ! https://filings.xbrl.org/api/entities/74780000V0GH8Q3K5K76/filings?page[size]=100: HTTP Error 429: Too Many Requests
-read 36 reports this run
+34 reports to read, 4011 cached
+read 34 reports this run
 4909 listed companies with an LEI on Wikidata
-18586 issuers with listed shares (FIRDS); 2331 of them file reports here
+18627 issuers with listed shares (FIRDS); 2330 of them file reports here
 shares in issue for 563 companies (data/shares.json)
 annual figures by hand for 625 companies (data/financials.json)
-Wikidata by ISIN/LEI: labels for 1712 of 3824 keys
-sector found for 775 of 1912 without a Wikidata industry: {'wikidata': 350, 'bank': 70, 'name': 355}
+Wikidata by ISIN/LEI: labels for 1711 of 3822 keys
+sector found for 775 of 1911 without a Wikidata industry: {'wikidata': 350, 'bank': 70, 'name': 355}
 earnings per share moved by powers of ten for 38 companies, dropped for 10 (checked against the price)
-shares in issue from the annual report for 2003 more companies
+shares in issue from the annual report for 2002 more companies
 revenue line set by hand for 1 companies (data/fixes.json)
 shared ISINs taken from 0 companies (kept by the larger one)
 hand-checked fixes for 141 companies (data/fixes.json)
-industry group (and sector) from data/groups.json for 2655 of 2871 companies
-2871 companies with figures, 202 without usable figures
-with ticker: 1129, with sector: 2772
-with F-score: 1895, F-score 8-9: 112, with dividend cover: 1143
-by country: GB 557, SE 354, FR 254, DE 195, IT 175, NO 156, PL 141, FI 131, ES 122, DK 122, NL 113, GR 104, BE 86, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 17, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
+industry group (and sector) from data/groups.json for 2653 of 2870 companies
+2870 companies with figures, 202 without usable figures
+with ticker: 1129, with sector: 2771
+with F-score: 1894, F-score 8-9: 112, with dividend cover: 1143
+by country: GB 557, SE 354, FR 254, DE 195, IT 175, NO 155, PL 141, FI 131, ES 122, DK 122, NL 113, GR 104, BE 86, AT 54, CH 53, LU 38, MT 30, IE 29, PT 28, IS 24, HU 21, LT 20, HR 17, CZ 12, SI 10, CY 7, SK 6, RO 5, EE 3, LV 3, BG 1
 
 largest 40 by revenue:
 Volkswagen                         DE VOW3     Consumer Discretionary 2025-12-31 rev€=321913.0 ebitda=25836.0 fcf=-290.0 roe=3.5 F=None None
@@ -200,7 +197,7 @@ Shell PLC                          GB SHEL     Energy                 2025-12-31
 Glencore PLC                       GB GLEN     Materials              2025-12-31 rev€=221706.2 ebitda=None fcf=-290.0 roe=0.9 F=6 1111101-0
 TotalEnergies SE                   FR TTE      Energy                 2025-12-31 rev€=180202.4 ebitda=None fcf=10390.0 roe=11.4 F=4 1101001-0
 BP P.L.C.                          GB BP       Energy                 2025-12-31 rev€=172457.7 ebitda=30464.0 fcf=11272.0 roe=0.1 F=6 1101011-1
-Stellantis N.V.                    NL STLAP    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
+Stellantis N.V.                    NL STLAM    Consumer Discretionary 2025-12-31 rev€=153508.0 ebitda=-19273.0 fcf=None roe=-41.8 F=3 0001001-1
 BMW                                DE BMW      Consumer Discretionary 2025-12-31 rev€=133453.0 ebitda=16651.0 fcf=-2735.0 roe=7.6 F=None None
 Mercedes-Benz Group                DE MBG      Consumer Discretionary 2025-12-31 rev€=132214.0 ebitda=11778.0 fcf=12524.0 roe=5.5 F=None None
 Deutsche Telekom                   DE DTE      Communication          2025-12-31 rev€=121816.0 ebitda=47389.0 fcf=28313.0 roe=15.5 F=None None
