@@ -1,0 +1,41 @@
+name: Annual figures from Belgian ESEF reports (FSMA STORI)
+
+# Reads the ESEF annual reports Belgian listed companies file with the FSMA (scripts/data/stori_esef.py)
+# into data/stori-history.json, used by the company pages. Each report is downloaded once (cache by file id).
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['scripts/data/stori_esef.py', '.github/workflows/stori-esef.yml']
+  schedule:
+    - cron: '20 1 * * 1'   # Mondays 01:20 UTC, before the page build
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stori-esef
+  cancel-in-progress: false
+
+jobs:
+  stori:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read Belgian ESEF annual reports
+        run: |
+          set -o pipefail
+          python scripts/data/stori_esef.py 2>&1 | tee data/stori-history.log || { echo "::error::stori: $(tail -3 data/stori-history.log | tr '\n' ' ')"; exit 1; }
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "finila-data-bot"
+          git config user.email "finila-data-bot@users.noreply.github.com"
+          git add data/stori-history.json data/stori-history.log data/cache/stori-esef.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Update Belgian ESEF annual figures [data refresh]"
+          git pull --rebase -X theirs || true
+          git push
