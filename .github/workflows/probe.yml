@@ -15,14 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: STORI script (FSMA, Belgium)
+      - name: STORI service endpoints (FSMA, Belgium)
         run: |
           UA='FINILA data refresh (finila.com)'
-          curl -sSL -A "$UA" -m 60 https://www.fsma.be/modules/custom/fsma_tools/modules/js/fsma_stori.js -o s.js
-          wc -c s.js
-          echo "=== URLs / endpoints"
-          grep -oE '["'"'"'`][^"'"'"'` ]*(/api/|/stori|json|ajax|/en/|/fr/|/nl/|https?://)[^"'"'"'` ]*["'"'"'`]' s.js | sort -u | head -80
-          echo "=== fetch/axios calls"
-          grep -oE '(fetch|axios[.a-z]*|\$http[.a-z]*|XMLHttpRequest|open)\([^)]{0,200}\)' s.js | head -40
-          echo "=== head"
-          head -c 6000 s.js
+          curl -sSL -A "$UA" -m 60 https://www.fsma.be/modules/custom/fsma_tools/modules/js/hook-in.js -o h.js
+          wc -c h.js
+          grep -oE '.{0,300}[Ss]tori.{0,600}' h.js | head -20
+          echo "=== baseURL"
+          grep -oE '.{0,200}baseURL.{0,200}' h.js | head -10
