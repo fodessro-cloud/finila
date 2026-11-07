@@ -15,11 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: STORI service endpoints (FSMA, Belgium)
+      - name: STORI API (FSMA, Belgium)
         run: |
           UA='FINILA data refresh (finila.com)'
-          curl -sSL -A "$UA" -m 60 https://www.fsma.be/modules/custom/fsma_tools/modules/js/hook-in.js -o h.js
-          wc -c h.js
-          grep -oE '.{0,300}[Ss]tori.{0,600}' h.js | head -20
-          echo "=== baseURL"
-          grep -oE '.{0,200}baseURL.{0,200}' h.js | head -10
+          curl -sSL -A "$UA" -m 60 https://www.fsma.be/en/stori -o p.html
+          API=$(grep -oE '"vueToolsApi":"[^"]+"' p.html | head -1 | cut -d'"' -f4 | sed 's#\\/#/#g')
+          echo "API=$API"
+          B="$API/api/v1/en/stori"
+          curl -sS -A "$UA" -m 60 "$B/document-type" -o types.json; echo "=== types"; head -c 4000 types.json; echo
+          sleep 30
+          curl -sS -A "$UA" -m 60 "$B/companies/abbreviated-name" -o comp.json; echo "=== companies"; wc -c comp.json; python3 -c "
+          import json; d=json.load(open('comp.json')); print(len(d)); print(d[:3]); print([c for c in d if 'post' in json.dumps(c).lower()])"
+          sleep 30
+          ID=$(python3 -c "
+          import json; d=json.load(open('comp.json')); print(next((c.get('companyId') or c.get('id')) for c in d if 'bpost' in json.dumps(c).lower()))")
+          echo "bpost id=$ID"
+          curl -sS -A "$UA" -m 60 -H 'Content-Type: application/json' -d "{\"startRowIndex\":0,\"pageSize\":15,\"sortDirection\":\"Descending\",\"sortColumn\":\"datePublication\",\"companyId\":$ID}" "$B/result" -o res.json
+          echo "=== result"; head -c 8000 res.json
