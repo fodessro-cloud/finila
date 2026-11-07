@@ -120,7 +120,12 @@ def main():
     filings = [r for r in annual_filings(base, today - timedelta(days=MONTHS * 31), today) if r.get("lei") in rows]
     print(f"{len(filings)} of them by companies on FINILA", flush=True)
     read = 0
-    for r in sorted(filings, key=lambda r: -(rows[r["lei"]].get("revenueEur") or 0)):
+    # Each company's newest report first (it gives two years), largest companies first; older reports after.
+    newest = {}
+    for r in sorted(filings, key=lambda r: r.get("datePublication") or "", reverse=True):
+        newest.setdefault(r["lei"], r)
+    first = set(id(r) for r in newest.values())
+    for r in sorted(filings, key=lambda r: (id(r) not in first, -(rows[r["lei"]].get("revenueEur") or 0))):
         doc = esef_doc(r)
         if not doc or doc["fileDataId"] in cache["reports"]:
             continue

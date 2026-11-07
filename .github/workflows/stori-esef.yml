@@ -7,7 +7,7 @@ on:
     branches: [claude/project-thread-z7m788]
     paths: ['scripts/data/stori_esef.py', '.github/workflows/stori-esef.yml']
   schedule:
-    - cron: '20 1 * * 1'   # Mondays 01:20 UTC, before the page build
+    - cron: '20 1 * * *'   # daily 01:20 UTC; reports already read are skipped, so it is quick once caught up
   workflow_dispatch:
 
 permissions:
