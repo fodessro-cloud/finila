@@ -492,7 +492,8 @@ def pdf_blocks(text):
             cur[1] = re.sub(r"(?<=[a-z])- (?=[a-z])", "", cur[1] + " " + l)
         if re.search(r"[.!?:]$|[.!?]”$", l) and not re.search(r"(?i)\b(vs|e\.g|i\.e|approx|incl|no|ca|cf)\.$", l) and not bullet:
             cur = None
-    return [(h, re.sub(r"\s+", " ", t).strip()) for h, t in out]
+    fix = lambda t: re.sub(r"(\d)\. (\d+(?:[.,]\d+)?\s?%)", r"\1.\2", re.sub(r"(\d) \.(\d)", r"\1.\2", re.sub(r"\s+", " ", t))).strip()   # "487 .5", "6. 6%"
+    return [(h, fix(t)) for h, t in out]
 
 
 def html_sections(raw, blocks=None):
@@ -575,6 +576,15 @@ WATCH = [
 WATCH_SKIP = r"\b(forward-looking|cautionary|disclaimer|this (press release|report) (contains|is)|for more information)\b"
 
 
+def watch_score(sent):
+    """The quote that explains most: an amount (what it costs or brings), a word saying what kind of contract,
+    rule or deal it is ("banking contract", not just "the 679 contract"), then the earliest (reports lead with what matters)."""
+    low = sent.lower()
+    amount = bool(re.search(r"\d[\d.,]*\s?(m|bn|mio\.?|million|billion)?\s?(eur|usd|sek|dkk|nok|chf|gbp|€|\$|£)|(€|\$|£)\s?\d|\d\s?%", low))
+    kind = bool(re.search(r"\b(?!the\b|a\b|an\b|this\b|that\b|its\b|our\b|\d+\b)[a-z]{4,} (contract|agreement|concession|levy|fee|tax|ruling|lawsuit|acquisition|disposal)\b", low))
+    return (amount + kind, kind)
+
+
 def watch_items(blocks, limit=5):
     """At most one quote per topic: the first that gives a figure or a name, else the first (reports lead with what matters)."""
     found = {}
@@ -593,7 +603,7 @@ def watch_items(blocks, limit=5):
     for topic, _ in WATCH:
         c = [x for x in found.get(topic, []) if x not in used]
         if c and len(out) < limit:
-            pick = next((x for x in c if re.search(r"\d", x)), c[0])
+            pick = max(c, key=watch_score)
             used.add(pick)
             out.append({"topic": topic, "text": pick})
     return out
