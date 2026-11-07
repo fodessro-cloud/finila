@@ -30,5 +30,5 @@ jobs:
           ID=$(python3 -c "
           import json; d=json.load(open('comp.json')); print(next((c.get('companyId') or c.get('id')) for c in d if 'bpost' in json.dumps(c).lower()))")
           echo "bpost id=$ID"
-          curl -sS -A "$UA" -m 60 -H 'Content-Type: application/json' -d "{\"startRowIndex\":0,\"pageSize\":15,\"sortDirection\":\"Descending\",\"sortColumn\":\"datePublication\",\"companyId\":$ID}" "$B/result" -o res.json
-          echo "=== result"; head -c 8000 res.json
+          curl -sS -A "$UA" -m 60 -H 'Content-Type: application/json' -H 'Origin: https://www.fsma.be' -H 'Referer: https://www.fsma.be/en/stori' -d "{\"startRowIndex\":0,\"pageSize\":15,\"sortDirection\":\"Descending\",\"companyId\":\"$ID\"}" "$B/result" -o res.json
+          echo "=== result"; python3 -c "import json;d=json.load(open('res.json'));print(d.get('resultCount'));print(json.dumps(d.get('storiResultItems',[])[:6],indent=1)[:9000])" || head -c 1500 res.json
