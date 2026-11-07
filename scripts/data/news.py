@@ -37,7 +37,7 @@ REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|r
                r"\b(q[1-4]|h[12]|9m|[1-4]q)\s?20\d\d\b|\b(first|second|third|fourth)[- ]quarter\b|fiscal 20\d\d results|sales at 3\d (march|june|september|december)|"
                r"resultados (del|correspondientes al) (primer|segundo|tercer|cuarto|[1-4]t)|(primer|segundo|tercer|cuarto) trimestre|primer semestre|\b[1-4]t ?20\d\d\b|"
                r"(order intake|sales|revenue) as of (march|june|september|december) 3\d|activity indicators")
-REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly financial information|financial report"
+REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly (financial )?information|financial report"
 SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|teleconference|capital markets day|"
              r"contratos? de liquidez|acciones propias|operaciones (realizadas )?(al amparo|sobre acciones propias)|autocartera|recompra de acciones|"
              r"franchissement de seuils?|d[ée]claration des transactions|nombre total de droits de vote|contrat de liquidit[ée]|"
@@ -56,11 +56,25 @@ RESULT_VERB = (r"increased|decreased|rose|fell|grew|declined|amounted|was|were|t
                r"came in|ended at|up \d|down \d|growth of|increase of|decrease of|compared")
 
 
-def get(url, as_json=True, tries=(0, 5, 20)):
+CRAWL_DELAY = {"fsma.be": 30}   # seconds between requests, from the host's robots.txt
+_last = {}
+
+
+def polite(url):
+    host = urllib.parse.urlparse(url).hostname or ""
+    for h, delay in CRAWL_DELAY.items():
+        if host == h or host.endswith("." + h):
+            time.sleep(max(0, _last.get(h, 0) + delay - time.time()))
+            _last[h] = time.time()
+
+
+def get(url, as_json=True, tries=(0, 5, 20), data=None):
     for wait in tries:
         time.sleep(wait)
+        polite(url)
         try:
-            req = urllib.request.Request(url, headers=UA)
+            req = urllib.request.Request(url, headers={**UA, **({"Content-Type": "application/json"} if data else {})},
+                                         data=json.dumps(data).encode() if data else None)
             with urllib.request.urlopen(req, timeout=60) as r:
                 body = r.read()
                 return (json.loads(body) if as_json else (body, r.headers.get("Content-Type", "")))
@@ -353,6 +367,45 @@ def oslo(since, today):
     return out
 
 
+def belgium(since, today):
+    """FSMA STORI, the Belgian official storage of regulated information (fsma.be/en/stori; site content under
+    CC BY 4.0, robots.txt asks 30 s between requests). Each filing carries the issuer's LEI and ISIN; the
+    same release filed under two topics (e.g. quarterly information and inside information) is kept once."""
+    page = get("https://www.fsma.be/en/stori", as_json=False)
+    m = re.search(rb'"vueToolsApi":"([^"]+)"', page[0]) if page else None
+    if not m:
+        print("  ! STORI: no API address on the page", flush=True)
+        return []
+    base = m.group(1).decode().replace("\\/", "/") + "/api/v1/en/stori"
+    rows, start = [], 0
+    while start < 3000:
+        d = get(base + "/result", data={"startRowIndex": start, "pageSize": 100, "sortDirection": "Descending",
+                                         "publicationStart": since.isoformat(), "publicationEnd": today.isoformat()})
+        part = (d or {}).get("storiResultItems") or []
+        rows += part
+        if len(part) < 100:
+            break
+        start += 100
+    out, seen = [], set()
+    for r in sorted(rows, key=lambda r: (not re.search(REPORT_CAT, r.get("reportingTopicName") or "", re.I), r.get("datePublication") or "")):
+        docs = r.get("mainDocuments") or []
+        doc = next((x for x in docs if x.get("language") == "en"), docs[0] if docs else None)
+        key = (r.get("lei") or r.get("companyName"), (doc or {}).get("originalFileName"), (r.get("datePublication") or "")[:10])
+        if not doc or key in seen:   # each filing has its own file ids, so the same release is known by name and day
+            continue
+        seen.add(key)
+        name = re.sub(r"(?i)[ _-]*\b(eng?|english|nl|fr)\b[ _-]*(?=\.\w+$)|\.\w+$", "", doc.get("title") or doc.get("originalFileName") or "").strip()
+        topic = (r.get("reportingTopicName") or "").strip()
+        isins = [i.get("code") for i in r.get("isinCodes") or [] if i.get("isinType") == "Shares"]
+        out.append({"id": "be" + doc["fileDataId"], "src": "FSMA Belgium", "company": r.get("companyName") or "",
+                    "lei": r.get("lei"), "isin": isins[0] if isins else None,
+                    "title": (r.get("documentTitle") or "").strip() or (f"{topic}: {name}" if name else topic), "cat": topic,
+                    "time": (r.get("datePublication") or "").replace("T", " ")[:19], "url": f"{base}/download?fileDataId={doc['fileDataId']}",
+                    "att": [], **({"lang": doc["language"]} if doc.get("language") in ("fr", "nl") else {})})
+    print(f"FSMA Belgium: {len(rows)} filings, {len(out)} kept", flush=True)
+    return out
+
+
 def is_report(a):
     if norwegian(a):
         return False
@@ -555,11 +608,12 @@ def main():
     today = date.today()
     since = today - timedelta(days=DAYS)
     by_isin = {r["isin"]: r["lei"] for r in rows if r.get("isin")}
-    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today) + spain(since, today)
+    names = {r["lei"]: r["name"] for r in rows}
+    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today) + spain(since, today) + belgium(since, today)
     print(f"{len(fresh)} announcements since {since}", flush=True)
     unmatched = {}
     for a in fresh:
-        lei = by_isin.get(a.get("isin") or "") or by_sign.get((a.get("sign") or "").upper()) or (None if a.get("isin") else find(a["company"]))
+        lei = (a.get("lei") if a.get("lei") in names else None) or by_isin.get(a.get("isin") or "") or by_sign.get((a.get("sign") or "").upper()) or (None if a.get("isin") else find(a["company"]))
         if not lei:
             unmatched[a["company"]] = unmatched.get(a["company"], 0) + 1
             continue
@@ -604,7 +658,7 @@ def main():
         o = out.setdefault(a["lei"], {"news": []})
         if len(o["news"]) < MAX_NEWS:
             o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"],
-                              **({"lang": a["lang"]} if a.get("lang") in ("fr", "es") else {})})
+                              **({"lang": a["lang"]} if a.get("lang") in ("fr", "es", "nl") else {})})
         if is_report(a) and "results" in a:
             a["quarter"] = report_quarter(a["title"], "", a["time"]) if report_quarter(a["title"], "", "") else a.get("quarter")
         if is_report(a) and "report" not in o and "results" in a:

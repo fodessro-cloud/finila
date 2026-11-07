@@ -1351,7 +1351,8 @@ def events_html(c):
     """Company events FINILA records itself: managers' trades, short positions, the latest annual report."""
     ev = sorted(c.get('events', []), key=lambda e: e[0], reverse=True)[:12]
     nice = lambda d: date.fromisoformat(d).strftime('%-d %b %Y') if re.fullmatch(r'\d{4}-\d\d-\d\d', d or '') else d
-    ev += [(n['date'][:10], esc(n['title']) + ({'fr': ' <small class="ins-note">(in French)</small>', 'es': ' <small class="ins-note">(in Spanish)</small>'}.get(n.get('lang'), '')), n['url'], True)
+    ev += [(n['date'][:10], esc(n['title']) + ({'fr': ' <small class="ins-note">(in French)</small>', 'es': ' <small class="ins-note">(in Spanish)</small>',
+                                                     'nl': ' <small class="ins-note">(in Dutch)</small>'}.get(n.get('lang'), '')), n['url'], True)
            for n in c.get('news', [])]
     ev = sorted(ev, key=lambda e: e[0], reverse=True)[:12]
     items = ''.join(f'<li><time datetime="{esc(e[0])}">{esc(nice(e[0]))}</time><span>{e[1]}</span>'
