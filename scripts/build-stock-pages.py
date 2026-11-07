@@ -1132,7 +1132,7 @@ def latest_report_html(c):
     if rest:
         body += f'<details class="sp-more"><summary>More from the report</summary>{ul(rest)}</details>'
     # What to watch (Lub, 2026-11-07): contracts with the state, regulation, lawsuits, lost contracts, management, deals.
-    watch = [w for w in r.get('watch') or [] if not re.search(BROKEN, w['text'])][:5]
+    watch = [w for w in r.get('watch') or [] if not re.search(BROKEN, w['text'])][:5] if os.environ.get('FINILA_WATCH') else []   # preview until Lub approves
     if watch:
         body = (f'<div class="sp-q sp-watch">{head("What to watch", "Matters the company itself raises in this report.")}<ul>'
                 + ''.join(f'<li><b>{esc(w["topic"])}:</b> “{esc(quote_clean(w["text"]))}”</li>' for w in watch) + '</ul></div>') + body
