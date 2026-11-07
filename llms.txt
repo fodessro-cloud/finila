@@ -1,25 +1,23 @@
 # FINILA
 
-> FINILA (www.finila.com) is a free website comparing investments in Europe. It has two main parts: listed companies (every company's figures from its official annual and quarterly reports, with the report and date behind each number, plus share prices, short positions and insider trades) and property (home prices, growth and affordability in every European country from Eurostat and OECD). It also compares stocks, bonds, deposits, gold and property against inflation.
+> FINILA (www.finila.com) is a free website comparing investments in Europe. It has three main parts: stocks (every listed company's figures from its official annual and quarterly reports, with the report and date behind each number, plus share prices, short positions, insider trades and market signals), property (home prices, growth and affordability in every European country from Eurostat and OECD) and other investments (bonds, deposits, gold and interest rates, all compared against inflation).
 
 Everything on FINILA comes from official public sources and is linked to them. Company statements (outlook, risks, events) are quoted word for word from the company's own report, never rewritten. FINILA gives no investment advice.
 
-## Companies
+## Stocks
 - [Company pages](https://www.finila.com/stock/): one page per listed European company (about 2,800, from 30 countries): what it does, five years of history (revenue, profit, cash flow, debt), valuation against peers, latest report quotes and official announcements.
 - [Stock screener](https://www.finila.com/screener): filter and sort European companies by country, sector, size, P/E, dividend yield, growth and margins.
 - [Market map](https://www.finila.com/map): European companies by sector and size, coloured by price change.
 - [Sectors and countries](https://www.finila.com/groups): European companies grouped by sector or country with market value, P/E, dividend yield, margins and growth.
+- [Short positions](https://www.finila.com/shorts): funds' net short positions in stocks from five European regulators, updated twice a day.
+- [Insider trades](https://www.finila.com/insiders): managers' own share purchases on the exchange, reported to the Swedish regulator.
+- [Market Radar](https://www.finila.com/radar): stock market and economy signals (valuation, yield curve, unemployment, financial stress, central bank balance sheets) with long-history charts and recession periods.
 - [Methodology](https://www.finila.com/stock/methodology): sources, definitions (EBITDA, EV, free cash flow, ROIC, CAGR, peer median) and data checks.
 
 ## Property
 - [Property](https://www.finila.com/property): how home prices changed in every European country over 1, 5 and 10 years, before and after inflation; prices per m²; whether homes are expensive against incomes and rents. Official Eurostat and OECD data, refreshed daily.
 
-## Ownership signals
-- [Short positions](https://www.finila.com/shorts): funds' net short positions in stocks from five European regulators, updated twice a day.
-- [Insider trades](https://www.finila.com/insiders): managers' own share purchases on the exchange, reported to the Swedish regulator.
-
-## Markets and other investments
-- [Market Radar](https://www.finila.com/radar): stock market and economy signals (valuation, yield curve, unemployment, financial stress, central bank balance sheets) with long-history charts and recession periods.
+## Other investments
 - [Where to put money](https://www.finila.com/assets): real returns of stocks, bonds, deposits, gold and property against inflation in 31 European countries.
 - [Interest rates](https://www.finila.com/rates): central bank and deposit rates across Europe.
 
