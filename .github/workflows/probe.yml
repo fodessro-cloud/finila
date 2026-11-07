@@ -13,14 +13,30 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
-      - name: bpost 3Q26 release text (FSMA STORI)
+      - name: bpost annual report (FSMA STORI)
         run: |
           pip install -q pypdf
-          curl -sS -A 'FINILA data refresh (finila.com)' -m 120 'https://webapi.fsma.be/api/v1/en/stori/download?fileDataId=473b78cf-ca3a-4786-b1dd-8c7eb96a67b4' -o r.pdf
+          B=https://webapi.fsma.be/api/v1/en/stori
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 60 -H 'Content-Type: application/json' \
+            -d '{"startRowIndex":0,"pageSize":40,"sortDirection":"Descending","companyId":"70c2d6a2-8c5d-42d4-82b7-83a7a5c527d9","publicationStart":"2025-11-01"}' "$B/result" -o res.json
           python3 -c "
+          import json; d=json.load(open('res.json'))
+          for r in d['storiResultItems']:
+              print(r['datePublication'][:10], r['reportingTopicName'], [(m['language'], m['title'], m['size'], m['fileDataId']) for m in r['mainDocuments']])
+          a=[r for r in d['storiResultItems'] if 'nnual' in r['reportingTopicName']]
+          docs=a[0]['mainDocuments'] if a else []
+          doc=next((m for m in docs if m['language']=='en'), docs[0] if docs else None)
+          open('id','w').write(doc['fileDataId'] if doc else '')"
+          sleep 30
+          ID=$(cat id); [ -n "$ID" ] || exit 0
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 300 "$B/download?fileDataId=$ID" -o a.pdf; ls -la a.pdf
+          python3 -c "
+          import re
           from pypdf import PdfReader
-          r = PdfReader('r.pdf'); print(len(r.pages), 'pages')
-          for i, p in enumerate(r.pages[:14]):
-              print('=== page', i + 1); print(p.extract_text())"
+          r = PdfReader('a.pdf'); print(len(r.pages), 'pages')
+          t = '\n'.join((p.extract_text() or '') for p in r.pages)
+          print(len(t), 'chars')
+          for m in re.finditer(r'(?i)[^.]{0,300}(management contract|public service|concession|universal service|press distribution|State)[^.]{0,300}\.', t):
+              print('---', re.sub(r'\s+', ' ', m.group(0))[:600])" | head -150
