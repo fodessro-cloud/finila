@@ -1131,6 +1131,11 @@ def latest_report_html(c):
             body += f'<div class="sp-q">{head(title, sub)}{ul(out)}</div>'
     if rest:
         body += f'<details class="sp-more"><summary>More from the report</summary>{ul(rest)}</details>'
+    # What to watch (Lub, 2026-11-07): contracts with the state, regulation, lawsuits, lost contracts, management, deals.
+    watch = [w for w in r.get('watch') or [] if not re.search(BROKEN, w['text'])][:5]
+    if watch:
+        body = (f'<div class="sp-q sp-watch">{head("What to watch", "Matters the company itself raises in this report.")}<ul>'
+                + ''.join(f'<li><b>{esc(w["topic"])}:</b> “{esc(quote_clean(w["text"]))}”</li>' for w in watch) + '</ul></div>') + body
     period = f'Q{n} {yr}' if n in (1, 2, 3) else (f'Full year {yr}' if n == 4 else '')
     return (f'<div class="sp-latest"><p class="sp-q-date"><b>Latest report{": " + period if period else ""}</b> · {esc(r["title"])}, published {esc(nice_date(r["date"]))} '
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the report</a></p>{body}</div>')

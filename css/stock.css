@@ -170,3 +170,5 @@ html, body { height: auto; }
 
 .sp-chg { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
 .sp-chg-pos { background: var(--pos-bg); color: var(--pos); } .sp-chg-neg { background: var(--neg-bg); color: var(--neg); } .sp-chg-neu { background: var(--bg3); color: var(--text2); }
+.sp-watch { border-left: 3px solid #E0A100; padding-left: 10px; }
+.sp-watch li b { font-weight: 600; }
