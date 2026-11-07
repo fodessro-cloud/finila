@@ -21,22 +21,17 @@ jobs:
           B=https://webapi.fsma.be/api/v1/en/stori
           curl -sS -A 'FINILA data refresh (finila.com)' -m 60 -H 'Content-Type: application/json' \
             -d '{"startRowIndex":0,"pageSize":40,"sortDirection":"Descending","companyId":"70c2d6a2-8c5d-42d4-82b7-83a7a5c527d9","publicationStart":"2025-11-01"}' "$B/result" -o res.json
-          python3 -c "
-          import json; d=json.load(open('res.json'))
-          for r in d['storiResultItems']:
-              print(r['datePublication'][:10], r['reportingTopicName'], [(m['language'], m['title'], m['size'], m['fileDataId']) for m in r['mainDocuments']])
-          a=[r for r in d['storiResultItems'] if 'nnual' in r['reportingTopicName']]
-          docs=a[0]['mainDocuments'] if a else []
-          doc=next((m for m in docs if m['language']=='en'), docs[0] if docs else None)
-          open('id','w').write(doc['fileDataId'] if doc else '')"
+          echo 00448840-66ce-4451-82e8-e17f654880e9 > id
           sleep 30
-          ID=$(cat id); [ -n "$ID" ] || exit 0
-          curl -sS -A 'FINILA data refresh (finila.com)' -m 300 "$B/download?fileDataId=$ID" -o a.pdf; ls -la a.pdf
+          ID=$(cat id)
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 400 "$B/download?fileDataId=$ID" -o a.xhtml; ls -la a.xhtml
           python3 -c "
-          import re
-          from pypdf import PdfReader
-          r = PdfReader('a.pdf'); print(len(r.pages), 'pages')
-          t = '\n'.join((p.extract_text() or '') for p in r.pages)
+          import re, html
+          raw = open('a.xhtml', encoding='utf-8', errors='replace').read()
+          print('nonFraction', raw.count('ix:nonFraction'), 'nonNumeric', raw.count('ix:nonNumeric'))
+          names = re.findall(r'<ix:nonFraction[^>]*name=\"([^\"]+)\"', raw)
+          from collections import Counter; print(Counter(n for n in names if n.startswith('ifrs-full:')).most_common(15))
+          t = re.sub(r'\\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'(?is)<(style|script)[^>]*>.*?</\\1>', ' ', raw))))
           print(len(t), 'chars')
-          for m in re.finditer(r'(?i)[^.]{0,300}(management contract|public service|concession|universal service|press distribution|State)[^.]{0,300}\.', t):
-              print('---', re.sub(r'\s+', ' ', m.group(0))[:600])" | head -150
+          for m in re.finditer(r'(?i)[^.]{0,300}(management contract|public service|concession|universal service|press distribution)[^.]{0,300}\\.', t):
+              print('---', m.group(0)[:600])" | head -120
