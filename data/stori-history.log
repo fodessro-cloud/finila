@@ -1,0 +1,29 @@
+STORI: 209 annual financial reports since 2024-04-21 (no type filter)
+146 of them by companies on FINILA
+  Anheuser-Busch InBev: FY 2025-12-31 USD, 413 facts, revenue 59320.0
+  Anheuser-Busch InBev: FY 2024-12-31 USD, 413 facts, revenue 59768.0
+  KBC Group: FY 2025-12-31 EUR, 711 facts, revenue 12200.0
+  KBC Group: FY 2024-12-31 EUR, 725 facts, revenue 11167.0
+  Colruyt Group: FY 2026-03-31 EUR, 521 facts, revenue 10568.2
+  Colruyt Group: FY 2025-03-31 EUR, 552 facts, revenue 10963.4
+  Colruyt Group: FY 2024-03-31 EUR, 398 facts, revenue 10844.8
+  Ageas: FY 2025-12-31 EUR, 370 facts, revenue None
+  Ageas: FY 2024-12-31 EUR, 549 facts, revenue None
+  D'Ieteren Group: FY 2025-12-31 EUR, 470 facts, revenue 8033.5
+  D'Ieteren Group: FY 2024-12-31 EUR, 491 facts, revenue 8154.7
+  D'Ieteren Group: FY 2023-12-31 EUR, 530 facts, revenue 7983.6
+  Proximus Group: FY 2025-12-31 EUR, 527 facts, revenue 6248.0
+  Proximus Group: FY 2024-12-31 EUR, 502 facts, revenue 6376.0
+  Groupe Bruxelles Lambert: FY 2025-12-31 EUR, 419 facts, revenue 6221.7
+  Groupe Bruxelles Lambert: FY 2024-12-31 EUR, 419 facts, revenue 6198.0
+  Ackermans & van Haaren: FY 2025-12-31 EUR, 560 facts, revenue 5961.6
+  time budget used, the rest next run
+read 17 reports this run; wrote 8 companies to data/stori-history.json
+  Anheuser-Busch InBev: 2023 rev 59380.0 net 5341.0, 2024 rev 59768.0 net 5855.0, 2025 rev 59320.0 net 6837.0
+  KBC Group: 2023 rev 11224.0 net 3402.0, 2024 rev 11167.0 net 3415.0, 2025 rev 12200.0 net 3568.0
+  Colruyt Group: 2023 rev 9691.0 net 200.6, 2024 rev 10844.8 net 1050.9, 2025 rev 10248.2 net 337.3, 2026 rev 10568.2 net 303.5
+  Ageas: 2023 rev None net 953.0, 2024 rev None net 1118.0, 2025 rev None net 1712.0
+  D'Ieteren Group: 2022 rev 4714.6 net 332.7, 2023 rev 7983.6 net 504.7, 2024 rev 8154.7 net 372.1, 2025 rev 8033.5 net 424.5
+  Proximus Group: 2023 rev 5993.0 net 357.0, 2024 rev 6376.0 net 447.0, 2025 rev 6248.0 net 398.0
+  Groupe Bruxelles Lambert: 2023 rev 6137.3 net 1723.2, 2024 rev 6055.7 net 132.3, 2025 rev 6221.7 net -625.4
+  Ackermans & van Haaren: 2024 rev 6043.3 net 459.9, 2025 rev 5961.6 net 592.5
