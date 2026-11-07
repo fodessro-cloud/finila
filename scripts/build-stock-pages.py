@@ -1467,7 +1467,8 @@ def page(c, peers, updated, med=None):
     fin = '<p class="modal-report-src">Bank or insurer: EBITDA, free cash flow and net debt are not shown because they do not describe these businesses well.</p>' if c.get('financial') else ''
     nd = c.get('netDebtToEbitda')
     ndv = ('<span class="pos">net cash</span>' if nd < 0 else f'{num(nd, 2)}×') if is_num(nd) else '—'
-    intro = f'{esc(c["name"])} is a{"n" if (c.get("sector") or "x")[0].lower() in "aeiou" else ""} {esc((c.get("sector") or "listed").lower())} company from {esc(country)}' + \
+    kind = c.get('subindustry') or c.get('group') or c.get('sector') or 'listed'   # bpost: "a logistics & postal company", not "an industrials company"
+    intro = f'{esc(c["name"])} is a{"n" if kind[0].lower() in "aeiou" else ""} {esc(kind.lower())} company from {esc(country)}' + \
         (f', listed on {esc(c["exchange"])}' + (f' under the ticker {esc(c["ticker"])}' if c.get('ticker') else '') if c.get('exchange') else '') + \
         (f'. In the financial year ending {esc(c["periodEnd"])} it reported revenue of {bn(c["revenue"], cur)}' if is_num(c.get('revenue')) else '') + \
         (f' and net income of {bn(c["netIncome"], cur)}' if is_num(c.get('netIncome')) and is_num(c.get('revenue')) else '') + '.'
