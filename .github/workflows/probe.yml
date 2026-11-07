@@ -13,14 +13,25 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
-      - name: bpost 3Q26 release text (FSMA STORI)
+      - name: bpost annual report (FSMA STORI)
         run: |
           pip install -q pypdf
-          curl -sS -A 'FINILA data refresh (finila.com)' -m 120 'https://webapi.fsma.be/api/v1/en/stori/download?fileDataId=473b78cf-ca3a-4786-b1dd-8c7eb96a67b4' -o r.pdf
+          B=https://webapi.fsma.be/api/v1/en/stori
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 60 -H 'Content-Type: application/json' \
+            -d '{"startRowIndex":0,"pageSize":40,"sortDirection":"Descending","companyId":"70c2d6a2-8c5d-42d4-82b7-83a7a5c527d9","publicationStart":"2025-11-01"}' "$B/result" -o res.json
+          echo 00448840-66ce-4451-82e8-e17f654880e9 > id
+          sleep 30
+          ID=$(cat id)
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 400 "$B/download?fileDataId=$ID" -o a.xhtml; ls -la a.xhtml
           python3 -c "
-          from pypdf import PdfReader
-          r = PdfReader('r.pdf'); print(len(r.pages), 'pages')
-          for i, p in enumerate(r.pages[:14]):
-              print('=== page', i + 1); print(p.extract_text())"
+          import re, html
+          raw = open('a.xhtml', encoding='utf-8', errors='replace').read()
+          print('nonFraction', raw.count('ix:nonFraction'), 'nonNumeric', raw.count('ix:nonNumeric'))
+          names = re.findall(r'<ix:nonFraction[^>]*name=\"([^\"]+)\"', raw)
+          from collections import Counter; print(Counter(n for n in names if n.startswith('ifrs-full:')).most_common(15))
+          t = re.sub(r'\\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'(?is)<(style|script)[^>]*>.*?</\\1>', ' ', raw))))
+          print(len(t), 'chars')
+          for m in re.finditer(r'(?i)[^.]{0,300}(management contract|public service|concession|universal service|press distribution)[^.]{0,300}\\.', t):
+              print('---', m.group(0)[:600])" | head -120

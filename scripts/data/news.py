@@ -444,7 +444,7 @@ NOT_COMMERCIAL = (r"\b(appoint|appointed|ceo|cfo|chief|board|annual general meet
                   r"own shares|dividend|interim report|webcast|resigned|step down|succeed|named winner|award(s|ed)? for|ranked)\b")
 
 
-SECTIONS_VERSION = 5
+SECTIONS_VERSION = 6
 OUTLOOK_JUNK = r"this (release|report) is a summary|is attached|available (at|on)|www\.|please refer|refer to|defined in|^\d+ "
 OUTLOOK_WORD = r"\b(expect|estimat|anticipat|forecast|guidance|outlook|target|project|will|aim|believ|plan|foresee|assum|predict)"
 
@@ -492,7 +492,7 @@ def pdf_blocks(text):
             cur[1] = re.sub(r"(?<=[a-z])- (?=[a-z])", "", cur[1] + " " + l)
         if re.search(r"[.!?:]$|[.!?]”$", l) and not re.search(r"(?i)\b(vs|e\.g|i\.e|approx|incl|no|ca|cf)\.$", l) and not bullet:
             cur = None
-    fix = lambda t: re.sub(r"(\d)\. (\d+(?:[.,]\d+)?\s?%)", r"\1.\2", re.sub(r"(\d) \.(\d)", r"\1.\2", re.sub(r"\s+", " ", t))).strip()   # "487 .5", "6. 6%"
+    fix = lambda t: (lambda t: t.replace("ﬁ", "fi").replace("ﬂ", "fl"))(re.sub(r"(\d)\. (\d+(?:[.,]\d+)?\s?%)", r"\1.\2", re.sub(r"(\d) \.(\d)", r"\1.\2", re.sub(r"\s+", " ", t))).strip())   # "487 .5", "6. 6%", ligatures
     return [(h, fix(t)) for h, t in out]
 
 
@@ -576,36 +576,48 @@ WATCH = [
 WATCH_SKIP = r"\b(forward-looking|cautionary|disclaimer|this (press release|report) (contains|is)|for more information)\b"
 
 
+AHEAD = (r"\b(will|(?<!-)expects?|(?<!-)expected to|pending|awaiting|await\w*|negotiat\w*|renewal|to be (decided|signed|renewed)|"
+         r"upcoming|from 1 january|as of 1 january|next year|tender|consultation|proposal|draft|plans? to|intends?)\b")
+
+
+def explains_past(sent):
+    """A sentence that only explains last period's figures ("income decreased ... driven by the termination of ...")."""
+    low = sent.lower()
+    return bool(re.search(fr"\b({RESULT_LINE}|income|ebit|volumes?|margin)\b", low) and re.search(r"\b(decrease[ds]?|increase[ds]?|declin\w+|grew|rose|fell|amounted|contraction|driven by|reflect\w*|offset|due to|impacted)\b", low)
+                and not re.search(AHEAD, low))
+
+
 def watch_score(sent):
     """The quote that explains most: an amount (what it costs or brings), a word saying what kind of contract,
     rule or deal it is ("banking contract", not just "the 679 contract"), then the earliest (reports lead with what matters)."""
     low = sent.lower()
     amount = bool(re.search(r"\d[\d.,]*\s?(m|bn|mio\.?|million|billion)?\s?(eur|usd|sek|dkk|nok|chf|gbp|€|\$|£)|(€|\$|£)\s?\d|\d\s?%", low))
     kind = bool(re.search(r"\b(?!the\b|a\b|an\b|this\b|that\b|its\b|our\b|\d+\b)[a-z]{4,} (contract|agreement|concession|levy|fee|tax|ruling|lawsuit|acquisition|disposal)\b", low))
-    return (amount + kind, kind)
+    return (bool(re.search(AHEAD, low)), amount + kind, kind)   # what is still ahead first (Lub, 2026-11-07)
 
 
 def watch_items(blocks, limit=5):
     """At most one quote per topic: the first that gives a figure or a name, else the first (reports lead with what matters)."""
-    found = {}
+    found, ahead = {}, False
     for head, text in blocks:
-        if head:
+        if head:   # inside the outlook section (and its sub-headings such as "Bpost 4Q26") everything is about what comes
+            ahead = bool(re.search(H_OUTLOOK, text, re.I)) or (ahead and bool(re.search(r"\b([1-4]Q\d\d|Q[1-4]|20\d\d)\b", text)))
             continue
-        for sent in re.split(r"(?<=[a-z0-9%\)”][.!?])\s+(?=[A-Z“])", text):
+        for sent in re.split(r"(?<=[A-Za-z0-9%\)”][.!?])\s+(?=[A-Z“])", text):
             sent = sent.strip()
-            if not 50 <= len(sent) <= 360 or re.search(BROKEN, sent) or re.search(WATCH_SKIP, sent, re.I):
+            if not 50 <= len(sent) <= 360 or re.search(BROKEN, sent) or re.search(WATCH_SKIP, sent, re.I) or (not ahead and explains_past(sent)):
                 continue
             low = sent.lower()
             for topic, rx in WATCH:
                 if re.search(rx, low):
-                    found.setdefault(topic, []).append(sent)
+                    found.setdefault(topic, []).append(("\x00" if ahead else "") + sent)
     out, used = [], set()
     for topic, _ in WATCH:
         c = [x for x in found.get(topic, []) if x not in used]
         if c and len(out) < limit:
-            pick = max(c, key=watch_score)
+            pick = max(c, key=lambda x: (x.startswith("\x00"),) + watch_score(x.lstrip("\x00")))
             used.add(pick)
-            out.append({"topic": topic, "text": pick})
+            out.append({"topic": topic, "text": pick.lstrip("\x00")})
     return out
 
 

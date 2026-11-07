@@ -1083,6 +1083,22 @@ def nice_date(d):
         return d or ''
 
 
+try:
+    WATCH_NOTES = json.loads((SRC / 'data' / 'watch-notes.json').read_text(encoding='utf-8'))
+except (OSError, ValueError):
+    WATCH_NOTES = {}
+
+
+def watch_note(c, text):
+    """FINILA's own one-line explanation of a term in the company's quote (Lub, 2026-11-07: the visitor should not
+    have to leave the page), kept apart from the quote and linked to an official source."""
+    for n in WATCH_NOTES.get(c['lei'], []):
+        if n['match'].lower() in text.lower():
+            return (f'<br><small class="sp-note"><b>Explained by FINILA:</b> {esc(n["text"])} '
+                    f'<a href="{esc(n["source"])}" target="_blank" rel="noopener">{esc(n.get("sourceName") or "source")}</a></small>')
+    return ''
+
+
 def latest_report_html(c):
     """The newest quarterly / half-year / annual report announced on the exchange, quoted word for word."""
     r = c.get('latestReport')
@@ -1135,7 +1151,7 @@ def latest_report_html(c):
     watch = [w for w in r.get('watch') or [] if not re.search(BROKEN, w['text'])][:5] if os.environ.get('FINILA_WATCH') else []   # preview until Lub approves
     if watch:
         body = (f'<div class="sp-q sp-watch">{head("What to watch", "Matters the company itself raises in this report.")}<ul>'
-                + ''.join(f'<li><b>{esc(w["topic"])}:</b> “{esc(quote_clean(w["text"]))}”</li>' for w in watch) + '</ul></div>') + body
+                + ''.join(f'<li><b>{esc(w["topic"])}:</b> “{esc(quote_clean(w["text"]))}”{watch_note(c, w["text"])}</li>' for w in watch) + '</ul></div>') + body
     period = f'Q{n} {yr}' if n in (1, 2, 3) else (f'Full year {yr}' if n == 4 else '')
     return (f'<div class="sp-latest"><p class="sp-q-date"><b>Latest report{": " + period if period else ""}</b> · {esc(r["title"])}, published {esc(nice_date(r["date"]))} '
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the report</a></p>{body}</div>')
