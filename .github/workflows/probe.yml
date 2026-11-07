@@ -1,0 +1,26 @@
+name: Probe a public source (dev)
+
+# Prints what a public page looks like from GitHub Actions (the dev container cannot reach some hosts).
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['.github/workflows/probe.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: bpost 3Q26 release text (FSMA STORI)
+        run: |
+          pip install -q pypdf
+          curl -sS -A 'FINILA data refresh (finila.com)' -m 120 'https://webapi.fsma.be/api/v1/en/stori/download?fileDataId=473b78cf-ca3a-4786-b1dd-8c7eb96a67b4' -o r.pdf
+          python3 -c "
+          from pypdf import PdfReader
+          r = PdfReader('r.pdf'); print(len(r.pages), 'pages')
+          for i, p in enumerate(r.pages[:14]):
+              print('=== page', i + 1); print(p.extract_text())"

@@ -1131,6 +1131,11 @@ def latest_report_html(c):
             body += f'<div class="sp-q">{head(title, sub)}{ul(out)}</div>'
     if rest:
         body += f'<details class="sp-more"><summary>More from the report</summary>{ul(rest)}</details>'
+    # What to watch (Lub, 2026-11-07): contracts with the state, regulation, lawsuits, lost contracts, management, deals.
+    watch = [w for w in r.get('watch') or [] if not re.search(BROKEN, w['text'])][:5] if os.environ.get('FINILA_WATCH') else []   # preview until Lub approves
+    if watch:
+        body = (f'<div class="sp-q sp-watch">{head("What to watch", "Matters the company itself raises in this report.")}<ul>'
+                + ''.join(f'<li><b>{esc(w["topic"])}:</b> “{esc(quote_clean(w["text"]))}”</li>' for w in watch) + '</ul></div>') + body
     period = f'Q{n} {yr}' if n in (1, 2, 3) else (f'Full year {yr}' if n == 4 else '')
     return (f'<div class="sp-latest"><p class="sp-q-date"><b>Latest report{": " + period if period else ""}</b> · {esc(r["title"])}, published {esc(nice_date(r["date"]))} '
             f'{chip("r", "Exchange")} <a href="{esc(r["url"])}" target="_blank" rel="noopener">read the report</a></p>{body}</div>')
@@ -1351,7 +1356,8 @@ def events_html(c):
     """Company events FINILA records itself: managers' trades, short positions, the latest annual report."""
     ev = sorted(c.get('events', []), key=lambda e: e[0], reverse=True)[:12]
     nice = lambda d: date.fromisoformat(d).strftime('%-d %b %Y') if re.fullmatch(r'\d{4}-\d\d-\d\d', d or '') else d
-    ev += [(n['date'][:10], esc(n['title']) + ({'fr': ' <small class="ins-note">(in French)</small>', 'es': ' <small class="ins-note">(in Spanish)</small>'}.get(n.get('lang'), '')), n['url'], True)
+    ev += [(n['date'][:10], esc(n['title']) + ({'fr': ' <small class="ins-note">(in French)</small>', 'es': ' <small class="ins-note">(in Spanish)</small>',
+                                                     'nl': ' <small class="ins-note">(in Dutch)</small>'}.get(n.get('lang'), '')), n['url'], True)
            for n in c.get('news', [])]
     ev = sorted(ev, key=lambda e: e[0], reverse=True)[:12]
     items = ''.join(f'<li><time datetime="{esc(e[0])}">{esc(nice(e[0]))}</time><span>{e[1]}</span>'
@@ -1401,7 +1407,7 @@ def page(c, peers, updated, med=None):
         ('Share price, insider trades and short positions. ' if listed_only else
          f'Headline financials for {fy}, insider trades and short positions. ' if wd else
          f'Financials from the {fy} annual report, quality score, insider trades and short positions. ') + \
-        ', '.join(x for x in [country, c.get('sector')] if x) + '.'
+        ', '.join(x for x in [country, c.get('subindustry') or c.get('group') or c.get('sector')] if x) + '.'   # the most specific line of business (bpost: Logistics & postal, not Industrials)
     ld = {'@context': 'https://schema.org', '@type': 'Corporation', 'name': c['name'], 'url': url,
           'leiCode': c['lei'], 'address': {'@type': 'PostalAddress', 'addressCountry': c['country']}}
     if c.get('ticker'):
@@ -1461,7 +1467,8 @@ def page(c, peers, updated, med=None):
     fin = '<p class="modal-report-src">Bank or insurer: EBITDA, free cash flow and net debt are not shown because they do not describe these businesses well.</p>' if c.get('financial') else ''
     nd = c.get('netDebtToEbitda')
     ndv = ('<span class="pos">net cash</span>' if nd < 0 else f'{num(nd, 2)}×') if is_num(nd) else '—'
-    intro = f'{esc(c["name"])} is a{"n" if (c.get("sector") or "x")[0].lower() in "aeiou" else ""} {esc((c.get("sector") or "listed").lower())} company from {esc(country)}' + \
+    kind = c.get('subindustry') or c.get('group') or c.get('sector') or 'listed'   # bpost: "a logistics & postal company", not "an industrials company"
+    intro = f'{esc(c["name"])} is a{"n" if kind[0].lower() in "aeiou" else ""} {esc(kind.lower())} company from {esc(country)}' + \
         (f', listed on {esc(c["exchange"])}' + (f' under the ticker {esc(c["ticker"])}' if c.get('ticker') else '') if c.get('exchange') else '') + \
         (f'. In the financial year ending {esc(c["periodEnd"])} it reported revenue of {bn(c["revenue"], cur)}' if is_num(c.get('revenue')) else '') + \
         (f' and net income of {bn(c["netIncome"], cur)}' if is_num(c.get('netIncome')) and is_num(c.get('revenue')) else '') + '.'
@@ -1503,7 +1510,7 @@ def page(c, peers, updated, med=None):
     <div class="modal-header">
       <div>
         <h1 class="sp-title">{esc(c["name"])} {f'<span class="modal-name">{esc(c["ticker"])}{" · " + esc(c["exchange"]) if c.get("exchange") else ""}</span>' if c.get("ticker") else ""}</h1>
-        <div class="modal-meta">{esc(country)}{" · " + esc(c["sector"]) if c.get("sector") else ""}{" · " + esc(" · ".join(x for x in (c.get("group"), c.get("subindustry")) if x) or c["industry"]) if c.get("group") or c.get("industry") else ""} · ISIN {esc(c["isin"])} · LEI {esc(c["lei"])}</div>
+        <div class="modal-meta">{esc(country)}{" · " + esc(" · ".join(x for x in (c.get("subindustry"), c.get("group")) if x) or c["industry"]) if c.get("group") or c.get("industry") else ""}{" · " + ("sector " if c.get("group") or c.get("industry") else "") + esc(c["sector"]) if c.get("sector") else ""} · ISIN {esc(c["isin"])} · LEI {esc(c["lei"])}</div>
       </div>
     </div>
     {price}

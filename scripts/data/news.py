@@ -37,7 +37,7 @@ REPORT_HEAD = (r"interim report|quarter(ly)? report|\bq[1-4]\b.{0,12}\b(report|r
                r"\b(q[1-4]|h[12]|9m|[1-4]q)\s?20\d\d\b|\b(first|second|third|fourth)[- ]quarter\b|fiscal 20\d\d results|sales at 3\d (march|june|september|december)|"
                r"resultados (del|correspondientes al) (primer|segundo|tercer|cuarto|[1-4]t)|(primer|segundo|tercer|cuarto) trimestre|primer semestre|\b[1-4]t ?20\d\d\b|"
                r"(order intake|sales|revenue) as of (march|june|september|december) 3\d|activity indicators")
-REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly financial information|financial report"
+REPORT_CAT = r"interim report|half[- ]year|annual financial|year[- ]end|quarterly (financial )?information|financial report"
 SKIP_HEAD = (r"invitation|presentation of|webcast|conference call|audiocast|teleconference|capital markets day|"
              r"contratos? de liquidez|acciones propias|operaciones (realizadas )?(al amparo|sobre acciones propias)|autocartera|recompra de acciones|"
              r"franchissement de seuils?|d[ée]claration des transactions|nombre total de droits de vote|contrat de liquidit[ée]|"
@@ -56,11 +56,25 @@ RESULT_VERB = (r"increased|decreased|rose|fell|grew|declined|amounted|was|were|t
                r"came in|ended at|up \d|down \d|growth of|increase of|decrease of|compared")
 
 
-def get(url, as_json=True, tries=(0, 5, 20)):
+CRAWL_DELAY = {"fsma.be": 30}   # seconds between requests, from the host's robots.txt
+_last = {}
+
+
+def polite(url):
+    host = urllib.parse.urlparse(url).hostname or ""
+    for h, delay in CRAWL_DELAY.items():
+        if host == h or host.endswith("." + h):
+            time.sleep(max(0, _last.get(h, 0) + delay - time.time()))
+            _last[h] = time.time()
+
+
+def get(url, as_json=True, tries=(0, 5, 20), data=None):
     for wait in tries:
         time.sleep(wait)
+        polite(url)
         try:
-            req = urllib.request.Request(url, headers=UA)
+            req = urllib.request.Request(url, headers={**UA, **({"Content-Type": "application/json"} if data else {})},
+                                         data=json.dumps(data).encode() if data else None)
             with urllib.request.urlopen(req, timeout=60) as r:
                 body = r.read()
                 return (json.loads(body) if as_json else (body, r.headers.get("Content-Type", "")))
@@ -119,13 +133,17 @@ def matcher(by_name):
     return find, fuzzy
 
 
+def pdf_lines(raw, pages=12):
+    from pypdf import PdfReader
+    pdf = PdfReader(io.BytesIO(raw))
+    return "\n".join((p.extract_text() or "") for p in pdf.pages[:pages])
+
+
 def text_of(raw, ctype):
     """Plain text of an announcement page or its PDF attachment."""
     if b"%PDF" in raw[:1024] or "pdf" in (ctype or "").lower():
         try:
-            from pypdf import PdfReader
-            pdf = PdfReader(io.BytesIO(raw))
-            return re.sub(r"\s+", " ", " ".join((p.extract_text() or "") for p in pdf.pages[:12]))
+            return re.sub(r"\s+", " ", pdf_lines(raw))
         except Exception as e:
             print(f"  ! pdf: {e}", flush=True)
             return ""
@@ -353,6 +371,45 @@ def oslo(since, today):
     return out
 
 
+def belgium(since, today):
+    """FSMA STORI, the Belgian official storage of regulated information (fsma.be/en/stori; site content under
+    CC BY 4.0, robots.txt asks 30 s between requests). Each filing carries the issuer's LEI and ISIN; the
+    same release filed under two topics (e.g. quarterly information and inside information) is kept once."""
+    page = get("https://www.fsma.be/en/stori", as_json=False)
+    m = re.search(rb'"vueToolsApi":"([^"]+)"', page[0]) if page else None
+    if not m:
+        print("  ! STORI: no API address on the page", flush=True)
+        return []
+    base = m.group(1).decode().replace("\\/", "/") + "/api/v1/en/stori"
+    rows, start = [], 0
+    while start < 3000:
+        d = get(base + "/result", data={"startRowIndex": start, "pageSize": 100, "sortDirection": "Descending",
+                                         "publicationStart": since.isoformat(), "publicationEnd": today.isoformat()})
+        part = (d or {}).get("storiResultItems") or []
+        rows += part
+        if len(part) < 100:
+            break
+        start += 100
+    out, seen = [], set()
+    for r in sorted(rows, key=lambda r: (not re.search(REPORT_CAT, r.get("reportingTopicName") or "", re.I), r.get("datePublication") or "")):
+        docs = r.get("mainDocuments") or []
+        doc = next((x for x in docs if x.get("language") == "en"), docs[0] if docs else None)
+        key = (r.get("lei") or r.get("companyName"), (doc or {}).get("originalFileName"), (r.get("datePublication") or "")[:10])
+        if not doc or key in seen:   # each filing has its own file ids, so the same release is known by name and day
+            continue
+        seen.add(key)
+        name = re.sub(r"(?i)[ _-]*\b(eng?|english|nl|fr)\b[ _-]*(?=\.\w+$)|\.\w+$", "", doc.get("title") or doc.get("originalFileName") or "").strip()
+        topic = (r.get("reportingTopicName") or "").strip()
+        isins = [i.get("code") for i in r.get("isinCodes") or [] if i.get("isinType") == "Shares"]
+        out.append({"id": "be" + doc["fileDataId"], "src": "FSMA Belgium", "company": r.get("companyName") or "",
+                    "lei": r.get("lei"), "isin": isins[0] if isins else None,
+                    "title": (r.get("documentTitle") or "").strip() or (f"{topic}: {name}" if name else topic), "cat": topic,
+                    "time": (r.get("datePublication") or "").replace("T", " ")[:19], "url": f"{base}/download?fileDataId={doc['fileDataId']}",
+                    "att": [], **({"lang": doc["language"]} if doc.get("language") in ("fr", "nl") else {})})
+    print(f"FSMA Belgium: {len(rows)} filings, {len(out)} kept", flush=True)
+    return out
+
+
 def is_report(a):
     if norwegian(a):
         return False
@@ -387,7 +444,7 @@ NOT_COMMERCIAL = (r"\b(appoint|appointed|ceo|cfo|chief|board|annual general meet
                   r"own shares|dividend|interim report|webcast|resigned|step down|succeed|named winner|award(s|ed)? for|ranked)\b")
 
 
-SECTIONS_VERSION = 3
+SECTIONS_VERSION = 5
 OUTLOOK_JUNK = r"this (release|report) is a summary|is attached|available (at|on)|www\.|please refer|refer to|defined in|^\d+ "
 OUTLOOK_WORD = r"\b(expect|estimat|anticipat|forecast|guidance|outlook|target|project|will|aim|believ|plan|foresee|assum|predict)"
 
@@ -409,11 +466,41 @@ def html_blocks(raw):
     return out
 
 
-def html_sections(raw):
+BULLET = r"^\s*([\uf0b7\uf0a7\uf0d8\uf076•▪●◦■►✓]|-|–|o(?=\s+[A-Z]))\s+"
+PAGE_MARK = r"(?i)\bpage \d+ (of|/) \d+\b|^\s*\d+\s*$"
+
+
+def pdf_blocks(text):
+    """Report PDF text (lines as extracted) -> [(is_heading, text)] like html_blocks: a bullet starts a block, a
+    paragraph runs until a line ends a sentence, a short line without end punctuation that stands alone is a heading."""
+    out, cur = [], None
+    lines = [l.strip() for l in text.splitlines()]
+    for i, l in enumerate(lines):
+        if not l or re.search(PAGE_MARK, l):
+            continue
+        bullet = re.match(BULLET, l)
+        nxt = next((x for x in lines[i + 1:] if x and not re.search(PAGE_MARK, x)), "")
+        heading = not bullet and len(l) < 70 and not re.search(r"[.,;:)%]$|^\(|^\d", l) and (re.match(BULLET, nxt) or nxt[:1].isupper()) \
+            and (cur is None or cur[1].endswith((".", ":", "”", '"')) or re.search(f"{H_HIGHLIGHTS}|{H_OUTLOOK}|{H_EVENTS}", l, re.I))
+        if heading:
+            out.append([True, l]); cur = None
+            continue
+        if bullet or cur is None:
+            cur = [False, re.sub(BULLET, "", l)]
+            out.append(cur)
+        else:
+            cur[1] = re.sub(r"(?<=[a-z])- (?=[a-z])", "", cur[1] + " " + l)
+        if re.search(r"[.!?:]$|[.!?]”$", l) and not re.search(r"(?i)\b(vs|e\.g|i\.e|approx|incl|no|ca|cf)\.$", l) and not bullet:
+            cur = None
+    fix = lambda t: re.sub(r"(\d)\. (\d+(?:[.,]\d+)?\s?%)", r"\1.\2", re.sub(r"(\d) \.(\d)", r"\1.\2", re.sub(r"\s+", " ", t))).strip()   # "487 .5", "6. 6%"
+    return [(h, fix(t)) for h, t in out]
+
+
+def html_sections(raw, blocks=None):
     """{"highlights": [...], "events": [...], "outlook": [...], "outlook_head": heading} from the report's own headings.
     Highlights prefer the section about the quarter alone over the year-to-date one."""
     found, heads, cur = {}, {}, None
-    for head, text in html_blocks(raw):
+    for head, text in blocks if blocks is not None else html_blocks(raw):
         if head:
             t = text.strip(" :*").lower()
             cur = "events" if re.search(H_EVENTS, t) else "outlook" if re.search(H_OUTLOOK, t) \
@@ -449,8 +536,10 @@ def pick_sections(sec, year):
     whether the company raised, lowered or confirmed it."""
     hl = []
     for x in sec["highlights"]:
+        if hl and len(x) < 40 and not re.search(r"\d", x):
+            break   # a segment name ("Bpost", "Paxon"): the lines after it are about that segment, not the group
         t = first_sentences(x)
-        if t and re.search(ol.NUMBER, t) and re.search(fr"\b({RESULT_LINE})", t.lower()) and not re.search(BROKEN, t):
+        if t and re.search(ol.NUMBER + r"|\d\s?(?:m|bn|mio\.?\s?)?(?:EUR|eur|USD|SEK|DKK|NOK|CHF|GBP)\b", t) and re.search(fr"\b({RESULT_LINE})", t.lower()) and not re.search(BROKEN, t):
             hl.append(t)
     ev = []
     for x in sec["events"]:
@@ -468,6 +557,56 @@ def pick_sections(sec, year):
             break
     return {"highlights": hl[:3], "events": ev[:2], "outlook": out_txt,
             "change": outlook_change(" ".join([sec.get("title") or "", sec.get("outlook_head") or ""] + sec["outlook"][:3] + sec["highlights"]))}
+
+
+# ---- What to watch (Lub, 2026-11-07): things the company itself flags in its newest report that an owner should
+# follow (a contract with the state, regulation, a lawsuit, a lost contract, a new CEO, a deal), quoted word for word.
+WATCH = [
+    ("State and public contracts", r"\b(management contract|public service (obligation|contract|mission)|concession|government contract|state contract|"
+                                    r"(contract|agreement|negotiations?) with the (\w+ )?(state|government)|universal service)\b"),
+    ("Contracts won or lost", r"\b(terminat\w+|loss of|lost|won|awarded|renew\w*|signed|extended)\b[^.]{0,50}\bcontracts?\b|"
+                               r"\bcontracts?\b[^.]{0,30}\b(terminat\w+|ended|roll-offs?|churn|expir\w+)"),
+    ("Regulation and taxes", r"\b(regulator\w*|regulatory (headwinds?|changes?|decision|approval)|levy|levies|new tax|tariffs?|"
+                              r"antitrust|competition authority|european commission|price cap|licen[cs]e (renewal|withdraw))"),
+    ("Legal matters", r"\b(litigation|lawsuit|legal proceedings?|court|arbitration|investigation|settlement|class action|customer claims)\b"),
+    ("Management", r"\bappoint\w*\b[^.]{0,80}\b(ceo|cfo|chief executive|chief financial|chair\w*)\b|\b(ceo|cfo)\b[^.]{0,40}\b(step down|resign\w*|leave|depart\w*)\b"),
+    ("Deals", r"\b(acquisition of|acquired|to acquire|divest\w*|disposal of|sale of (its|the|our)|merger|takeover|joint venture|strategic review)\b"),
+    ("Strikes and disruption", r"\bstrikes?\b|industrial action|cyber[- ]?(attack|incident)|outage"),
+]
+WATCH_SKIP = r"\b(forward-looking|cautionary|disclaimer|this (press release|report) (contains|is)|for more information)\b"
+
+
+def watch_score(sent):
+    """The quote that explains most: an amount (what it costs or brings), a word saying what kind of contract,
+    rule or deal it is ("banking contract", not just "the 679 contract"), then the earliest (reports lead with what matters)."""
+    low = sent.lower()
+    amount = bool(re.search(r"\d[\d.,]*\s?(m|bn|mio\.?|million|billion)?\s?(eur|usd|sek|dkk|nok|chf|gbp|€|\$|£)|(€|\$|£)\s?\d|\d\s?%", low))
+    kind = bool(re.search(r"\b(?!the\b|a\b|an\b|this\b|that\b|its\b|our\b|\d+\b)[a-z]{4,} (contract|agreement|concession|levy|fee|tax|ruling|lawsuit|acquisition|disposal)\b", low))
+    return (amount + kind, kind)
+
+
+def watch_items(blocks, limit=5):
+    """At most one quote per topic: the first that gives a figure or a name, else the first (reports lead with what matters)."""
+    found = {}
+    for head, text in blocks:
+        if head:
+            continue
+        for sent in re.split(r"(?<=[a-z0-9%\)”][.!?])\s+(?=[A-Z“])", text):
+            sent = sent.strip()
+            if not 50 <= len(sent) <= 360 or re.search(BROKEN, sent) or re.search(WATCH_SKIP, sent, re.I):
+                continue
+            low = sent.lower()
+            for topic, rx in WATCH:
+                if re.search(rx, low):
+                    found.setdefault(topic, []).append(sent)
+    out, used = [], set()
+    for topic, _ in WATCH:
+        c = [x for x in found.get(topic, []) if x not in used]
+        if c and len(out) < limit:
+            pick = max(c, key=watch_score)
+            used.add(pick)
+            out.append({"topic": topic, "text": pick})
+    return out
 
 
 def outlook_change(t):
@@ -488,6 +627,11 @@ def outlook_change(t):
     if near(r"(unchanged|confirm|affirm|reaffirm|reiterat|maintain|remains? unchanged)") or \
             re.search(r"in line with (the )?previous(ly)? (communicat|guidance|outlook|announced)|as previously (communicated|announced)|\(unchanged[,)]", low):
         return "confirmed"
+    m = re.search(r"now (?:expects?|sees?|anticipates?)\b[^.]{0,120}?(\d+(?:[.,]\d+)?)\s*(?:-|–|to)?\s*(\d+(?:[.,]\d+)?)?\s*(?:%|m?eur|bn|million|billion|m)?\s*\(vs\.?(?: \.)? (?:around |about |approximately )?(\d+(?:[.,]\d+)?)", low)
+    if m:   # bpost 3Q26: "now expects an adjusted EBIT between 95-105 mEUR (vs. around 140 mEUR previously ...)"
+        now, before = float((m.group(2) or m.group(1)).replace(",", ".")), float(m.group(3).replace(",", "."))
+        if now != before:
+            return "lowered" if now < before else "raised"
     if near(r"(updated|updates|narrow|specified|specifies|revised|revises)"):
         return "updated"
     return None
@@ -510,7 +654,7 @@ def report_change(a):
 def read_report(a):
     """Text of a report announcement (the release itself, else its first readable attachment) and the
     sections under its own headings when the release is an HTML page."""
-    best, a["_html"] = "", None
+    best, a["_html"], a["_pdf"] = "", None, None
     if a.get("api"):   # Oslo: the message API carries the release text
         d = get(a["api"])
         body = ((d or {}).get("data") or {}).get("message") or {}
@@ -528,6 +672,11 @@ def read_report(a):
         best = text_of(*r)
         if not (b"%PDF" in r[0][:1024] or "pdf" in (r[1] or "").lower()):
             a["_html"] = r[0]
+        else:
+            try:
+                a["_pdf"] = pdf_lines(r[0])
+            except Exception as e:
+                print(f"  ! pdf lines: {e}", flush=True)
     for u in a["att"][:2]:
         if len(best) >= 8000:
             break
@@ -555,11 +704,12 @@ def main():
     today = date.today()
     since = today - timedelta(days=DAYS)
     by_isin = {r["isin"]: r["lei"] for r in rows if r.get("isin")}
-    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today) + spain(since, today)
+    names = {r["lei"]: r["name"] for r in rows}
+    fresh = nasdaq(since, today) + oslo(since, today) + france(since, today) + spain(since, today) + belgium(since, today)
     print(f"{len(fresh)} announcements since {since}", flush=True)
     unmatched = {}
     for a in fresh:
-        lei = by_isin.get(a.get("isin") or "") or by_sign.get((a.get("sign") or "").upper()) or (None if a.get("isin") else find(a["company"]))
+        lei = (a.get("lei") if a.get("lei") in names else None) or by_isin.get(a.get("isin") or "") or by_sign.get((a.get("sign") or "").upper()) or (None if a.get("isin") else find(a["company"]))
         if not lei:
             unmatched[a["company"]] = unmatched.get(a["company"], 0) + 1
             continue
@@ -585,9 +735,12 @@ def main():
         a["chars"] = len(text)
         a["results"], a["outlook"] = quotes(text, year) if text else ([], [])
         a["quarter"] = report_quarter(a["title"], text, a["time"])
-        raw = a.pop("_html", None)
+        raw, pdf = a.pop("_html", None), a.pop("_pdf", None)
         try:
-            a["sections"] = pick_sections({**html_sections(raw), "title": a["title"]}, year) if raw else None
+            blocks = html_blocks(raw) if raw else pdf_blocks(pdf) if pdf else None
+            sec = html_sections(None, blocks) if blocks else None
+            a["watch"] = watch_items(blocks) if blocks else []
+            a["sections"] = pick_sections({**sec, "title": a["title"]}, year) if sec else None
         except Exception as e:   # a strange page must not stop the run
             print(f"  ! sections {a['id']}: {e}", flush=True)
             a["sections"] = None
@@ -604,13 +757,13 @@ def main():
         o = out.setdefault(a["lei"], {"news": []})
         if len(o["news"]) < MAX_NEWS:
             o["news"].append({"date": a["time"][:16], "title": a["title"], "cat": a["cat"], "url": a["url"], "src": a["src"],
-                              **({"lang": a["lang"]} if a.get("lang") in ("fr", "es") else {})})
+                              **({"lang": a["lang"]} if a.get("lang") in ("fr", "es", "nl") else {})})
         if is_report(a) and "results" in a:
             a["quarter"] = report_quarter(a["title"], "", a["time"]) if report_quarter(a["title"], "", "") else a.get("quarter")
         if is_report(a) and "report" not in o and "results" in a:
             o["report"] = {"date": a["time"][:16], "title": a["title"], "url": a["url"], "src": a["src"],
                            "results": a["results"], "outlook": a["outlook"],
-                           "quarter": a.get("quarter"), "sections": a.get("sections"),
+                           "quarter": a.get("quarter"), "sections": a.get("sections"), "watch": a.get("watch") or [],
                            "change": report_change(a)}
     OUT.write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False))
     print(f"news for {len(out)} companies, {sum('report' in v for v in out.values())} with a report; read {read} reports this run", flush=True)
