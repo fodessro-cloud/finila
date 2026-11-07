@@ -1402,7 +1402,7 @@ def page(c, peers, updated, med=None):
         ('Share price, insider trades and short positions. ' if listed_only else
          f'Headline financials for {fy}, insider trades and short positions. ' if wd else
          f'Financials from the {fy} annual report, quality score, insider trades and short positions. ') + \
-        ', '.join(x for x in [country, c.get('sector')] if x) + '.'
+        ', '.join(x for x in [country, c.get('subindustry') or c.get('group') or c.get('sector')] if x) + '.'   # the most specific line of business (bpost: Logistics & postal, not Industrials)
     ld = {'@context': 'https://schema.org', '@type': 'Corporation', 'name': c['name'], 'url': url,
           'leiCode': c['lei'], 'address': {'@type': 'PostalAddress', 'addressCountry': c['country']}}
     if c.get('ticker'):
@@ -1504,7 +1504,7 @@ def page(c, peers, updated, med=None):
     <div class="modal-header">
       <div>
         <h1 class="sp-title">{esc(c["name"])} {f'<span class="modal-name">{esc(c["ticker"])}{" · " + esc(c["exchange"]) if c.get("exchange") else ""}</span>' if c.get("ticker") else ""}</h1>
-        <div class="modal-meta">{esc(country)}{" · " + esc(c["sector"]) if c.get("sector") else ""}{" · " + esc(" · ".join(x for x in (c.get("group"), c.get("subindustry")) if x) or c["industry"]) if c.get("group") or c.get("industry") else ""} · ISIN {esc(c["isin"])} · LEI {esc(c["lei"])}</div>
+        <div class="modal-meta">{esc(country)}{" · " + esc(" · ".join(x for x in (c.get("subindustry"), c.get("group")) if x) or c["industry"]) if c.get("group") or c.get("industry") else ""}{" · " + ("sector " if c.get("group") or c.get("industry") else "") + esc(c["sector"]) if c.get("sector") else ""} · ISIN {esc(c["isin"])} · LEI {esc(c["lei"])}</div>
       </div>
     </div>
     {price}
