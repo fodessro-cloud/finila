@@ -1,0 +1,25 @@
+name: Probe a public source (dev)
+
+# Prints what a public page looks like from GitHub Actions (the dev container cannot reach some hosts).
+on:
+  push:
+    branches: [claude/project-thread-z7m788]
+    paths: ['.github/workflows/probe.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: STORI (FSMA, Belgium)
+        run: |
+          UA='FINILA data refresh (finila.com)'
+          for u in https://www.fsma.be/en/stori https://www.fsma.be/robots.txt; do
+            echo "=== $u"; curl -sSL -A "$UA" -m 60 -D - "$u" -o page.html | grep -i '^HTTP\|^location' || true
+            grep -oiE '(href|src|action)="[^"]+"' page.html | grep -viE '\.(css|png|svg|gif|ico|woff2?)|/sites/default/files/(css|js)' | sort -u | head -150
+            [ "${u##*.}" = txt ] && cat page.html
+          done
