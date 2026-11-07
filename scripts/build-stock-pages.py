@@ -171,6 +171,17 @@ def add_history_figures(rows):
                 hist[lei] = h
     except (OSError, ValueError):
         pass
+    # Belgian ESEF annual reports from FSMA STORI (scripts/data/stori_esef.py), which filings.xbrl.org often
+    # lacks (bpost 2024, 2025): their years join the ESEF years, a year already there is kept.
+    try:
+        for lei, h in json.loads((SRC / 'data' / 'stori-history.json').read_text(encoding='utf-8')).items():
+            old = hist.get(lei)
+            if not old or not old.get('years'):
+                hist[lei] = h
+            elif old.get('currency') == h['currency']:
+                hist[lei] = {**old, 'years': dict(sorted({**h['years'], **old['years']}.items()))}
+    except (OSError, ValueError):
+        pass
     for c in rows:
         h = hist.get(c['lei'])
         if not h or c.get('origin') not in (None, 'hand') or h['currency'] != c.get('currency'):
