@@ -1,10 +1,59 @@
-AMF France: 1133 filings, 741 kept
+AMF France: 5234 filings, 3443 kept
 CNMV Spain: 2 notices
-FSMA Belgium: 83 filings, 77 kept
-5421 announcements since 2026-10-24
-matched 781 companies; unmatched names (top): [('Sveriges Riksbank', 23), ('Nykredit Realkredit A/S', 21), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 19), ('Dataproces Group A/S', 17), ('PPI Public Property Invest AB', 17), ('Inderes Oyj', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Lánamál ríkisins', 14), ('Realfiction Holding AB', 14), ('Kuntarahoitus Oyj.', 13), ('Betolar Oyj', 12), ('AI Revenue Assistant Software Stockholm AB', 12), ('White Pearl Technology Group AB', 12), ('Loihde Oyj', 12), ('Besqab AB(publ)', 12), ('Gigasun AB', 11), ('Klaria Pharma Holding AB', 11), ('Calviks AB (publ)', 11), ('Minesto AB', 11), ('Realkredit Danmark A/S', 11), ('Endomines Finland Oyj', 10), ('Kambi Group Plc', 10), ('Totalkredit A/S', 10)]
+FSMA Belgium: 511 filings, 491 kept
+8537 announcements since 2026-08-09
+matched 878 companies; unmatched names (top): [('Sveriges Riksbank', 23), ('Nykredit Realkredit A/S', 21), ('Gentoo Media Inc.', 21), ('FLEURY MICHON', 21), ('ACHETER-LOUER.FR', 20), ('Trifork Group AG', 19), ('SIGNAUX GIROD', 18), ('Dataproces Group A/S', 17), ('PPI Public Property Invest AB', 17), ('CAISSE REGIONALE DE CREDIT AGRICOLE MUTUEL BRIE PICARDIE', 17), ('CAISSE REGIONALE DE CREDIT AGRICOLE MUTUEL ALPES PROVENCE', 16), ('Inderes Oyj', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('CAISSE REGIONALE DE CREDIT AGRICOLE MUTUEL TOULOUSE 31', 15), ('Lánamál ríkisins', 14), ('Realfiction Holding AB', 14), ('EUROPLASMA', 14), ('CEGEDIM', 14), ('ATARI', 14), ('Kuntarahoitus Oyj.', 13), ('OXURION', 13), ('Betolar Oyj', 12), ('AI Revenue Assistant Software Stockholm AB', 12), ('White Pearl Technology Group AB', 12)]
 filler-word name matches: [('Ambea AB', 'Ambea AB ( publ )'), ('DNO ASA', 'DNO International'), ('Entra ASA', 'Entra Eiendom'), ('Ericsson, Telefonab. L M', 'Ericsson'), ('H. Lundbeck A/S', 'Lundbeck'), ('Kinnevik, Investment AB', 'Kinnevik AB'), ('Latour, Investmentab.', 'Investment AB Latour'), ('Lindab AB', 'Lindab International AB'), ('Moberg Pharma AB', 'Moberg Pharma (Sweden)'), ('Modern Times Group MTG AB', 'Modern Times Group'), ('Moreld ASA', 'Moreld AS'), ('Roblon A/S', 'Roblon Aktieselskab'), ('Senzime AB', 'Senzime AB (publ.)'), ('UPM-Kymmene Oyj', 'UPM'), ('WindowMaster International A/S', 'WindowMaster')]
-news for 781 companies, 627 with a report; read 19 reports this run
+Ignoring wrong pointing object 6 0 (offset 0)
+Ignoring wrong pointing object 8 0 (offset 0)
+Ignoring wrong pointing object 10 0 (offset 0)
+Ignoring wrong pointing object 13 0 (offset 0)
+Ignoring wrong pointing object 15 0 (offset 0)
+Ignoring wrong pointing object 17 0 (offset 0)
+Ignoring wrong pointing object 23 0 (offset 0)
+Ignoring wrong pointing object 30 0 (offset 0)
+Ignoring wrong pointing object 32 0 (offset 0)
+Ignoring wrong pointing object 34 0 (offset 0)
+Ignoring wrong pointing object 36 0 (offset 0)
+Ignoring wrong pointing object 38 0 (offset 0)
+Ignoring wrong pointing object 43 0 (offset 0)
+Ignoring wrong pointing object 45 0 (offset 0)
+Ignoring wrong pointing object 50 0 (offset 0)
+Ignoring wrong pointing object 52 0 (offset 0)
+Ignoring wrong pointing object 56 0 (offset 0)
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GRIJJX+Helvetica-Bold', '/FontDescriptor': IndirectObject(16, 0, 136531336822864), '/Type': '/Font', '/FirstChar': 32, '/LastChar': 116, '/Widths': [278, 0, 0, 0, 0, 0, 722, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 556, 0, 0, 333, 0, 0, 0, 0, 0, 0, 0, 0, 722, 0, 667, 0, 0, 0, 278, 0, 0, 611, 0, 0, 0, 0, 0, 0, 0, 0, 0, 667, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 556, 0, 556, 0, 556, 0, 611, 0, 278, 0, 0, 0, 889, 611, 611, 0, 0, 0, 556, 333], '/Encoding': '/WinAnsiEncoding', '/Subtype': '/Type1'}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/ZBGSHV+Times-Roman', '/FontDescriptor': IndirectObject(8, 0, 136531336822864), '/Type': '/Font', '/FirstChar': 32, '/LastChar': 32, '/Widths': [250], '/Encoding': '/WinAnsiEncoding', '/Subtype': '/Type1'}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/CHCTNO+MyriadPro-Regular', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 68, '/FontDescriptor': IndirectObject(4, 0, 136531331132320), '/LastChar': 88, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [666, 492, 487, 0, 0, 239, 0, 0, 472, 0, 658, 689, 0, 0, 538, 493, 497, 647, 0, 0, 571]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(82, 0, 136531328499680), '/FirstChar': 18, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [667, 612, 681, 677, 513, 269, 572, 598, 574, 644, 617, 574, 370, 669]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Bold', '/Encoding': IndirectObject(83, 0, 136531328499680), '/FirstChar': 28, '/FontDescriptor': IndirectObject(2923, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [595, 637, 620, 820]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Regular', '/Encoding': IndirectObject(84, 0, 136531328499680), '/FirstChar': 23, '/FontDescriptor': IndirectObject(2931, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [677, 269, 1061, 262, 269, 590, 406, 627, 574]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Bold', '/Encoding': IndirectObject(83, 0, 136531328499680), '/FirstChar': 28, '/FontDescriptor': IndirectObject(2923, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [595, 637, 620, 820]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(85, 0, 136531328499680), '/FirstChar': 21, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [644, 574, 617, 598, 843, 574, 370, 617, 572, 667, 669]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Light', '/Encoding': IndirectObject(86, 0, 136531328499680), '/FirstChar': 10, '/FontDescriptor': IndirectObject(2944, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [602, 581, 602, 673, 669, 491, 322, 632, 353, 321, 558, 654, 558, 658, 563, 257, 394, 675, 1064, 555, 597, 826]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Light', '/Encoding': IndirectObject(87, 0, 136531328499680), '/FirstChar': 12, '/FontDescriptor': IndirectObject(2944, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [673, 669, 491, 322, 321, 558, 558, 257, 394, 675, 1064, 555, 597, 826, 353, 632, 602, 654, 563, 658]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(88, 0, 136531328499680), '/FirstChar': 17, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [669, 598, 667, 612, 681, 677, 513, 617, 574, 617, 400, 843, 370, 227, 644]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Regular', '/Encoding': IndirectObject(89, 0, 136531328499680), '/FirstChar': 22, '/FontDescriptor': IndirectObject(2931, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [339, 677, 269, 1061, 262, 269, 590, 406, 627, 574]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Bold', '/Encoding': IndirectObject(90, 0, 136531328499680), '/FirstChar': 27, '/FontDescriptor': IndirectObject(2923, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [877, 595, 637, 620, 820]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(91, 0, 136531328499680), '/FirstChar': 24, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [644, 843, 574, 574, 617, 669, 617, 370]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(92, 0, 136531328499680), '/FirstChar': 25, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [370, 574, 843, 598, 574, 572, 669]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Regular', '/Encoding': IndirectObject(84, 0, 136531328499680), '/FirstChar': 23, '/FontDescriptor': IndirectObject(2931, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [677, 269, 1061, 262, 269, 590, 406, 627, 574]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Light', '/Encoding': IndirectObject(122, 0, 136531328499680), '/FirstChar': 12, '/FontDescriptor': IndirectObject(2944, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [322, 1064, 321, 558, 602, 581, 632, 602, 673, 669, 491, 375, 654, 555, 597, 826, 563, 353, 558, 658]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(123, 0, 136531328499680), '/FirstChar': 18, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [598, 617, 681, 677, 513, 667, 617, 574, 644, 370, 574, 572, 227, 669]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Bold', '/Encoding': IndirectObject(124, 0, 136531328499680), '/FirstChar': 22, '/FontDescriptor': IndirectObject(2923, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [392, 679, 620, 592, 689, 590, 637, 877, 637, 595]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Light', '/Encoding': IndirectObject(125, 0, 136531328499680), '/FirstChar': 13, '/FontDescriptor': IndirectObject(2944, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [200, 322, 1064, 321, 558, 602, 632, 581, 602, 353, 673, 669, 491, 654, 658, 563, 555, 597, 826]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(126, 0, 136531328499680), '/FirstChar': 19, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [370, 617, 669, 617, 598, 644, 227, 574, 667, 574, 571, 612, 826]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Light', '/Encoding': IndirectObject(150, 0, 136531328499680), '/FirstChar': 1, '/FontDescriptor': IndirectObject(2944, 0, 136531328499680), '/LastChar': 173, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [798, 321, 838, 715, 295, 555, 673, 620, 675, 394, 478, 675, 257, 597, 528, 261, 398, 583, 261, 1064, 669, 716, 602, 581, 558, 654, 558, 563, 658, 353, 375, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 322, 632, 669, 673, 491, 826, 0, 0, 0, 0, 0, 0, 0, 0, 675, 0, 528, 814, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 705, 0, 0, 687, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 328]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(151, 0, 136531328499680), '/FirstChar': 25, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [617, 667, 574, 612, 681, 677, 513]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Light', '/Encoding': IndirectObject(152, 0, 136531328499680), '/FirstChar': 1, '/FontDescriptor': IndirectObject(2944, 0, 136531328499680), '/LastChar': 127, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [491, 620, 322, 798, 321, 838, 715, 295, 555, 478, 673, 257, 597, 528, 261, 398, 583, 261, 1064, 669, 716, 632, 602, 581, 602, 558, 654, 353, 563, 658, 558, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 826]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/GYUIWG+Montserrat-Medium', '/Encoding': IndirectObject(153, 0, 136531328499680), '/FirstChar': 21, '/FontDescriptor': IndirectObject(2938, 0, 136531328499680), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [617, 667, 612, 681, 677, 513, 572, 598, 669, 574, 644]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/RJRDJK+LTUnivers-CondMedium', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 32, '/FontDescriptor': IndirectObject(3203, 0, 136531326399264), '/LastChar': 117, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [234, 0, 0, 0, 0, 0, 0, 0, 0, 0, 429, 0, 234, 303, 0, 0, 468, 0, 468, 468, 0, 0, 468, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 526, 0, 0, 435, 0, 590, 0, 476, 0, 0, 0, 0, 0, 0, 0, 545, 501, 0, 591, 0, 0, 0, 504, 0, 0, 0, 0, 0, 0, 0, 443, 0, 423, 469, 439, 284, 0, 481, 226, 0, 0, 226, 706, 481, 453, 469, 0, 305, 400, 289, 480]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/RJRDJK+LTUnivers-CondRegular', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 32, '/FontDescriptor': IndirectObject(3201, 0, 136531326399264), '/LastChar': 146, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [226, 0, 0, 0, 0, 0, 0, 0, 0, 0, 422, 0, 226, 286, 226, 0, 452, 0, 452, 452, 0, 0, 452, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 548, 523, 511, 0, 456, 418, 0, 0, 0, 456, 0, 0, 787, 0, 0, 485, 0, 524, 486, 433, 0, 507, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 439, 462, 406, 462, 436, 278, 0, 472, 213, 213, 0, 213, 689, 472, 445, 462, 0, 290, 383, 279, 472, 401, 671, 0, 402, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 234]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/RJRDJK+LTUnivers-CondBlack', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 48, '/FontDescriptor': IndirectObject(3199, 0, 136531326399264), '/LastChar': 54, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [540, 0, 540, 0, 0, 0, 540]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/RJRDJK+LTUnivers-CompRegular', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 32, '/FontDescriptor': IndirectObject(3180, 0, 136531326399264), '/LastChar': 89, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [188, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 278, 0, 0, 376, 0, 376, 0, 0, 0, 376, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 386, 0, 352, 0, 305, 298, 0, 383, 168, 0, 0, 288, 0, 421, 386, 363, 0, 374, 0, 304, 0, 0, 0, 0, 334]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/VOTQYC+Montserrat-Regular', '/Encoding': IndirectObject(671, 0, 136531370306944), '/FirstChar': 2, '/FontDescriptor': IndirectObject(672, 0, 136531370306944), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [269, 601, 563, 406, 677, 688, 627, 615, 590, 677, 489, 401, 604, 678, 698, 717, 813, 609, 262, 635, 813, 609, 638, 589, 661, 564, 568, 361, 566, 662]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/VOTQYC+Montserrat-Bold', '/Encoding': IndirectObject(673, 0, 136531370306944), '/FirstChar': 27, '/FontDescriptor': IndirectObject(674, 0, 136531370306944), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [595, 262, 637, 590, 592]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/QNXTJS+FrutigerLTPro-LightCn', '/Encoding': IndirectObject(330, 0, 136531326207856), '/FirstChar': 22, '/FontDescriptor': IndirectObject(362, 0, 136531326207856), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [259, 463, 464, 204, 204, 686, 240, 480, 259, 480]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
+news for 878 companies, 742 with a report; read 115 reports this run
 
 == TotalEnergies SE | 2026-10-29 06:45 | Quarterly financial reporting / Third quarter financial report | chars 29079
   quarter 3
@@ -15,6 +64,27 @@ news for 781 companies, 627 with a report; read 19 reports this run
 == AXA | 2026-10-29 15:48 | AXA - 9M26 Activity Indicators | chars 27353
   quarter 3
   [result None] Gross written premiums & other revenues1 were up +7% to Euro 44.8 billion.
+
+== Carrefour Group | 2026-10-20 15:44 | PR_Carrefour Sales Q3 2026 | chars 22647
+  quarter 3
+  [result None] In Brazil , sales grew by +1.4% LFL, driven by Atacadão, which is accelerating its market share growth in a still challenging environment
+  [result None] This growth was driven by food sales (+2.7% LFL) and the positive contribution from the Group’s three core countries, whilst non-food sales were down -1.1% LFL.
+  [result None] After taking into account a positive exchange rate effect of +1.2%, notably reflecting the appreciation of the Brazilian real, total sales growth at current exchange rates amounted to +3.9%.
+  [result None] The impact of the IAS 29 standard on total sales was + € 88m.
+  [result q] France +1.2% Spain +2.1% Brazil +1.4% Other countries +8.4% Group +2.3% In France, like-for-like sales grew by +1.2% in the third quarter, with growth across all formats.
+  [result None] Total sales nevertheless decreased by -2.3% LFL, mainly due to the discontinuation of non-food e-commerce operations, as Carrefour Brazil continues to prioritise the profitability of its digital business.
+  [outlook] Q3 2026 sales October 20, 2026 Solid performance in Q3 2026 (+2.3% LFL) in line with H1 Full-year 2026 financial targets adjusted in light of the current events in France
+  [outlook] Against this backdrop, the Group is reducing its investments in France until the end of the year and is now targeting annual CAPEX of € 1.6bn (vs. € 1.7bn) THIRD-QUARTER 2026 SALES INC.
+
+== Christian Dior | 2026-10-12 17:42 | Christian Dior : Continued growth in the third quarter of 2026 | chars 9904
+  quarter 3
+  [result ytd] The Wines & Spirits business group recorded organic revenue growth of 5% in the first nine months of 2026.
+  [result ytd] The Watches & Jewelry business group recorded organic revenue growth of 8% in the first nine months of 2026, driv en by the very good performance in jewelry.
+
+== LVMH | 2026-10-12 15:45 | LVMH: Continued growth in the third quarter of 2026 | chars 11691
+  quarter 3
+  [result ytd] The Wines & Spirits business group recorded organic revenue growth of 5% in the first nine months of 2026.
+  [result ytd] The Watches & Jewelry business group recorded organic revenue growth of 8% in the first nine months of 2026, driven by the very good performance in jewelry.
 
 == Vinci | 2026-10-22 15:45 | VINCI - 9M 2026 - FURTHER GROWTH IN REVENUE AND ORDER INTAKE | chars 22493
   quarter 3
@@ -140,6 +210,14 @@ news for 781 companies, 627 with a report; read 19 reports this run
   [result q] TOTEM’s revenue was €173 million in the third quarter, down -2.9%.
   [outlook] These strong results confirm our ambition to deliver “stable +” EBITDAaL in 2026. 5 Spain In millions of euros 3Q 2026 change comparable basis change historical basis 4M 2026 change comparable basis change historical basis Revenue 1,910 3.5 % - 2,558 3.1 %.
 
+== Schneider Electric | 2026-10-16 05:29 | Third Quarter Revenues 2026 | chars 31594
+  quarter 3
+  [result q] REVENUES WERE UP +17% ORGANIC 2026 Q3 revenues were €11,460 million, up +16.9% organic and up +17.9% on a reported basis.
+  [result q] Products (48% of Q3 revenues) grew +17% organic in Q3.
+  [result q] Systems (35% of Q3 revenues) grew +22% organic in Q3.
+  [result q] China & East Asia (19% of Q3 revenues) grew +26.1% organic in Q3.
+  [outlook] EBITA margin VIII. 2026 TARGET UPGRADED The Group upgrades its 2026 financial target as follows: 2026 Adjusted EBITA growth of between +18% and +21% organic.
+
 == Schouw & Co. | 2026-11-06 08:03 | Interim report - third quarter of 2026 | chars 23269
   quarter 3
   [result q] Revenue increased by 16% to DKK 10,646 million in Q3 2026 from DKK 9,195 million in Q3 2025.
@@ -189,6 +267,14 @@ news for 781 companies, 627 with a report; read 19 reports this run
   [result None] Free cash flow of $1.6 billion was supported by robust earnings combined with disciplined management of Trade net working capital, which more than compensated for higher capex spend.
   [target] We already trend at a higher capex level of around $1 billion and do not expect it to rise further in the mid-term.
 
+== EssilorLuxottica | 2026-10-20 16:00 | EssilorLuxottica: Q3 2026 Revenue - Revenue growth at 9.0% in Q3, +7.2% at constant currency | chars 20437
+  quarter 3
+  [result q] Group revenue +9.0% to Euro 7,486 million in Q3, +7.2% at constant ER1 on top of double-digit growth of last year.
+  [result q] Direct to Consumer up 10.6%1 in Q3, with comparable-store sales3 at +6.8%.
+  [result q] Wearables (AI glasses and Nuance Audio) up 20%1 in revenue in Q3.
+  [result q] Our eyecare, eyewear and medtech activities remained a powerful engine of growth, up over 6% in both the quarter and the first nine months of the year, while wearables ’ revenue increased 20%, confirming the strong momentum behind this emerging category we continue to lead.
+  [result None] E-commerce was slightly positive in the period, stable at 7% of the total Group’s revenue.
+
 == Danone | 2026-10-28 05:30 | Danone: Solid performance in Q3; Broad-based growth across categories and geographies | chars 17414
   quarter 3
   [result q] Sales by operating segment In Q3 2026, EMEA LFL sales increased by +3.9%, with volume/mix at -0.4% and price at +4.3%.
@@ -208,6 +294,9 @@ news for 781 companies, 627 with a report; read 19 reports this run
   [backlog] Record investments since the beginning of 2026, strengthening a record backlog
   [backlog] At 6.2 billion euros , the investment backlog reached a new record high.
 
+== Eiffage | 2026-10-20 15:39 | APRR revenue and traffic for Q3 2026 | chars 3149
+  quarter 3
+
 == Sodexo | 2026-10-23 05:00 | Sodexo - Fiscal 2026 results: organic growth above guidance; Fiscal 2027 outlook confirmed | chars 36509
   quarter 3
   [result None] Fiscal 2026 financial performance Revenue and commercial activity Fiscal 2026 consolidated revenues amounted to 24.0 billion euros, down -0.5% year-on-year.
@@ -217,57 +306,3 @@ news for 781 companies, 627 with a report; read 19 reports this run
   [result None] By geography: — North America: organic growth of -1.0%, mainly reflecting prior contract losses in Education and Business & Administrations and the contract reclassification.
   [result None] Healthcare & Seniors delivered strong growth, driven by new contract ramp-ups, while Sodexo Live! sustained its momentum, supported by high activity levels across stadiums, conference centers and airport lounges. — Europe: organic growth of +2.1%, supported by Healthcare & Seniors.
   [outlook] Proposed dividend of 1.74 euros per share, in line with the Group's policy (50% payout) — Fiscal 2027 guidance confirmed:.
-
-== Capgemini | 2026-10-30 05:00 | Q3 2026 momentum drives upgrade in Capgemini's 2026 outlook | chars 15255
-  quarter 3
-
-== Thales | 2026-10-22 04:59 | Thales reports its order intake and sales as of September 30, 2026 - Press release - 22 October 2026 | chars 16441
-  quarter 3
-  [result None] Geographically5, order intake in mature markets recorded organic growth of +17%, at €14,425 million.
-  [result None] Order intake in emerging markets amounted to €4,697 million and showed an organic inc rease of +7% at 30 September 2026.
-  [result None] At €2,724 million, order intake in the Cyber & Digital segment was structurally very close to sales, as most of the activities in this segment operate on short sales cycles.
-  [result q] In the third quarter, sales amounted to €5,473 million, growing organically by 8.7% (+9.7% on a reported basis).
-  [result None] Geographically7, sales were up in mature markets (+6.0% organic growth), notably in continental Europe excluding France (+21.8%).
-  [result ytd] In the Aerospace segment, sales for the first nine months of 2026 amounted to €4,237 million, up 4.0% at constant scope and exchange rates (+3.2% on a reported basis).
-  [outlook] Assuming no new disruptions in the macroeconomic and geopolitical contexts, Thales’ solid performance in 2026 allows the Group to expect organic sales growth now comprised in the upper- end of the +6% to +7% 8 guided range, and potentially beyond .
-
-== Ericsson | 2026-10-15 07:00 | Ericsson reports third quarter results 2026 | chars 40336
-  quarter 3
-  [result None] Solid customer demand in strategic markets, combined with near-term commercial actions, supported organic growth of 7%*.
-  [result None] Excluding the prior-year period capital gain of SEK 7.6 b., adjusted EBITA increased.
-  [result None] Net income was SEK 5.8 (11.3) b. and diluted EPS was SEK 1.77 (3.33).
-  [result None] Group results 2 EBITA EBITA decreased to SEK 9.2 (15.5) b. reflecting a SEK 7.6 b. capital gain in the prior-year period as well as higher restructuring charges.
-  [result None] Gross income decreased to SEK 75.4 (80.0) b. impacted by lower net sales, a negative currency impact of SEK -4.7 b. and restructuring charges of SEK -2.2 (-0.7) b.
-  [result None] EBITA decreased to SEK 17.3 (28.9) b. with a margin of 10.7% (17.3%), impacted by lower net sales, increased restructuring charges, the divestment of iconectiv, and a negative currency impact of SEK -2.9 b.
-  [outlook] Adjusted gross margin in Q4 2026 is expected to be in the range of 49% to 51%.
-  <highlights> Reported sales were SEK 59.5 (56.2) b. Organic* sales increased by 7%* YoY primarily driven by higher sales in Networks. Organic* sales grew in three out of four market areas.
-  <highlights> Adjusted [1] gross margin was 47.7% (48.1%). Networks margin increased, supported by retroactive IPR revenues. Enterprise margin was lower, due to the divestment of iconectiv. Cloud Software and Services margin was stable. Reported gross margin was 47.1% (47.6%).
-  <highlights> Adjusted [1] EBITA was SEK 10.1 (15.8) b. with a 17.0% (28.1%) margin. Excluding the prior-year period capital gain of SEK 7.6 b., adjusted EBITA increased. Operating expenses decreased YoY. Reported EBITA was SEK 9.2 (15.5) b., with a 15.5% (27.6%) margin.
-  <events> Solid customer demand in strategic markets, combined with near-term commercial actions, supported organic growth of 7%*.
-  <events> Customer wins and deployments across network modernization, differentiated connectivity and mission-critical networks.
-
-== Forvia | 2026-11-02 06:00 | SALES BROADLY STABLE IN Q3, INTERIORS DIVESTITURE ON TRACK FOR Q4 CLOSING, FY 2026 GUIDANCE CONFIRMED | chars 18513
-  quarter 4
-  [result q] Organic sales were broadly stable in Q3 at -0.6%, while they declined by 1.5% over the first nine months of the year.
-  [result q] NORTH AMERICA: outperformance essentially driven by Clean Mobility Organic sales were slightly up 0.4% in Q3, representing an outperformance of 510 basis points.
-  [result ytd] CHINA: progress with Chinese OEMs reduced underperformance compared to H1 Organic sales declined by 17. 2% in Q3 , reflecting continued weakness in production among international OEM s.
-  [result None] Electronics maintained strong momentum, with organic sales up 7.0%, supported by continued success in radar and energy management technologies, particularly in Europe.
-  [result ytd] Seating organic sales declined by 4.4%, with the decline halved compared with H1, reflecting a gradual recovery in China and solid growth in Europe.
-  [result None] Clarion Electronics maintained strong organic growth of 22.0%, driven by Japanese OEMs in Asia and North America.
-  [outlook] Lighting sales declined by 7.8%, with business trends remaining broadly in line with the expected path towards stabilization in 2027..
-
-== Valeo | 2026-10-22 16:02 | Valeo - Q3 2026 Sales | chars 14186
-  quarter 3
-  [result None] Total sales for third-quarter 2026 came in at 4,881 million euros, down 2.3% compared with the same period in 2025.
-  [result None] Aftermarket sales rose by 3.0% on a like-for-like basis compared with the prior-year period, supported by ongoing momentum in North America, Asia and Europe.
-  [result None] Miscellaneous” sales, essentially comprising customer contributions to R&D costs and prototypes, were up 6.6% on a like-for-like basis.
-  [result None] While business volumes with local automakers were down slightly, efforts to reposition the customer portfolio continue to advance (56% of original equipment sales to Chinese automakers since the start of the year, compared with 52% in 2025 over the same period and 53% in first-half 2026).
-
-== Nokia | 2026-10-22 07:00 | Nokia Corporation Interim Report for Q3 2026 | chars 15047
-  quarter 3
-  [result None] Group net sales to AI & Cloud customers grew 123% and order intake 118%.
-  [result q] Mobile Infrastructure net sales grew 5% y-o-y, in part due to acceleration of revenue from Q4 into Q3.
-  [result None] Reported operating margin declined 160bps to 3.8% due to accelerated restructuring and integration cost.
-  [result q] In Q3, we grew net sales by 9% and improved comparable operating margin by 220 basis points.
-  [outlook] Comparable financial income and expenses Positive EUR 300 to 400 million (update) Strong income from Nokia's venture fund investments is leading to an increase in the outlook assumption for 2026.
-  <outlook None> The outlook and the underlying outlook assumptions are forward-looking statements subject to a number of risks and uncertainties as described or referred to in the Risk Factors section later in this release.
