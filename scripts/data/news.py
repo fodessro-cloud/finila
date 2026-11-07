@@ -444,7 +444,7 @@ NOT_COMMERCIAL = (r"\b(appoint|appointed|ceo|cfo|chief|board|annual general meet
                   r"own shares|dividend|interim report|webcast|resigned|step down|succeed|named winner|award(s|ed)? for|ranked)\b")
 
 
-SECTIONS_VERSION = 6
+SECTIONS_VERSION = 7
 OUTLOOK_JUNK = r"this (release|report) is a summary|is attached|available (at|on)|www\.|please refer|refer to|defined in|^\d+ "
 OUTLOOK_WORD = r"\b(expect|estimat|anticipat|forecast|guidance|outlook|target|project|will|aim|believ|plan|foresee|assum|predict)"
 
@@ -587,6 +587,22 @@ def explains_past(sent):
                 and not re.search(AHEAD, low))
 
 
+# Outside the outlook, a sentence without a forward cue is kept only when it reports a new event that shapes
+# what comes (a contract won or signed, a new CEO or chair, a deal agreed, a claim filed), not one that explains
+# past figures ("the expense reflects the acquisition", "margin down ... levies") (Lub 2026-11-07: past = uninteresting).
+EVENT = (r"\b(awarded|won|wins|signed|secured|appointed|appoints|nominated|agreed to (acquire|sell|merge)|to acquire|"
+         r"entered into|filed|ruled|ruling|announced (the|its|an?) (acquisition|sale|merger|offer))\b")
+PASTY = (r"\b(reflects?|reflected|includes?|included|contributed|contribution|expenses?|costs?|impact\w*|year-on-year|"
+         r"compared|versus|vs\.|margin|amounted|down|up \d|increase[ds]?|decrease[ds]?|declin\w+|drove|driven)\b")
+
+
+def watch_kept(sent, ahead):
+    low = sent.lower()
+    if ahead or re.search(AHEAD, low):
+        return not explains_past(sent) or ahead
+    return bool(re.search(EVENT, low)) and not re.search(PASTY, low)
+
+
 def watch_score(sent):
     """The quote that explains most: an amount (what it costs or brings), a word saying what kind of contract,
     rule or deal it is ("banking contract", not just "the 679 contract"), then the earliest (reports lead with what matters)."""
@@ -605,7 +621,7 @@ def watch_items(blocks, limit=5):
             continue
         for sent in re.split(r"(?<=[A-Za-z0-9%\)”][.!?])\s+(?=[A-Z“])", text):
             sent = sent.strip()
-            if not 50 <= len(sent) <= 360 or re.search(BROKEN, sent) or re.search(WATCH_SKIP, sent, re.I) or (not ahead and explains_past(sent)):
+            if not 50 <= len(sent) <= 360 or re.search(BROKEN, sent) or re.search(WATCH_SKIP, sent, re.I) or not watch_kept(sent, ahead):
                 continue
             low = sent.lower()
             for topic, rx in WATCH:
