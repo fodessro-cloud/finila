@@ -1,14 +1,10 @@
-AMF France: 1182 filings, 772 kept
-CNMV Spain: 28 notices
-5401 announcements since 2026-10-23
-matched 753 companies; unmatched names (top): [('Sveriges Riksbank', 23), ('Nykredit Realkredit A/S', 21), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 19), ('Dataproces Group A/S', 17), ('PPI Public Property Invest AB', 17), ('Inderes Oyj', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Lánamál ríkisins', 14), ('Realfiction Holding AB', 14), ('Kuntarahoitus Oyj.', 13), ('Betolar Oyj', 12), ('AI Revenue Assistant Software Stockholm AB', 12), ('White Pearl Technology Group AB', 12), ('Loihde Oyj', 12), ('Besqab AB(publ)', 12), ('Gigasun AB', 11), ('Klaria Pharma Holding AB', 11), ('Calviks AB (publ)', 11), ('Minesto AB', 11), ('Realkredit Danmark A/S', 11), ('Endomines Finland Oyj', 10), ('Kambi Group Plc', 10), ('Totalkredit A/S', 10)]
+AMF France: 1133 filings, 741 kept
+CNMV Spain: 2 notices
+FSMA Belgium: 83 filings, 77 kept
+5421 announcements since 2026-10-24
+matched 781 companies; unmatched names (top): [('Sveriges Riksbank', 23), ('Nykredit Realkredit A/S', 21), ('Gentoo Media Inc.', 21), ('Trifork Group AG', 19), ('Dataproces Group A/S', 17), ('PPI Public Property Invest AB', 17), ('Inderes Oyj', 15), ('Jyske Realkredit A/S', 15), ('Physitrack PLC', 15), ('Lánamál ríkisins', 14), ('Realfiction Holding AB', 14), ('Kuntarahoitus Oyj.', 13), ('Betolar Oyj', 12), ('AI Revenue Assistant Software Stockholm AB', 12), ('White Pearl Technology Group AB', 12), ('Loihde Oyj', 12), ('Besqab AB(publ)', 12), ('Gigasun AB', 11), ('Klaria Pharma Holding AB', 11), ('Calviks AB (publ)', 11), ('Minesto AB', 11), ('Realkredit Danmark A/S', 11), ('Endomines Finland Oyj', 10), ('Kambi Group Plc', 10), ('Totalkredit A/S', 10)]
 filler-word name matches: [('Ambea AB', 'Ambea AB ( publ )'), ('DNO ASA', 'DNO International'), ('Entra ASA', 'Entra Eiendom'), ('Ericsson, Telefonab. L M', 'Ericsson'), ('H. Lundbeck A/S', 'Lundbeck'), ('Kinnevik, Investment AB', 'Kinnevik AB'), ('Latour, Investmentab.', 'Investment AB Latour'), ('Lindab AB', 'Lindab International AB'), ('Moberg Pharma AB', 'Moberg Pharma (Sweden)'), ('Modern Times Group MTG AB', 'Modern Times Group'), ('Moreld ASA', 'Moreld AS'), ('Roblon A/S', 'Roblon Aktieselskab'), ('Senzime AB', 'Senzime AB (publ.)'), ('UPM-Kymmene Oyj', 'UPM'), ('WindowMaster International A/S', 'WindowMaster')]
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/BHDGKQ+ProximaNova-Regular', '/Encoding': IndirectObject(54, 0, 131859623465840), '/FirstChar': 1, '/FontDescriptor': IndirectObject(523, 0, 131859623465840), '/LastChar': 173, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [808, 225, 557, 550, 591, 558, 765, 339, 515, 590, 588, 612, 731, 574, 551, 490, 574, 552, 230, 465, 563, 225, 574, 258, 495, 527, 330, 294, 551, 572, 676, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 490, 591, 248, 300, 581, 0, 0, 0, 0, 0, 0, 0, 0, 0, 700, 0, 608, 658, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 809, 0, 0, 248, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 708]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/BHDGKQ+ProximaNova-Semibold', '/Encoding': IndirectObject(55, 0, 131859623465840), '/FirstChar': 12, '/FontDescriptor': IndirectObject(528, 0, 131859623465840), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [319, 567, 581, 300, 754, 241, 580, 567, 536, 472, 497, 241, 580, 257, 503, 347, 573, 833, 557, 835]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/BHDGKQ+ProximaNova-Semibold', '/Encoding': IndirectObject(56, 0, 131859623465840), '/FirstChar': 6, '/FontDescriptor': IndirectObject(528, 0, 131859623465840), '/LastChar': 31, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [532, 616, 595, 503, 581, 568, 833, 580, 577, 319, 472, 536, 308, 581, 567, 241, 497, 257, 567, 580, 241, 347, 557, 503, 573, 594]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/BHDGKQ+ProximaNova-Regular', '/Encoding': IndirectObject(57, 0, 131859623465840), '/FirstChar': 1, '/FontDescriptor': IndirectObject(523, 0, 131859623465840), '/LastChar': 173, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [700, 575, 490, 575, 713, 230, 574, 551, 569, 230, 239, 551, 574, 225, 490, 586, 591, 294, 465, 527, 495, 563, 330, 572, 550, 258, 515, 588, 339, 590, 612, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 700, 808, 225, 591, 557, 558, 499, 581, 731, 0, 0, 0, 0, 0, 230, 0, 486, 514, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 708, 0, 0, 552, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 658]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-fontTools is required to fully parse the encoding of a CFF Type1 font in font dictionary {'/BaseFont': '/BHDGKQ+MyriadPro-Regular', '/Encoding': '/WinAnsiEncoding', '/FirstChar': 185, '/FontDescriptor': IndirectObject(59, 0, 131859623465840), '/LastChar': 185, '/Subtype': '/Type1', '/Type': '/Font', '/Widths': [244]}, but is not installed. Consider installing fontTools if you encounter encoding problems.
-news for 753 companies, 608 with a report; read 6 reports this run
+news for 781 companies, 627 with a report; read 19 reports this run
 
 == TotalEnergies SE | 2026-10-29 06:45 | Quarterly financial reporting / Third quarter financial report | chars 29079
   quarter 3
@@ -64,6 +60,15 @@ news for 753 companies, 608 with a report; read 6 reports this run
 
 == ArcelorMittal | 2026-11-05 06:10 | ArcelorMittal presenta sus resultados correspondientes al tercer trimestre de 2026. | chars 2241
   quarter 3
+
+== Anheuser-Busch InBev | 2026-10-29 07:00 | Quarterly information: 3Q26_AB InBev_Press Release | chars 33346
+  quarter 3
+  [result None] Normalized EBITDA +3.9% Normalized EBITDA increased by 3.9% to 5 957 million USD in 3Q26, with a margin contraction of 34bps to 36.1%.
+  [result None] On a constant currency basis, Underlying EPS increased by 13.9% in 3Q26 and by 12.0% in 9M26.
+  [result None] Revenue increased by 4.9%, with total volume growth of 0.4% and a revenue per hl increase of 4.2%, driven by revenue growth management and positive mix from premiumization and Beyond Beer.
+  [result None] EBIT increased by 6.0% and Underlying EPS by 22%, as we continue to optimize the business and drive operating leverage through the P&L.
+  [result None] Premiumization: Our above core beer portfolio delivered an 8.6% revenue increase in 3Q26, led by Corona, Stella Artois and Michelob Ultra, which grew revenue by 20%, 19% and 50%, respectively, outside of their home markets.
+  [result None] EBITDA decreased by 4.0%, reflecting increased investment in sales and marketing and elevated commodity and transportation costs. o 9M26: Revenue increased by 0.8%, with revenue per hl increasing by 3.0%.
 
 == Astrazeneca PLC | 2026-10-30 08:00 | 3rd Quarter Results | chars 37468
   quarter 3
@@ -266,15 +271,3 @@ news for 753 companies, 608 with a report; read 6 reports this run
   [result q] In Q3, we grew net sales by 9% and improved comparable operating margin by 220 basis points.
   [outlook] Comparable financial income and expenses Positive EUR 300 to 400 million (update) Strong income from Nokia's venture fund investments is leading to an increase in the outlook assumption for 2026.
   <outlook None> The outlook and the underlying outlook assumptions are forward-looking statements subject to a number of risks and uncertainties as described or referred to in the Risk Factors section later in this release.
-
-== Rexel | 2026-10-22 15:45 | REXEL: Q3 2026 sales | chars 17922
-  quarter 3
-  [result None] Constant and same-day sales growth of +11.4%, with: ◦ Growth in all geographies ◦ Volume growth acceleration (+6.3% contribution) ◦ Selling price increases in both cable ( +2.9% contribution) and non-cable ( +2.2% contribution) products across all three regions.
-  [result None] Constant and same-day sales growth of +7.3%, with positive contributions from both volumes (+3.4%) and selling prices (+2.3% from cable products and +1.6% from non-cable).
-  [result q] A currency effect of (1.4)%, mainly due to the depreciation of the US dollar against the euro Digital sales: Digital sales in Q3 2026 increased by +256bps to represent 36% of total Group sales:.
-  [result None] Strong constant and same-day sales growth of +17.4%.
-  [result q] US same-day sales were up +18.2% in Q3 2026, driven by: ◦ Data centers up in triple digits, now representing c. 13% of US sales, mainly driven by Mountain Plains, Southeast (including Mayer) and the Gulf.
-  [result None] Strong constant and same-day sales increase of +4.5%.
-  [backlog] Backlog at end-September 2026 above USD3bn, up +42% vs end 2025 and representing 3.4 months of sales United States:.
-  [outlook] In Asia, sales in China and India grew by +19.4% and +15.1% respectively, supported by industrial automation activity, mainly in manufacturing, logistics and electronics/robotics 5/13 Outlook Rexel is raising its full-year 2026 guidance for the second time this year, on the back of its acceleration in sales.
-  [target] Free cash flow conversion2 above 65% (unchanged) Reminder of Rexel's key medium-term ambitions:.
