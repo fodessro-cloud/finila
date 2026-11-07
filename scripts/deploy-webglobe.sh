@@ -74,7 +74,7 @@ echo "== Preparing FINILA"
 mkdir -p "$WORK/site"
 cp "$SRC"/index.html "$SRC"/screener.html "$SRC"/insiders.html "$SRC"/shorts.html "$SRC"/assets.html "$SRC"/rates.html "$SRC"/property.html "$SRC"/map.html "$SRC"/groups.html "$WORK/site/"
 cp -r "$SRC/css" "$SRC/js" "$WORK/site/"
-cp "$SRC/robots.txt" "$SRC/favicon.ico" "$SRC"/google*.html "$WORK/site/"
+cp "$SRC/robots.txt" "$SRC/llms.txt" "$SRC/favicon.ico" "$SRC"/google*.html "$WORK/site/"
 # One page per company (/stock/<name>), the A-Z list and sitemap.xml, built from the current data.
 python3 "$SRC/scripts/build-stock-pages.py" "$SRC" "$WORK/site"
 # Market Radar (/radar and /radar/<indicator>), built from js/radar.json.
