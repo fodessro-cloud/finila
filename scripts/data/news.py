@@ -444,7 +444,7 @@ NOT_COMMERCIAL = (r"\b(appoint|appointed|ceo|cfo|chief|board|annual general meet
                   r"own shares|dividend|interim report|webcast|resigned|step down|succeed|named winner|award(s|ed)? for|ranked)\b")
 
 
-SECTIONS_VERSION = 7
+SECTIONS_VERSION = 8
 OUTLOOK_JUNK = r"this (release|report) is a summary|is attached|available (at|on)|www\.|please refer|refer to|defined in|^\d+ "
 OUTLOOK_WORD = r"\b(expect|estimat|anticipat|forecast|guidance|outlook|target|project|will|aim|believ|plan|foresee|assum|predict)"
 
@@ -573,7 +573,10 @@ WATCH = [
     ("Deals", r"\b(acquisition of|acquired|to acquire|divest\w*|disposal of|sale of (its|the|our)|merger|takeover|joint venture|strategic review)\b"),
     ("Strikes and disruption", r"\bstrikes?\b|industrial action|cyber[- ]?(attack|incident)|outage"),
 ]
-WATCH_SKIP = r"\b(forward-looking|cautionary|disclaimer|this (press release|report) (contains|is)|for more information)\b"
+WATCH_SKIP = (r"\b(forward-looking|cautionary|disclaimer|this (press release|report) (contains|is)|for more information)\b|"
+              # assumptions behind a forecast, footnotes, exchange-rate tables, figures lost in the text
+              r"\b(outlook|forecasts?|guidance)\b[^.]{0,30}\b(does not|do not|assumes?|excludes?)\b|\bassumes? (that )?there will be no\b|"
+              r"^\s*(\d{1,2}|\*+)\s+[A-Z*\d]|€ ?1\.00 ?=|\b(of|at|to|by) (billion|million|bn|m)\b|, ,|\bincludes? \$?€?\d[^.]{0,40}cash-out")
 
 
 AHEAD = (r"\b(will|(?<!-)expects?|(?<!-)expected to|pending|awaiting|await\w*|negotiat\w*|renewal|to be (decided|signed|renewed)|"
